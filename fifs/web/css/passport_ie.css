@@ -1,0 +1,37 @@
+/* IE Styles */
+
+.button a, input.button {
+	padding: 10px 30px;
+}
+
+.proceed-button a, input.proceed-button {
+  background-color: #61c13a;
+}
+
+.proceed-button a:hover, input.proceed-button:hover {
+	background-color: #74ce46;
+}
+
+.cancel-button a, input.cancel-button {
+	background-color: #dc1212;
+}
+
+.cancel-button a:hover, input.cancel-button:hover {
+	background-color: #e31616;
+}
+
+.generic-button a, input.generic-button {
+	background-color: #357db0;
+}
+
+.generic-button a:hover, input.generic-button:hover {
+	background-color: #4096c0;
+}
+
+.special-button a, input.special-button {
+	background-color: #ff8a00;
+}
+
+.special-button a:hover, input.special-button:hover {
+	background-color: #ffa600;
+}

@@ -1,0 +1,60 @@
+[% WRAPPER membercard/MemberCard_Wrapper.templ %]
+	[% USE date %]
+	[% varDate =  date.format(date.now(), '%d/%m/%Y') %]
+	<style type="text/css">
+		.line {
+			margin-bottom:5px;
+			font-size:10px;
+		}
+	</style>
+	[% FOREACH m = Members %]
+		<!-- [% m.intMemberID %] -->
+		[% varClub = '' %]
+		[% varDefaultClub = '' %]
+		[% FOREACH c = m.Clubs %] 
+			[% NEXT IF c.intAssocID != 15943 %]
+			[% NEXT IF c.intStatus != 1 %]
+			[% varDefaultClub = c.strName %]
+			[% NEXT IF c.intPrimaryClub == 1 %]
+			[% varClub = c.strName %]
+		[% END %]
+		[% IF varClub == '' %]
+			[% varClub = varDefaultClub %]
+		[% END %]
+		<div style="background:url(/formsimg/NBFA_Logo_BG.gif);background-repeat:no-repeat;">
+		<table border="0" style="width:320px;">
+			<tr>
+				<td valign="top">
+					<div style="text-align:center;padding-bottom:10px;"><b>NORTHERN BEACHES <br> FUTSAL ASSOCIATION</b></div>
+					<div class="line"><b>Name:</b> [% m.strFirstname %] [% m.strSurname %]</div>
+					<div class="line"><b>DOB:</b> [% m.dtDOB %]</div>
+					<div class="line""><b>Team:</b> 
+          	[% varCount = 0 %]
+						[% varTeam = '' %]
+          	[% FOREACH t = m.Teams %]
+							<!-- [% t.strTeamName %] -->
+            	[% NEXT IF varCount > 0 %]
+            	[% varTeam = t.strTeamName %]
+            	[% varCount = 1 %]
+          	[% END %]
+						[% IF varTeam %]
+							[% varTeam %]
+						[% ELSE %]
+							[% varClub %]
+						[% END %]
+					</div>
+					<div class="line" style="padding-top:7px;"><b>ID#:</b> [% m.strNationalNum %]</div>
+				</td>
+				<td valign="top" style="width:130px;">
+					<img src="https://reg.sportingpulse.com/getphoto.cgi?client=[% m.client %]" alt="" height="160">
+				</td>
+			</tr>
+			<tr>
+				<td align="center"><b>PLAYER ID CARD</b></td>
+				<td align="center"><b>WINTER 2011</b></td>
+			</tr>
+		</table>
+		</div>
+	[% END %]
+[% END %]
+

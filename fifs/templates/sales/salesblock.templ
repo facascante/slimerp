@@ -1,0 +1,58 @@
+<script>
+	Ext.onReady(function(){
+
+		jQuery('#salesblock-wrapper div.ads').hover(function()	{
+			jQuery(this).addClass('salesblock-hover');
+			jQuery('.salesblock-detail-item').hide();
+			var field = jQuery(this).attr('href');
+			if(field)	{
+				jQuery('#' + field).show();
+			}
+		},function ()	{
+			jQuery(this).removeClass('salesblock-hover');
+		});
+		jQuery('#salesblock-wrapper .ads').click(function(e)	{
+			e.preventDefault();
+			openoffers(1);
+		});
+	});
+
+		function openoffers (openblock)	{
+			var open_already = jQuery('#salesblock').is('.salesblock-open') || 0;
+			if(openblock && open_already)	{
+				return true;
+			}
+			if(openblock || !open_already)	{
+				jQuery('#salesblock').addClass('salesblock-open');
+				jQuery('#salesblock-wrapper .COexpand-btn').text('CLOSE');
+			}
+			else	{
+				jQuery('#salesblock').removeClass('salesblock-open');
+				jQuery('#salesblock-wrapper .COexpand-btn').text('EXPAND');
+			}
+			return true;
+		}
+
+</script>
+
+<div id="salesblock-wrapper" class="x-panel">
+	<div class="x-panel-header">
+		<a href="#" class="COexpand-btn" onclick="openoffers(0);return false;">EXPAND</a>
+		Club Offers
+	</div>
+	<div class="x-panel-body salesblock-content">
+		<div class="salesblock-detail">
+[% FOREACH b = Blocks %]
+			<div class="salesblock-detail-item" id="salesblock-item-[% b.intSalesBlockID %]">
+				<a href="[% b.strURL %]" target="salesblock"><img src="[% b.DetailURL %]"></a>
+			</div>
+[% END %]
+		</div>
+[% FOREACH b = Blocks %]
+		<div href="salesblock-item-[% b.intSalesBlockID %]" class="ads">
+			<div class="COthumb"><img src="[% b.ThumbURL %]"></div>
+			<div class="COlink">[% b.strTitle %]</div>
+		</div>
+[% END %]
+	</div>
+</div>

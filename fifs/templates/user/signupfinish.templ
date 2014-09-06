@@ -1,0 +1,19 @@
+[% IF Errors.size %]
+<div class = "warningmsg">
+  <ul>
+  [% FOREACH error IN Errors %]
+    <li>[% error %]</li>
+  [% END %]
+  </ul>
+</div>
+[% END %]
+<div class="heading-bar">
+<h1 class="page-title">[% Lang.txt('Thanks for signing up') %]</h1>
+</div>
+<div class="logout-wrap">
+    [% IF Status != 2 %]
+        <p>[% Lang.txt("We've sent you an email to welcome you to the system.") %]</p><p>[% Lang.txt('Make sure you click the link to confirm your email address and complete your signup') %].</p>
+    [% END %]  
+</div>
+
+

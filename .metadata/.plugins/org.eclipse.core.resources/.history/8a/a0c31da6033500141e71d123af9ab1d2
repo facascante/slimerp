@@ -1,0 +1,65 @@
+#!/usr/bin/perl
+use strict;
+use Data::Dumper;
+use English;
+use DBInserter;
+use Getopt::Long;
+use Text::CSV;
+use TableRules;
+
+my $directory = '';  
+GetOptions ('directory=s' => \$directory);
+
+foreach my $fp (glob("$directory/*.csv")) {
+  readCSVFile($fp);
+}
+
+
+sub readCSVFile{
+    my ($file) = @_;
+    my @records;
+    my @directory = split /\//, $file;
+    my $dirlength  = scalar @directory;
+    my $table =  $directory[$dirlength - 1];
+    $table =~ s/.csv//g;
+    open my $fh, '<:utf8', $file or die "Cannot open: $!";
+    my $csv = Text::CSV->new or die "Text::CSV error: " . Text::CSV->error_diag;
+    my @headers = $csv->getline($fh) or die "no header";
+    $csv->column_names(@headers);
+    while (my $hashref = $csv->getline_hr($fh)) {
+      push @records, $hashref;
+      ApplyRules($table,$hashref);
+    }
+    close $fh;
+   
+    return ($table,@headers,@records)
+}
+
+sub ApplyRules{
+    my ($table,$hashref) = @_;
+    my @mrecords;
+    my ($rules) = getRules($table);
+    foreach my $key ( keys $rules ){
+        my $rule = $rules->{$key};
+        if($rule->{"rule"} eq "multiplyEntry"){
+            push @mrecords, multiplyEntry($hashref,$rule);
+        }
+    }
+    
+}
+sub multiplyEntry{
+    my ($hashref,$rule) = @_;
+    my @records;
+    my $collection = $rule->{"collection"};
+    foreach my $key ( @{$collection} ){
+        $hashref->{$rule->{field}} = $key;
+        print Dumper($hashref);
+      #  print "$key\n";
+        push @records, \%$hashref;
+        #print Dumper($hashref);
+       
+    }
+    print Dumper(@records);
+    return @records;
+   
+}

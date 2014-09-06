@@ -1,0 +1,108 @@
+<h1 class="page-header">Edit Details</h1>
+[% ErrorMessage %]
+<form class="form-horizontal" role="form" method="post" action="[% Target %]">
+    [% FormParams %]
+    <div class="form-group">
+        <label for="strFirstName" class="col-sm-2 control-label">First Name</label>
+        <div class="col-sm-4">
+            <input type="text" name="FirstName" value="[% MemberDetails.strFirstName %]" id="strFirstName" class="form-control" placeholder="First Name">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="strSurname" class="col-sm-2 control-label">Last Name</label>
+        <div class="col-sm-4">
+            <input type="text" name="LastName" value="[% MemberDetails.strSurname %]" id="strSurname" class="form-control" placeholder="Last Name">
+        </div>
+    </div>  
+    <div class="form-group">
+        <label for="strNationalNum" class="col-sm-2 control-label">YA Number</label>
+        <div class="col-sm-4">
+            <input type="text" name="NationalNum" value="[% MemberDetails.strNationalNum %]" id="strNationalNum" class="form-control" placeholder="YA Number">
+        </div>
+    </div>  
+    <div class="form-group">
+        <label for="strDOB" class="col-sm-2 control-label">Date of Birth</label>
+        <div class="col-sm-3">
+            <input type="text" name="DOB" value="[% MemberDetails.dtDOB %]" id="strDOB" class="form-control" placeholder="DD/MM/YY">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="strGender" class="col-sm-2 control-label">Gender</label>
+        <div class="col-sm-3">
+            <select class="form-control" name="Gender" id="strGender">
+                <option value=""></option>
+                <option value="2" [% IF MemberDetails.intGender == 2 %]selected="selected"[% END %]>Female</option>
+                <option value="1" [% IF MemberDetails.intGender == 1 %]selected="selected"[% END %]>Male</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="strHomePhone" class="col-sm-2 control-label">Home Phone</label>
+        <div class="col-sm-3">
+            <input type="tel" name="HomePhone" value="[% MemberDetails.strPhoneHome %]" id="strHomePhone" class="form-control" placeholder="Home Phone">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="strWorkPhone" class="col-sm-2 control-label">Work Phone</label>
+        <div class="col-sm-3">
+            <input type="tel" name="WorkPhone" value="[% MemberDetails.strPhoneWork %]" id="strWorkPhone" class="form-control" placeholder="Work Phone">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="strMobile" class="col-sm-2 control-label">Mobile</label>
+        <div class="col-sm-3">
+            <input type="tel" name="Mobile" value="[% MemberDetails.strPhoneMobile %]" id="strMobile" class="form-control" placeholder="Mobile">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="strEmail" class="col-sm-2 control-label">Email</label>
+        <div class="col-sm-5">
+            <input type="email" name="Email" value="[% MemberDetails.strEmail %]" id="strEmail" readonly="readonly" class="form-control" placeholder="Email Address">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="strAddress" class="col-sm-2 control-label">Address</label>
+        <div class="col-sm-5">
+            <input type="text" name="Address" value="[% MemberDetails.strAddress %]" id="strAddress" class="form-control" placeholder="e.g. 10 Smith Street">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="strSuburb" class="col-sm-2 control-label">Suburb</label>
+        <div class="col-sm-5">
+            <input type="text" name="City" value="[% MemberDetails.strSuburb %]" id="[% MemberDetails.strSuburb %]" class="form-control" placeholder="Suburb">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="strState" class="col-sm-2 control-label">State</label>
+        <div class="col-sm-3">
+            <select class="form-control" name="State" id="strState">
+                <option disabled selected>Select</option>
+                <option>ACT</option>
+                <option>NSW</option>
+                <option>NT</option>
+                <option>QLD</option>
+                <option>SA</option>
+                <option>TAS</option>
+                <option>VIC</option>
+                <option>WA</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="strPostcode" class="col-sm-2 control-label">Postcode</label>
+        <div class="col-sm-3">
+            <input type="text" name="Postcode" value="[% MemberDetails.strPostalCode %]" id="strPostCode" class="form-control" placeholder="Postcode">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="strCountry" class="col-sm-2 control-label">Country</label>
+        <div class="col-sm-5">
+            <input type="text" name="Country" value="[% MemberDetails.strCountry %]" id="strCountry" class="form-control" placeholder="Country">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Update Details</button>
+        </div>
+    </div>
+</form>

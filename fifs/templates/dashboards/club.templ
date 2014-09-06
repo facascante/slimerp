@@ -1,0 +1,63 @@
+<div class = "pageHeading dash-heading">[% Name %]</div>
+<div id="logo-status">
+	[% Logo %]
+	[% ContactsMenu %]
+</div>
+
+<div class = "home_details">
+  <div class = "sectionheader">[% Lang.txt('Details') %]&nbsp;&nbsp;[% IF EditDetailsLink and !ReadOnlyLogin %]<a href = "[% EditDetailsLink %]" class="edit-link">[% Lang.txt('Edit') %]</a>[% END %]</div>
+	[% IF Details.Address or Details.Town %]
+	<div class = "details-address">
+		<span class = "label">[% Lang.txt('Address') %]</span><br>
+		[% IF Details.Address %][% Details.Address %]<br>[% END %]
+		[% IF Details.Town %][% Details.Town %]<br>[% END %]
+		[% IF Details.Region %][% Details.Region %],&nbsp;[% END %]
+		[% IF Details.Country %][% Details.Country %],&nbsp;[% END %]
+		[% IF Details.PostalCode %][% Details.PostalCode %][% END %]
+	</div>
+	[% END %]
+	<div class = "details-phone">
+		[% IF Details.Phone %]<span class = "label">[% Lang.txt('Phone') %]</span> [% Details.Phone %]<br>[% END %]
+		[% IF Details.Fax %]<span class = "label">[% Lang.txt('Fax') %]</span> [% Details.Fax %]<br>[% END %]
+		[% IF Details.Email %]<span class = "label">[% Lang.txt('Email') %]</span> <a href = "mailto:[% Details.Email %]" class="mail-link">[% Details.Email %]</a><br>[% END %]
+	</div>
+</div>
+[% IF Contacts.size > 0 %]
+<div class = "contacts">
+<div class = "sectionheader">[% Lang.txt('Contacts') %] [% IF EditContactsLink and !ReadOnlyLogin  %]&nbsp;<a href = "[% EditContactsLink %]" class="edit-link">[% Lang.txt('Edit') %]</a>[% END %]</div>
+	[% FOREACH contact IN Contacts %]
+		<div class="club-contact">
+			<span class="label">[% contact.Role %]&nbsp;<span class="primary-contact">[% IF contact.PrimaryContact %](Primary Contact)[% END %]</span></span><br>
+				[% contact.Firstname %]&nbsp;[% contact.Surname %]<br>
+				[% IF contact.Mobile %]
+					[% contact.Mobile %]<br>
+				[% END %]
+				[% IF contact.Email %]
+					<a href="mailto:[% contact.Email %]" class="mail-link">[% contact.Email %]</a>
+				[% END %]
+		</div>
+	[% END %]
+</div>
+[% END %]
+[% IF Notifications.size() > 0 and !ReadOnlyLogin  %]
+<div class = "notifications">
+	<div class="notifications-inner">
+		<div class = "sectionheader">[% Lang.txt('Notifications') %]</div>
+		<div class = "sectionsubheader">The following items require your attention:</div>
+		[% FOREACH nitem IN Notifications %]
+        [% IF !nitem.nodisplay %]
+			<div class="notification-item">
+				<a href = "#" class="delete-icon"></a>&nbsp;&nbsp;<a href = "[% nitem.url %]" class="notification-link">[% nitem.title %]</a>
+      </div>	
+        [% END %]
+		[% END %]
+	</div>
+</div>
+[% END %]
+<div class = "welcome">
+[% Welcome %]
+</div>
+<div id="dash-wrap">
+  <div class = "sectionheader">Dashboard&nbsp;&nbsp;[% IF EditDashboardLink and !ReadOnlyLogin  %]<a href = "[% EditDashboardLink %]" class="edit-link">Configure</a>[% END %]</div>
+  [% Dashboard %]
+</div>

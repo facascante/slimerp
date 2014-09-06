@@ -1,0 +1,69 @@
+[% WRAPPER membercard/MemberCard_Wrapper.templ %]
+
+	[% USE date %]
+	[% varDate =  date.format(date.now(), '%d/%m/%Y') %]
+
+
+	<style type="text/css">
+		.line {
+			margin-bottom:10px;
+		}
+	</style>
+
+	[% FOREACH m = Members %]
+
+		<!-- [% m.intMemberID %] -->
+		[% varClub = '' %]
+		[% varDefaultClub = '' %]
+		[% FOREACH c = m.Clubs %] 
+			[% NEXT IF c.intAssocID != 68 %]
+			[% NEXT IF c.intStatus != 1 %]
+			[% varDefaultClub = c.strName %]
+			[% NEXT IF c.intPrimaryClub == 1 %]
+			[% varClub = c.strName %]
+		[% END %]
+
+		[% IF varClub == '' %]
+			[% varClub = varDefaultClub %]
+		[% END %]
+
+
+    [% varTypeExpiry = '' %]
+    [% FOREACH t = m.Types %]
+      [% IF t.intTypeID == 4 AND t.intActive == 1 AND t.intSubTypeID == 1 %]
+        [% IF t.dtDate2 > varTypeExpiry %]
+          [% varTypeExpiry = t.dtDate2 %]
+        [% END %]
+      [% END %]
+    [% END %]
+
+    [% IF varDate > varTypeExpiry %]
+      [% varDate = '' %]
+    [% END %]
+
+    [% IF varTypeExpiry %]
+      [% varTypeExpiry = 'Expiry: ' _ varTypeExpiry %]
+    [% END %]
+
+
+		<div style="font-size:10px;width:300px;height:192px;">
+		<table border="0" style="width:319px;margin-top:55px;">
+			<tr>
+				<td colspan="2" style="font-weight:bold;font-size:12px;text-align:center;">Penrith Officials Registration</td>
+			</tr>
+			<tr>
+				<td valign="top" style="width:150px;">
+					<img src="https://reg.sportingpulse.com/getphoto.cgi?client=[% m.client %]" alt="" height="110" style="padding-left:5px;">
+				</td>
+				<td valign="top">
+					<div class="line">[% m.strNationalNum %]</div>
+					<div class="line"><b>[% m.strFirstname %] <br> [% m.strSurname FILTER upper %]</b></div>
+					<div class="line">[% varClub %]</div>
+					<div class="line" style="font-weight:bold;font-size:11px;">FAO Level 2</div>
+					<div class="line">[% varTypeExpiry %]</div>
+				</td>
+		</table>
+		</div>
+	[% END %]
+
+[% END %]

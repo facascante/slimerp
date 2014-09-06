@@ -1,0 +1,48 @@
+<h1 class="page-header">[% MemberDetails.strFirstName %] [% MemberDetails.strSurname %] <small>[% MemberDetails.strNationalNum %]</small></h1>
+<h4>General Information</h4>
+
+<span class="info-item">
+    <h5><i class="fa fa-calendar fa-fw"></i> Date of Birth</h5>
+    <p class="info-value">[% MemberDetails.dtDOB %]</p>
+</span>
+
+<span class="info-item">
+    <h5><i class="fa [% IF MemberDetails.intGender == 2 %]fa-female[% ELSE %]fa-male[% END %] fa-fw"></i> Gender</h5>
+    <p class="info-value">[% IF MemberDetails.intGender == 2 %]Female[% ELSE %]Male[% END %]</p>
+</span>
+
+<h4>Contact Information</h4>
+
+<span class="info-item">
+    <h5><i class="fa fa-home fa-fw"></i> Home Phone</h5>
+    <p class="info-value">[% MemberDetails.strPhoneHome %]</p>
+</span>
+
+<span class="info-item">
+    <h5><i class="fa fa-mobile fa-fw"></i> Mobile Phone</h5>
+    <p class="info-value">[% MemberDetails.strPhoneMobile %]</p>
+</span>
+
+<span class="info-item">
+    <h5><i class="fa fa-building-o fa-fw"></i> Work Phone</h5>
+    <p class="info-value">[% MemberDetails.strPhoneWork %]</p>
+</span>
+
+<span class="info-item">
+    <h5><i class="fa fa-envelope-o fa-fw"></i>Primary Email</h5>
+    <p class="info-value">[% MemberDetails.strEmail %]</p>
+</span>
+
+<span class="info-item">
+    <h5><i class="fa fa-envelope-o fa-fw"></i>Contact Email</h5>
+    <p class="info-value">[% MemberDetails.strEmail2 %]</p>
+</span>
+
+<span class="info-item address-item">
+    <h5><i class="fa fa-map-marker fa-fw"></i> Address</h5>
+    <p class="info-value">
+        [% MemberDetails.strAddress %]<br>
+        [% MemberDetails.strSuburb %] [% MemberDetails.strState %] [% MemberDetails.strPostalCode %]<br>
+        [% MemberDetails.strCountry %]    
+    </p>
+</span>

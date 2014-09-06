@@ -1,0 +1,98 @@
+/* Defcode Options order */
+
+#sortable {
+    list-style-type:none;
+    margin:0;
+    padding:0;
+    width:500px;
+}
+#sortable li {
+    float:left;
+    width: 100%;
+    height: 32px;
+    font-size: 16px;
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+#sortable li span {
+    margin-left: 0;
+    position: inherit;
+}
+#avfields {
+    overflow:auto;
+    height:353px;
+    width:518px;
+    border-style:solid;
+    border-width:1px;
+    border-color:silver;
+    padding:0 0 5px 5px;
+}
+.dbdata, #avfields, #sortable {
+    width: 100%;
+}   
+#avfields {
+    padding: 5px 0;
+    height: auto;
+    border:0px;
+    overflow:visible;
+}
+#avfields .RO_fieldblock {
+    cursor:move;
+    height: 26px;
+    line-height: 30px;
+    background-image: #f8f8f8;
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMSAxIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIj48bGluZWFyR3JhZGllbnQgaWQ9ImcxMzU1OTc1NzYzOTE5IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjEwMCUiIHgyPSI1MCUiIHkyPSIwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2YxZjFmMSIgc3RvcC1vcGFjaXR5PSIxIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjEiLz4gIDwvbGluZWFyR3JhZGllbnQ+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNnMTM1NTk3NTc2MzkxOSkiIC8+PC9zdmc+);
+    background-image: -webkit-linear-gradient(bottom, #f1f1f1 0%, #ffffff 100%);
+    background-image: -moz-linear-gradient(bottom, #f1f1f1 0%, #ffffff 100%);
+    background-image: -o-linear-gradient(bottom, #f1f1f1 0%, #ffffff 100%);
+    background-image: -ms-linear-gradient(bottom, #f1f1f1 0%, #ffffff 100%);
+    background-image: linear-gradient(bottom, #f1f1f1 0%, #ffffff 100%);
+}
+
+#avfields .picked .RO_fieldblock, #avfields .ui-sortable-helper .RO_fieldblock {
+	background: #e1e1e1;
+}
+
+.RO_fieldname {
+    width:70%;
+    display:inline;
+}
+.move-icon {
+    float:left;
+    margin: 2px 10px 2px 0;
+    width: 24px;
+    height: 24px;
+    background: url(../images/move.png) no-repeat 0 1px transparent;
+}
+.fieldlinks {
+    float:right;
+		text-align:right;
+    width: 200px;
+}
+.fieldlinks a{
+    display:inline-block;
+    font-size:0.9em;
+    height:15px;
+    line-height:15px;
+    vertical-align:middle;
+    color: #0567A4;
+    text-decoration: underline;
+    font-family: 'DINMedium',sans-serif;
+		margin: 0 6px;
+}
+li.ui-state-highlight {
+    width: 99%;
+    background: #FFF;
+    border: 1px dashed #C0C0C0;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+p {
+    line-height: 1.333;
+}
+
+p .button-small {
+	float:left;
+	margin: 10px 0;
+}

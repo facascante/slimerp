@@ -1,0 +1,21 @@
+[% IF AuthList.size %]
+	<p>The following users are authorised to login for this [% TypeName %].</p>
+	[% Grid %]
+	<br>
+[% ELSE %]
+	<p>There are no authorised users for this [% TypeName %].</p>
+[% END %]
+
+<form action = "[% Target %]" method = "POST">
+	<input type="hidden" name="client" value="[% client %]">
+	<input type="hidden" name="a" value="[% AddAction %]">
+	<input type="hidden" name="a2" value="[% AddAction2 %]">
+	<input type="hidden" name="id" value="[% ID %]">
+		<div class = "sectionheader">Grant a user access</div>
+	<p>
+		To grant access to a user they must hold a confirmed SP Passport.<br>
+	</p><br>
+	<span class = "label">Email Address:</span> &nbsp; <input type="text" name="newemail" size="50" maxlength="250"><br><br>
+	<span class = "label">Restricted Access</span> <input type="checkbox" name="readonly" value ="1"> <br><br>
+	<input type="submit" value="Add" class = "button proceed-button">
+</form>

@@ -1,0 +1,11 @@
+<?php 
+
+require_once '/Users/chito/Sites/slimerp/versions/v01/models/Realms.php';
+
+$app->get('/v01/realms', function () use ($app) {	
+	
+	$object = new Realms();
+	$list = $object->getRealms();
+	$app->contentType('application/json');
+	echo json_encode($list);
+});

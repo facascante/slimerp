@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.22/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../web/js/jquery-ui/css/theme/jquery-ui-1.8.22.custom.css">
+        <link rel="stylesheet" type="text/css" href="../web/css/style.css">
+        <link rel="stylesheet" type="text/css" href="../web/css/spfont.css"> 
+        <link rel="stylesheet" type="text/css" href="../web/css/regoform.css">
+        <link rel="stylesheet" type="text/css" href="../web/css/regoform_2013.css">
+           <link rel="stylesheet" type="text/css" href="../web/js/chosen/chosen.css">
+
+        <script type="text/javascript" src="../web/js/regoform.js"></script>
+    <script type="text/javascript" src="../web/js/chosen/chosen.jquery.min.js"></script>
+<style>
+    .ruleblocks {
+        margin-left:50px;
+        margin-bottom:50px;
+    }
+    .ruleblockheader    {
+        font-size:28px;
+        border-bottom:1px solid;
+    }
+</style>
+
+        
+        
+            <title>SportingPulse Registration</title>
+    </head>
+    <body>
+        <div id="pagewrapper">
+            <div id="pageheader"> </div>
+            <div id="pageholder">
+                <div id="content">
+                    
+            <div class="pageHeading">
+        <span class="form-title-wrap"><h1 class="form-title">Rules Management - Person : Player</h1></span></div>
+            <div id="form-container">
+                <div class="form-body">
+                    <form action = "regoform.cgi" method = "POST" id = "m_formID">
+<div style ="float:right;margin:10px;" class = "generic-button button-small"><a href = "setupdetail.html">Add New Rule</a></div>
+<table class = "listTable products-table">
+    <tr>
+        <th>Sport</th>
+        <th>Level</th>
+        <th>Type</th>
+        <th>Age Group</th>
+        <th>Register From</th>
+        <th>Approvals</th>
+        <th>Documents</th>
+        <th>&nbsp;</th>
+    </tr>
+    <tr>
+        <td>Football</td>
+        <td>Amateur</td>
+        <td>ALL</td>
+        <td>Adult</td>
+        <td>Self, Club, Region, MA</td>
+        <td>Club, MA</td>
+        <td>Passport, <i>National Service Waiver</i></td>
+        <td><a href = "#" onclick = "return confirm('Delete this row?');"><img src = "../web/images/delete_sml.png"></a></td>
+    </tr>
+    <tr>
+        <td>Football</td>
+        <td>Amateur</td>
+        <td>ALL</td>
+        <td>Minor</td>
+        <td>Self, Club, Region, MA</td>
+        <td>Club, MA</td>
+        <td>Parental Approval, Birth Certificate</td>
+        <td><a href = "#" onclick = "return confirm('Delete this row?');"><img src = "../web/images/delete_sml.png"></a></td>
+    </tr>
+    <tr>
+        <td>Football</td>
+        <td>Professional</td>
+        <td>ALL</td>
+        <td>Adult</td>
+        <td>MA</td>
+        <td>MA</td>
+        <td>Passport, Contract</td>
+        <td><a href = "#" onclick = "return confirm('Delete this row?');"><img src = "../web/images/delete_sml.png"></a></td>
+    </tr>
+    <tr>
+        <td>Football</td>
+        <td>Professional</td>
+        <td>ALL</td>
+        <td>Minor</td>
+        <td>None</td>
+        <td></td>
+        <td></td>
+        <td><a href = "#" onclick = "return confirm('Delete this row?');"><img src = "../web/images/delete_sml.png"></a></td>
+    </tr>
+    <tr>
+        <td>Futsal</td>
+        <td>Professional</td>
+        <td>ALL</td>
+        <td>ALL</td>
+        <td>MA</td>
+        <td>MA</td>
+        <td>Contract</td>
+        <td><a href = "#" onclick = "return confirm('Delete this row?');"><img src = "../web/images/delete_sml.png"></a></td>
+    </tr>
+
+</table>
+
+<div class = "warningmsg">
+Missing scenario:
+<ul>
+    <li>Futsal : Amateur : ALL : ALL</li>
+</ul>
+</div>
+
+</form>
+
+                </div>
+            </div>
+    </div> <!-- End Content --> 
+                <div id="pagefooter">
+                    
+        <div id="footer-links">
+            <span class="footerline">&copy;&nbsp; Copyright SportingPulse International Pty Ltd &nbsp;2014.&nbsp; All rights reserved.</span>
+        </div>
+                    </div>
+            </div> <!-- End Page Holder --> 
+        </div> <!-- End Page Wrapper --> 
+        
+<script type="text/javascript"> 
+jQuery().ready(function() { 
+    jQuery(".chzn-select").chosen({ disable_search_threshold: 5 });
+});
+</script>
+        </body>
+</html>
+

@@ -1,0 +1,194 @@
+<script type="text/javascript">
+    function displayFormOptions(formtype)	{
+        if(formtype == 'member')	{
+            jQuery('#regform_memberoptions').show();
+            jQuery('#regform_teamoptions').hide();
+        }
+        else	{
+            jQuery('#regform_memberoptions').hide();
+            jQuery('#regform_teamoptions').show();
+        }
+    }
+</script>
+
+[% addFieldsOnly = 0 %]
+[% IF (isNodeForm AND currentID != createdID) OR isLinkedForm %]
+    [% addFieldsOnly = 1 %]
+    [% IF allow_new_is_0 %]   [% regoOptionText = 'Allow all registrations' %]                            [% regoOptionVal = '0' %]
+    [% ELSIF allow_new_is_1 %][% regoOptionText = 'Allow new registrations if not in national system' %]  [% regoOptionVal = '1' %]
+    [% ELSIF allow_new_is_2 %][% regoOptionText = 'Allow existing members only' %]                        [% regoOptionVal = '2' %]
+    [% ELSIF allow_new_is_3 %][% regoOptionText = 'Allow new registrations only' %]                       [% regoOptionVal = '3' %]
+    [% ELSIF allow_new_is_4 %][% regoOptionText = 'Allow new registrations only if in national system' %] [% regoOptionVal = '4' %]
+    [% ELSIF allow_new_is_5 %][% regoOptionText = 'Allow new only if already in the association' %]       [% regoOptionVal = '5' %]
+    [% END %]
+[% END  %]
+
+[%# comments...
+    pc = Payment Compulsory
+    ra = Register As
+    mr = Multiple Registrations
+    ro - Registration options
+    For normal (non-Node) forms, the fields are enabled by default...
+    As this change was sometime after the addFieldsOnly implementation, the latter was retained for all other fields.
+%]
+
+[%# !isLinkedForm will cause the vars to be set to 1 if isLinkedForm is not set %]
+[% pcEnabled = !isLinkedForm %]
+[% raEnabled = !isLinkedForm %]
+[% mrEnabled = !isLinkedForm %]
+[% roEnabled = !isLinkedForm %]
+
+[% IF isNodeForm AND nrsConfig.enabled AND currentID != createdID %]
+    [% pcEnabled = nrsConfig.pcEnabled %]
+    [% raEnabled = nrsConfig.raEnabled %]
+    [% mrEnabled = nrsConfig.mrEnabled %]
+    [% roEnabled = nrsConfig.roEnabled %]
+[% END %]
+    
+[% stepper_html %]
+[% IF isLinkedForm %]
+    <div class="linked-form-msg">
+    	<h3>Can't see this forms settings?</h3>
+			<p>This form is linked and shares settings with the parent body form <span class="bold">[% pbfName %] (#[% pbfID %])</span>.</p>
+      <p>If you wish to view the parent body form settings or make changes you can do so via the link below.</p>
+			<p><a href="[% target %]?client=[% client %]&amp;fID=[% pbfID %]&amp;a=A_ORF_re">Go to parent body form.</a></p>
+    </div>
+[% END %]
+<form id="form-settings" class="[% IF isLinkedForm %]linked-form[% END %]">
+    <input type="hidden" name="a" value="A_ORF_res">
+    <input type="hidden" name="fID" value="[% formID %]">
+    <input type="hidden" name="client" value="[% client %]">
+    <input type="hidden" name="stepper" value="[% stepper_mode %]">
+    [% IF !isLinkedForm %][% continue_btn %][% END %]
+    <table id="table-settings">
+        <tbody>
+            <tr>
+                <td class="label" style="vertical-align:middle;">Form Name:</td>
+                <td>
+                    [% IF !addFieldsOnly %]
+                        <input type="text" name="strRegoFormName" value="[% form_name %]" size = "50"></td>
+                    [% ELSE %]
+                        <span class='value'>[% form_name %]</span>
+                        <input type='hidden' name='strRegoFormName' value="[% form_name %]">
+                    [% END %]
+                </td>
+            </tr>
+            [% form_type_block %]
+            <tr>
+                <td class="label">Form Enabled</td>
+                <td>
+                    [% IF !addFieldsOnly %]
+                        <input type="checkbox" name="intStatus" value="1" [% form_enabled_checked %] >
+                    [% ELSE %]
+                        <span class='value'>[% IF form_enabled_checked %]Yes[% ELSE %]No[% END %]</span>
+                        <input type='hidden' name='intStatus' value="[% IF form_enabled_checked %]1[% ELSE %]0[% END %]">
+                    [% END %]
+                </td>
+            </tr>
+            <tr>
+                <td class="label">Payment is Compulsory</td>
+                <td>
+                    [% IF pcEnabled %]
+                        <input type="checkbox" name="intPaymentCompulsory" value="1" [% payment_compulsory_checked %] >[This option should be set only if payments are enabled and you have merchant account set up.]
+                        <br />[% is_payment_on %]<br/>[% has_merchant %]<br />[% check_bank %]
+                    [% ELSE %]
+                        <span class='value'>[% IF payment_compulsory_checked %]Yes[% ELSE %]No[% END %]</span>
+                        <input type="hidden" name="intPaymentCompulsory" value="[% IF payment_compulsory_checked %]1[% ELSE %]0[% END %]" >
+                    [% END %]
+                    <br/>
+                    <span>
+                        When this option is set if a form does not have a product or the member does not select a product, the member will not be able to complete their registration. <a href="#">CLICK HERE</a> to see how to make a product mandatory.                  
+                    </span>
+                </td>
+            </tr>
+
+            [% IF form_type != regoform_type_team_assoc %]
+		<tbody id="regform_memberoptions" >
+                <tr>
+                    <td class="label">Allow Member to Register as:</td>
+                    [% IF enable_member_record and raEnabled %]
+                        <td valign="top">
+                            <select name="strAllowedMemberRecordTypes" size="0" multiple>
+                            [% FOREACH type IN all_member_record_types %]
+                                <option value="[% type.intMemberRecordTypeID %]" [%
+type.selected %]>[% type.strName %]</option>
+                            [% END %]
+                            </select>
+                        </td>
+                    [% ELSE %]
+                        <td valign="top">
+                            [% IF raEnabled %]
+                                <input type="checkbox" name="ynPlayer"        value="Y" [% allow_player %]   >[% player_label %]<br>
+                                <input type="checkbox" name="ynCoach"         value="Y" [% allow_coach %]    >[% coach_label %]<br>
+                                <input type="checkbox" name="ynMatchOfficial" value="Y" [% allow_umpire %]   >[% umpire_label %]<br>
+                                <input type="checkbox" name="ynOfficial"      value="Y" [% allow_official %] >[% official_label %]<br>
+                                <input type="checkbox" name="ynMisc"          value="Y" [% allow_misc %]     >[% misc_label %]<br>
+                                <input type="checkbox" name="ynVolunteer"     value="Y" [% allow_volunteer %]>[% volunteer_label %]<br>
+                            [% ELSE %]
+                                <ul style="list-style:none;padding-left:0;margin-top:0;margin-bottom:0">
+                                    [% IF allow_player %]    <li>[% player_label %]</li>    [% ynPlayer    = 'Y' %]  [% ELSE %] [% ynPlayer    = 'N' %] [% END %]
+                                    [% IF allow_coach %]     <li>[% coach_label %]</li>     [% ynCoach     = 'Y' %]  [% ELSE %] [% ynCoach     = 'N' %] [% END %]
+                                    [% IF allow_umpire %]    <li>[% umpire_label %]</li>    [% ynUmpire    = 'Y' %]  [% ELSE %] [% ynUmpire    = 'N' %] [% END %]
+                                    [% IF allow_official %]  <li>[% official_label %]</li>  [% ynOfficial  = 'Y' %]  [% ELSE %] [% ynOfficial  = 'N' %] [% END %]
+                                    [% IF allow_misc %]      <li>[% misc_label %]</li>      [% ynMisc      = 'Y' %]  [% ELSE %] [% ynMisc      = 'N' %] [% END %]
+                                    [% IF allow_volunteer %] <li>[% volunteer_label %]</li> [% ynVolunteer = 'Y' %]  [% ELSE %] [% ynVolunteer = 'N' %] [% END %]
+                                </ul>
+                                <input type='hidden' name='ynPlayer'        value="[% ynPlayer %]">
+                                <input type='hidden' name='ynCoach'         value="[% ynCoach %]">
+                                <input type='hidden' name='ynMatchOfficial' value="[% ynMatchOfficial %]">
+                                <input type='hidden' name='ynOfficial'      value="[% ynOfficial %]">
+                                <input type='hidden' name='ynMisc'          value="[% ynMisc %]">
+                                <input type='hidden' name='ynVolunteer'     value="[% ynVolunteer %]">
+                            [% END %]
+                        </td>
+                    [% END %]
+                </tr>
+                <tr>
+                    <td class="label" style="width:200px;">Allow multiple registration<br>(family registration process):</td>
+                    <td valign="top">
+                        [% allowMultipleAdultsText   = 'Allow multiple adults to register' %]
+                        [% allowMultipleChildrenText = 'Allow multiple children to register' %]
+                        [% IF mrEnabled %]
+                            <p><span style="color:red">IMPORTANT NOTE:</span>&nbsp;This will allow you to register and pay for multiple people at once. You need to check the boxes below to allow multiple adults or children (or both) to be entered using this process.</p>
+                            <p>Using this process, some details from the initial person&#39s registration will be copied to the subsequent forms, and a single payment will be made covering all the registrations.</p>
+                                <input type="checkbox" name="intAllowMultipleAdult" value="1" [% allow_mult_adult %]> [% allowMultipleAdultsText %]?<br>
+                                <input type="checkbox" name="intAllowMultipleChild" value="1" [% allow_mult_child %]> [% allowMultipleChildrenText %]?<br>
+                        [% ELSE %]
+                            <ul style="list-style:none;padding-left:0;margin-top:0;margin-bottom:0">
+                                [% IF allow_mult_adult %] <li>[% allowMultipleAdultsText %]</li>   [% intAllowMultipleAdult = '1' %]  [% ELSE %] [% intAllowMultipleAdult = '0' %] [% END %]
+                                [% IF allow_mult_child %] <li>[% allowMultipleChildrenText %]</li> [% intAllowMultipleChild = '1' %]  [% ELSE %] [% intAllowMultipleChild = '0' %] [% END %]
+                                [% IF !allow_mult_adult AND !allow_mult_child %] <li>Multiple registration not allowed</li> [% END %]
+                            </ul>
+                            <input type='hidden' name='intAllowMultipleAdult' value="[% intAllowMultipleAdult %]">
+                            <input type='hidden' name='intAllowMultipleChild' value="[% intAllowMultipleChild %]">
+                        [% END %]
+                    </td>
+                </tr>
+		</tbody>
+            [% END %]
+
+            [% rego_type_block %]
+
+            <tr>
+                <td class="label" style="vertical-align:middle;">Registration Options:</td>
+                <td>
+                    [% IF roEnabled %]
+                        <select name="intNewRegosAllowed">
+                            <option value="0" [% allow_new_is_0 %]>Allow all registrations</option>
+                            [% allow_if_not_in_national_system %]
+                            <option value="2" [% allow_new_is_2 %]>Allow existing members only</option>
+                            <option value="3" [% allow_new_is_3 %]>Allow new registrations only</option>
+                            <option value="5" [% allow_new_is_5 %]>Allow new only if already in the association</option>
+                        </select>
+                        [% helpoptions %]
+                        [% override %]
+                    [% ELSE %]
+                        <span class='value'>[% regoOptionText %]</span>
+                        <input type='hidden' name='intNewRegosAllowed' value="[% regoOptionVal %]">
+                    [% END %]
+                </td>
+            </tr>
+    		</tbody>
+    </table>
+    [% IF !isLinkedForm %][% continue_btn %][% END %]
+</form>

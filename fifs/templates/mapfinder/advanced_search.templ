@@ -1,0 +1,5 @@
+<div id = "advanced_search_box">
+	[% FOR c IN Characteristics %]
+		<input type = "checkbox" value = "1" name = "as_char_[% c.intCharacteristicID %]" id = "id_as_char_[% c.intCharacteristicID %]" ><label for ="id_as_char_[% c.intCharacteristicID %]">[% c.strName %]</label><br>
+	[% END %]
+</div>

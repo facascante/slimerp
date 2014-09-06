@@ -1,0 +1,87 @@
+<link rel="stylesheet" type="text/css" href="js/jquery-ui/css/theme/jquery-ui-1.8.22.custom.css">
+
+<style>
+    .hilite { color:#0067A4; };
+    .ui-button { margin-top: 0.2em; margin-right: 0.1em; }
+    .ui-button .ui-button-text { line-height: 0.7; }
+    .ui-button-text-only .ui-button-text { padding: 0.3em 0.5em; }
+    input.ui-button { padding: 0.3em 0.5em; }
+</style>
+
+<script type="text/javascript">
+    jQuery().ready(function(){
+        jQuery(function() {
+            jQuery(".chkPrimary").button();
+        });
+        jQuery(".chkPrimary").change(function() {
+            var fID      = jQuery(this).prop('id').replace('chkPrimary_', '');
+            var action   = this.checked ? 'add' : 'delete';
+            var deferred = jQuery.Deferred();
+
+            var request = jQuery.ajax({
+                url: 'ajax/aj_main.cgi',
+                type: "POST",
+                data: {
+                    f:            'SetPrimaryForm',
+                    client:       '[% client %]',
+                    key1:         [% key1 %],
+                    key2:         '[% key2 %]',
+                    entityTypeID: [% entityTypeID %],
+                    entityID:     [% entityID %],
+                    formID:       fID,
+                    action:       action
+                },
+                dataType: 'json'
+            });
+            request.done(function(data){
+                if (data.old) {
+                    jQuery('#chkPrimary_' + data.old).prop('checked', false);
+                    jQuery('#chkPrimary_' + data.old).button('option', 'label', 'Set Primary');
+                    jQuery('#chkPrimary_' + data.old).button('refresh');
+                }
+                if (data.new) jQuery('#chkPrimary_' + data.new).button('option', 'label', 'Primary');
+                deferred.resolve();
+            });
+            request.fail(function(){
+                deferred.reject();
+            });
+            return true;
+        });
+    });
+    function unlinkFromPBF(fID, etID, eID){
+        var deferred = jQuery.Deferred();
+        var request = jQuery.ajax({
+            url: "ajax/aj_regoform_pbfid_update.cgi",
+            type: "POST",
+            data: "client=[% client %]&amp;fid="+fID+"&amp;pbfid=0&amp;etid="+etID+"&amp;eid="+eID,
+            dataType: 'json'
+        });
+        request.done(function(){
+            jQuery("#frmDummy").submit();
+            deferred.resolve();
+        });
+        request.fail(function(){
+            deferred.reject();
+        });
+        return true;
+    };
+
+    function submitDummy(){
+        jQuery('#modalIframeId').dialog("destroy");
+        jQuery("#frmDummy").submit();
+    }
+</script>
+
+<div id="dummy" style="display:none">
+    <form action ="[% target %]" method="POST" name="frmDummy" id="frmDummy">
+        <input type="hidden" name="a" value="A_ORF_r">
+        <input type="hidden" name="client" value="[% client %]">
+    </form>
+</div>
+<br><table class='listTable'>
+
+
+
+
+
+

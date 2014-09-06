@@ -1,0 +1,44 @@
+<ul id = "menu">
+[% IF MenuData.home %]
+<li class = "home"><a href = "[% MenuData.home.0.items.0.url %]">[% MenuData.home.0.name %]</a></li>
+[% END %]
+[% FOREACH toplevel IN MenuData.menu %]
+	[% IF toplevel.numitems == 1 %]
+	<li><a href = "[% toplevel.items.0.url %]" target="[% m.target %]">[% toplevel.name %]</a></li>
+	[% ELSE %]
+	<li class = "subnav"><a href = "#">[% toplevel.name %]</a>
+		<ul>
+		[% FOREACH m IN toplevel.items %]
+			<li><a href = "[% m.url %]" target="[% m.target %]">[% m.name %]</a>
+		[% END %]
+		</ul>
+	</li>
+	[% END %]
+[% END %]
+</ul>
+
+<div class="search-system-wrap [% IF !MenuData.search %]no-search[% END %]">
+
+  [% IF MenuData.search %]
+    <div class ="search-box-wrap">
+	<input type = "text" name = "searchval" value = "" id = "search">
+      [% IF MenuData.search.0.numitems %]
+        [% FOREACH m IN MenuData.search.0.items %]
+          <a href = "[% m.url %]" target="[% m.target %]">[% m.name %]</a>
+        [% END %]
+      [% END %]
+    </div>
+  [% END %]
+
+	[% IF MenuData.system && MenuData.system.0.numitems %]
+		<a href = "" class ="system-icon" onclick = "jQuery('.system-icon-wrap').toggle();return false;" title="Settings" alt="Settings" ></a>
+		<div class ="system-icon-wrap" style = "display:none;">
+			<ul>
+				[% FOREACH m IN MenuData.system.0.items %]
+					<li><a href = "[% m.url %]" target="[% m.target %]">[% m.name %]</a>
+				[% END %]
+			</ul>
+		</div>
+	[% END %]
+
+</div>

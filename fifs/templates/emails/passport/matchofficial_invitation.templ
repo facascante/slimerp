@@ -1,0 +1,16 @@
+<p>Hi [% MemberName %],</p>
+
+[% IF !editable_1 %]
+    <p class="editable" id="editable_1">[% AssocName %] uses SP Passport to manage the logins for Match Officials.</p>
+[% ELSE %]
+    <p>[% editable_1 %]</p>
+[% END %]
+
+<p><a href="[% SignupURL %]">Click here</a> to create a new SP Passport or to link your existing account.</p>
+
+<p>This link has been specifically created for you. Do not share this email with anyone else.</p>
+
+<p>Thank You</p>
+
+<p>[% AssocName %]</p>
+

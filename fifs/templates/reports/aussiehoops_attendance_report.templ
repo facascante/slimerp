@@ -1,0 +1,51 @@
+<div class="report-wrapper">
+   
+[% FOREACH program_obj = ReportData.programs %]
+    <h2>[% program_obj.name %] - [% program_obj.display_day_of_week('short') %] [% program_obj.display_time() %] </h2>
+
+	[% members = program_obj.get_enrolled_members() %]
+
+	[% IF members.size %]    
+		
+
+    	[% members = members.sort('strSurname', 'strFirstname') %]
+    	<table class="report-table">    
+    	      <thead>
+    	        <th>First Name</th>
+    	        <th>Last Name</th>
+    	        <th>Date Of Birth</th>
+                <th>Gender</th>
+                <th>Parent/Guardian 1</th>
+                <th>Mobile</th>
+                <th>Assistance Area</th>
+    	        <th>Parent/Guardian 2</th>
+                <th>Mobile</th>
+                <th>Assistance Area</th>
+                <th>Message for the Coach</th>
+    	      </thead>
+    	      [% FOREACH member IN members %]
+    	          <tr>
+    	            <td>[% member.strFirstname %]</td>
+    	            <td>[% member.strSurname %]</td>
+    	            <td>[% member.dtDOB %]</td>
+    	            [% gender_lookup_value = member.intGender %]
+    	            <td>[% ReportData.gender_map.$gender_lookup_value %]</td>
+    	            <td>[% member.strP1FName %] [% member.strP1SName %]</td>
+    	            <td>[% member.strP1PhoneMobile %]</td>
+    	            [% p1_assist_lookup_value = member.intP1AssistAreaID %]
+    	            <td>[% ReportData.assist_area_map.$p1_assist_lookup_value %]</td>
+    	            <td>[% member.strP2FName %] [% member.strP2SName %]</td>
+                    <td>[% member.strP2PhoneMobile %]</td>
+                    [% p2_assist_lookup_value = member.intP2AssistAreaID %]
+                    <td>[% ReportData.assist_area_map.$p2_assist_lookup_value %]</td>
+    	            <td>[% member.strNatCustomStr2 %]</td>
+    	          </tr>
+    	      [% END %]
+    	</table>
+    	Total: [% members.size %] members
+    [% END %]
+
+    <div style="page-break-after:always"><span class="report-daterun">Report Run [% DateRun %]</span></div>
+	
+[% END %]
+</div>

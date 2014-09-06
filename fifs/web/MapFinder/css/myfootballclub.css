@@ -1,0 +1,12 @@
+.header, .copyright {
+	display:none;
+}
+
+.ui-accordion-content .star-img img {
+    margin: 20px 0px 0px;
+    width: 120px;
+}
+
+body	{
+	background-color:transparent;
+}

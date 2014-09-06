@@ -1,0 +1,12 @@
+<div class="member-status-wrap">
+<p>[% RoleMsg %]</p>
+	<div class="members-seasonstatus-content">
+		[% FOREACH role IN RoleList %]
+			<div class="member-data">
+				<a href="main.cgi?client=[% client %]&a=WF_ListTasks&EID=[% role.EntityID %]&RID=[% role.RoleID %]"> [% role.EntityTitle %] </a></div>
+			<div class="member-data"> [% role.RoleTitle %] </div>
+			<div class="member-data"> [% role.EntityID %] </div>
+			<div class="member-data"> [% role.RoleID %] </div>			
+		[% END %]
+	</div>
+</div>

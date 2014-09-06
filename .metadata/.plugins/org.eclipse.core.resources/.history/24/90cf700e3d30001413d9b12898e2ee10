@@ -1,0 +1,20 @@
+{
+    "name": "facascante/slimerp",
+    "description": "A Slim Framework for ERP",
+    "keywords": ["erp","slimerp"],
+    "homepage": "http://github.com/facascante/slimerp",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Chito Cascante",
+            "email": "chito.cascante@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "monolog/monolog": "1.*",
+        "slim/slim": "2.*",
+        "slim/views": "0.*",
+        "twig/twig": "1.*"
+    }
+}

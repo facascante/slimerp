@@ -1,0 +1,2 @@
+ALTER TABLE tblAssoc ADD COLUMN  intMemberAdd    INT DEFAULT 1;
+ALTER TABLE tblAssoc ADD COLUMN strAddMemberForm VARCHAR(250);

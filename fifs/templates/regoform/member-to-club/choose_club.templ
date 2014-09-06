@@ -1,0 +1,50 @@
+
+[% IF Errors.size %]
+<div class = "warningmsg">
+  <ul>
+  [% FOREACH error IN Errors %]
+    <li>[% error %]</li>
+  [% END %]
+  </ul>
+</div>
+[% END %]
+
+
+[% IF ClubRecordList.size() > 0 or ShowNewClubButton %]
+<p>Please select the [% LevelName_Club %] record for <b>[% MemberName %]</b> that you wish to edit.</p>
+[% END %]
+
+[% IF ClubRecordList.size() > 0 %]
+<table class = "listTable">
+	<tr>
+		<th>[% LevelName_Club %] Name</th>
+	</tr>
+	[% FOREACH club IN ClubRecordList %]
+	<tr>
+		<td><a href = "[% club.url %]">[% club.name %]</td>
+	</tr>
+	[% END %]
+</table>
+[% ELSE %]
+	[% IF !ShowNewClubButton %]
+		<p>New Club Registrations are not availabe from this form.  Please contact you Association/League for more information about the requirements for registering to a club.</p>
+	[% END %]
+[% END %]
+
+
+[% IF ShowNewClubButton %]
+<form method="post" action="[% Target %]" enctype="multipart/form-data">
+  <input type="hidden" name="rfp" value="vt">
+  <input type="hidden" name="a" value="NEW">
+  [% HiddenFields %]
+  <p><select name="clubID" >
+    [% FOREACH club IN ClubList %]
+      <option value ="[% club.intClubID %]">[% club.strName %]</option>
+    [% END %]
+    </select>
+  <p>[% NewMemberText %]</p>
+  <input name="submit" type="submit" value="Register to a new [% LevelName_Club %]" style="width:200px">
+</form>
+[% END %]
+
+

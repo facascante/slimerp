@@ -1,0 +1,1 @@
+ALTER TABLE tblPerson ADD COLUMN intSystemStatus TINYINT DEFAULT 0;

@@ -1,0 +1,71 @@
+[% WRAPPER membercard/MemberCard_Wrapper.templ %]
+
+	[% USE date %]
+	[% varDate =  date.format(date.now(), '%d/%m/%Y') %]
+
+
+	<style type="text/css">
+		.line {
+			margin-bottom:5px;
+			font-size: 12px;
+		}
+	</style>
+
+	[% FOREACH m = Members %]
+
+		<!-- [% m.intMemberID %] -->
+		[% varClub = '' %]
+		[% varDefaultClub = '' %]
+		[% FOREACH c = m.Clubs %]
+      [% NEXT IF c.intClubID == 73932 %]
+			[% NEXT IF c.intAssocID != 7721 %] 
+			[% NEXT IF c.intStatus != 1 %]
+			[% varDefaultClub = c.strName %]
+			[% NEXT IF c.intPrimaryClub == 1 %]
+			[% varClub = c.strName %]
+		[% END %]
+
+    [% FOREACH s = m.Seasons %]
+      [% FOREACH c = m.Clubs %]
+        [% NEXT IF s.intAssocID != 7721 %]
+        [% NEXT IF s.intPlayerStatus != 1 %]
+        [% IF s.intClubID == c.intClubID %]
+          [% varClub = c.strName %]
+        [% END %]
+      [% END %]
+    [% END %]
+
+		[% IF varClub == '' %]
+			[% varClub = varDefaultClub %]
+		[% END %]
+
+		<div style="font-size:10px;width:300px;height:175px;">
+		<table border="0" style="width:300px;margin-top:0px;">
+			<tr>
+				<td valign="top" style="width:100px;padding-top:15px;padding-left:20px;">
+					<img src="https://reg.sportingpulse.com/getphoto.cgi?client=[% m.client %]" alt="" height="100">
+				</td>
+				<td valign="top" style="padding-top:5px;">
+					<img src="/formimages/fsc_logo.jpg" align="right" width="50">
+					<div class="line"><b>2012</b></div>
+					<div class="line"><b>[% m.strFirstname %] <br> [% m.strSurname %]</b></div>
+					<div class="line">DOB [% m.dtDOB %]</div>
+					<div class="line"><b>[% varClub %]</b></div>
+					<div class="line">FFA NO [% m.strNationalNum %]</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align:center;background:yellow;">PLAYER</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align:center;background:#92D050;">Mens Premiership Competition</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align:center;background:#00B0F0;"><b>Football South Coast</b></td>
+			</tr>
+		</table>
+		</div>
+
+	[% END %]
+
+[% END %]

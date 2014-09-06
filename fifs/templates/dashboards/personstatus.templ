@@ -1,0 +1,204 @@
+[% IF clubID > 0 %]
+	[% IF registerInto_currentSeason != 1 and MSThisClub_currentSeason_MSID %]
+		[% highlight_class_current = 'memberstatus_ok';%]
+		[% summary_text_current = Lang.txt('Registered');	%]
+		[% IF Details.recStatus != 1 %]
+			[% summary_text_current = Lang.txt('Registered but Inactive');	%]
+			[% highlight_class_current = 'memberstatus_warning';%]
+		[% END %]
+	[% ELSE %]
+		[% highlight_class_current = 'memberstatus_bad';%]
+		[% summary_text_current = Lang.txt('Not Registered');	%]
+		[% IF Details.recStatus != 1 %]
+			[% summary_text_current = Lang.txt('Not Registered and Inactive');	%]
+		[% END %]
+	[% END %]
+	[% IF registerInto_newRegoSeason != 1 and MSThisClub_newRegoSeason_MSID %]
+		[% highlight_class_new = 'memberstatus_ok';%]
+		[% summary_text_new = Lang.txt('Registered');	%]
+		[% IF Details.recStatus != 1 %]
+			[% summary_text_new = Lang.txt('Registered but Inactive');	%]
+			[% highlight_class_new = 'memberstatus_warning';%]
+		[% END %]
+	[% ELSE %]
+		[% highlight_class_new = 'memberstatus_bad';%]
+		[% summary_text_new = Lang.txt('Not Registered');	%]
+		[% IF Details.recStatus != 1 %]
+			[% summary_text_new = Lang.txt('Not Registered and Inactive');	%]
+		[% END %]
+	[% END %]
+[% ELSE %]
+	[% IF registerInto_currentSeason != 1 and currentSeason_MSID %]
+		[% highlight_class_current = 'memberstatus_ok';%]
+		[% summary_text_current = Lang.txt('Registered');	%]
+		[% IF Details.recStatus != 1 %]
+			[% summary_text_current = Lang.txt('Registered but Inactive');	%]
+			[% highlight_class_current = 'memberstatus_warning';%]
+		[% END %]
+	[% ELSE %]
+		[% highlight_class_current = 'memberstatus_bad';%]
+		[% summary_text_current = Lang.txt('Not Registered');	%]
+		[% IF Details.recStatus != 1 %]
+			[% summary_text_current = Lang.txt('Not Registered and Inactive');	%]
+		[% END %]
+	[% END %]
+	[% IF registerInto_newRegoSeason != 1 and newRegoSeason_MSID %]
+		[% highlight_class_new = 'memberstatus_ok';%]
+		[% summary_text_new = Lang.txt('Registered');	%]
+		[% IF Details.recStatus != 1 %]
+			[% summary_text_new = Lang.txt('Registered but Inactive');	%]
+			[% highlight_class_new = 'memberstatus_warning';%]
+		[% END %]
+	[% ELSE %]
+		[% highlight_class_new = 'memberstatus_bad';%]
+		[% summary_text_new = Lang.txt('Not Registered');	%]
+		[% IF Details.recStatus != 1 %]
+			[% summary_text_new = Lang.txt('Not Registered and Inactive');	%]
+		[% END %]
+	[% END %]
+[% END %]
+
+[% IF isSuspended %]
+	[% highlight_class_current = 'memberstatus_warning';%]
+	[% summary_text_current = Lang.txt('Suspended');	%]
+	[% highlight_class_new = 'memberstatus_warning';%]
+	[% summary_text_new = Lang.txt('Suspended');	%]
+[% END %] 
+
+[% IF defaulter %]
+	[% highlight_class_current = 'memberstatus_warning';%]
+	[% summary_text_current = Lang.txt('Defaulter');	%]
+	[% highlight_class_new = 'memberstatus_warning';%]
+	[% summary_text_new = Lang.txt('Defaulter');	%]
+[% END %] 
+
+[% IF MSThisClub_currentSeason.ClearedOut %]
+	[% highlight_class_current = 'memberstatus_warning';%]
+	[% summary_text_current = Lang.txt('Cleared Out');	%]
+	[% highlight_class_new = 'memberstatus_warning';%]
+	[% summary_text_new = Lang.txt('Cleared Out');	%]
+[% END %] 
+
+[% IF Details.isDeceased %]
+	[% highlight_class_current = 'memberstatus_deceased';%]
+	[% summary_text_current = Lang.txt('Deceased');	%]
+	[% highlight_class_new = 'memberstatus_deceased';%]
+	[% summary_text_new = Lang.txt('Deceased');	%]
+[% END %]
+[% IF Details.isDeRegister %]
+	[% highlight_class_current = 'memberstatus_deceased';%]
+	[% summary_text_current = Lang.txt('DeRegistered');	%]
+	[% highlight_class_new = 'memberstatus_deceased';%]
+	[% summary_text_new = Lang.txt('DeRegistered');	%]
+[% END %]
+<div class = "member-status-wrap">
+	<div class = "member-seasonstatus">
+		<div class = "sectionheader [% highlight_class_current %]">[% summary_text_current %]</div>
+<div class="members-seasonstatus-content">
+	[% IF clubID > 0 %]
+		[% IF registerInto_currentSeason != 1 and MSThisClub_currentSeason_MSID %]
+		<!-- Registered in Current Season at club -->
+			Registered in Current [% txtSeason %]: <b>[% assocSeasons.currentSeasonName %]</b> as
+			<ul>
+				[% IF MSThisClub_currentSeason.PlayerStatus %]<li>[% Lang.txt('Player') %][% IF MSThisClub_currentSeason.PlayerFinancialStatus %](Financial)[% END %]</li>[% END %]
+				[% IF MSThisClub_currentSeason.CoachStatus %]<li>[% Lang.txt('Coach') %][% IF MSThisClub_currentSeason.CoachFinancialStatus %](Financial)[% END %]</li>[% END %]
+				[% IF MSThisClub_currentSeason.UmpireStatus %]<li>[% Lang.txt(UmpireLabel) %][% IF MSThisClub_currentSeason.UmpireFinancialStatus %](Financial)[% END %]</li>[% END %]
+				[% IF MSThisClub_currentSeason.MiscStatus %]<li>[% Lang.txt('Misc') %][% IF MSThisClub_currentSeason.MiscFinancialStatus %](Financial)[% END %]</li>[% END %]
+				[% IF MSThisClub_currentSeason.VolunteerStatus %]<li>[% Lang.txt('Volunteer') %][% IF MSThisClub_currentSeason.VolunteerFinancialStatus %](Financial)[% END %]</li>[% END %]
+				[% IF MSThisClub_currentSeason.Other1Status %]<li>[% Lang.txt('Other1') %][% IF MSThisClub_currentSeason.Other1FinancialStatus %](Financial)[% END %]</li>[% END %]
+				[% IF MSThisClub_currentSeason.Other2Status %]<li>[% Lang.txt('Other2') %][% IF MSThisClub_currentSeason.Other2FinancialStatus %](Financial)[% END %]</li>[% END %]
+			</ul>
+		[% ELSE %]
+			Not Registered in Current [% txtSeason %]: <b>[% assocSeasons.currentSeasonName %]</b>
+		[% END %]
+		[% IF MSThisClub_currentSeason.MemberClubPermit %]
+			<div><b>On Permit: [% MSThisClub_currentSeason.dtPermitStart %] to [% MSThisClub_currentSeason.dtPermitEnd %]</b></div> 
+		[% END %]
+	[% ELSE %]
+		[% IF registerInto_currentSeason != 1 and currentSeason_MSID %]
+		<!-- Registered in Current Season at assoc -->
+			Registered in Current [% txtSeason %]: <b>[% assocSeasons.currentSeasonName %]</b> as 
+			<ul>
+				[% IF MSassoc_currentSeason.PlayerStatus %]<li>[% Lang.txt('Player') %][% IF MSassoc_currentSeason.PlayerFinancialStatus %](Financial)[% END %]</li>[% END %]
+				[% IF MSassoc_currentSeason.CoachStatus %]<li>[% Lang.txt('Coach') %][% IF MSassoc_currentSeason.CoachFinancialStatus %](Financial)[% END %]</li>[% END %]
+				[% IF MSassoc_currentSeason.UmpireStatus %]<li>[% Lang.txt(UmpireLabel) %][% IF MSassoc_currentSeason.UmpireFinancialStatus %](Financial)[% END %]</li>[% END %]
+				[% IF MSassoc_currentSeason.MiscStatus %]<li>[% Lang.txt('Misc') %][% IF MSassoc_currentSeason.MiscFinancialStatus %](Financial)[% END %]</li>[% END %]
+				[% IF MSassoc_currentSeason.VolunteerStatus %]<li>[% Lang.txt('Volunteer') %][% IF MSassoc_currentSeason.VolunteerFinancialStatus %](Financial)[% END %]</li>[% END %]
+				[% IF MSassoc_currentSeason.Other1Status %]<li>[% Lang.txt('Other1') %][% IF MSassoc_currentSeason.Other1FinancialStatus %](Financial)[% END %]</li>[% END %]
+				[% IF MSassoc_currentSeason.Other2Status %]<li>[% Lang.txt('Other2') %][% IF MSassoc_currentSeason.Other2FinancialStatus %](Financial)[% END %]</li>[% END %]
+			</ul>
+		[% ELSE %]
+			Not Registered in Current [% txtSeason %]: <b>[% assocSeasons.currentSeasonName %]</b>
+		[% END %]
+	[% END %]
+	[% IF registerInto_currentSeason == 1 and !ReadOnlyLogin and !Details.isDeRegister %]
+		[% IF registerInto_currentSeason_URL_add %]
+			<span class = "button-small generic-button"><a href = "[% registerInto_currentSeason_URL_add %]">[% Lang.txt('Register') %]</a></span>
+		[% ELSIF registerInto_currentSeason_URL_edit and currentSeason_MSID %]
+			<span class = "button-small generic-button"><a href = "[% registerInto_currentSeason_URL_edit %]">[% Lang.txt('Register') %]</a></span>
+		[% ELSIF registerInto_currentSeason_URL_edit %]
+			<span class = "button-small generic-button"><a href = "[% registerInto_currentSeason_URL_edit %]">[% Lang.txt('Edit Registration') %]</a></span>
+		[% END %]
+	[% END %]
+	</div>
+</div>
+[% IF !SameSeason %]
+	<div class = "member-seasonstatus">
+		<div class = "sectionheader [% highlight_class_new %]">[% summary_text_new %]</div>
+	[% IF clubID > 0 %]
+		[% IF registerInto_newRegoSeason != 1 and MSThisClub_newRegoSeason_MSID %]
+		<!-- Registered in Current Season at club -->
+			Registered in Current [% txtSeason %]: <b>[% assocSeasons.newRegoSeasonName %]</b> as
+			<ul>
+				[% IF MSThisClub_newRegoSeason.PlayerStatus %]<li>[% Lang.txt('Player') %][% IF MSThisClub_newRegoSeason.PlayerFinancialStatus %](Financial)[% END %]</li>[% END %]
+				[% IF MSThisClub_newRegoSeason.CoachStatus %]<li>[% Lang.txt('Coach') %][% IF MSThisClub_newRegoSeason.CoachFinancialStatus %](Financial)[% END %]</li>[% END %]
+				[% IF MSThisClub_newRegoSeason.UmpireStatus %]<li>[% Lang.txt(UmpireLabel) %][% IF MSThisClub_newRegoSeason.UmpireFinancialStatus %](Financial)[% END %]</li>[% END %]
+				[% IF MSThisClub_newRegoSeason.MiscStatus %]<li>[% Lang.txt('Misc') %][% IF MSThisClub_newRegoSeason.MiscFinancialStatus %](Financial)[% END %]</li>[% END %]
+				[% IF MSThisClub_newRegoSeason.VolunteerStatus %]<li>[% Lang.txt('Volunteer') %][% IF MSThisClub_newRegoSeason.VolunteerFinancialStatus %](Financial)[% END %]</li>[% END %]
+				[% IF MSThisClub_newRegoSeason.Other1Status %]<li>[% Lang.txt('Other1') %][% IF MSThisClub_newRegoSeason.Other1FinancialStatus %](Financial)[% END %]</li>[% END %]
+				[% IF MSThisClub_newRegoSeason.Other2Status %]<li>[% Lang.txt('Other2') %][% IF MSThisClub_newRegoSeason.Other2FinancialStatus %](Financial)[% END %]</li>[% END %]
+			</ul>
+		[% ELSE %]
+			Not Registered in Current [% txtSeason %]: <b>[% assocSeasons.newRegoSeasonName %]</b>
+		[% END %]
+		[% IF MSThisClub_newRegoSeason.MemberClubPermit %]
+			<div><b>On Permit: [% MSThisClub_newRegoSeason.dtPermitStart %] to [% MSThisClub_newRegoSeason.dtPermitEnd %]</b></div> 
+		[% END %]
+	[% ELSE %]
+		[% IF registerInto_newRegoSeason != 1 and newRegoSeason_MSID %]
+		<!-- Registered in Current Season at assoc -->
+			Registered in Current [% txtSeason %]: <b>[% assocSeasons.newRegoSeasonName %]</b> as
+			<ul>
+				[% IF MSassoc_newRegoSeason.PlayerStatus %]<li>[% Lang.txt('Player') %][% IF MSassoc_newRegoSeason.PlayerFinancialStatus %](Financial)[% END %]</li>[% END %]
+				[% IF MSassoc_newRegoSeason.CoachStatus %]<li>[% Lang.txt('Coach') %][% IF MSassoc_newRegoSeason.CoachFinancialStatus %](Financial)[% END %]</li>[% END %]
+				[% IF MSassoc_newRegoSeason.UmpireStatus %]<li>[% Lang.txt(UmpireLabel) %][% IF MSassoc_newRegoSeason.UmpireFinancialStatus %](Financial)[% END %]</li>[% END %]
+				[% IF MSassoc_newRegoSeason.MiscStatus %]<li>[% Lang.txt('Misc') %][% IF MSassoc_newRegoSeason.MiscFinancialStatus %](Financial)[% END %]</li>[% END %]
+				[% IF MSassoc_newRegoSeason.VolunteerStatus %]<li>[% Lang.txt('Volunteer') %][% IF MSassoc_newRegoSeason.VolunteerFinancialStatus %](Financial)[% END %]</li>[% END %]
+				[% IF MSassoc_newRegoSeason.Other1Status %]<li>[% Lang.txt('Other1') %][% IF MSassoc_newRegoSeason.Other1FinancialStatus %](Financial)[% END %]</li>[% END %]
+				[% IF MSassoc_newRegoSeason.Other2Status %]<li>[% Lang.txt('Other2') %][% IF MSassoc_newRegoSeason.Other2FinancialStatus %](Financial)[% END %]</li>[% END %]
+			</ul>
+		[% ELSE %]
+			Not Registered in New Registration [% txtSeason %]: <b>[% assocSeasons.newRegoSeasonName %]</b>
+		[% END %]
+	[% END %]
+	[% IF registerInto_newRegoSeason == 1  and !ReadOnlyLogin and !Details.isDeRegister %]
+		[% IF registerInto_newRegoSeason_URL_add %]
+			<span class = "button-small generic-button"><a href = "[% registerInto_newRegoSeason_URL_add %]">[% Lang.txt('Register') %]</a></span>
+		[% ELSIF registerInto_newRegoSeason_URL_edit and newRegoSeason_MSID %]
+			<span class = "button-small generic-button"><a href = "[% registerInto_currentSeason_URL_edit %]">[% Lang.txt('Register') %]</a></span>
+		[% ELSIF registerInto_newRegoSeason_URL_edit %]
+			<span class = "button-small generic-button"><a href = "[% registerInto_newRegoSeason_URL_edit %]">[% Lang.txt('Edit Registration') %]</a></span>
+		[% END %]
+	[% END %]
+	</div>
+[% END %]
+
+[% IF MSOtherClubs.size() > 0 %]
+	<div class = "sectionheader">[% Lang.txt('Other Clubs') %]</div>
+	<ul>
+[% FOREACH club IN MSOtherClubs %]
+	<li>[% club.ClubName %] [% IF club.PlayerStatus %]([% Lang.txt('Player') %])[% END %]</li>
+[% END %]
+	</ul>
+[% END %]
+</div>

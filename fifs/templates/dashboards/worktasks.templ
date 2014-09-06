@@ -1,0 +1,54 @@
+<div class="task-list-wrap">
+<p>[% TaskMsg %]</p>
+	<div class="tasklist-content">
+		<!-- use tables until UI/UX sorted -->
+		<table cellpadding="5">
+		<tr>
+			<th>TaskID</th>
+			<th>WorkFlow Type</th>
+			<th>Action</th>
+			<th>Age<br>Level</th>
+			<th>Reg<br>Nature</th>
+			<th>Document<br>Type</th>
+			<th>Name</th>
+			<th>Status</th>
+		</tr>
+		[% FOREACH task IN TaskList %]
+			<tr>
+			<td><div class="member-data"> [% task.WFTaskID %] </div></td>
+			<td><div class="member-data"> [% task.RuleFor %] </div></td>
+			<td><div class="member-data"> [% task.TaskType %] </div></td>
+			<td><div class="member-data"> [% task.AgeLevel %] </div></td>			
+			<td><div class="member-data"> [% task.RegistrationNature %] </div></td>			
+			<td><div class="member-data"> [% task.DocumentName %] </div></td>			
+			<td><div class="member-data"> [% task.Name %] </div></td>			
+			<td><div class="member-data"> [% task.TaskStatus %] </div></td>	
+            [% IF task.TaskType == 'TRANSFERS' %]
+			    <td colspan="2"><div class="member-data">
+                    <span class = "button-small generic-button">
+                        <a href="main.cgi?client=[% client %]&a=CL_list">View</a>
+                    </span>
+                </td>
+            [% ELSIF task.TaskType == 'DUPLICATES' %]
+			    <td colspan="2"><div class="member-data">
+                    <span class = "button-small generic-button">
+                        <a href="main.cgi?client=[% client %]&a=DUPL_L">View</a>
+                    </span>
+                </td>
+            [% ELSE %]
+			    <td><div class="member-data">
+                    <span class = "button-small generic-button">
+                        <a href="main.cgi?client=[% client %]&a=WF_Approve&TID=[% task.WFTaskID %]">Approve</a>
+                    </span>
+                </div></td>
+                <td><div class="member-data">
+                    <span class = "button-small generic-button">
+                        <a href="main.cgi?client=[% client %]&a=WF_Reject&TID=[% task.WFTaskID %]">Reject</a>
+                    </span>
+                </div></td>	
+            [% END %]
+			</tr>				
+		[% END %]
+		</table>
+	</div>
+</div>

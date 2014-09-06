@@ -1,0 +1,132 @@
+[% Programs_Block = 'BLOCK_programs' %]
+[% Location_Block = 'BLOCK_location' %]
+
+[% IF directory %]
+    [% IF programs_block_override %]
+       [% Programs_Block = directory _ '/' _ programs_block_override %]
+    [% END %]
+    [% IF location_block_override %]
+       [% Location_Block = directory _ '/' _ location_block_override %]
+    [% END %]
+[% END %]
+
+  [% FOREACH r = results %]
+  
+    <h3 style="font-size:12px;width:319px;text-align:left;"><a href="#" onClick="javascript:cm_markerClicked('[% r.Details.rank %]')">[% r.Details.letter %]) [% r.Details.strName %] [% IF r.Details.intGoodSport %]<div style='float:right;'><img src="../images/good-sports-logo.png" /></div> [% END %]</a></h3>
+
+    <div id="row_[% r.Details.intFacilityID %]">
+
+
+    [% BLOCK BLOCK_title_facility %]
+      [% r.Details.strName %]
+    [% END %]
+    
+    [% BLOCK BLOCK_location %]
+      [% IF r.Details.strName or r.Details.strAddress or r.Details.strSuburb or r.Details.strPostalCode or r.Details.strCountry %]
+        <span class="section_heading">Location</span> <br>
+        [% IF r.Programs.first.get_logo_url %]
+            <span><img src ="[% r.Programs.first.get_logo_url %]" alt = "Logo"></span> <br>
+        [% END %]
+        [% contact = r.Programs.first.get_contacts.first %]
+        [% IF contact %]
+            [% IF contact.strContactFirstname %]
+            <span><b>Contact Name:</b> [% contact.strContactFirstname %]</span> <br>
+            [% END %]  
+        [% END %]
+        [% IF r.Details.strName %]
+          <span><b>Name:</b> [% r.Details.strName %]</span> <br>
+        [% END %]
+        [% IF r.Details.strAddress1 %]
+          <span><b>Address:</b> [% r.Details.strAddress1 %] [% r.Details.strAddress2 %]</span> <br>
+        [% END %]
+        [% IF r.Details.strSuburb %]
+          <span><b>Suburb:</b> [% r.Details.strSuburb %]</span> <br>
+        [% END %]
+        [% IF r.Details.strPostalCode %]
+          <span><b>Postal Code:</b> [% r.Details.strPostalCode %]</span> <br>
+        [% END %]
+        [% IF r.Programs.size %]
+          <span><b>Programs:</b> [% r.Programs.size %] Program[% IF r.Programs.size > 1 %]s[% END %]  Available</span> <br>
+        [% END %]
+        <br>
+      [% END %]
+    [% END %]
+    
+    [% BLOCK BLOCK_programs %]
+      [% IF r.Programs %]
+        <span class="section_heading">Programs</span> <br>
+        <table>
+        <tr>
+          <th>Name</th>
+          <th>Day</th>
+          <th>Start Date</th>
+          <th>Time</th>
+          <th>Ages</th>
+          <th>Cost</th>
+          <th></th>
+        </tr>
+        [% FOREACH p = r.Programs %]
+            [% costs = p.get_prices %]
+            <tr>
+                <td>[% p.name %]</td>
+                <td>[% p.display_day_of_week('short').upper %]</td>
+                <td>[% p.DBData.dtStartDate %]</td>
+                <td>[% p.DBData.tmStartTime %]</td>
+                <td>[% p.display_ages('') %]</td>
+                <td>
+                    [% IF costs.new AND costs.returning %]
+                        New: \$[%costs.new%]<br>Returning: \$[% costs.returning %]
+                    [% ELSIF costs.new %]    
+                        $[% costs.new %]
+                    [% ELSIF costs.none %]
+                        $[% costs.none %]
+                    [% ELSE %]
+                        Free
+                    [% END %]
+                </td>
+                [% IF p.display_rego_link && !p.is_full %]
+                    <td>[% p.display_rego_link('Rego') %]</td>
+                [% ELSE %]
+                    <td>
+                    [% IF AllowEOI  %]
+                        <div class="button">
+                            <form name="EOI_form" action="mapfinder.cgi" method="post">
+                                <input type="submit" name="" value="Register Interest">
+                                <input type="hidden" name="a" value="EOI_DTA">
+                                <input type="hidden" name="programID" value="[% p.ID %]">
+                                <input type="hidden" name="postcode" value="[% search_value %]">
+                                <input type="hidden" name="r" value="[% realmID %]">
+                                <input type="hidden" name="sr" value="[% subRealmID %]">
+                                <input type="hidden" name="type" value="[% type %]">
+                            </form>
+                        </div>
+                    [% END %]
+                    </td>
+                [% END %]
+            </tr>
+        [% END %]
+        </table>
+        <br>
+      [% END %]
+    [% END %]
+
+
+    <div style="clear:both;"></div>
+
+    [% PROCESS $Location_Block %]
+        <input type = "button" class = "finder_more_info_btn" value = "[% Lang.txt('More Information') %]" id = "[% r.Details.intFacilityID %]_more_info">
+
+        <div id = "[% r.Details.intFacilityID %]_more_info_data" class = "more_info_data">
+            <div class="result_heading" id = "[% r.Details.intFacilityID %]_more_info_title">
+            [% PROCESS BLOCK_title_facility %]
+            </div>
+
+            [% PROCESS $Location_Block %]
+            [% PROCESS $Programs_Block %]
+
+            <div style="clear:both;"></div>
+
+        </div>
+    </div>
+
+  [% END %]

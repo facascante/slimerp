@@ -1,0 +1,118 @@
+<div class="rego-intro">
+    [% TopText %]
+</div>
+
+[% IF CompulsoryPayment %]
+<p class="compulsorypaymentwarning">NOTE: To complete this process you will need to pay online via credit card. Please have your Visa or Mastercard ready.</p>
+[% END %]
+
+[% IF Errors.size %]
+<div class = "warningmsg">
+  <ul>
+  [% FOREACH error IN Errors %]
+    <li>[% error %]</li>
+  [% END %]
+  </ul>
+</div>
+[% END %]
+
+<script type="text/javascript" src = "js/regoformfrontpage.js"></script>
+
+[%IF AllowNewRegos != 3 %]
+<div class="option accordianheader inactivebar" id="existinghdr"><h4>[% ReturningRegoTitle_ASSOC %]</h4></div>
+
+<div id="existingmember" class="accordianblock" style="display:none;">
+<form method="post" action="[% Target %]" enctype="multipart/form-data">
+  <input type="hidden" name="rfp" value="vt">
+  <input type="hidden" name="a" value="LOGIN">
+    [% HiddenFields %]
+    <p>Please enter your username and password below.</p>
+    <table class="rego-form-table" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td class="label">Username:</td> 
+            <td class="value"><input name="d_username" type = "text" value="" class="input_large" pattern="\d*"></td>
+        </tr> 
+        <tr>
+            <td class="label">Password:</td> 
+            <td class="value">
+			    <input name="d_password" type="password" value="" class="input_large">
+			</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td><input name="submit" type="submit" value="Continue" class="button proceed-button"></td>
+        </tr>
+    </table>
+</form>
+</div>
+
+<div class="option accordianheader inactivebar" id="remindhdr"><h4>I would like to request my username and password</h4></div>
+<div id="forgottenpassword" style="display:none;" class="accordianblock">
+<form method="post" action="[% Target %]" enctype="multipart/form-data">
+    [% HiddenFields %]
+  <input type="hidden" name="a" value="PWD">
+  <input type="hidden" name="rfp" value="vt">
+    <p>Please enter your email address below</p>
+    <table class="rego-form-table" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td class="label">Email Address:</td>
+        <td class="value"><input type="text" value="" name="emailaddress" size="50" class="input_large"></td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td><input name="submit" type="submit" value="Continue" class="button proceed-button"></td>
+    </tr>
+  </table>
+  <p>When you click <b>Continue</b> you will receive an email with all usernames and passwords that are assigned to this emails address.</p>
+    <p>If you don't receive the email, please remember to check your junk mail for your password reminder. It comes from "DoNotReply" and the Subject is "Password reminder for Your League Name"</p>
+    <p class="p-note"><b>Please Note:</b> This will only be successful if the email address entered is already in the database.</p>
+</form>
+</div>
+[% END %]
+
+    [%IF !SystemNoNewMembers and HideNewButton != 3 and AllowNewRegos != 2 and HideNewButton != 1 %]
+
+    <div class="option accordianheader inactivebar" id="newhdr1"><h4>
+        [% NewRegoTitle_ASSOC %]
+    </h4></div>
+    <div id="newmember" class="accordianblock" style="display:none;">
+    <form method="post" action="[% Target %]" enctype="multipart/form-data">
+      <input type="hidden" name="rfp" value="vt">
+      <input type="hidden" name="a" value="NEW">
+        [% HiddenFields %]
+        [% NewMemberText %]
+        <input name="submit" type="submit" value="Continue" class="button proceed-button">
+    </form>
+
+</div>
+[% END %]
+
+[%IF SystemNewCodeRequired and AllowNewRegos != 2 and HideNewButton != 2 and HideNewButton != 3 %]
+<div class="option accordianheader inactivebar" id="newhdr2"><h4>I have a New Registration Code from the PlayAFL system given to me by a Club</h4></div>
+
+<div id="newmember" class="accordianblock"  style="display:none;">
+<form method="post" action="[% Target %]" enctype="multipart/form-data">
+    [% HiddenFields %]
+  <input type="hidden" name="rfp" value="vt">
+    <input type="hidden" name="UseNewCode" value="1">
+    <table class="rego-form-table" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td class="label">New Individual Code:</td> 
+            <td class="value"><input name="newCode" type = "text" value = "" class="input_medium"></td>
+        </tr>
+    </table>
+
+    [% NewCodeText %]
+    <input name="submit" type="submit" value="Continue" class="button proceed-button">
+</form>
+[% END %]
+
+[% IF CartMembers %]
+<div><b>Member transactions waiting to be paid for your current session:</b></div>
+<ul>
+[% FOR m IN CartMembers %]
+    <li>[% m.FirstName %] [% m.Surname %] ([% m.Type %])</li>
+[% END %]
+</ul>
+[% END %]
+

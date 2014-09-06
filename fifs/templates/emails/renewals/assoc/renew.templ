@@ -1,0 +1,13 @@
+<p>Hi [% MemberName %],</p>
+
+[% IF !editable_1 %]
+    <p class="editable" id="editable_1">[% AssocName %] is now open for registrations.</p>
+[% ELSE %]
+    <p>[% editable_1 %]</p>
+[% END %]
+<p>We have prepared an online registration form and we can also accept online payment via credit card.</p>
+
+<p><a href="[% SignupURL %]">Click here</a> to commence the registration process.</p>
+
+<p>[% AssocName %]</p>
+

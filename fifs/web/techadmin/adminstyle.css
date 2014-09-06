@@ -1,0 +1,138 @@
+	body {
+		font-family:Verdana, Geneva, sans-serif;
+		font-size:11px;
+		color:#000000;
+		background-color:#4a618c;  
+		background-color:#ffffff;  
+	}
+
+  .name {
+    font-family:Verdana, Geneva, sans-serif;
+    font-size:14px;
+    font-weight:bold;
+    color:#000000;
+    background-color:#478dec;
+  } 
+
+	/* LINKS */
+	a { 
+		text-decoration:none; 
+		color:#0000ff; 
+	}
+	a:hover { 
+		text-decoration:underline; 
+		color:#0000ff; 
+	}
+	.whitelink {
+		text-decoration:none; 
+		color:#ffffff; 
+	}
+	.whitelink:hover { 
+		text-decoration:underline; 
+		color:#ffffff; 
+	}
+  .fieldlabel {
+    text-decoration:none;
+    color:#ffffff;
+    font-weight:bold;
+		text-align:right;
+  } 
+	.tabheading	{
+		color:#ffffff; 
+    font-family:Verdana, Geneva, sans-serif;
+    font-size:13px;
+  	font-weight:bold;
+		padding:3px;
+	}
+	.tabheading:hover { 
+		text-decoration:none; 
+		color:#000000; 
+	}
+	.tab	{}
+
+	.tab a	{
+		display:block;
+		height:20px;
+
+	}
+	.tab a:hover	{
+		background-color:#75aaff;
+	}
+
+	/* STYLE FOR TABLES */
+
+	td {
+		background-color:#ffffff;  
+		color:#000000;
+		font-size:0.8em;
+
+	}
+	.commentheading	{
+		font-family:Verdana, Arial, sans-serif;
+		font-size:10px;
+		text-decoration:none;
+		color:#000000;
+		background-color:#eeeeee;  
+		font-weight:bold;
+	}
+	.commentshaded	{
+		background-color:#eeeeee;  
+	}
+	.commentborder {
+		color:#000000;
+		background-color:#ffffff;  
+    border-top:  1px solid #4a618c;
+		padding: 3px;
+	}
+	.commentbordershaded {
+		color:#000000;
+		background-color:#eeeeee;  
+    border-top:  1px solid #4a618c;
+		padding: 3px;
+	}
+	.blackborder	{
+    border-bottom:  1px solid #000000;
+    border-top:  1px solid #000000;
+    border-left:  1px solid #000000;
+    border-right:  1px solid #000000;
+	}
+
+	.whitebg  {
+		background-color:#ffffff;
+	}
+	.shadebg  {
+		background-color:#eeeeee;
+	}
+	.blackbg  {
+		background-color:#000000;
+	}
+	.formbg  {
+		background-color:#478dec;
+	}
+	.inactiveformbg  {
+		background-color:#aaaaaa;
+	}
+	.highlighttab {
+		background-color:#75aaff;
+	}
+	.bluebg  {
+		background-color:#4a618c;  
+	}
+	.redtext	{
+		color:#ff0000;
+	}
+	.greytext	{
+		color:#888888;
+	}
+
+td.bg-No	{
+		background-color:#ff0000;
+}
+td.bg-Yes	{
+		background-color:#00ff00;
+}
+
+table.whitetable td	{
+	border:1px solid #fff;
+
+}

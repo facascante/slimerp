@@ -1,0 +1,46 @@
+<div style="padding:10px;">
+<div class="pageHeading">It's only Temporary!</div>
+<p>Hi, your sport really needs some up to date information to ensure everyone is communicating in the best possible way.<br><br>Your database has been made temporarily inactive, however you can regain access immediately by updating the following below:</p>
+<br>
+[% IF detailsLink %]
+	<div style="margin:10px 20px;">
+		<img src="images/incomplete.jpg" alt="Incomplete and compulsory" style="vertical-align:middle;">
+		<a href="[% detailsLink %]">Update the details of your organisation</a>
+	</div>
+[% END %]
+
+[% IF contactsLink %]
+	<div style="margin:10px 20px;">
+		<img src="images/incomplete.jpg" alt="Incomplete and compulsory" style="vertical-align:middle;">
+		<a href="[% contactsLink %]">Update your Contacts now</a>
+	</div>
+[% END %]
+
+[% IF agreementsLink %]
+	<div style="margin:10px 20px;">
+		<img src="images/incomplete.jpg" alt="Incomplete and compulsory" style="vertical-align:middle;">
+		<a href="[% agreementsLink %]">Your league or governing body requires that you acknowledge a new agreement</a>
+	</div>
+[% END %]
+
+[% IF servicesLink %]
+	<div style="margin:10px 20px;">
+		<img src="images/incomplete.jpg" alt="Incomplete and compulsory" style="vertical-align:middle;">
+		<a href="[% servicesLink %]">Confirm your Locator information is correct</a>
+	</div>
+[% END %]
+
+<!--<p>If you complete this now you will have immediate access to your usual functionality.</p>-->
+
+<br>
+
+[% IF help_override %]
+  [% help_override %]
+[% ELSE %]
+  <p>For any questions or support on this, please contact your Sport Administrator or alternatively SportingPulse on 1300 139 970</p>
+[% END %]
+
+<br>
+<p>Thanks for your assistance.</p>
+
+</div>

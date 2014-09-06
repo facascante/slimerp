@@ -1,0 +1,274 @@
+[% IF Errors.size %]
+<div class = "warningmsg">
+	<ul>
+	[% FOREACH error IN Errors %]
+		<li>[% error %]</li>
+	[% END %]
+	</ul>
+</div>
+[% END %]
+
+	<script src = "//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+
+	<script type="text/javascript">
+	jQuery().ready(function() {
+		// validate the comment form when it is submitted
+		jQuery("#m_formID").validate(
+			{
+				"messages":{
+					"d_strFirstname":{"required":"Field required"},
+					"d_strSurname":{"required":"Field required"},
+					"d_dtDOB_day":{"required":"You must enter a day for the date of birth"},
+					"d_dtDOB_month":{"required":"You must enter a month for the date of birth"},
+					"d_dtDOB_year":{"required":"You must enter a year for the date of birth"},
+					"intGender":{"required":"You must choose a gender"}
+				},
+				"rules":{
+[% IF GenderPermission == 'Compulsory' %]
+					"d_intGender":{"required":true},
+[% END %]
+					"d_strFirstname":{"required":true},
+					"d_strSurname":{"required":true},
+					"d_dtDOB_day":{"required":true},
+					"d_dtDOB_month":{"required":true},
+					"d_dtDOB_year":{"required":true, "min":1900, "max": [% CheckMinimumDOBYear %]}
+				},
+				errorClass: "form_field_invalid",
+				validClass: "form_field_valid"
+			}
+		);
+	});
+		</script>
+		
+[% TopText %]
+
+[% TeamSummary %]
+<form action = "[% Target %]" method = "POST" id = "m_formID">
+[% IF PassportID && ! ReRegister %]
+<div id = "loadfrompassport">
+	<span class="button generic-button"><a href = "#" id = "loadfrompassport_btn">Load info from Passport</a></span>
+	[% FOR key IN PassportDetails.keys  %]
+		<input type = "hidden" id = "pp_[% key %]" value = "[% PassportDetails.$key %]">
+	[% END %]
+		<input type = "hidden" name = "loadedpassport" id = "loadedpassport" value = "0">
+	<script type="text/javascript">
+	jQuery().ready(function() {
+		// validate the comment form when it is submitted
+		jQuery("#loadfrompassport_btn").click(function() {
+			jQuery('#l_strFirstname').val(jQuery('#pp_FirstName').val());
+			jQuery('#l_strSurname').val(jQuery('#pp_FamilyName').val());
+			jQuery('#l_intGender').val(jQuery('#pp_Gender').val());
+			jQuery('#l_d_dtDOB').val(jQuery('#pp_DOB_D').val());
+			jQuery('#l_m_dtDOB').val(jQuery('#pp_DOB_M').val());
+			jQuery('#l_y_dtDOB').val(jQuery('#pp_DOB_Y').val());
+			jQuery('#loadedpassport').val('1');
+			return false;
+		});
+	});
+	</script>
+</div>
+<div class="compulsory-notice"><span class="compulsory">*</span> Compulsory Field</div>
+[% END %]
+
+[% IF CompID %]
+	<input type = "hidden" name = "d_intCompID" value = "[% CompID %]">
+[% ELSIF CompSelect %]
+    [% CompSelect %]
+[% END %]
+
+<table class="rego-form-table init-info" border="0" cellpadding="2" cellspacing="0">
+	<tbody id="secregoform">
+		<tr class="form-input-text required">
+			<td class="label">
+				<label for="l_strFirstname">[% Lang.txt('Legal first name') %] </label> :
+			</td>
+			<td class="value">
+[% IF FirstNamePermission == 'ReadOnly' %]
+	[% MemberData.strFirstname %]
+	<input type = "hidden" name = "d_strFirstname" value = "[% MemberData.strFirstname %]">
+[% ELSE %]
+				<input type="text" name="d_strFirstname"  size="40" maxlength="50" id="l_strFirstname" value = "[% MemberData.strFirstname %]" class="input_large">&nbsp;
+				<span class="compulsory">*</span>
+[% END %]
+			</td>
+		</tr>
+		<tr class="form-input-text required">
+			<td class="label"> <label for="l_strSurname">[% Lang.txt('Family name') %] </label> :
+			</td>
+			<td class="value">
+[% IF SurnamePermission == 'ReadOnly' %]
+	[% MemberData.strSurname %]
+	<input type = "hidden" name = "d_strSurname" value = "[% MemberData.strSurname %]">
+[% ELSE %]
+				<input type="text" name="d_strSurname"  size="40" maxlength="50" id="l_strSurname" value = "[% MemberData.strSurname %]" class="input_large">&nbsp;
+				<span class="compulsory">*</span>
+[% END %]
+			</td>
+		</tr>
+		<tr class="form-select required">
+			<td class="label">
+				<label for="l_dtDOB"> [% Lang.txt('Date of Birth') %]</label> :
+			</td>
+			<td class="value">
+<div class="dob-form-wrap">
+[% IF DOBPermission == 'ReadOnly' %]
+	[% MemberData.dtDOB %]
+<input type = "hidden" name = "d_dtDOB_day" value = "[% MemberData.dtDOB_day %]" class="input_small">
+<input type = "hidden" name = "d_dtDOB_mon" value = "[% MemberData.dtDOB_mon %]" class="input_small">
+<input type = "hidden" name = "d_dtDOB_year" value = "[% MemberData.dtDOB_year %]" class="input_small">
+[% ELSE %]
+		<span>
+			<span class="mem-day">
+				<select name="d_dtDOB_day" size="1" id = "l_d_dtDOB" class="input_small">
+					<option value=""></option>
+					<option value="01">01</option>
+					<option value="02">02</option>
+					<option value="03">03</option>
+					<option value="04">04</option>
+					<option value="05">05</option>
+					<option value="06">06</option>
+					<option value="07">07</option>
+					<option value="08">08</option>
+					<option value="09">09</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+					<option value="21">21</option>
+					<option value="22">22</option>
+					<option value="23">23</option>
+					<option value="24">24</option>
+					<option value="25">25</option>
+					<option value="26">26</option>
+					<option value="27">27</option>
+					<option value="28">28</option>
+					<option value="29">29</option>
+					<option value="30">30</option>
+					<option value="31">31</option>
+				</select>
+				<label>Day</label>
+			</span>
+			<span class="dob-sep">/</span>
+			<span class="mem-month">
+				<select name="d_dtDOB_mon" size="1" id = "l_m_dtDOB" class="input_small">
+					<option value=""></option>
+					<option value="01">Jan</option>
+					<option value="02">Feb</option>
+					<option value="03">Mar</option>
+					<option value="04">Apr</option>
+					<option value="05">May</option>
+					<option value="06">Jun</option>
+					<option value="07">Jul</option>
+					<option value="08">Aug</option>
+					<option value="09">Sep</option>
+					<option value="10">Oct</option>
+					<option value="11">Nov</option>
+					<option value="12">Dec</option>
+				</select>
+				<label>Month</label>
+			</span>
+			<span class="dob-sep">/</span>
+			<span class="mem-year">
+				<select name="d_dtDOB_year" size="1" id = "l_y_dtDOB" class="input_small input_year">
+				<option value="">[% %]</option>
+				[% year = CheckMinimumDOBYear %][% WHILE (year >=1900) %]
+					<option value="[% year %]">[% year %]</option>
+				[% year=year - 1 %][% END %]
+				</select>
+				<label>Year</label>	
+			</span>
+		</span>
+[% END %]
+<span class="compulsory">*</span>
+</div>
+			</td>
+		</tr>
+[% IF GenderPermission != 'Hidden' %]
+		<tr class="form-select">
+			<td class="label"> <label for="l_intGender"> [% Lang.txt('Gender') %] </label> : </td>
+			<td class="value">
+[% IF GenderPermission == 'ReadOnly' %]
+				[% IF MemberData.intGender == 1 %][% Lang.txt('Male') %][% ELSIF MemberData.intGender == 2 %][% Lang.txt('Female') %][% END %]
+				<input type = "hidden" name = "d_intGender" value = "[% MemberData.intGender %]" class="input_medium">
+[% ELSE %]
+			<select name="d_intGender"  size="1" class="small-field" id = "l_intGender" class="input_medium">
+				<option value=""></option>
+				<option value="2">[% Lang.txt('Female') %]</option>
+				<option value="1">[% Lang.txt('Male') %]</option>
+			</select>&nbsp;
+[% IF GenderPermission == 'Compulsory' %]
+		<span class="compulsory">*</span>
+[% END %]
+[% END %]
+
+			</td>
+		</tr>
+[% END %]
+
+
+[% IF enable_member_record %]
+    [% IF valid_member_record_types.size > 1 %]
+            <tr class="form-checkbox">
+                <td class="label">[% Lang.txt('Registering As') %] :</td> 
+                <td>
+        [% FOREACH id IN valid_member_record_types.keys %]
+            [% IF PreventTypeChange and ReRegister %]
+                <input type="hidden" name="mrt_reg_as" value="[% id %]" id="id_mrt">
+                <label for="id_mrt]">[% valid_member_record_types.$id %]</label><br>
+            [% ELSE %]
+                <input type="checkbox" name="mrt_reg_as" value="[%id%]" id="id_mrt_[%id%]">
+                <label for="id_mrt_[%id%]">[% valid_member_record_types.$id %]</label><br>
+            [% END %]
+        [% END %]
+                </td>
+            </tr>
+    [% ELSE %]
+        <input type="hidden" name="mrt_reg_as" value="">
+    [% END %]
+[% ELSE %]
+    [% IF TypeData.size > 1 %]
+            <tr class="form-checkbox">
+                <td class="label">[% Lang.txt('Registering As') %] :</td> 
+                <td>
+        [% FOREACH type IN TypeData %]
+            [% IF PreventTypeChange and ReRegister %]
+                <input type = "hidden" name ="[% type.field %]" value = "[% ExistingTypes.item(type.seasonfield) || 0 %]">
+                [% IF ExistingTypes.item(type.seasonfield) || 0 %]
+                <label for = "id_[% type.field %]">[% type.name %]</label><br>
+                [% END %]
+            [% ELSE %]
+                <input type="checkbox" name="[% type.field %]" value="1" id = "id_[% type.field %]">
+                <label for = "id_[% type.field %]">[% type.name %]</label><br>
+            [% END %]
+        [% END %]
+                </td>
+            </tr>
+    [% END %]
+    [% IF TypeData.size == 1 %]
+        <input type = "hidden" name ="[% TypeData.0.field %]" value = "1">
+    [% END %]
+[% END %]
+
+[% IF AskAdultChild %]
+   <tr class="form-radio">
+      <td class="label">[% Lang.txt('Age Type') %] :</td>
+      <td><input type = "radio" name = "rego_multitype" value ="Adult">Adult<br>
+      <input type = "radio" name = "rego_multitype" value ="Child" checked>Child
+			</td>
+    </tr>
+[% END %]
+	</tbody>
+	</table>
+
+	<input type = "submit" value = " [% Lang.txt('Continue') %] "  class = "button proceed-button">
+	<input type = "hidden" name ="rfp" value ="vi">
+	[% HiddenFields %]
+
+</form>

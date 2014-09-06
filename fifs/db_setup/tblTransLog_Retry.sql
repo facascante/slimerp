@@ -1,0 +1,21 @@
+CREATE TABLE tblTransLog_Retry (
+  intRetryLogID int(11) NOT NULL auto_increment,
+  intLogID int(11) NOT NULL DEFAULT 0,
+  dtLog datetime default NULL,
+  intAmount decimal(16,2) default NULL,
+  strTXN varchar(200) default NULL,
+  strResponseCode varchar(10) default NULL,
+  strResponseText varchar(100) default NULL,
+  intPaymentType int(11) default NULL,
+  strBSB varchar(50) default NULL,
+  strBank varchar(100) default NULL,
+  strAccountName varchar(100) default NULL,
+  strAccountNum varchar(100) default NULL,
+  strReceiptRef varchar(100) default NULL,
+  intStatus tinyint(4) default '0',
+tTimeStamp TIMESTAMP,
+  PRIMARY KEY  (intRetryLogID),
+  KEY index_logID (intLogID),
+  KEY index_paymentType (intPaymentType),
+  KEY intStatus (intStatus)
+);

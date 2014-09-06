@@ -1,0 +1,76 @@
+[% WRAPPER membercard/MemberCard_Wrapper.templ %]
+
+	[% USE date %]
+	[% varDate =  date.format(date.now(), '%d/%m/%Y') %]
+
+
+	<style type="text/css">
+		.line {
+			margin-bottom:10px;
+		}
+	</style>
+
+	[% FOREACH m = Members %]
+
+		<!-- [% m.intMemberID %] -->
+		[% varClub = '' %]
+		[% varDefaultClub = '' %]
+		[% FOREACH c = m.Clubs %] 
+			[% NEXT IF c.intAssocID != 7766 %]
+			[% NEXT IF c.intStatus != 1 %]
+			[% varDefaultClub = c.strName %]
+			[% NEXT IF c.intPrimaryClub == 1 %]
+			[% varClub = c.strName %]
+		[% END %]
+
+		[% IF varClub == '' %]
+			[% varClub = varDefaultClub %]
+		[% END %]
+
+		<div style="font-size:10px;width:319px;height:192px;">
+		<table border="0" style="width:319px;">
+			<tr>
+				<td><img src="formimages/nwswfa_idcard.gif" border="0" alt="" height="50"></td>
+				<td style="text-align:center;background:#FFFFA8;font-size:12px;" colspan="2"><b>NORTH WEST SYDNEY WOMENS <br> FOOTBALL ASSOCIATION</b></td>
+			</tr>
+		</table>
+		<table border="0" style="width:319px;margin-top:5px;">
+			<tr>
+				<td valign="top">
+					<div class="line"><i>FFA Number</i> [% m.strMemberNo %]</div>
+					<div class="line"><i>Issued</i> [% varDate %]</div>
+					<div class="line">Name <b> [% m.strFirstname %] [% m.strSurname %]</b></div>
+					<div class="line">Club <b>[% varClub %]</b></div>
+					<div class="line">DOB: [% m.dtDOB %]</div>
+				</td>
+				<td valign="top" align="right">
+					<img src="https://reg.sportingpulse.com/getphoto.cgi?client=[% e_client %]" alt="" height="100">
+				</td>
+		</table>
+		<table border="0" style="width:319px;">
+			<tr>
+				<td style="text-align:center;background:#FFFFA8;font-size:12px;">
+					[% varPlayer = "" %]
+					[% FOREACH t = m.Types %]
+						[% IF t.intTypeID == 1 %]
+							[% varPlayer = "Player" %]
+						[% END %]
+						[% IF t.intTypeID == 2 %]
+							[% coach = "Coach" %]
+						[% END %]
+						[% IF t.intTypeID == 3 %]
+							[% umpire = "Umpire" %]
+						[% END %]
+						[% IF t.intTypeID == 4 %]
+							[% official = "Match Official" %]
+						[% END %]
+					[% END %]
+					<b>[% varPlayer %] [% coach %] [% umpire %] [% official %]</b>
+				</td>
+			</tr>
+		</table>
+		</div>
+
+	[% END %]
+
+[% END %]

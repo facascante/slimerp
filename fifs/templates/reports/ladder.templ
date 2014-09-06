@@ -1,0 +1,11 @@
+<div class="report-wrapper">
+		<h1>[% Name %]</h1>
+[% FOREACH l = ReportData %]
+	<h2>[% l.Title %]</h2>
+	[% l.Content%]
+	<div><span class="report-daterun">Report Run [% DateRun %]</span></div>
+	[% IF !loop.last %]
+<div style="page-break-after:always"></div>
+	[% END %]
+[% END %]
+</div>

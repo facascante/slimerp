@@ -1,0 +1,6 @@
+<html>
+<title>Chito</title>
+<body>
+{% extends "layout.html" %}
+</body>
+</html>

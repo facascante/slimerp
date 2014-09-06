@@ -1,0 +1,55 @@
+[% IF CompulsoryPayment and CheckOut %]
+        <p>Thank you, we have sent your details to <b>[% AssocName %]</b>.</p>
+        <p class="strong-confirm">To complete your registration, you must follow the payment process below.</p>
+        [% ELSE %]
+        <p>Thank you, we have registered you in <b>[% AssocName %]</b>.</p>
+[% END %]
+
+[% IF !ReRegistration %]
+            [% IF CompulsoryPayment and CheckOut %]
+                <p>We have sent you an email with information about how to manage your registration, but <b>your registration is not yet complete</b> until you have completed the online payment process.</p>
+            [% ELSE %]
+                <p>We have sent you an email with information about how to manage your registration and your registration is now complete [% IF !regoForm_HIDE_PaymentText %] subject to any relevant registration fees [% END %].</p>
+            [% END %]
+        <b>
+        <table>
+        [% IF MultiPersonDetails %]
+            [% FOREACH m IN MultiPersonDetails %]
+            <tr>
+                <td colspan = "3">[% m.FirstName %] [% m.Surname %]</td>
+            </tr>
+            [% IF !usePassportFeature %]
+                <tr>
+                        <td>&nbsp;</td>
+                        <td>Username: [% m.Username %]</td>
+                </tr>
+                <tr>
+                        <td>&nbsp;</td>
+                        <td>Password: [% m.Password %]</td>
+                </tr>
+                
+            [% END %]
+         [% END %]
+        [% ELSE %]
+            [% IF !usePassportFeature %]
+            <tr>
+                <td>Username: [% Username %]</td>
+            </tr>
+            <tr>
+                <td>Password: [% Password %]</td>
+            </tr>
+             [% END %]
+        [% END %]
+        </table>
+        </b>
+        
+        <p>Please take a note of these details.  They have been emailed to you.</p>
+[% END %]
+
+[% IF CheckOut %]
+<div class="sectionheader">Pay now</div>
+[% CheckOut %]
+[% ELSE %]
+[% Success %]
+[% END %]
+

@@ -1,0 +1,73 @@
+[% varNationalNumName = 'National #' %]
+[% IF ReportData.realm == 2 %]
+  [% SET varNationalNumName = 'FootyWeb No' %]
+[% ELSIF ReportData.realm == 3 %]
+  [% SET varNationalNumName = 'ARLID No' %]
+[% END %]
+
+<div class="report-wrapper">
+	<h1>Permit Games Played - Your Organisation</h1>
+<b> Your report returned [% ReportData.players.size %] records</b>
+<table class="report-table">
+  <thead>
+<tr>
+	<th>Family Name</th>
+	<th>Firstname</th>
+	<th>[% varNationalNumName %]</th>
+	<th>Organisation</th>
+	<th>Permit To</th>
+	<th>Competition</th>
+	<th>Total</th>
+</tr>
+  </thead>
+
+  <tbody>
+[% FOREACH player = ReportData.players %]
+  [% class = loop.index % 2 ? 'even' : 'odd' %]
+	<tr class="[% class %]">
+	<td>[% player.Surname %]</td>
+	<td>[% player.Firstname %]</td>
+	<td>[% player.NationalNum %]</td>
+	<td>[% player.ParentTeam %]</td>
+	<td>[% player.PermitTeam %]</td>
+	<td>[% player.CompName %]</td>
+	<td>[% player.Total %]</td>
+</tr>
+[% END %]
+  </tbody>
+</table>
+
+<br />
+<br />
+	<h1>Permit Games Played - Other Organisations</h1>
+<b> Your report returned [% ReportData.other_players.size %] records</b>
+<br />
+
+<table class="report-table">
+  <thead>
+<tr>
+<th>Family Name</th>
+<th>Firstname</th>
+<th>FootyWeb No</th>
+<th>Organisation</th>
+<th>Permit From</th>
+<th>Competition</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+[% FOREACH player = ReportData.other_players %]
+<tr>
+	<td>[% player.Surname %]</td>
+	<td>[% player.Firstname %]</td>
+	<td>[% player.NationalNum %]</td>
+	<td>[% player.PermitTeam %]</td>
+	<td>[% player.ParentTeam %]</td>
+	<td>[% player.CompName %]</td>
+	<td>[% player.Total %]</td>
+</tr>
+[% END %]
+</tbody>
+</table>
+
+	<span class="report-daterun">Report Run [% DateRun %]</span>

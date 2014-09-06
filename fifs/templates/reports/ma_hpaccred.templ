@@ -1,0 +1,74 @@
+
+[% var_COUNT = 0 %]
+[% var_STYLE = 'even' %]
+[% var_LEVEL = '' %]
+
+<table class="report-table">
+  <caption>
+    <h1>High Performance Accreditations</h1>
+  </caption>
+  <thead>
+  <tr>
+    <th>National Number</td>
+    <th>Active</td>
+    <th>First Name</td>
+    <th>Last Name</td>
+    <th>Date of Birth</td>
+    <th>Suburb</td>
+    <th>State</td>
+    <th>Home Phone</td>
+    <th>Work Phone</td>
+    <th>Mobile Phone</td>
+    <th>Email</td>
+    <th>Type</td>
+    <th>Level</td>
+  </tr>
+  </thead>
+  <tbody>
+
+[% FOREACH m = ReportData %]
+
+	[% IF var_NATIONAL_NUMBER == m.strNationalNum %]
+		&nbsp; [% m.intInt1 %]
+	[% ELSE %]
+		[% IF var_COUNT > 0 %]
+		</td>
+		<td>[% var_LEVEL %]</td>
+	</tr>
+		[% END %]
+	<tr class='[% var_STYLE %]'>
+ 		<td>[% m.strNationalNum %]</td>
+		[% IF m.intRecStatus == 1 %]
+			[% varStatus = "Yes" %]
+		[% ELSE %]
+			[% varStatus = "No" %]
+		[% END %]
+ 		<td>[% varStatus %]</td>
+		<td>[% m.strFirstName %]</td>
+		<td>[% m.strLastName %]</td>
+		<td>[% m.dtDOB %]</td>
+		<td>[% m.strSuburb %]</td>
+		<td>[% m.strState %]</td>
+		<td>[% m.strPhoneHome %]</td>
+		<td>[% m.strPhoneWork %]</td>
+		<td>[% m.strPhoneMobile %]</td>
+		<td>[% m.strEmail %]</td>
+		<td>[% m.intInt1 %]
+		[% var_LEVEL = m.intInt2 %]
+		[% var_COUNT = var_COUNT + 1 %]
+		[% IF var_STYLE == 'odd' %]
+			[% var_STYLE = 'even' %]
+		[% ELSE %]
+			[% var_STYLE = 'odd' %]
+		[% END %]
+	[% END %]
+	[% var_NATIONAL_NUMBER = m.strNationalNum %]
+[% END %]
+		</td>
+		<td>[% var_LEVEL %]</td>
+	</tr>
+  </tbody>
+  <tfoot>
+    <th colspan = "13"><span class="report-daterun">Report Run [% DateRun %] - [% var_COUNT %] records found</span></th>
+  </tfoot>
+</table>

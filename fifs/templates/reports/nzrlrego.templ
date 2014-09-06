@@ -1,0 +1,212 @@
+[% BLOCK header %]
+<table border="0" width="100%">
+<tr>
+	<td valign="middle"><img src="formsimg/nzrl_logo.gif" alt=""></td>
+	<td class="title">New Zealand Rugby League Inc <br> Contractual Registration Form 2011 Season</td>
+	<td valign="middle" align="right"><img src="formsimg/nzrl_logo.gif" alt=""></td>
+</tr>
+<tr>
+	<td colspan="3" style="font-size:11px;">
+We, the undersigned, make application to be registered and contracted as a player with the <u>[% m.strClubName %]</u> Rugby League Club, and agree to abide by the constitutions of the N.Z.R.L. (Inc.), the District League and all rules and by-laws of the above Club in their entirety and to observe all directions or additional rules, if any, and financial arrangements for players which may from time to time be made by the said Club, District League or N.Z.R.L. (Inc). I agree to carry out all reasonable requirements of the Club, District League and N.Z.R.L. (Inc.) and to play at all times to the best of my ability.
+	</td>
+</tr>
+<tr>
+	<td colspan="3" class="text" style="padding-top:10px; padding-bottom:10px;">
+
+	[% IF m.strZoneName %]
+		<b>Division:</b> [% m.strZoneName %] &nbsp;&nbsp;&nbsp;
+	[% END %]
+
+	<b>Local League:</b> [% m.strAssocName %] &nbsp;&nbsp;&nbsp; 
+	<b>Club:</b> [% m.strClubName %] &nbsp;&nbsp;&nbsp; 
+	<b>Team:</b> [% m.strTeamName %]
+
+	</td>
+</tr>
+</table>
+
+<table border="0" width="100%">
+<tr>
+        <td class="header"></td>
+        <td class="header">Surname</td>
+        <td class="header">First Name</td>
+        <td class="header" align="center">M/F</td>
+        <td class="header" align="center">DOB</td>
+        <td class="header">Signature</td>
+</tr>
+[% END %]
+
+[% BLOCK footer %]
+<tr>
+	<td colspan="6" class="footer">
+It is important that all columns be filled out correctly. The information on this form is used by the NZRL (Inc) at Rugby League House, 7 Beasley Avenue, Penrose, Auckland to register Senior and Junior players both male and female. This information may also be disclosed to NZRL.s family of sponsors.
+	</td>
+</tr>
+</table>
+
+<div class="title">Team Details and Team Management Information</div>
+<table border="0" width="100%">
+	<tr>
+		<td class="header">Team Name</td>
+		<td class="header" colspan="2">&nbsp;</td>
+		<td class="header">Team Grade</td>
+		<td class="header" colspan="2">&nbsp;</td>
+	</tr>
+	<tr>
+		<td class="row1"><b>Position</b></td>
+		<td class="row1"><b>Full Name</b></td>
+		<td class="row1"><b>Email or Address</b></td>
+		<td class="row1"><b>Qualifications</b></td>
+		<td class="row1"><b>New Coach (Yes/No)</b></td>
+		<td class="row1"><b>Best Phone Contact</b></td>
+	</tr>
+	<tr>
+		<td class="row1">Coach</td>
+		<td class="row1"></td>
+		<td class="row1"></td>
+		<td class="row1"></td>
+		<td class="row1"></td>
+		<td class="row1"></td>
+	</tr>
+	<tr>
+		<td class="row1">Co-Coach</td>
+		<td class="row1"></td>
+		<td class="row1"></td>
+		<td class="row1"></td>
+		<td class="row1"></td>
+		<td class="row1"></td>
+	</tr>
+	<tr>
+		<td class="row1">Manager</td>
+		<td class="row1"></td>
+		<td class="row1"></td>
+		<td class="row1"></td>
+		<td class="row1"></td>
+		<td class="row1"></td>
+	</tr>
+</table>
+
+<p>The Club Agrees:</p>
+<ol>
+	<li>To reimburse the players with any mutually agreed expenses.</li>
+	<li>To pay injury compensation in accordance with the Club.s usual practice from time to time, decided upon by the Committee of the Club and to claim on the player.s behalf to the District League, or the N.Z.R.L. (Inc.) for any compensation payable in accordance with insurance schemes currently conducted by them.</li>
+	<li>To provide the usual facilities for training and playing the game of Rugby League.</li>
+</ol>
+<p>The Club verifies that all of the players listed on this document are eligible to play in this team and for this club and have received the appropriate clearance or transfer where required.</p>
+<hr style="border:1px dashed grey;">
+
+<table border="0" width="100%">
+  <tr>
+    <td colspan="6" align="center"><b>District League Endorsement</b></td>
+  </tr>
+  <tr>
+    <td width="140"><b>Secretary Name:</b></td>
+    <td style="border-bottom: 1px solid black;"></td>
+    <td width="90"><b>Signature:</b></td>
+    <td style="border-bottom: 1px solid black;"></td>
+    <td width="40"><b>Date:</b></td>
+    <td style="border-bottom: 1px solid black;"></td>
+  </tr>
+</table>
+
+<br>
+[% IF team == 0 %]
+<span class="text">Team total: <i>[% teamtotal %]</i></span>
+[% END %]
+<br>
+<div class="breakhere">&nbsp;</div>
+[% END %]
+
+[% SET page=0 %]
+[% SET pagetotal=0 %]
+[% SET recordtotal=0 %]
+[% SET teamtotal=0 %]
+
+<style type="text/css">
+	td {
+ 	 	font-family:arial;
+	}
+	td.header {
+		font-weight:bold;
+		background:#E5E2de;
+		border: 1px solid black;
+		font-size:14px;
+		padding-left:4px;
+	}
+	td.row1 {
+		font-size:12px;
+		border: 1px solid black;
+	}
+	td.row2 {
+		font-size:12px;
+		border-left: 1px solid black;
+		border-right: 1px solid black;
+		border-bottom: 1px solid black;
+	}
+	.text {
+		font-size:11px;
+	}
+	.footer {
+		padding-top:4px;
+		font-size:10px;
+	}
+	div.breakhere {
+		page-break-before: always
+	}
+	td.title {
+		font-size:20px;
+		font-weight:bold;
+		text-align:center;
+	}
+	div.title {
+		font-size:20px;
+		font-weight:bold;
+		text-align:center;
+	}
+</style>
+
+[% FOREACH m = ReportData %]
+
+	[% IF teamname != m.strTeamName OR club != m.strClubName OR assoc != m.strAssocName OR recordtotal > 24 %]
+		[% IF teamname != m.strTeamName OR club != m.strClubName %]
+			[% SET team = 0 %]
+		[% ELSE %]
+			[% SET team = 1 %]
+		[% END %]
+		[% IF recordtotal > 0 %]
+			[% INCLUDE footer %]
+			[% SET recordtotal = 0 %]
+		[% END %]
+		[% IF teamname != m.strTeamName OR club != m.strClubName %]
+			[% SET teamtotal = 0 %]
+			[% SET team = 0 %]
+		[% END %]
+		[% INCLUDE header %]
+	[% END %]
+
+	[% SET teamtotal = teamtotal + 1 %]
+
+<tr>
+  <td class="row1" width="30" align="center">[% teamtotal %]</td>
+  <td class="row1" width="28%">[% m.strSurname %]</td>
+  <td class="row1" width="28%">[% m.strFirstName %]</td>
+  <td class="row1" width="30" align="center">[% m.strGender %]</td>
+  <td class="row1" width="30" align="center">[% m.dtDOB %]</td>
+  <td class="row1" width="28%"> &nbsp; </td>
+</tr>
+
+	[% SET dob = m.YearOfBirth %]
+	[% SET teamname = m.strTeamName %]
+	[% SET club = m.strClubName %]
+	[% SET assoc = m.strAssocName %]
+
+	[% SET recordtotal = recordtotal + 1 %]
+
+[% END %]
+
+[% IF recordtotal > 0 %]
+	[% SET team = 0 %]
+	[% INCLUDE footer %]
+[% END %]
+
+

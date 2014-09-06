@@ -1,0 +1,189 @@
+
+<style type="text/css">
+	#reptable td {
+		padding:5px;
+		text-align:center;
+	}
+</style>
+
+<table class="report-table">
+  <caption>
+    <h1>Referees Accreditation Summary Report by League</h1>
+  </caption>
+  <thead>
+  <tr>
+    <th style="text-align:left;">Status</th>
+    <th style="text-align:left;">Division</th>
+    <th style="text-align:left;">League</th>
+    <th>MGR <br> (IT)</th>
+    <th>MGR</th>
+    <th>ILR <br> (IT)</th>
+    <th>ILR</th>
+    <th>L1R</th>
+    <th>L1R <br> (IT)</th>
+    <th>L1RTJ</th>
+    <th>MGR <br> SO(IT)</th>
+    <th>MGR <br> SO</th>
+    <th>ILR <br> SO (IT)</th>
+    <th>ILR <br> SO</th>
+    <th>L2R <br> (CP)</th>
+    <th>L2R</th>
+    <th>L3R</th>
+    <th>L4R</th>
+    <th>L5R</th>
+    <th>NRAS</th>
+    <th>U</th>
+    <th>Total</th>
+  </tr>
+  </thead>
+  <tbody>
+
+[% FOREACH m = ReportData %]
+
+	[% IF row == 'odd' %]
+		[% SET row = 'even' %]
+	[% ELSE %]
+		[% SET row = 'odd' %]
+	[% END %]
+	[% IF oldzone == m.strZone %]
+		[% SET zone = "" %]	
+	[% ELSE %]
+		[% SET zone = m.strZone %]	
+	[% END %]
+	[% SET oldzone =  m.strZone %]	
+  [% IF oldstatus == m.intStatus %]
+    [% SET status = "" %]
+  [% ELSE %]
+    [% SET status = m.intStatus %]
+  [% END %]
+  [% SET oldstatus =  m.intStatus %]
+	[% IF status == 1 %]
+		[% SET status = "Active" %]
+	[% END %]
+	[% IF status == 0 %]
+		[% SET status = "Inactive" %]
+	[% END %]
+
+	<tr class='[% row %]'>
+ 		<td style="text-align:left;">[% status %]</td>
+		<td style="text-align:left;">[% zone %]</td>
+ 		<td style="text-align:left;">[% m.strLeague %]</td>
+ 		<td>[% m.intAccredType_01 %]</td>
+ 		<td>[% m.intAccredType_02 %]</td>
+ 		<td>[% m.intAccredType_03 %]</td>
+ 		<td>[% m.intAccredType_04 %]</td>
+ 		<td>[% m.intAccredType_05 %]</td>
+ 		<td>[% m.intAccredType_06 %]</td>
+ 		<td>[% m.intAccredType_07 %]</td>
+ 		<td>[% m.intAccredType_08 %]</td>
+ 		<td>[% m.intAccredType_09 %]</td>
+ 		<td>[% m.intAccredType_10 %]</td>
+ 		<td>[% m.intAccredType_11 %]</td>
+ 		<td>[% m.intAccredType_12 %]</td>
+ 		<td>[% m.intAccredType_13 %]</td>
+ 		<td>[% m.intAccredType_14 %]</td>
+ 		<td>[% m.intAccredType_15 %]</td>
+ 		<td>[% m.intAccredType_16 %]</td>
+ 		<td>[% m.intAccredType_17 %]</td>
+ 		<td>[% m.intUnknown %]</td>
+ 		<td>[% m.intTotal %]</td>
+	</tr>
+
+	[% SET accred_01 = accred_01 + m.intAccredType_01 %]
+	[% SET accred_02 = accred_02 + m.intAccredType_02 %]
+	[% SET accred_03 = accred_03 + m.intAccredType_03 %]
+	[% SET accred_04 = accred_04 + m.intAccredType_04 %]
+	[% SET accred_05 = accred_05 + m.intAccredType_05 %]
+	[% SET accred_06 = accred_06 + m.intAccredType_06 %]
+	[% SET accred_07 = accred_07 + m.intAccredType_07 %]
+	[% SET accred_08 = accred_08 + m.intAccredType_08 %]
+	[% SET accred_09 = accred_09 + m.intAccredType_09 %]
+	[% SET accred_10 = accred_10 + m.intAccredType_10 %]
+	[% SET accred_11 = accred_11 + m.intAccredType_11 %]
+	[% SET accred_12 = accred_12 + m.intAccredType_12 %]
+	[% SET accred_13 = accred_13 + m.intAccredType_13 %]
+	[% SET accred_14 = accred_14 + m.intAccredType_14 %]
+	[% SET accred_15 = accred_15 + m.intAccredType_15 %]
+	[% SET accred_16 = accred_16 + m.intAccredType_16 %]
+	[% SET accred_17 = accred_17 + m.intAccredType_17 %]
+	[% SET unknown = unknown + m.intUnknown %]
+	[% SET total = total + m.intTotal %]
+
+[% END %]
+
+	<tr class='[% row %]'>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>[% accred_01 %]</td>
+		<td>[% accred_02 %]</td>
+		<td>[% accred_03 %]</td>
+		<td>[% accred_04 %]</td>
+		<td>[% accred_05 %]</td>
+		<td>[% accred_06 %]</td>
+		<td>[% accred_07 %]</td>
+		<td>[% accred_08 %]</td>
+		<td>[% accred_09 %]</td>
+		<td>[% accred_10 %]</td>
+		<td>[% accred_11 %]</td>
+		<td>[% accred_12 %]</td>
+		<td>[% accred_13 %]</td>
+		<td>[% accred_14 %]</td>
+		<td>[% accred_15 %]</td>
+		<td>[% accred_16 %]</td>
+		<td>[% accred_17 %]</td>
+		<td>[% unknown %]</td>
+		<td><b>[% total %]</b></td>
+	</tr>
+  </tbody>
+</table>
+
+<br><br>
+<table class="report-table">
+  <caption>
+    <p><b>Key:</b></p>
+  </caption>
+  <tbody>
+	<tr>
+		<td style="text-align:left;"><b>MGR</b></td>
+		<td style="text-align:left;">Modified Games Referee</td>
+		<td>&nbsp;</td>
+		<td style="text-align:left;"><b>ILR</b></td>
+		<td style="text-align:left;">International Laws Referee</td>
+		<td>&nbsp;</td>
+		<td style="text-align:left;"><b>IT</b></td>
+		<td style="text-align:left;">In Training</td>
+		<td>&nbsp;</td>
+		<td style="text-align:left;"><b>L1R</b></td>
+		<td style="text-align:left;">Level 1 Referee</td>
+		<td>&nbsp;</td>
+		<td style="text-align:left;"><b>L1RTJ</b></td>
+		<td style="text-align:left;">Level 1 Referee Touch Judge</td>
+		<td>&nbsp;</td>
+		<td style="text-align:left;"><b>SO</b></td>
+		<td style="text-align:left;">School Only</td>
+	</tr>
+	<tr>
+		<td style="text-align:left;"><b>NRAS</b></td>
+		<td style="text-align:left;">NRAS Course Participant</td>
+		<td>&nbsp;</td>
+		<td style="text-align:left;"><b>L2R</b></td>
+		<td style="text-align:left;">Level 2 Referee</td>
+		<td>&nbsp;</td>
+		<td style="text-align:left;"><b>L3R</b></td>
+		<td style="text-align:left;">Level 3 Referee</td>
+		<td>&nbsp;</td>
+		<td style="text-align:left;"><b>L4R</b></td>
+		<td style="text-align:left;">Level 4 Referee</td>
+		<td>&nbsp;</td>
+		<td style="text-align:left;"><b>L5R</b></td>
+		<td style="text-align:left;">Level 5 Referee</td>
+		<td>&nbsp;</td>
+		<td style="text-align:left;"><b>U</b></td>
+		<td style="text-align:left;">Unknown</td>
+	</tr>
+  </tbody>
+</table>
+
+[% USE date %]
+<p align="center"><i>Report Generated: [% date.format(filemod_time) %]</i></p>

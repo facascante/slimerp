@@ -1,0 +1,33 @@
+#spheader {
+	background:url(../images/Melb07_bg.jpg);
+	height:167px;
+} 
+#headerbar {
+	background-color:#00ADEF;
+	color:#ffffff;
+}
+#headerbar a{
+	color:#ffffff;
+	font-weight:bold;
+}
+#pageholder{
+	margin-left:0px;
+} 
+#navbar {
+	padding-top:0px;
+} 
+#contentholder{
+	margin-top:0px;
+} 
+div#navbar	{
+  background-color:#cff1fd;
+  border:1px solid #00aeed;
+	border-top:0px;
+}
+
+#navbar div.navHeader  a {
+  color: #ffffff;
+  background-color:#c2135e;
+  border:0px;
+  padding:  5px 5px 5px 5px;
+}

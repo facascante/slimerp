@@ -1,0 +1,65 @@
+{
+	SQL => => qq[
+		SELECT tblClub.strName AS strClubName, IF(tblMember.intGender=1,'Male',IF(tblMember.intGender=2,'Female','')) AS Gender 
+,COUNT(DISTINCT CASE WHEN IF(tblMember_Seasons_3.intPlayerAgeGroupID IN (452,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30),tblMember_Seasons_3.intPlayerAgeGroupID, 0) = '452' THEN tblMember_Seasons_3.intMemberSeasonID ELSE NULL END) AS strFour 
+,COUNT(DISTINCT CASE WHEN IF(tblMember_Seasons_3.intPlayerAgeGroupID IN (452,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30),tblMember_Seasons_3.intPlayerAgeGroupID, 0) = '16' THEN tblMember_Seasons_3.intMemberSeasonID ELSE NULL END) AS strFive 
+,COUNT(DISTINCT CASE WHEN IF(tblMember_Seasons_3.intPlayerAgeGroupID IN (452,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30),tblMember_Seasons_3.intPlayerAgeGroupID, 0) = '17' THEN tblMember_Seasons_3.intMemberSeasonID ELSE NULL END) AS strSix 
+,COUNT(DISTINCT CASE WHEN IF(tblMember_Seasons_3.intPlayerAgeGroupID IN (452,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30),tblMember_Seasons_3.intPlayerAgeGroupID, 0) = '18' THEN tblMember_Seasons_3.intMemberSeasonID ELSE NULL END) AS strSeven 
+,COUNT(DISTINCT CASE WHEN IF(tblMember_Seasons_3.intPlayerAgeGroupID IN (452,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30),tblMember_Seasons_3.intPlayerAgeGroupID, 0) = '19' THEN tblMember_Seasons_3.intMemberSeasonID ELSE NULL END) AS strEight 
+,COUNT(DISTINCT CASE WHEN IF(tblMember_Seasons_3.intPlayerAgeGroupID IN (452,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30),tblMember_Seasons_3.intPlayerAgeGroupID, 0) = '20' THEN tblMember_Seasons_3.intMemberSeasonID ELSE NULL END) AS strNine 
+,COUNT(DISTINCT CASE WHEN IF(tblMember_Seasons_3.intPlayerAgeGroupID IN (452,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30),tblMember_Seasons_3.intPlayerAgeGroupID, 0) = '21' THEN tblMember_Seasons_3.intMemberSeasonID ELSE NULL END) AS strTen 
+,COUNT(DISTINCT CASE WHEN IF(tblMember_Seasons_3.intPlayerAgeGroupID IN (452,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30),tblMember_Seasons_3.intPlayerAgeGroupID, 0) = '22' THEN tblMember_Seasons_3.intMemberSeasonID ELSE NULL END) AS strEleven 
+,COUNT(DISTINCT CASE WHEN IF(tblMember_Seasons_3.intPlayerAgeGroupID IN (452,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30),tblMember_Seasons_3.intPlayerAgeGroupID, 0) = '23' THEN tblMember_Seasons_3.intMemberSeasonID ELSE NULL END) AS strTwelve 
+,COUNT(DISTINCT CASE WHEN IF(tblMember_Seasons_3.intPlayerAgeGroupID IN (452,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30),tblMember_Seasons_3.intPlayerAgeGroupID, 0) = '24' THEN tblMember_Seasons_3.intMemberSeasonID ELSE NULL END) AS strThirteen 
+,COUNT(DISTINCT CASE WHEN IF(tblMember_Seasons_3.intPlayerAgeGroupID IN (452,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30),tblMember_Seasons_3.intPlayerAgeGroupID, 0) = '25' THEN tblMember_Seasons_3.intMemberSeasonID ELSE NULL END) AS strFourteen 
+,COUNT(DISTINCT CASE WHEN IF(tblMember_Seasons_3.intPlayerAgeGroupID IN (452,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30),tblMember_Seasons_3.intPlayerAgeGroupID, 0) = '26' THEN tblMember_Seasons_3.intMemberSeasonID ELSE NULL END) AS strFifteen 
+,COUNT(DISTINCT CASE WHEN IF(tblMember_Seasons_3.intPlayerAgeGroupID IN (452,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30),tblMember_Seasons_3.intPlayerAgeGroupID, 0) = '27' THEN tblMember_Seasons_3.intMemberSeasonID ELSE NULL END) AS strSixteen 
+,COUNT(DISTINCT CASE WHEN IF(tblMember_Seasons_3.intPlayerAgeGroupID IN (452,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30),tblMember_Seasons_3.intPlayerAgeGroupID, 0) = '28' THEN tblMember_Seasons_3.intMemberSeasonID ELSE NULL END) AS strSeventeen 
+,COUNT(DISTINCT CASE WHEN IF(tblMember_Seasons_3.intPlayerAgeGroupID IN (452,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30),tblMember_Seasons_3.intPlayerAgeGroupID, 0) = '29' THEN tblMember_Seasons_3.intMemberSeasonID ELSE NULL END) AS strEighteen 
+,COUNT(DISTINCT CASE WHEN IF(tblMember_Seasons_3.intPlayerAgeGroupID IN (452,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30),tblMember_Seasons_3.intPlayerAgeGroupID, 0) = '30' THEN tblMember_Seasons_3.intMemberSeasonID ELSE NULL END) AS strSenior 
+,COUNT(DISTINCT CASE WHEN IF(tblMember_Seasons_3.intPlayerAgeGroupID IN (452,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30),tblMember_Seasons_3.intPlayerAgeGroupID, 0) = '0' THEN tblMember_Seasons_3.intMemberSeasonID ELSE NULL END) AS Others 
+,COUNT(DISTINCT tblMember_Seasons_3.intMemberSeasonID) AS total
+FROM tblAssoc INNER JOIN tblMember INNER JOIN tblMember_Associations ON (tblMember.intMemberID=tblMember_Associations.intMemberID AND tblMember_Associations.intRecStatus<> -1) 
+INNER JOIN tblMember_Seasons_3 ON (
+tblMember_Seasons_3.intMemberID = tblMember_Associations.intMemberID 
+AND tblMember_Seasons_3.intAssocID = tblMember_Associations.intAssocID 
+AND tblMember_Seasons_3.intMSRecStatus=1 
+) LEFT JOIN tblClub ON (tblMember_Seasons_3.intClubID = tblClub.intClubID) INNER JOIN tblAssoc_Clubs ON (tblAssoc_Clubs.intAssocID=tblAssoc.intAssocID AND tblAssoc_Clubs.intClubID=tblClub.intClubID) 
+INNER JOIN tblSeasons as S ON (S.intSeasonID = tblMember_Seasons_3.intSeasonID
+AND S.intAssocID IN (0, ###ASSOCID###)
+)
+WHERE tblMember_Associations.intAssocID= ###ASSOCID###  AND tblAssoc.intAssocID=tblMember_Associations.intAssocID AND tblMember.intStatus <> -1 AND tblAssoc.intAssocID= ###ASSOCID###  AND tblMember_Seasons_3.intSeasonID = tblAssoc.intCurrentSeasonID  AND tblMember_Associations.intRecStatus = '1' AND intPlayerStatus = '1' AND tblMember_Seasons_3.intClubID=tblClub.intClubID AND tblClub.intRecStatus <> -1 AND tblMember.intMemberID IN (SELECT DISTINCT MC2.intMemberID FROM tblMember_Clubs as MC2 WHERE MC2.intMemberID=tblMember.intMemberID AND MC2.intClubID=tblMember_Seasons_3.intClubID AND MC2.intStatus = '1' ) 
+GROUP BY strClubName, intGender
+ORDER BY strClubName, intGender
+	],
+	StatsReport => 0,
+	MemberTeam => 0,
+	ReportEntity => 0,
+	ReportLevel => 0,
+	Template => 'default',
+	DistinctValues => 1,
+	Labels => [
+		['strClubName','Club Name'],
+		['Gendere','Gender'],
+      		['strFour','04 Years'],
+      		['strFive','05 Years'],
+      		['strSix','06 Years'],
+      		['strSeven','07 Years'],
+      		['strEight','08 Years'],
+      		['strNine','09 Years'],
+      		['strTen','10 Years'],
+      		['strEleven','11 Years'],
+      		['strTwelve','12 Years'],
+      		['strThirteen','13 Years'],
+      		['strFourteen','14 Years'],
+      		['strFifteen','15  Years'],
+      		['strSixteen','16 Years'],
+      		['strSeventeen','17 Years'],
+      	 	['strEighteen','18 Years'],
+     	 	['strSenior','Senior'],
+      		['total','Total'],
+	],
+	Sort => [
+		['strClubName','ASC','string'],
+],
+}

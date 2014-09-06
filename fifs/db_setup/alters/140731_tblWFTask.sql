@@ -1,0 +1,1 @@
+ALTER TABLE tblWFTask ADD COLUMN intCreatedByUserID INT DEFAULT 0;

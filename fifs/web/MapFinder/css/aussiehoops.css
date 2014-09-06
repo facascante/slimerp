@@ -1,0 +1,690 @@
+/* Aussie Hoops Club Locator - Launch v1.0 */
+
+ body {
+    background: none repeat scroll 0 0 #333333;
+    font-family:'Open Sans', sans-serif;
+}
+
+#wrapper {
+    margin: 0 auto;
+    position: relative;
+    width: 100%;
+}
+
+#content {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background: none repeat scroll 0 0 #FFFFFF;
+    float: left;
+    padding: 0;
+    width: 100%;
+}
+
+#map_canvas, #intro_popup {
+    float:right;
+    height: 825px;
+    width: -webkit-calc(100% - 320px);
+    width: -moz-calc(100% - 320px);
+    width: calc(100% - 320px);
+}
+
+.ie8 #map_canvas, ie8 #intro_popup {
+    width: 800px;
+}
+
+#content #intro_popup {
+    background: url("../images/fiba/aussiehoops/AH_Text.png") no-repeat scroll center center #FFFFFF;
+    left: 320px;
+    position: absolute;
+    z-index: 1;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 2), screen and (max--moz-device-pixel-ratio: 2) {
+    background-image: url("../images/fiba/aussiehoops/AH_Text@2x.png");
+    background-size: 412px 634px;
+}
+
+#globalnav #globalnav-inner {
+    max-width: 100%;
+    width: auto;
+}
+
+.map-control {
+    float:left;
+    width:320px;
+}
+
+.map-title {
+	background: url("../images/fiba/aussiehoops/ah_locator.png") no-repeat scroll 0 0 #000;
+    float:left;
+    height:100px;
+    width:100%;
+}
+
+#accordion_container {
+    float:left;
+    width:100%;
+    color:#FFF;
+}
+
+.map-intro {
+    background:#1F1F1F;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    float:left;
+    padding: 15px;
+    width:100%;
+}
+
+.map-intro h3 {
+    color: #F98A1E;
+    font-weight:normal;
+    font-size: 16px;
+    margin-top: 0px;
+}
+
+#search-box {
+    padding: 0px;
+}
+
+.search-box-wrap {
+    float:left;
+    width: 100%;
+    background: #FFF;
+    padding: 10px;
+    border-radius: 5px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.search-box-wrap input[type="text"] {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 0;
+    font-size: 38px;
+    font-family:'Franchise-Bold', sans-serif, arial;
+    font-weight:400;
+    float:left;
+    height: 42px;
+	margin: 0 5px 0 0;
+    padding: 4px;
+    width:155px;
+}
+
+.search-box-wrap input[type="submit"] {
+    background: #E55902;
+    border: 0px;
+    color: #FFF;
+    font-size: 30px;
+    font-family:'Franchise-Bold', sans-serif, arial;
+    font-weight:400;
+    text-shadow: none;
+    text-transform: uppercase;
+}
+
+#advanced_ShowDays_Link, #advanced_ShowDays {
+    color: #fff;
+    display: inline-block;
+    margin: 0;
+    text-align: center;
+    width: 100%;
+}
+
+.daytitle {
+    color: #E75800;
+    float: left;
+    font-weight: 700;
+    text-align: left;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.day {
+    float: left;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 0 10px 0 0;
+}
+
+.day span {
+    float: right;
+    line-height: 18px;
+}
+
+.ui-buttonset, #marker_list {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+	background: none no-repeat scroll 0 0 #333333;
+	float: left;
+	list-style: none outside none;
+	margin: 0;
+	height: 486px;
+	overflow: auto;
+	padding: 10px;
+	width: 100%;
+}
+
+.ui-buttonset .ui-button, #marker_list .ui-button {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background: none repeat scroll 0 0 #292929;
+    border-radius: 5px;
+    cursor: pointer;
+    float: left;
+    font-family:'Open Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 10px;
+    padding: 10px 5px;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+
+/*
+.ui-buttonset .ui-button h3, #marker_list .ui-button h3 {
+    float:left;
+    width:100%;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    margin: 8px 0;
+}
+
+.ui-buttonset .ui-button h3 a, #marker_list .ui-button h3 a {
+    color: #FFF;
+    text-decoration:none;
+    font-weight: 400;
+    font-size:16px;
+    text-align:left;
+}
+*/
+
+.ui-buttonset .ui-button h3 img, #marker_list .ui-button h3 img, .ui-buttonset {
+    display:none;
+}
+
+.ui-buttonset a {
+	color: #fff;
+}
+
+#marker_list .ui-button.active {
+    /* background: none repeat scroll 0 0 #5c5c5c; */
+}
+
+span.letter {
+	background: none repeat scroll 0 0 #E75800;
+	border-radius: 12px;
+	display: inline-block;
+	float: left;
+	font-size: 14px;
+	font-weight: bold;
+	height: 24px;
+	line-height: 24px;
+	margin: 0 8px;
+	text-align: center;
+	width: 24px;
+}
+
+.row-details {
+    color: #000;
+}
+
+#locator-type {
+    font-size: 11px;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    display: none;
+}
+
+#close-dialog {
+	color: #FFFFFF;
+	cursor: pointer;
+	font-size: 16px;
+	font-weight: 700;
+	padding: 5px 10px;
+	position: absolute;
+	right: 0;
+	text-transform: uppercase;
+}
+
+#dialogformwrap {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.5);
+    display: none;
+    left: 50%;
+    margin-left: -408px;
+    position: fixed;
+    top: 15%;
+    width: 816px;
+}
+
+#map_canvas .gm-style-iw {
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+}
+
+#map_canvas .gm-style-iw #bodyContent {
+    padding: 25px;
+}
+
+#map_canvas #firstHeading {
+    background: none repeat scroll 0 0 #262626;
+    height: 37px;
+    padding: 10px 0;
+    width: 100%;
+}
+
+#map_canvas #firstHeading .program-title {
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: 700;
+	line-height: 24px;
+}
+
+#map_canvas #firstHeading .letter {
+    color: #FFFFFF;
+    float: left;
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 15px;
+}
+
+#map_canvas #firstHeading .program-size-wrap {
+	color: #B3B4B8;
+	font-size: 12px;
+	line-height: 12px;
+	text-indent: 55px;
+}
+
+#wrapper .location-wrap .section_heading {
+    color: #000000;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    vertical-align: top;
+}
+
+#bodyContent span b {
+    font-weight: 700;
+}
+
+input[type="submit"], input[type="button"], .special-button a {
+    background: none repeat scroll 0 0 #E75800;
+    border: medium none;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover, input[type="button"]:hover, .special-button a:hover {
+    background: none repeat scroll 0 0 #E75800;
+    border: medium none;
+}
+
+#map_canvas input[type="submit"], input[type="button"], .special-button a {
+    font-family:'Open Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-shadow: none;
+    text-transform: uppercase;
+}
+
+#dialogform .result_heading {
+	background: none repeat scroll 0 0 #000000;
+	color: #FFFFFF;
+	font-size: 20px;
+	font-weight: 700;
+	height: 35px;
+	line-height: 35px;
+}
+
+#dialogform .result_heading .letter {
+    margin-top: 5px;
+}
+
+#dialogform .location-wrap span {
+	font-size: 14px;
+}
+
+#dialogform .location-wrap span b {
+	font-weight: 700;
+}
+
+#dialogform .location-wrap .dialog_heading {
+	display: block;
+	font-size: 22px;
+	font-weight: 700;
+}
+
+#dialogform .programs-wrap, #dialogform .location-wrap {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    float: left;
+    padding: 0 30px;
+    width: 100%;
+}
+
+#dialogform tr:first-child {
+    background: #000;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+#dialogform #n_formID tr:first-child {
+    text-transform: inherit;
+}
+
+#dialogform .section_heading, #content .location-img {
+    display: none;
+}
+
+#dialogform .location-img {
+	border: 1px solid #D0D0D0;
+	border-radius: 3px;
+	float: left;
+	height: 130px;
+	margin: 20px 15px 30px 0;
+    overflow: hidden;
+    text-align: center;
+	width: 130px;
+}
+
+#dialogform .location-img img {
+    max-width: 100%;
+}
+
+#dialogform #popup-info {
+    display: none;
+}
+#bodyContent #detailed-popup-info {
+    display: none;
+}
+
+.programs-wrap table {
+	border-collapse: collapse;
+	font-size: 12px;
+	width: 100%;
+}
+
+.programs-wrap table tr {
+    height: 35px;
+}
+
+.programs-wrap table tr:nth-child(2n) {
+	background: none repeat scroll 0 0 #F2F2F2;
+}
+
+.programs-wrap table tr:nth-child(2n+1) {
+	background: none repeat scroll 0 0 #D9D9D9;
+}
+
+.programs-wrap table th {
+	font-weight: 700;
+	padding: 5px 0;
+}
+
+.programs-wrap table td {
+    text-align: center;
+}
+
+.programs-wrap table th:first-child, .programs-wrap table td:first-child {
+    padding-left: 10px;
+    text-align: left;
+    width: 160px;
+}
+
+.programs-wrap table td:nth-child(2) {
+    width: 90px;
+}
+
+.programs-wrap table td:first-child {
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.program-size-wrap {
+    float: left;
+    width: 100%;
+    text-indent: 40px;
+}
+
+.programs-wrap table td a, .programs-wrap table input[type="submit"] {
+    background: none repeat scroll 0 0 #E75800;
+    border-radius: 2px;
+    color: #FFFFFF;
+    font-family: 'Open Sans',sans-serif;
+    font-size: 11px;
+    font-weight: normal;
+    letter-spacing: 0;
+    padding: 4px 10px;
+    text-decoration: none;
+    text-shadow: 0 0;
+    text-transform: uppercase;
+}
+
+#marker_list .program-size-wrap, .ui-buttonset .program-size-wrap {
+	color: #B3B4B8;
+	font-size: 10px;
+}
+
+.program-title, .ui-buttonset h3 a {
+	float: left;
+	font-size: 15px;
+	line-height: 23px;
+	text-decoration: none;
+}
+
+#accordion_container .program-title, #accordion_container .ui-buttonset h3 a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 230px;
+}
+
+.program-size-wrap {
+    float: left;
+    width: 100%;
+    text-indent: 40px;
+    font-weight: 300;
+}
+
+#bodyContent .program-size, .dialog_heading, #dialogform .program-size {
+	display:none;
+}
+
+#dialogform .programs-wrap .section_heading {
+  color: #000000;
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+#dialogform .dialog_heading {
+	display: block;
+}
+
+#dialogform .program-title {
+	line-height: 34px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 75%;
+}
+
+.eoi #content {
+  width: 100%;
+}
+
+.eoi .map-control {
+  float: left;
+  width: 100%;
+}
+
+.eoi .map-intro {
+    display: none;
+}
+
+.eoi .ui-buttonset, .eoi #marker_list {
+  background: none no-repeat scroll 0 0 #FFFFFF;
+}
+
+.eoi #marker_list, .eoi #content #intro_popup {
+    display: none;
+}
+
+.eoi #accordion_container {
+  color: #000000;
+  padding: 50px 100px;
+}
+
+/* EOI Form */
+#dialogform #n_formID {
+    background: none repeat scroll 0 0 #000000;
+}
+                
+#dialogform p {
+    color: #FFFFFF;
+    margin: 0;
+    padding: 10px;
+}
+
+#dialogform #n_formID tr:first-child {
+    background-color: inherit;
+    color: #000;
+}
+
+#dialogform p {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background: none repeat scroll 0 0 #FFFFFF;
+    color: #000000;
+    display: inline-block;
+    margin: 0;
+    padding: 10px;
+    width: 100%;
+}
+
+#dialogform p.introtext {
+    margin-top: 40px;
+}
+
+#dialogform .HTbuttons {
+    background: none repeat scroll 0 0 #FFFFFF;
+    display: inline-block;
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+}
+
+#dialogform .HTF_table {
+    background: none repeat scroll 0 0 #FFFFFF;
+    text-align: center;
+    width: 100%;
+}
+
+#dialogform #secmain {
+    display: inline-block;
+    width: 360px;
+}
+
+.ie9 #dialogform .HTF_table {
+    width: 50%;
+}
+
+
+#dialogform #secmain input[type="text"] {
+  width: 205px;
+}
+
+#dialogform .compulsory {
+    float: right;
+    padding: 15px 0;
+}
+
+#dialogform #n_formID .value {
+    width: 255px;
+}
+
+#dialogform #n_formID #secmain select {
+    width: 74px;
+}
+
+.copyright {
+    color: #B3B4B8;
+    font-size: 10px;
+    margin: 0;
+}
+
+@font-face {
+	font-family:'Franchise-Bold';
+	src:url('//d1f1uv2yjzdc4k.cloudfront.net/fonts/franchise/franchise-bold-webfont.eot');
+	src:url('//d1f1uv2yjzdc4k.cloudfront.net/fonts/franchise/franchise-bold-webfont.eot?#iefix') format('embedded-opentype'),
+		url('//d1f1uv2yjzdc4k.cloudfront.net/fonts/franchise/franchise-bold-webfont.ttf') format('truetype'),
+		url('//d1f1uv2yjzdc4k.cloudfront.net/fonts/franchise/franchise-bold-webfont.woff') format('woff'),
+		url('//d1f1uv2yjzdc4k.cloudfront.net/fonts/franchise/franchise-bold-webfont.svg#Franchise-Bold') format('svg');
+    font-weight:normal;
+    font-style:normal;
+}
+
+
+@media screen and (max-width: 640px) {
+	#map_canvas, #marker_list, #content #intro_popup {
+		display:none;
+	}
+	.map-control {
+		float: left;
+		width: 100%;
+	}
+	.ui-buttonset {
+		display: block;
+	}
+	#dialogformwrap {
+        position: absolute;
+		top: 20%;
+		width: 100%;
+	}
+	#dialogform .location-wrap .dialog_heading {
+		font-size: 16px;
+	}
+	#dialogform .programs-wrap	{
+		padding: 0;
+	}
+	#dialogform .programs-wrap .section_heading {
+		text-indent: 30px;
+	}
+	.programs-wrap table td:first-child {
+		display: inline-block;
+		font-size: 11px;
+		line-height: 34px;
+		width: 71px;
+	}
+	.programs-wrap table, .programs-wrap table td a {
+		font-size: 10px;
+	}
+    .search-box-wrap input[type="submit"] {
+        float: right;
+    }
+    .programs-wrap table td a, .programs-wrap table input[type="submit"] {
+        white-space: pre-line;
+        width: 65px;
+    }
+}

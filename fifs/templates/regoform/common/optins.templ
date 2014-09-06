@@ -1,0 +1,10 @@
+<div id="optins">
+    [% IF optins.size %]
+        <br>
+        [% FOREACH optin IN optins %]
+            <input type="checkbox" name="cbOptin_[% optin.intOptinID %]" id="cbOptin_[% optin.intOptinID %]" class="cbOptin" value="1" [% IF optin.intDefault %]checked[% END %] />[% optin.strOptinText %]
+            <br><br>
+        [% END %]
+    [% END %]
+</div>
+

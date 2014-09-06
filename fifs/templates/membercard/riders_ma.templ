@@ -1,0 +1,91 @@
+[% WRAPPER membercard/MemberCard_Wrapper.templ %]
+
+[% FOREACH m = Members %]
+
+	<div style="background:url(formimages/licence_bg_etr2.jpg);padding-left:10px;width:315px;height:200px;">
+		<div style="color:white;padding-top:1px;;padding-left:10px;font-family:arial black;font-size:14px;"><p><b>MOTORCYCLING AUSTRALIA</b></div>
+		<div style="width:300px;height:90px;">
+		<div style="width:200px;padding-left:3px;padding-top:20px;font-family:arial;font-size:14px;float:left;">
+			<!--[% m.intMemberID %] <br>-->
+			<b>[% m.strFirstname %] [% m.strSurname %]</b> <br>
+			<span style="color:#019934;font-weight:bold;">Member No: [% m.strNationalNum %] </span><br>
+			<span style="color:#019934;font-weight:bold;">Riders Division</span> <br>
+			</span>
+		</div>
+		</div>
+		<div style="padding-top:30px;padding-left:12px;font-weight:bold;color:white;font-family:arial;">
+
+  [% name = '' %]
+  [% end = '' %]
+  [% rawend = '' %]
+  [% lifemember = '' %]
+
+  [% FOREACH t = m.Transactions %]
+    [% IF t.strName == 'Riders Division IMIS' %]
+      [% t.strName = 'RID' %]
+    [% END %]
+    [% IF t.strName == 'Riders Discount' %]
+      [% t.strName = 'RID' %]
+    [% END %]
+    [% IF t.strName == 'Riders Complimentary' %]
+      [% t.strName = 'RID' %]
+    [% END %]
+    [% IF t.strName == 'Riders Division - 1 year (Club Member)' %]
+      [% t.strName = 'RID' %]
+    [% END %]
+    [% IF t.strName == 'Riders Division - 1 year' %]
+      [% t.strName = 'RID' %]
+    [% END %]
+    [% IF t.strName == 'Riders Division - 2 years' %]
+      [% t.strName = 'RID' %]
+    [% END %]
+    [% IF t.strName == 'Riders Division - 3 years' %]
+      [% t.strName = 'RID' %]
+    [% END %]
+    [% IF t.strName == 'Riders Division - 5 years' %]
+      [% t.strName = 'RID' %]
+    [% END %]
+    [% IF t.strName == 'Riders Division - Lifetime' %]
+      [% t.strName = 'Life Member' %]
+    [% END %]
+
+    [% NEXT IF t.dtEndRaw < date.format(date.now(), '%Y-%m-%d') %]
+    	[% IF t.strGroup == "Licence Type" AND t.strName == "RID" %]
+      	[% IF t.dtEndRaw > rawend %]
+        	[% name = t.strName %]
+          [% end = t.dtEnd %]
+          [% rawend = t.dtEndRaw %]
+      	[% END %]
+  		[% END %]
+			[% IF t.strGroup == "Licence Type" AND t.strName == "Life Member" %]
+				[% lifemember = t.strName %]
+			[% END %]
+		[% END %]
+
+		[% IF lifemember != '' %]
+			[% lifemember %]
+		[% ELSIF name != '' %]
+			Expires: [% end %]
+		[% END %]
+
+		</div>
+	</div>
+
+	<div style="width:300px;height:180px;font-family:arial;padding-top:5px;padding-left:10px;font-size:8px;">
+		<div style="text-align:center;">
+		This licence is not transferable and remains the property of MA
+		<br><br><br><br><br><br>
+		<i>Member Signature - Not valid unless signed</i> <br><br><br>
+ 		Contact Motorcycling Australia <br>
+		03 96840500, riders@ma.org.au <br> 
+  	www.ma.org.au <br><br>
+		For Roadside Assistance Call <br>
+		Australian Mainland - 24/7 Road Services, Phone: 1800 008 616 <br>
+		Tasmania - Tasmanian Motorcycle Transport, Phone: 0401 160 144/03 6423 1555
+		</div>
+	</div>
+
+[% END %]
+
+
+[% END %]

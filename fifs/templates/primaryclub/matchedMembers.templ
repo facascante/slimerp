@@ -1,0 +1,53 @@
+<style>
+    #divMessage { width:70%; }
+    #divMember  { width:30%; }
+    #divMatched { width:70%; }
+    #tblMatched { border:solid #CCCCCC; border-width:1px; }
+</style>
+
+<div id="divMessage">
+    <h5 class="warningmsg" style="margin-left:0">Cannot add new member because [% IF matched.size < 2 %]an[% END %]other member[% IF matched.size > 1 %]s[% END %] with the same Firstname, Surname and Date of Birth exist[% IF matched.size < 2 %]s[% END %].</h5>
+</div>
+[% IF format == 2 %]
+    <div id="divMember">
+        <table class="listTable" id="tblNew">
+            <tr>
+                <td>First name:</td>
+                <td>[% firstname %]</td>
+            </tr>
+            <tr>
+                <td>Surname:</td>
+                <td>[% surname %]</td>
+            </tr>
+            <tr>
+                <td>Date of Birth:</td>
+                <td>[% dob %]</td>
+            </tr>
+        </table>
+    </div>
+    <h5>To add the new member, initiate a transfer request for [% IF matched.size > 1 %]one of [% END %]the existing member[% IF matched.size > 1 %]s[% END %] listed below:</h5>
+    <div id="divMatched">
+        <table class="listTable" id="tblMatched">
+            <thead>
+                <tr>
+                    <th>National #</th>
+                    <th>State</th>
+                    <th>Association</th>
+                    <th>Club</th>
+                    <th>Last Played</th>
+                    <th>&nbsp</th>
+                </tr>
+            </thead>
+            [% FOREACH member IN matched %]
+                <tr>
+                    <td>[% member.strNationalNum %]</td>
+                    <td>[% member.AssocState %]</td>
+                    <td>[% member.AssocName %]</td>
+                    <td>[% member.ClubName %]</td>
+                    <td>[% member.LastPlayed %]</td>
+                    <td>[% member.transferLink %]</td>
+                </tr>
+            [% END %]
+        </table>
+    </div>
+[% END %]

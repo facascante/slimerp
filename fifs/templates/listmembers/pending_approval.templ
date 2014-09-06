@@ -1,0 +1,53 @@
+function pendingApproval(action, item){
+
+    // If action is -1, the waiting member has been rejected. No need to get any futher validation.
+    // If action is 1,  the waiting member has been put (back) into a pending state. No need for any further validation.
+    // If action is 0,  the waiting member has been approved. We need to get validation that all ok to proceed.
+
+    if (action === undefined || action === '') {
+        return { valid: false, msg: 'Invalid value for action parameter!' };
+    }
+    else if (action === '-1' || action === '1') {
+        return { valid: true, msg: null };
+    }
+  
+    var myValid;
+    var myMsg;
+
+    jQuery.when(
+        jQuery.ajax({
+            url: 'ajax/aj_main.cgi',
+            type: "POST",
+            data: {
+                f:         'ValidatePendingApproval',
+                client:    '[% client %]',
+                key1:      [% key1 %],
+                key2:      '[% key2 %]',
+                associd:   [% assocID %],
+                clubid:    [% clubID %],
+                memberid:  item.intMemberID,
+                seasonid:  item.intSeasonID,
+                firstname: item.strFirstname,
+                surname:   item.strSurname,
+                dob:       item.dtDOB,
+                dobraw:    item.dtDOB_RAW,
+            },
+            dataType: 'json',
+            async: false, //not ideal, but the only way it would stop the return before correct value assigned.
+        })
+    ).then(function(data) {
+        if (data.result === 'Success') {
+            myValid = true;
+            myMsg   = null;
+        }
+        else {
+            myValid = false;
+            myMsg   = data.message;
+        }
+    }, function() {
+        myValid = false;
+        myMsg   = 'Unable to process request!';
+    });
+
+    return { valid: myValid, msg: myMsg };
+}

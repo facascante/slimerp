@@ -1,0 +1,28 @@
+-- DROP TABLE IF EXISTS `tblMemberRecords`;
+CREATE TABLE IF NOT EXISTS `tblMemberRecords` (
+      `intMemberRecordID` int(11) NOT NULL AUTO_INCREMENT,
+      `intRefMemberRecordID` int(11) NOT NULL DEFAULT '0',
+      `intMemberRecordTypeID` int(11) NOT NULL DEFAULT '0',
+      `intMemberID` int(11) NOT NULL DEFAULT '0',
+      `intEntityTypeID` int(11) NOT NULL DEFAULT '0',
+      `intEntityID` int(11) NOT NULL DEFAULT '0',
+      `intSeasonID` int(11) NOT NULL DEFAULT '0',
+      `intAgeGroupID` int(11) DEFAULT NULL,
+      `dtIn` date DEFAULT NULL,
+      `dtOut` date DEFAULT NULL,
+      `intFinancialStatus` int(11) DEFAULT NULL,
+      `intFromRegoForm` int(11) DEFAULT '0',
+      `intUsedRegoFormID` int(11) DEFAULT NULL,
+      `dtLastUsedRegoForm` date DEFAULT NULL,
+      `intStatus` int(11) DEFAULT '0',
+      `intRecStatus` int(11) NOT NULL DEFAULT '1',
+      `dtCreated` date DEFAULT NULL,
+      `tTimeStamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+      PRIMARY KEY (`intMemberRecordID`),
+      KEY `intMemberRecordTypeID` (`intMemberRecordTypeID`),
+      KEY `intRefMemberRecordID` (`intRefMemberRecordID`),
+      KEY `intMemberID` (`intMemberID`),
+      KEY `intEntityTypeID` (`intEntityTypeID`),
+      KEY `intEntityID` (`intEntityID`),
+      KEY `intSeasonID` (`intSeasonID`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;

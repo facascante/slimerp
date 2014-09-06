@@ -1,0 +1,35 @@
+<script>
+    jQuery(document).ready(function() {
+         jQuery(".tandc").click(function(e){
+             e.preventDefault();
+             jQuery("#dialog-modal").dialog("open"); 
+         });
+        jQuery("#dialog-modal").dialog ({
+            height: 600,
+            width: 800,
+            minHeight: 600,
+            minWidth: 800,
+            modal: true,
+            resizable: true,
+            draggable: true,
+            autoOpen: false,
+            buttons: {
+                Close: function() {
+                jQuery(this).dialog("close");
+                }
+            }
+        });
+    });
+</script>
+
+<div id="dialog-modal" title="Terms & Conditions" style="display:none">
+    [% IF termsAndConditions.size %]
+        [% FOREACH TCs IN termsAndConditions %]
+            [% IF TCs.strTermsCondHeader %]
+                <div>[% TCs.strTermsCondHeader %]</div>
+            [% END %]
+            <div><pre>[% TCs.strTermsCondText %]</pre></div>
+        [% END %]
+    [% END %]
+</div>
+

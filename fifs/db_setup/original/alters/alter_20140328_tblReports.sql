@@ -1,0 +1,1 @@
+insert into tblReports ( strName, strDescription, intType, strFilename, strGroup, intOrder ) values ( 'Interchange Agreements', 'Interchange Agreements', 1, 'interchange_agreements_afl.rpt', 'Associations', 1 );

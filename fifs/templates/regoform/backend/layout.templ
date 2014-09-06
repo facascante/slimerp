@@ -1,0 +1,141 @@
+<style>
+    #sortable {list-style-type:none;margin:0;padding:0;width:500px;}
+    #sortable li {margin:2px 2px 2px 2px;padding:0.2em;padding-left:.5em;font-size:10px;height:24px;}
+    #sortable li span {position:absolute;margin-left:-1.3em;}
+    #avfields {overflow:auto;height:353px;width:518px;border-style:solid;border-width:1px;border-color:silver;padding:0 0 5px 5px;}
+    .picked .RO_fieldblock {background-color:#cce0ed;color:#0065a4;}
+    .picked .fieldlinks .thspecial, .picked .fieldlinks .config {color:#0065a4;}
+
+    .fieldlinks a{
+        display:block;
+        float:right;
+        font-size:0.9em;
+        height:15px;
+        line-height:15px;
+        vertical-align:middle;
+        margin-left:10px;
+        color: #888;
+    }
+
+</style>
+
+<script src="js/regoformfieldorder.js"></script>
+
+<script type="text/javascript">
+  jQuery(function() {
+    jQuery( "#sortable" ).sortable({
+        placeholder: "ui-state-highlight"
+    });
+    jQuery( "#sortable" ).disableSelection();
+    });
+</script>
+
+<div style="display:none">
+    <form>
+        <input type="hidden" id="cff_client" value="[% client %]">
+        <input type="hidden" id="cff_formID" value="[% formID %]">
+        <input type="hidden" id="cff_formKey" value="[% formKey %]">
+    </form>
+</div>
+
+<div id="msgarea" class="warningmsg" style="width:300px;margin-left:0;display:none"></div>
+
+[% stepper_html %]
+<div id="reorder">
+    <p>Reorder the fields by dragging them to position. The new order is saved automatically.<br>Extra blocks of headers or text can be added by clicking the respective buttons.</p>
+    <form action="[% target %]" method="post" name="comboForm" id="comboForm">
+        <input type="hidden" name="activeorder" value="">
+        <input type="hidden" name="a" id="actn" value="[% actn %]">
+        <input type="hidden" name="client" value="[% client %]">
+        <input type="hidden" name="fID" value="[% formID %]">
+        [% stepper_inpt %]
+        <div class="dbdata">
+            <div class="adminartbuttons" style="margin-top:5px">
+                [% continue_btn %]
+                <input type="button" class="addhdrblkjs button-small generic-button" value="Add Header Block" name="submitbutton" >
+                <input type="button" class="addtxtblkjs button-small generic-button" value="Add Text Block" name="submitbutton">
+            </div>
+            [% IF fieldData.size %]
+                <div id="avfields">
+                    <ul id="sortable">
+                        [% FOREACH field IN fieldData %]
+                            <li class="fieldblock-li" id="foo_[% field.field_id %]">
+                                <div class="RO_fieldblock[% field.extra_class %]">
+                                    <div class="move-icon"></div>
+                                    <div class="RO_fieldname" id="joo_[% field.field_id %]">[% field.field_label %]</div>
+                                    [% IF field.field_links.size %]
+                                        <div class="fieldlinks">
+                                           [% FOREACH link IN field.field_links %]
+                                               <span class="button-small generic-button"><a class="[% link.class %]" id="[% link.prefix %]_[% field.field_id %]" href="">[% link.text %]</a></span>
+                                            [% END %]
+                                        </div>
+                                    [% END %]
+                                </div>
+                            </li>
+                        [% END %]
+                    </ul>
+                </div>
+            [% END %]
+            <div class="adminartbuttons">
+                [% continue_btn %]
+                <input type="button" class="addhdrblkjs button-small generic-button" value="Add Header Block" name="submitbutton" >
+                <input type="button" class="addtxtblkjs button-small generic-button" value="Add Text Block" name="submitbutton">
+            </div>
+        </div>
+    </form>
+</div>
+
+<div id="hdrblk" style="display:none">
+     <div class="dbdata">
+         <form action="[% target %]" method="POST" name="frmhdrblk">
+             [% stepper_inpt %]
+             <table>
+                 <tr>
+                     <td valign="top"><span class="label">Block Label:</span></td>
+                     <td valign="top"><input type="text" id="hdrbl" name="hdrbl" size="20" rows="1" /></td>
+                 </tr>
+                 <tr>
+                     <td valign="top"><span class="label">Block Content:</span></td>
+                     <td valign="top"><textarea id="hdrbc" name="hdrbc" rows="10" cols="74"></textarea></td>
+                 </tr>
+                 <tr>
+                     <td valign="top"></td>
+                     <td valign="top"><input type="button" class="savhdrblkjs button proceed-button" name="submitbutton" value="Save Header Block"/></td>
+                 </tr>
+             </table>
+        </form>
+    </div>
+</div>
+
+<div id="txtblk" style="display:none">
+    <div class="dbdata">
+        <form action="[% target %]" method="POST" name="frmtxtblk">
+            [% stepper_inpt %]
+            <table>
+                <tr>
+                    <td><span class="label">Block Label:</span></td>
+                    <td><input type="text" id="txtbl" name="txtbl" size="20" rows="1" /></td>
+                </tr>
+                <tr>
+                    <td><span class="label">Block Content:</span></td>
+                    <td><textarea id="txtbc" name="txtbc" rows="10" cols="74"></textarea></td>
+                </tr>
+            </table>
+            <input type="button" class="savtxtblkjs button proceed-button" name="submitbutton" value="Save Text Block" />
+        </form>
+    </div>
+</div>
+
+<div id="config" style="display:none">
+    <form action="[% target %]" method="post" name="configForm" id="configForm">
+        [% stepper_inpt %]
+        <input type="hidden" name="selected_fieldID" id="sID">
+        <input type="hidden" name="a" value="A_ORF_oup">
+        <input type="hidden" name="client" value="[% client %]">
+        <input type="hidden" name="fID" value="[% formID %]">
+        <input type="submit">
+    </form>
+</div>
+
+
+

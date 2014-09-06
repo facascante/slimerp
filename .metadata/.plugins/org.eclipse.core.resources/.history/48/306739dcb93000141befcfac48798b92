@@ -1,0 +1,6 @@
+<html>
+<title>Chito</title>
+<body>
+{% block content %}{% endblock %}
+</body>
+</html>

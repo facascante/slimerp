@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="com.zend.php.ide.github.internal.ui.wizards.NewPHPProjectGitHubWizard">
+	</section>
+	<section name="com.zend.php.ide.git.internal.ui.wizards.NewPHPProjectGitWizard">
+	</section>
+</section>

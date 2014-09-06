@@ -1,0 +1,257 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.22/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../web/js/jquery-ui/css/theme/jquery-ui-1.8.22.custom.css">
+        <link rel="stylesheet" type="text/css" href="../web/css/style.css">
+        <link rel="stylesheet" type="text/css" href="../web/css/spfont.css"> 
+        <link rel="stylesheet" type="text/css" href="../web/css/regoform.css">
+        <link rel="stylesheet" type="text/css" href="../web/css/regoform_2013.css">
+           <link rel="stylesheet" type="text/css" href="../web/js/chosen/chosen.css">
+
+        <script type="text/javascript" src="../web/js/regoform.js"></script>
+    <script type="text/javascript" src="../web/js/chosen/chosen.jquery.min.js"></script>
+<style>
+    .ruleblocks {
+        margin-left:50px;
+        margin-bottom:50px;
+    }
+    .ruleblockheader    {
+        font-size:28px;
+        border-bottom:1px solid;
+    }
+</style>
+
+        
+        
+            <title>SportingPulse Registration</title>
+    </head>
+    <body>
+        <div id="pagewrapper">
+            <div id="pageheader">
+                </div>
+            <div id="pageholder">
+                <div id="content">
+                    
+            <div class="pageHeading">
+        <span class="form-title-wrap"><h1 class="form-title">Rules Management - Add Rule</h1></span></div>
+            <div id="form-container">
+                <div class="form-body">
+                    
+<form action = "regoform.cgi" method = "POST" id = "m_formID">
+    <div class = "sectionheader ruleblockheader">Rule Criteria</div>
+<p>This section specifies the criteria for applying the rule. eg. Which set of variations of the registration is affected by the rule.</p>
+<div class = "ruleblocks">
+
+    <div class="sectionheader">Sports</div>
+<p>Choose the sports that this rule relates to.  </p>
+
+    <table class="listTable products-table">
+        <tbody>
+        <tr class ="product-row">
+            <td class="col-1"> <input type="checkbox" name="sport_football" value="1" class="nc" id = "up_sport_football"> </td>
+            <td class="col-3"><label for = "up_sport_football">Football</label></td>
+        </tr>
+        <tr class ="product-row">
+            <td class="col-1"> <input type="checkbox" name="sport_futsal" value="1" class="nc" id = "up_sport_futsal"> </td>
+            <td class="col-3"><label for = "up_sport_futsal">Futsal</label></td>
+        </tr>
+        <tr class ="product-row">
+            <td class="col-1"> <input type="checkbox" name="sport_beach" value="1" class="nc" id = "up_sport_beach"> </td>
+            <td class="col-3"><label for = "up_sport_beach">Beach Soccer</label></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="sectionheader">Player Level</div>
+<p>Choose the playing levels that this rule relates to.  </p>
+
+    <table class="listTable products-table">
+        <tbody>
+        <tr class ="product-row">
+            <td class="col-1"> <input type="checkbox" name="type_amateur" value="1" class="nc" id = "up_type_amateur"> </td>
+            <td class="col-3"><label for = "up_type_amateur">Amateur</label></td>
+        </tr>
+        <tr class ="product-row">
+            <td class="col-1">
+            <input type="checkbox" name="type_pro" value="1" class="nc" id = "up_type_pro"> </td>
+            <td class="col-3"><label for = "up_type_pro">Professional</label></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="sectionheader">Registration Types</div>
+<p>Choose the registration types this rule relates to.  </p>
+
+    <table class="listTable products-table">
+        <tbody>
+        <tr class ="product-row">
+            <td class="col-1"> <input type="checkbox" name="regtype_new" value="1" class="nc" id = "up_regtype_new"> </td>
+            <td class="col-3"><label for = "up_regtype_new">New Registration</label></td>
+        </tr>
+        <tr class ="product-row">
+            <td class="col-1"> <input type="checkbox" name="regtype_renewal" value="1" class="nc" id = "up_regtype_renewal"> </td>
+            <td class="col-3"><label for = "up_regtype_renewal">Renewal</label></td>
+        </tr>
+        <tr class ="product-row">
+            <td class="col-1"> <input type="checkbox" name="regtype_transfer" value="1" class="nc" id = "up_regtype_transfer"> </td>
+            <td class="col-3"><label for = "up_regtype_transfer">Transfer</label></td>
+        </tr>
+        <tr class ="product-row">
+            <td class="col-1"> <input type="checkbox" name="regtype_amend" value="1" class="nc" id = "up_regtype_amend"> </td>
+            <td class="col-3"><label for = "up_regtype_amend">Amendment</label></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="sectionheader">Age Group</div>
+<p>Choose the age group this rule relates to.  </p>
+
+    <table class="listTable products-table">
+        <tbody>
+        <tr class ="product-row">
+            <td class="col-1"> <input type="checkbox" name="agegroup_adult" value="1" class="nc" id = "up_agegroup_adult"> </td>
+            <td class="col-3"><label for = "up_agegroup_adult">Adult</label></td>
+        </tr>
+        <tr class ="product-row">
+            <td class="col-1"> <input type="checkbox" name="agegroup_minor" value="1" class="nc" id = "up_agegroup_minor"> </td>
+            <td class="col-3"><label for = "up_agegroup_minor">Minor</label></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class = "sectionheader ruleblockheader">Rule Configuation</div>
+<p>This section specifies the configuration that is applied to the registation when the criteria is met.</p>
+<div class = "ruleblocks">
+
+    <div class="sectionheader">Allowed registration Levels</div>
+<p>Registration is possible at these levels.  </p>
+
+    <table class="listTable products-table">
+        <tbody>
+        <tr class ="product-row">
+            <td class="col-1"> <input type="checkbox" name="entitylevel_self" value="1" class="nc" id = "up_entitylevel_self"> </td>
+            <td class="col-3"><label for = "up_entitylevel_self">Member Self Registration</label></td>
+        </tr>
+        <tr class ="product-row">
+            <td class="col-1"> <input type="checkbox" name="entitylevel_club" value="1" class="nc" id = "up_entitylevel_club"> </td>
+            <td class="col-3"><label for = "up_entitylevel_club">Club</label></td>
+        </tr>
+        <tr class ="product-row">
+            <td class="col-1"> <input type="checkbox" name="entitylevel_region" value="1" class="nc" id = "up_entitylevel_region"> </td>
+            <td class="col-3"><label for = "up_entitylevel_region">Region</label></td>
+        </tr>
+        <tr class ="product-row">
+            <td class="col-1"> <input type="checkbox" name="entitylevel_national" value="1" class="nc" id = "up_entitylevel_national"> </td>
+            <td class="col-3"><label for = "up_entitylevel_national">Member Federation</label></td>
+        </tr>
+        <tr class ="product-row">
+            <td class="col-1"> OR</td>
+            <td class="col-3"> &nbsp;</td>
+        </tr>
+        <tr class ="product-row">
+            <td class="col-1"> <input type="checkbox" name="entitylevel_none" value="1" class="nc" id = "up_entitylevel_none"> </td>
+            <td class="col-3"><label for = "up_entitylevel_none"><b>No Registration is possible</b></label></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="sectionheader">Approvals required</div>
+<p>Approvals for registration is required at these levels.  </p>
+
+    <table class="listTable products-table">
+        <tbody>
+        <tr class ="product-row">
+            <td class="col-1"> <input type="checkbox" name="approvelevel_club" value="1" class="nc" id = "up_approvelevel_club"> </td>
+            <td class="col-3"><label for = "up_approvelevel_club">Club</label></td>
+        </tr>
+        <tr class ="product-row">
+            <td class="col-1"> <input type="checkbox" name="approvelevel_region" value="1" class="nc" id = "up_approvelevel_region"> </td>
+            <td class="col-3"><label for = "up_approvelevel_region">Region</label></td>
+        </tr>
+        <tr class ="product-row">
+            <td class="col-1"> <input type="checkbox" name="approvelevel_national" value="1" class="nc" id = "up_approvelevel_national"> </td>
+            <td class="col-3"><label for = "up_approvelevel_national">Member Federation</label></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <div class="sectionheader">Registration problem resolution</div>
+<p>Registration problems are to be resolved at which level?  </p>
+
+    <table class="listTable products-table">
+        <tbody>
+        <tr class ="product-row">
+            <td class="col-1"> <input type="radio" name="problemres" value="1" class="nc" id = "up_problemres_club" checked> </td>
+            <td class="col-3"><label for = "up_problemres_club">Club</label></td>
+        </tr>
+        <tr class ="product-row">
+            <td class="col-1"> <input type="radio" name="problemres" value="1" class="nc" id = "up_problemres_region"> </td>
+            <td class="col-3"><label for = "up_problemres_region">Region</label></td>
+        </tr>
+        <tr class ="product-row">
+            <td class="col-1"> <input type="radio" name="problemres" value="1" class="nc" id = "up_problemres_national"> </td>
+            <td class="col-3"><label for = "up_problemres_national">Member Federation</label></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="sectionheader">Documents</div>
+<p>Specify the documents that need to be supplied for each registration.</p>
+
+    <table class="listTable products-table">
+        <tbody>
+        <tr class ="product-row"> <th>&nbsp;</th><th>Mandatory</th><th>Optional</th><th>Not Required</th></tr>
+<tr  class ="product-row"><td>Passport</td>
+    <td><input type="radio" name="doc1">&nbsp;</td>
+    <td><input type="radio" name="doc1">&nbsp;</td>
+    <td><input type="radio" name="doc1" checked="">&nbsp;</td>
+</tr>
+
+<tr  class ="product-row"><td>Transfer Certificate</td>
+    <td><input type="radio" name="doc2">&nbsp;</td>
+    <td><input type="radio" name="doc2">&nbsp;</td>
+    <td><input type="radio" name="doc2" checked="">&nbsp;</td>
+</tr>
+
+<tr  class ="product-row"><td>Parental Consent</td>
+    <td><input type="radio" name="doc3">&nbsp;</td>
+    <td><input type="radio" name="doc3">&nbsp;</td>
+    <td><input type="radio" name="doc3" checked="">&nbsp;</td>
+</tr>
+
+<tr  class ="product-row"><td>Coaching Certification</td>
+    <td><input type="radio" name="doc4">&nbsp;</td>
+    <td><input type="radio" name="doc4">&nbsp;</td>
+    <td><input type="radio" name="doc4" checked="">&nbsp;</td>
+</tr>
+</tbody></table>
+
+</div>
+
+    <input value=" Save " class="button proceed-button" type="submit">
+</form>
+
+                </div>
+            </div>
+    </div> <!-- End Content --> 
+                <div id="pagefooter">
+                    
+        <div id="footer-links">
+            <span class="footerline">&copy;&nbsp; Copyright SportingPulse International Pty Ltd &nbsp;2014.&nbsp; All rights reserved.</span>
+        </div>
+                    </div>
+            </div> <!-- End Page Holder --> 
+        </div> <!-- End Page Wrapper --> 
+        
+<script type="text/javascript"> 
+jQuery().ready(function() { 
+    jQuery(".chzn-select").chosen({ disable_search_threshold: 5 });
+});
+</script>
+        </body>
+</html>
+

@@ -1,0 +1,39 @@
+<div id = "navbar_wrap">
+	<div id = "nav_session_wrap">
+		<a href = "[% HomeURL %]" class="home-icon" title="[% Lang.txt('Home') %]" alt="[% Lang.txt('Home') %]"></a>
+		<span class="nav_session_title">[% Lang.txt('Level Selection') %]</span>
+		<div class="nav_session_menu_wrap">
+			<div class="nav_session_placement">
+				<a class="nav_session_current" href="">
+					<span class="nav-bar-name">[% NavTree.last.name %]</span>
+					<span class="level-name">[% NavTree.last.levelname %]</span>
+				</a>
+			</div>
+			<ol class="nav_session_levels">
+				[% FOR level = NavTree %]
+					<li class="session_item"><a href = "[% level.url %]"><span class="nav-bar-name">[% level.name %]</span>&nbsp;<span class="level-name">[% Lang.txt(level.levelname) %]</span></a></li>
+				[% END %]
+			</ol>
+			<script type="text/javascript">
+				var sessno = jQuery('li.session_item').length;
+				if(sessno > 1) {
+					jQuery('.nav_session_placement').addClass('arrow_bg');
+					jQuery('.nav_session_current').click(function() {
+						jQuery('.nav_session_levels').toggleClass('nav_display');
+     					return false;
+					});
+				}
+				else {
+					jQuery('.nav_session_current').click(function() {
+						return false;
+					});
+				}
+					jQuery('html').click(function() {
+    			  jQuery('.nav_session_levels').removeClass('nav_display');
+  		  	});
+		  	</script>	
+			</div>
+		<a href="#" class="window-resize" id = "fullscreen-btn" title = "[% Lang.txt('Go full screen') %]" alt="[% Lang.txt('Go full Screen') %]"></a>
+	</div>
+	<div id = "menu_wrap">[% Menu %]</div>
+</div>

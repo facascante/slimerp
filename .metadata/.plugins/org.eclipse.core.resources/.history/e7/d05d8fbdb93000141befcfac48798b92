@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block content %}
+    # Tasks
+    <?php foreach ($tasks as $task): ?>
+        <a href="<?php echo Slim::getInstance()->urlFor('task_delete', array('id' => $task->id)); ?>">Delete</a>
+    <?php endforeach; ?>
+
+    <form action="<?php echo Slim::getInstance()->urlFor('task_new'); ?>" method="post">
+        <input type="submit" value="Add Task" />
+    </form>
+{% endblock %}

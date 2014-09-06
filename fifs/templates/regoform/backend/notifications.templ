@@ -1,0 +1,230 @@
+<script src="js/jquery.tools.min.js"></script>
+
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        jQuery('#ttassocnew').tooltip({ tip:'#tooltipan', position:'top right', offset:[-5, -15], delay:0 });
+        jQuery('#ttassocren').tooltip({ tip:'#tooltipar', position:'top right', offset:[-5, -15], delay:0 });
+        jQuery('#ttassocpay').tooltip({ tip:'#tooltipap', position:'top right', offset:[-5, -15], delay:0 });
+        jQuery('#ttclubnew').tooltip({  tip:'#tooltipcn', position:'top right', offset:[-5, -15], delay:0 });
+        jQuery('#ttclubren').tooltip({  tip:'#tooltipcr', position:'top right', offset:[-5, -15], delay:0 });
+        jQuery('#ttclubpay').tooltip({  tip:'#tooltipcp', position:'top right', offset:[-5, -15], delay:0 });
+
+        jQuery('.cbac').click(function(){
+            var elemid = jQuery(this).attr('id');
+            elemid = elemid.replace('cbac', 'btnemails');
+            if (jQuery(this).attr('checked')){
+                jQuery('#' + elemid).removeAttr('disabled');
+            }
+            else {
+                jQuery('#' + elemid).attr('disabled', 'disabled');
+            }
+        });
+
+    });
+
+    function showEmails(suffix){
+        jQuery("#dialog-message-"+suffix).dialog({
+            modal: true,
+            buttons: {
+                Ok: function(){
+                    jQuery(this).dialog("close");
+                }
+            }
+        });
+    }
+</script>
+
+[% IF stepperMode == 'add' %]
+    [% saveBtn1 = '<input type="submit" value="Continue" class="button proceed-button">' %]
+[% ELSE %]    
+    [% saveBtn1 = '<input type="submit" value="Save" class="button proceed-button">' %]
+[% END %]
+
+[% saveBtn2 = saveBtn1 %]
+
+[% IF formType == 1 %]
+  [% formTypeDesc = 'Member To Assoc' %]
+[% ELSIF formType == 2 %]
+  [% formTypeDesc = 'Team To Assoc' %]
+[% ELSIF formType == 3 %]
+  [% formTypeDesc = 'Member To Team' %]
+[% ELSIF formType == 4 %]
+  [% formTypeDesc = 'Member To Club' %]
+[% ELSE %]
+  [% formTypeDesc = 'Unknown' %]
+[% END %]
+
+<style>
+    #divNotifs { width:95%; }
+    #tblNotifs { border:solid #CCCCCC; border-width:1px; }
+    #tblNotifs .cbhdr { text-align:center; }
+    #tblNotifs th { background:url(js/ext-2.2/resources/images/default/toolbar/bg.gif) repeat-x bottom; background-color: #DDDDDD; }
+    .cbox { text-align:center; vertical-align:top; }
+    .highlight { font-style:italic; font-weight:bold; }
+    .tooltip { width:50%; display:none; background-color:#2a91ba; font-size:12px; padding:5px 10px 5px 10px; color:#ffffff; }
+    .btnemails { height:18px; font-size:8px; margin-left:5px; width:40px; vertical-align:middle; color:#206d9d; border:#8cb3cb; border-style:solid; border-width:1px; }
+    .btnemails[disabled] { color:silver; border:silver; border-style:solid; border-width:1px; }
+    .btnemailswarn { color:red; } 
+    #tooltipan { width:610px; }
+    #tooltipar { width:555px; }
+    #tooltipap { width:640px; }
+    #tooltipcn { width:580px; }
+    #tooltipcr { width:525px; }
+    #tooltipcp { width:610px; }
+    .dialog-message { display:none; }
+    input[type=checkbox] { vertical-align:middle; }
+    td img { vertical-align:middle; }
+</style>
+
+[% stepperHTML %]
+<p>Choose who should receive the emails emanating from the registration process.</p>
+
+<div id="divNotifs">
+    <form id="frmNotif"  action="[% target %]" method="POST">
+        [% saveBtn1 %]    
+        <table class="listTable" id="tblNotifs">
+            <thead>
+                <tr>
+                    <th>Type of Email</th>
+                    <th class="cbhdr">Send to Association</th>
+                    <th class="cbhdr">Send to Club</th>
+                    <th class="cbhdr">Send to Team</th>
+                    <th class="cbhdr">Send to Member</th>
+                    <th class="cbhdr">Send to Parent/Guardian</th>
+                </tr>
+            </thead>
+            <tr>
+                <td class="rowshade">New Registrations</td>
+                <td class="cbox rowshade"><input type="checkbox" name="new_assoc" class="cbac" id="cbacan" value="1" [% IF newEmails.0 %]checked[% END %] /> <img id="ttassocnew" src="images/info_icon.png"/><button type="button" class="btnemails[% IF !arCount %] btnemailswarn[% END %]" id="btnemailsan" [% IF newEmails.0 <= 0 %]disabled[% END %] onclick="showEmails('ar')">eMails</button></td>
+                <td class="cbox rowshade"><input type="checkbox" name="new_club" class="cbac" id="cbaccn" value="1" [% IF newEmails.1 %]checked[% END %] [% IF clubID <= 0 AND formType != 4 %]disabled[% END %] />
+                    [% IF clubID > 0 OR formType == 4 %]
+                        <img id="ttclubnew" src="images/info_icon.png"/> 
+                        [% IF clubID > 0 %]
+                            <button type="button" class="btnemails[% IF !crCount %] btnemailswarn[% END %]" id="btnemailscn" [% IF newEmails.1 <= 0 %]disabled[% END %] onclick="showEmails('cr')">eMails</button>
+                        [% END %]
+                    [% END %]
+                </td>
+                <td class="cbox rowshade"><input type="checkbox" name="new_team" value="1" [% IF newEmails.2 %]checked[% END %] [% IF formType != 2 AND formType != 3 %]disabled[% END %] /></td>
+                <td class="cbox rowshade"><input type="checkbox" name="new_member" value="1" [% IF newEmails.3 %]checked[% END %] [% IF formType == 2 %]disabled[% END %] /></td>
+                <td class="cbox rowshade"><input type="checkbox" name="new_parents" value="1" [% IF newEmails.4 %]checked[% END %] [% IF formType == 2 OR !copyParents %]disabled[% END %] /></td>
+            </tr>
+            <tr>
+                <td>Renewals</td>
+                <td class="cbox"><input type="checkbox" name="ren_assoc" class="cbac" id="cbacar" value="1" [% IF rnwEmails.0 %]checked[% END %] /> <img id="ttassocren" src="images/info_icon.png"/><button type="button" class="btnemails[% IF !arCount %] btnemailswarn[% END %]" id="btnemailsar" [% IF rnwEmails.0 <= 0 %]disabled[% END %] onclick="showEmails('ar')">eMails</button></td>
+                <td class="cbox"><input type="checkbox" name="ren_club" class="cbac" id="cbaccr" value="1" [% IF rnwEmails.1 %]checked[% END %] [% IF clubID <= 0 AND formType != 4 %]disabled[% END %] /> 
+                    [% IF clubID > 0 OR formType == 4 %]
+                        <img id="ttclubren" src="images/info_icon.png"/>
+                        [% IF clubID > 0 %]
+                            <button type="button" class="btnemails[% IF !crCount %] btnemailswarn[% END %]" id="btnemailscr" [% IF rnwEmails.1 <= 0 %]disabled[% END %] onclick="showEmails('cr')">eMails</button>
+                        [% END %]
+                    [% END %]
+                </td>
+                <td class="cbox"><input type="checkbox" name="ren_team" value="1" [% IF rnwEmails.2 %]checked[% END %] [% IF formType != 2 AND formType != 3 %]disabled[% END %]/></td>
+                <td class="cbox"><input type="checkbox" name="ren_member" value="1" [% IF rnwEmails.3 %]checked[% END %] [% IF formType == 2 %]disabled[% END %] /></td>
+                <td class="cbox"><input type="checkbox" name="ren_parents" value="1" [% IF rnwEmails.4 %]checked[% END %] [% IF formType == 2 OR !copyParents %]disabled[% END %] /></td>
+            </tr>
+            <tr>
+                <td class="rowshade">Payment Advices</td>
+                <td class="cbox rowshade"><input type="checkbox" name="pay_assoc" class="cbac" id="cbacap" value="1" [% IF payEmails.0 %]checked[% END %] /> <img id="ttassocpay" src="images/info_icon.png"/><button type="button" class="btnemails[% IF !afCount %] btnemailswarn[% END %]" id="btnemailsap" [% IF payEmails.0 <= 0 %]disabled[% END %] onclick="showEmails('af')">eMails</button></td>
+                <td class="cbox rowshade"><input type="checkbox" name="pay_club" class="cbac" id="cbaccp" value="1" [% IF payEmails.1 %]checked[% END %] [% IF clubID <= 0 AND formType !=4 %]disabled[% END %] /> 
+                    [% IF clubID > 0 OR formType == 4 %]
+                        <img id="ttclubpay" src="images/info_icon.png"/>
+                        [% IF clubID > 0 %]
+                            <button type="button" class="btnemails[% IF !cfCount %] btnemailswarn[% END %]" id="btnemailscp" [% IF payEmails.1 <= 0 %]disabled[% END %] onclick="showEmails('cf')">eMails</button>
+                        [% END %]
+                    [% END %]
+                </td>
+                <td class="cbox rowshade"><input type="checkbox" name="pay_team" value="1" [% IF payEmails.2 %]checked[% END %] [% IF formType != 2 %]disabled[% ELSE %]onclick="return false" onkeydown="return false"[% END %]/></td>
+                <td class="cbox rowshade"><input type="checkbox" name="pay_member" value="1" [% IF payEmails.3 %]checked[% END %] [% IF formType == 2 %]disabled[% ELSE %]onclick="return false" onkeydown="return false"[% END %] /></td>
+                <td class="cbox rowshade"><input type="checkbox" name="pay_parents" value="1" [% IF payEmails.4 %]checked[% END %] [% IF formType == 2 OR !copyParents %]disabled[% END %] /></td>
+            </tr>
+        </table>
+        [% saveBtn2 %]
+        <input type="hidden" name="client" value="[% client %]">
+        <input type="hidden" name="a" value="[% action %]">
+        <input type="hidden" name="fID" value="[% formID %]">
+        [% IF stepperMode %]
+            <input type="hidden" name="stepper" value="[% stepperMode %]">
+        [% END %]
+    </form> 
+</div>
+
+<div id='tooltipan' class="tooltip">
+    If checked, <span class="highlight">New Registration</span>&nbsp; emails will be sent to all Association contacts with the <span class="highlight">[% registrations %]</span>&nbsp; responsibility.
+</div>
+
+<div id='tooltipar' class="tooltip">
+    If checked, <span class="highlight">Renewal</span>&nbsp; emails will be sent to all Association contacts with the <span class="highlight">[% registrations %]</span>&nbsp; responsibility.
+</div>
+
+<div id='tooltipap' class="tooltip">
+    If checked, <span class="highlight">Payment Advice</span>&nbsp; emails will be sent to all Association contacts with the <span class="highlight">[% finance %]</span>&nbsp; responsibility.
+</div>
+
+<div id='tooltipcn' class="tooltip">
+    If checked, <span class="highlight">New Registration</span>&nbsp; emails will be sent to all Club contacts with the <span class="highlight">[% registrations %]</span>&nbsp; responsibility.
+</div>
+
+<div id='tooltipcr' class="tooltip">
+    If checked, <span class="highlight">Renewal</span>&nbsp; emails will be sent to all Club contacts with the <span class="highlight">[% registrations %]</span>&nbsp; responsibility.
+</div>
+
+<div id='tooltipcp' class="tooltip">
+    If checked, <span class="highlight">Payment Advice</span>&nbsp; emails will be sent to all Club contacts with the <span class="highlight">[% finance %]</span>&nbsp; responsibility.
+</div>
+
+<div id="dialog-message-ar" class="dialog-message" title="Association Email Addresses<br>New Registations and Renewals">
+    [% IF arCount %]
+        [% FOREACH aremail IN arContacts %]
+            <p>[% aremail %]</p>
+        [% END %]
+    [% ELSIF aPrimaryContact %]
+        <p>New Registration and Renewal emails will be sent to <span class="highlight">[% aPrimaryContact %]</span>&nbsp; because there are no association contacts set up with the <span class="highlight">[% registrations %]</span>&nbsp; responsibility!<p>
+    [% ELSE %]
+        [% IF national %] 
+            <p>[National Registration Form] New Registration and Renewal emails will be sent to association's contact set up for the <span class="highlight">[% registrations %]</span>&nbsp; or association's primary contact.<p>
+        [% ELSE %]
+            <p>New Registration and Renewal emails will <span class="highlight">NOT</span>&nbsp; be sent because there are no association contacts set up with the <span class="highlight">[% registrations %]</span>&nbsp; responsibility nor is there a primary contact designated!<p>
+        [% END %]
+    [% END %]
+</div>
+
+<div id="dialog-message-af" class="dialog-message" title="Association Email Addresses<br>Payment Advices">
+    [% IF afCount %]
+        [% FOREACH afemail IN afContacts %]
+            <p>[% afemail %]</p>
+        [% END %]
+    [% ELSIF aPrimaryContact %]
+        <p>Payment Advice emails will be sent to <span class="highlight">[% aPrimaryContact %]</span>&nbsp; because there are no association contacts set up with the <span class="highlight">[% finance %]</span>&nbsp; responsibility!<p>
+    [% ELSE %]
+        [% IF national %]
+            <p>[National Registration Form]Payment Advice emails will be sent to association's contact set up for the <span class="highlight">[% finance %]</span>&nbsp; or association's primary contact.<p>
+        [% ELSE %]
+            <p>Payment Advice emails will <span class="highlight">NOT</span>&nbsp; be sent because there are no association contacts set up with the <span class="highlight">[% finance %]</span>&nbsp; responsibility nor is there a primary contact designated!<p>
+        [% END %]
+    [% END %]
+</div>
+
+<div id="dialog-message-cr" class="dialog-message" title="Club Email Addresses<br>New Registations and Renewals">
+    [% IF crCount %]
+        [% FOREACH cremail IN crContacts %]
+            <p>[% cremail %]</p>
+        [% END %]
+    [% ELSIF cPrimaryContact %]
+        <p>New Registration and Renewal emails will be sent to <span class="highlight">[% cPrimaryContact %]</span>&nbsp; because there are no club contacts set up with the <span class="highlight">[% registrations %]</span>&nbsp; responsibility!<p>
+    [% ELSE %]
+        <p>New Registration and Renewal emails will <span class="highlight">NOT</span>&nbsp; be sent because there are no club contacts set up with the <span class="highlight">[% registrations %]</span>&nbsp; responsibility nor is there a primary contact designated!<p>
+    [% END %]
+</div>
+
+<div id="dialog-message-cf" class="dialog-message" title="Club Email Addresses<br>Payment Advices">
+    [% IF cfCount %]
+        [% FOREACH cfemail IN cfContacts %]
+            <p>[% cfemail %]</p>
+        [% END %]
+    [% ELSIF cPrimaryContact %]
+        <p>Payment Advice emails will be sent to <span class="highlight">[% cPrimaryContact %]</span>&nbsp; because there are no club contacts set up with the <span class="highlight">[% finance %]</span>&nbsp; responsibility!<p>
+    [% ELSE %]
+        <p>Payment Advice emails will <span class="highlight">NOT</span>&nbsp; be sent because there are no club contacts set up with the <span class="highlight">[% finance %]</span>&nbsp; responsibility nor is there a primary contact designated!<p>
+    [% END %]
+</div>

@@ -1,0 +1,164 @@
+[% BLOCK header %]
+<table border="0" width="100%">
+<tr><td valign="middle" colspan="2">
+[% IF m.intAssocTypeID == 3 %]
+<img src="formsimg/arl.jpg" alt="" height="50">
+<img src="formsimg/qrl_logo.jpg" alt="" height="50">
+[% ELSE %]
+<img src="formsimg/arl.jpg" alt="" height="50">
+[% END %]
+</td><td colspan="11" class="title">ARLRA Re-Registration Report</td></tr>
+<tr><td colspan="13" class="text" style="padding-top:10px; padding-bottom:10px;">
+[% IF m.strZoneName %]
+<b>Division:</b> [% m.strZoneName %] &nbsp;&nbsp;&nbsp;
+[% END %]
+<b>Associatione:</b> [% m.strAssocName %] &nbsp;&nbsp;&nbsp; <b>^</b> PI = Pacific Islander, M = Maori, A = Aboriginal, TI = Torres Strait Islander <b>~</b> If under 18 Parent/Guardian name & signature required, if 18 or older Referee to sign
+</td></tr>
+<tr>
+        <td class="header">Surname / <br> ALRID No</td>
+        <td class="header">First Name / <br> Gender</td>
+        <td class="header">DOB / <br> Ethnicity ^</td>
+        <td class="header">Ref Type</td>
+        <td class="header">Address / <br> Email</td>
+        <td class="header">Suburb / <br> P/C</td>
+        <td class="header">Contact No's <br> Home Or Work /<br> Mobile</td>
+        <td class="header">Signature Referee <br> OR Guardian <br> Name/Signature ~</td>
+        <td class="header">WWC Check <br> Number / <br> Expiry Date</td>
+        <td class="header">Date <br> Registered / <br> Office Use</td>
+</tr>
+[% END %]
+
+[% BLOCK footer %]
+<tr><td colspan="13" class="footer">
+<br>
+By signing this form I declare that the above information is true and correct and I have not signed an application for registration or contract with any other club for season 20__.I understand that the information will be added to the ARL national membership database. 
+<br>
+I agree to abide by the Constitution and by-laws of the State/Division/League that I am registering with and their Terms and Conditions. I also agree to abide by the following ARL policies and understand that the documents in their entirety are available to download from www.arldevelopment.com.au: ARL Code of Conduct, ARL Laws of the Game, ARL Mini/Mod Rugby League Laws, ARL Safe Play Code, ARL Images Policy, ARL Clearance Policy, the ARL Anti-Doping Rules, ARL Liability and Indemnity. 
+<br>
+As Association Secretary/Registrar I certify that in accepting this application for registration that registration/insurance fees have been collected from the above named _______________________________ 
+<br>
+If you do not wish to receive information and offers from QRL, QRL Sponsors and associate organisations please indicate with a N preceding your surname above.
+
+[% IF m.intAssocTypeID == 3 %]
+<br>
+<b>If you do not wish to receive information and offers from QRL, QRL Sponsors and associate organisations please indicate with a N preceding your surname above.</b>
+[% END %]
+
+</td></tr>
+</table>
+<br>
+[% IF team == 0 %]
+<span class="text">Team total: <i>[% teamtotal %]</i></span>
+[% END %]
+<br>
+<div class="breakhere">&nbsp;</div>
+[% END %]
+
+[% SET page=0 %]
+[% SET pagetotal=0 %]
+[% SET recordtotal=0 %]
+[% SET teamtotal=0 %]
+
+<style type="text/css">
+	td {
+ 	 	font-family:arial;
+	}
+	td.header {
+		font-weight:bold;
+		background:#E5E2de;
+		border: 1px solid black;
+		font-size:14px;
+		padding-left:4px;
+	}
+	td.row1 {
+		font-size:12px;
+		border-top: 1px solid black;
+		border-left: 1px solid black;
+		border-right: 1px solid black;
+		border-bottom: 1px dashed grey;
+	}
+	td.row2 {
+		font-size:12px;
+		border-left: 1px solid black;
+		border-right: 1px solid black;
+		border-bottom: 1px solid black;
+	}
+	.text {
+		font-size:11px;
+	}
+	.footer {
+		padding-top:4px;
+		font-size:10px;
+	}
+	div.breakhere {
+		page-break-before: always
+	}
+	td.title {
+		font-size:25px;
+		font-weight:bold;
+		text-align:center;
+	}
+</style>
+
+[% FOREACH m = ReportData %]
+
+	[% IF  club != m.strClubName OR assoc != m.strAssocName OR recordtotal > 8 %]
+		[% IF club != m.strClubName %]
+			[% SET team = 0 %]
+		[% ELSE %]
+			[% SET team = 1 %]
+		[% END %]
+		[% IF recordtotal > 0 %]
+			[% INCLUDE footer %]
+			[% SET recordtotal = 0 %]
+		[% END %]
+		[% IF club != m.strClubName %]
+			[% SET teamtotal = 0 %]
+			[% SET team = 0 %]
+		[% END %]
+		[% INCLUDE header %]
+	[% END %]
+
+	[% IF m.dtPoliceCheckExp == '00/00/0000' %]
+		[% m.dtPoliceCheckExp = '' %]
+	[% END %]
+
+<tr>
+  <td class="row1">[% m.strSurname %]</td>
+  <td class="row1">[% m.strFirstName %]</td>
+  <td class="row1">[% m.dtDOB %]</td>
+  <td class="row1">[% m.intNatCustomLU10 %]</td>
+  <td class="row1">[% m.strAddress1 %]</td>
+  <td class="row1">[% m.strSuburb %]</td>
+  <td class="row1">[% m.strPhoneHome %]</td>
+  <td class="row1"> &nbsp; </td>
+  <td class="row1">[% m.strPoliceCheckRef %]</td>
+  <td class="row1"> &nbsp; </td>
+</tr>
+<tr>
+  <td class="row2">[% m.strNationalNum %]</td>
+  <td class="row2">[% m.strGender %]</td>
+  <td class="row2">[% m.intEthnicityID %]</td>
+  <td class="row2"> &nbsp; </td>
+  <td class="row2">[% m.strEmail %]</td>
+  <td class="row2">[% m.strPostalCode %]</td>
+  <td class="row2">[% m.strPhoneMobile %]</td>
+  <td class="row2">&nbsp;</td>
+  <td class="row2">[% m.dtPoliceCheckExp %]</td>
+  <td class="row2">&nbsp;</td>
+</tr>
+
+	[% SET club = m.strClubName %]
+	[% SET assoc = m.strAssocName %]
+
+	[% SET recordtotal = recordtotal + 1 %]
+	[% SET teamtotal = teamtotal + 1 %]
+
+[% END %]
+
+[% IF recordtotal > 0 %]
+	[% SET team = 0 %]
+	[% INCLUDE footer %]
+[% END %]
+
+

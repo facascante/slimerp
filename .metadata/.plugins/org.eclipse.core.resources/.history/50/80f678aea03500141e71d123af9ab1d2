@@ -1,0 +1,9 @@
+<html>
+<title>{{chito}}</title>
+<head>
+{% block scripts %}{% endblock %}
+</head>
+<body>
+{% block content %}{% endblock %}
+</body>
+</html>

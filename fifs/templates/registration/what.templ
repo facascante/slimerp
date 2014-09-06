@@ -1,0 +1,151 @@
+<form>
+<input type = "hidden" id = "selected_entityID" value = "[% entityID %]">
+<input type = "hidden" id = "originLevel" value = "[% originLevel %]">
+<input type = "hidden" id = "pID" value = "[% personID %]">
+<input type = "hidden" id = "rID" value = "[% realmID %]">
+<input type = "hidden" id = "srID" value = "[% realmSubTypeID %]">
+<input type = "hidden" id = "client" value = "[% client %]">
+
+<a href = "" id = "regopt-reset-btn">[% Lang.txt('Reset') %]</a>
+<div id = "chosenOptions_wrapper">
+    <input type = "hidden" id = "selected_sport">
+    <input type = "hidden" id = "selected_type">
+    <input type = "hidden" id = "selected_role">
+    <input type = "hidden" id = "selected_level">
+    <input type = "hidden" id = "selected_age">
+    <input type = "hidden" id = "selected_nature">
+    <div class = "co_row">
+        <div class = "co_label">[% Lang.txt('Sport') %]:</div>
+        <div class = "co_value" id = "selected_sport_name"></div>
+    </div>
+    <div class = "co_row">
+        <div class = "co_label">[% Lang.txt('Person Type') %]:</div>
+        <div class = "co_value" id = "selected_type_name"></div>
+    </div>
+    <div class = "co_row">
+        <div class = "co_label">[% Lang.txt('Person Role') %]:</div>
+        <div class = "co_value" id = "selected_role_name"></div>
+    </div>
+    <div class = "co_row">
+        <div class = "co_label">[% Lang.txt('Level') %]:</div>
+        <div class = "co_value" id = "selected_level_name"></div>
+    </div>
+    <div class = "co_row">
+        <div class = "co_label">[% Lang.txt('Age group') %]:</div>
+        <div class = "co_value" id = "selected_age_name"></div>
+    </div>
+    <div class = "co_row">
+        <div class = "co_label">[% Lang.txt('Nature of Registration') %]:</div>
+        <div class = "co_value" id = "selected_nature_name"></div>
+    </div>
+</div>
+
+<div id = "regopt_wrapper">
+    <div id  = "regopt_options_title" class = "regoptions_title">[% Lang.txt('Choose the sport') %] </div>
+    <div id  = "regopt_options" class = "regoptions"></div>
+    <div id  = "regopt_options_continue" style = "display:none;">
+        <span class = "proceed-button button"><a href = "[% continueURL %]">[% Lang.txt('Continue') %]</a></span>
+    </div>
+</div>
+<div class = "option_titles" style="display:none;">
+    <span id = "regopt_title_sport">[% Lang.txt("Choose the sport") %]</span>
+    <span id = "regopt_title_type">[% Lang.txt("Choose the type") %]</span>
+    <span id = "regopt_title_role">[% Lang.txt("Choose the role") %]</span>
+    <span id = "regopt_title_level">[% Lang.txt("Choose the level") %]</span>
+    <span id = "regopt_title_age">[% Lang.txt("Choose the age group") %]</span>
+    <span id = "regopt_title_nature">[% Lang.txt("Choose the nature of the registration") %]</span>
+    <span id = "regopt_title_nooptions">[% Lang.txt("This type of registration is not available") %]</span>
+</div>
+
+</form>
+<script>
+    function regopt_start()   {
+        update_options('sport');
+    }
+    function update_options(optionType)   {
+
+        var qstring = '';
+        qstring = qstring + '&sp=' + jQuery('#selected_sport').val();
+        qstring = qstring + '&pt=' + jQuery('#selected_type').val();
+        qstring = qstring + '&per=' + jQuery('#selected_role').val();
+        qstring = qstring + '&pl=' + jQuery('#selected_level').val();
+        qstring = qstring + '&ag=' + jQuery('#selected_age').val();
+        qstring = qstring + '&nat=' + jQuery('#selected_nature').val();
+        qstring = qstring + '&ol=' + jQuery('#originLevel').val();
+        qstring = qstring + '&r=' + jQuery('#rID').val();
+        qstring = qstring + '&sr=' + jQuery('#srID').val();
+        qstring = qstring + '&eID=' + jQuery('#selected_entityID').val();
+        qstring = qstring + '&pID=' + jQuery('#pID').val();
+
+        if(optionType == 'complete')    {
+          jQuery('#regopt_options').html('');
+          jQuery('#regopt_options_title').html('');
+          var url = jQuery('#regopt_options_continue a').attr('href');
+          url = url + qstring;
+          jQuery('#regopt_options_continue a').attr('href',url);
+          jQuery('#regopt_options_continue').show();
+        }
+        else    {
+            jQuery.getJSON('ajax/aj_person_registerwhat.cgi?otype=' + optionType + qstring, function(data)    {
+              var items = [];
+              if(data.results == 1) {
+                chooseOption(data.options[0].value,optionType, data.options[0].name); 
+              }
+              else if(data.results > 1) {
+                  jQuery.each( data.options, function( key, val ) {
+                    items.push( '<a href = "#" data-val = "' + val.value + '" data-optiontype = "' + optionType + '" data-optionname = "' + val.name + '">' + val.name + '</a>' );
+                  });
+                  jQuery('#regopt_options').html(items.join(''));
+                  jQuery('#regopt_options_title').html(jQuery('#regopt_title_' + optionType).html());
+              }
+              else  {
+                  jQuery('#regopt_options').html(jQuery('#regopt_title_nooptions').html());
+                  jQuery('#regopt_options_title').html('');
+              }
+            });
+        }
+    }
+
+    function chooseOption(val, optionType, name)  {
+        jQuery('#selected_' + optionType).val(val);
+        jQuery('#selected_' + optionType + "_name").html(name);
+        var nextlayer = {
+            'sport' : 'type',
+            'type' : 'role',
+            'role' : 'level',
+            'level' : 'age',
+            'age' : 'nature',
+            'nature' : 'complete'
+        };
+        update_options(nextlayer[optionType]);
+    }
+
+    jQuery('.regoptions').on('click','a',function(e) {
+        var v = jQuery(this).attr('data-val');
+        var optionType = jQuery(this).attr('data-optiontype');
+        var optionName = jQuery(this).attr('data-optionname');
+        chooseOption(v, optionType, optionName);
+        e.preventDefault();
+        return false; 
+    });
+
+    jQuery('#regopt-reset-btn').on('click',function(e) {
+        
+        jQuery('#selected_sport').val('');
+        jQuery('#selected_type').val('');
+        jQuery('#selected_role').val('');
+        jQuery('#selected_level').val('');
+        jQuery('#selected_age').val('');
+        jQuery('#selected_nature').val('');
+        jQuery('.co_value').html('');
+        jQuery('#regopt_options_continue').hide();
+        regopt_start();
+        e.preventDefault();
+        return false; 
+
+    });
+
+    regopt_start();
+</script>
+
+

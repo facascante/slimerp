@@ -1,0 +1,45 @@
+[% WRAPPER membercard/MemberCard_Wrapper.templ %]
+
+	[% USE date %]
+	[% varDate =  date.format(date.now(), '%d/%m/%Y') %]
+
+
+	<style type="text/css">
+		.line {
+			margin-bottom:10px;
+		}
+	</style>
+
+	[% FOREACH m = Members %]
+
+		<!-- [% m.intMemberID %] -->
+		[% varClub = '' %]
+		[% varDefaultClub = '' %]
+		[% FOREACH c = m.Clubs %] 
+			[% NEXT IF c.intAssocID != 71 %]
+			[% NEXT IF c.intStatus != 1 %]
+			[% varDefaultClub = c.strName %]
+			[% NEXT IF c.intPrimaryClub == 1 %]
+			[% varClub = c.strName %]
+		[% END %]
+
+		[% IF varClub == '' %]
+			[% varClub = varDefaultClub %]
+		[% END %]
+
+		<div style="font-size:14px;width:319px;height:192px;">
+		<table border="0" style="width:319px;margin-top:35px;">
+			<tr>
+				<td valign="top" style="width:120px;text-align:center;padding-top:15px;">
+					<img src="https://reg.sportingpulse.com/getphoto.cgi?client=[% m.client %]" alt="" height="130"> <br> <span style="font-size:12px;">Expire 2016</span>
+				</td>
+				<td valign="top" style="padding-left:10px;">
+					<br><br>
+					<div class="line"><b>[% m.strFirstname FILTER upper %] <br> [% m.strSurname FILTER upper %]</b></div>
+					<div class="line">[% m.dtDOB %]</div>
+				</td>
+		</table>
+		</div>
+	[% END %]
+
+[% END %]

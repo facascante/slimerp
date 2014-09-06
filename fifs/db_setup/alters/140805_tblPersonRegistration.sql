@@ -1,0 +1,1 @@
+ALTER TABLE tblPersonRegistration_1 DROP COLUMN intRegistrationNature;

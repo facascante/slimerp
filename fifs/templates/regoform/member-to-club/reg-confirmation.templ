@@ -1,0 +1,89 @@
+[% IF formType == 'ASSOC' %]
+    [% IF CompulsoryPayment and CheckOut %]
+	    <p class="strong-confirm payment_note">To complete your registration, you must follow the payment process below.</p>
+        <p class= 'userDetail' style="display:none" >Thank you, we have registered you in <b>[% AssocName %]</b>.</p>
+    [% ELSE %]
+	    <p>Thank you, we have registered you in <b>[% AssocName %]</b>.</p>
+    [% END %]
+[% END %]
+
+
+[% IF formType == 'TEAM' %]
+    [% IF CompulsoryPayment and CheckOut %]
+    <p class="strong-confirm payment_note" >To complete your registration, you must follow the payment process below.</p>
+    <p  class= 'userDetail' style="display:none">Thank you, we have registered you in the <b>[% TeamName %]</b> in <b>[% AssocName %]</b>.</p>
+    [% ELSE %]
+    <p>Thank you, we have registered you in the <b>[% TeamName %]</b> in <b>[% AssocName %]</b>.</p>
+    [% END %]
+[% END %]
+
+
+[% IF formType == 'CLUB' %]
+    [% IF CompulsoryPayment and CheckOut %]
+	    <p class="strong-confirm payment_note">To complete your registration, you must follow the payment process below.</p>
+         <p class= 'userDetail' style="display:none">Thank you, we have registered you in <b>[% ClubName %]</b>.</p>
+    [% ELSE %]
+	    <p>Thank you, we have registered you in <b>[% ClubName %]</b>.</p>
+    [% END %]
+[% END %]
+
+
+
+[% IF !ReRegistration %]
+	[% IF CompulsoryPayment and CheckOut %]
+	    <p class="payment_note"><b>your registration is not yet complete</b> until you have completed the online payment process.</p>
+	    [% IF isTemp %]
+		    <table class="userDetail" style="display:none">
+            <p class= "userDetail" style="display:none">We have allocated you a username and password and your registration is now complete.<p>
+	    [% ELSE %]
+		    <table class="userDetail" style="display:block">
+	    [% END %]
+	[% ELSE %]
+	    <p>We have allocated you a username and password and your registration is now complete[% IF !regoForm_HIDE_PaymentText %] subject to any relevant registration fees[% END %].</p>
+	    <table class="userDetail">
+	[% END %]
+	<b>
+	
+	[% IF MultiPersonDetails %]
+	  [% FOR m IN MultiPersonDetails %]
+	  <tr>
+	    <td colspan = "3"><span id="n_[% m.tID %]" >[% m.FirstName %] [% m.Surname %]</span></td>
+	  </tr>
+	[% IF !usePassportFeature %]
+	<tr>
+	    <td>&nbsp;</td>
+	    <td>Username:<span id="u_[% m.tID %]" > [% m.Username %]</span></td>
+	  </tr>
+	  <tr>
+	    <td>&nbsp;</td>
+	    <td>Password:<span id="p_[% m.tID %]" > [% m.Password %]</span></td>
+	  </tr>
+	[% END %]
+	
+	  [% END %]
+	[% ELSE %]
+	[% IF !usePassportFeature %]
+	<tr>
+	    <td>Username:<span id= "u_[% tID %]" > [% Username %]</span></td>
+	  </tr>
+	  <tr>
+	    <td>Password:<span id ="p_[% tID %]" > [% Password %]</span></td>
+	  </tr>
+	[% END %]
+	[% END %]
+	</table>
+	</b>
+
+    [% IF !CompulsoryPayment %]
+	    <p>Please take a note of these details.  They have been emailed to you.</p>
+    [% END %]
+[% END %]
+
+[% IF CheckOut %]
+<div class="sectionheader" id="trans_header">Pay now[% IF PrintButton %] <a href="#" onclick="window.print()"><img src="web/images/print_sml.gif" border=0 alt="Print" title="Print"></a> [% END %]</div>
+[% CheckOut %]
+[% ELSE %]
+[% Success %]
+[% END %]
+
+

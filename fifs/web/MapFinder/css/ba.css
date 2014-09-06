@@ -1,0 +1,92 @@
+body    {
+    background-color:transparent;
+}
+
+.header, .copyright {
+	display:none;
+}
+
+#locator-type {
+    display: inline-block;
+    width: 100%;
+}
+
+#locator-type input {
+    float: left;
+    margin-top: 5px;
+}
+
+#locator-type span {
+    float: left;
+    line-height: 26px;
+}
+
+@media only screen and (max-width : 870px) {
+    #wrapper {
+        width: 100%;
+    }
+    #content {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 10px 0 0;
+        width: 100%;
+    }
+    #accordion_container {
+        margin: 0 0 0 7px !important;
+        width: 39% !important;
+    }
+    #search-box {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 10px 5px !important;
+        width: 100%;
+    }
+    #map_canvas {
+       width: 59% !important;
+    }
+    input[type="text"] {
+        margin: 0;
+        width: 52%;
+    }
+    .ui-accordion-header {
+        width: 100% !important;
+    }
+    .ui-accordion .ui-accordion-content {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width : 640px) { 
+    #map_canvas {
+        width: 100% !important;
+    }
+    #accordion_container {
+        margin: 0 !important;
+        width: 100% !important;
+    }
+    input[type="text"] {
+        width: 63%;
+    }
+    .ui-dialog {
+        height: 480px !important;
+        left: 2% !important;
+        overflow-y: scroll !important;
+        position: fixed !important;
+        right: 2% !important;
+        top: 0 !important;
+        width: 94% !important;
+    }
+    .ui-dialog-titlebar {
+        position: fixed !important;
+        top: 0;
+        z-index: 1000;
+    }
+    #dialogform {
+        padding-top: 50px;
+    }
+}

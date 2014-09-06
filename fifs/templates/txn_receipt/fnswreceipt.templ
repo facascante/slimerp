@@ -1,0 +1,90 @@
+  <html>
+    <head>
+      <title>Receipt</title>
+      <link rel="stylesheet" type="text/css" href="css/style.css">
+			<style type="text/css">
+				h2 { font-size:16px;}
+				h3 { font-size:14px;}
+				td { font-size:12px;}
+				table.itemlist {
+					border:1px solid #aaa;
+					border-collapse: collapse;
+					width:100%;
+				}
+				table.itemlist	td{
+					padding:6px;
+					border:0px 1px;
+					border-right:1px solid #aaa;
+				}
+				.receiptbox	{
+					width:400px;
+					margin-left:auto;
+					margin-right:auto;
+				}
+				body	{
+				}
+				table.paymentlist td{
+					padding:6px;
+				}
+
+			</style>
+    </head>
+		<body>
+			<div class="receiptbox">
+
+[% FOREACH r = Receipts %]
+	<div style="text-align:center;">
+		<h2>[% r.Info.strAssocName %]</h2>
+		<h3>[% r.Info.strClubName %]</h3>
+	</div>
+
+	<table class="paymentlist">
+		<tr>
+			<td><b>Payment For:</b></td>
+			<td>[% r.Info.Name %]</td>
+		</tr>
+		<tr>
+			<td><b>Payment Date:</b></td>
+			<td>[% r.Info.dtLog_FMT %]</td>
+		</tr>
+		<tr>
+			<td><b>Payment Type:</b></td>
+			<td>[% r.Info.PaymentType %]</td>
+		</tr>
+		<tr>
+			<td><b>Receipt No.:</b></td>
+			<td>[% r.Info.intLogID %]</td>
+		</tr>
+	</table>
+		<br><br>
+	<table class="itemlist">
+		<tr style = " border-bottom:1px solid #aaa;">
+			<td style="width:80px;">Item</td>
+			<td style="width:20px;">QTY</td>
+			<td>Description</td>
+			<td style="width:70px;">Cost</td>
+		</tr>
+	[% FOREACH i = r.Items %]
+		<tr>
+			<td>[% i.InvoiceNo %]</td>
+			<td>[% i.intQty %]</td>
+			<td>[% i.strName %]</td>
+			<td>\$[% i.curAmount %]</td>
+		</tr>
+        [% IF i.strNotes %]
+		    <tr style = " border-top:1px solid #aaa;border-bottom:1px solid #aaa;">
+                <td >&nbsp</td>
+                <td colspan="2">Notes: [% i.strNotes %]</td>
+                <td >&nbsp</td>
+            </tr>
+        [% END %]
+	[% END %]
+		<tr style = " border-top:1px solid #aaa;">
+			<td colspan="3"><b>Payment Total:</b></td>
+			<td><b>\$[% r.Info.intAmount %]</b></td>
+		</tr>
+	</table>
+[% END %]
+			</div>
+    </body>
+  </html>

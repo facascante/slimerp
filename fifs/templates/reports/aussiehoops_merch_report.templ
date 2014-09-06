@@ -1,0 +1,69 @@
+<div class="report-wrapper">
+<h1 style="float: none;" >[% Name %]</h1>
+    
+[% FOREACH assoc = ReportData.associations.values %]
+    [% assoc_header_shown = 0 %]
+
+    [% FOREACH program_obj = assoc.programs %]
+
+    	[% members = program_obj.get_enrolled_members({
+    	    'new_to_program'  = 1, 
+    	    'enrolled_before' = ReportData.before, 
+    	    'enrolled_after'  = ReportData.after
+    	}) %]
+
+    	[% IF members.size %]
+        	[% IF !assoc_header_shown %]
+        	    <h2>[% assoc.name %]</h2>
+        	    [% assoc_header_shown = 1 %]
+        	[% END %]
+        	<h3>[% program_obj.name %]</h3>
+        	
+        	[% contact = program_obj.get_contacts.first %]
+            [% location_obj = program_obj.get_location_obj %]
+        	
+        	Coordinator: [% contact.strContactFirstname%] [% contact.strContactSurname%]<br>
+            Email: [% contact.strContactEmail%]<br>
+            Mobile: [% contact.strContactMobile%]<br>
+            Venue: [% location_obj.name %]<br>
+            [% location_obj.get_address %]<br>
+
+        	[% members = members.nsort('intNatCustomLU1') %]
+        	<table class="report-table">    
+        	      <thead>
+
+        	        <th>First Name</th>
+        	        <th>Last Name</th>
+        	        <th>Address</th>
+                    <th>Suburb</th>
+                    <th>State</th>
+                    <th>Postcode</th>
+        	        <th>Singlet Size</th>
+        	        <th>New/Returning</th>
+        	      </thead>
+        	      [% FOREACH member IN members %]
+        	          <tr>
+        	            <td>[% member.strFirstname %]</td>
+        	            <td>[% member.strSurname %]</td>
+        	            <td>[% member.strAddress1 %][% IF member.strAddress2 %] [% member.strAddress2 %][% END %]</td>
+        	            <td>[% member.strSuburb %]</td>
+        	            <td>[% member.strState %]</td>
+        	            <td>[% member.strPostalCode %]</td>
+        	            [% lookup_value = member.intNatCustomLU1 %]
+        	            <td>[% ReportData.intNatCustomLU1_map.$lookup_value %]</td>
+        	            <td>[% IF member.intNewToProgram %]New[% ELSE %]Returning[% END %]</td>
+        	          </tr>
+        	      [% END %]
+        	    </table>
+        	   Total: [% members.size %] members
+        	[% END %]
+
+    	[% END %]
+	[% IF !loop.last && assoc_header_shown %]
+        <div style="page-break-after:always"></div>
+	[% END %]
+	
+[% END %]
+
+<div><span class="report-daterun">Report Run [% DateRun %] for enrolments between [% ReportData.after %] and [% ReportData.before %]</span></div>
+</div>

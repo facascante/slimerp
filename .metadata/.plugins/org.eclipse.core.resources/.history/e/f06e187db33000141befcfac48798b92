@@ -1,0 +1,34 @@
+<?php
+require '../vendor/autoload.php';
+
+// Set default timezone
+date_default_timezone_set('Asia/Manila');
+
+$app = new \Slim\Slim(array(
+	'debug' => true,
+    'log.writer' => new \Slim\Logger\DateTimeFileWriter(array(
+        'path' => '../logs',
+        'name_format' => 'Y-m-d',
+        'message_format' => '%label% - %date% - %message%'
+    )),
+	'view' => new \Slim\Views\Twig(array(
+		'parserOptions' => array(
+			'charset' => 'utf-8',
+			'cache' => realpath('../templates/cache'),
+			'auto_reload' => true,
+			'strict_variables' => false,
+			'autoescape' => true,
+			'debug' => true
+		),
+		'parserExtensions' => array(new \Slim\Views\TwigExtension())
+	))
+));
+
+$app->get('/:module/:process/:action', function ($module,$process,$action) {
+    echo "sample $id";
+});
+$app->get('/:module/:process/:action/:id', function ($module,$process,$action,$id) {
+		echo "sample $id";
+});
+
+$app->run();

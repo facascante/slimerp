@@ -1,0 +1,121 @@
+<form id="frmInviteTeammates" action="">
+    <div id="seasons" style="display:none";>
+        <div class="sectionheader">Choose season</div>
+        <div id="seasonsintro">
+            Select the season of the competition that you would like to invite your teammates to join.</p>
+        </div>
+        <div>[% seasonsDD %]</div>
+        <br>
+    </div>
+    <div id="comps" style="display:none";>
+        <div class="sectionheader">Choose competition</div>
+        <div id="compsintro">
+            Select the competition that you would like to invite your teammates to join.</p>
+        </div>
+        <div>[% compsDD %]</div>
+        <br>
+    </div>
+    <div id="regoforms" style="display:none";>
+        <div class="sectionheader">Choose form</div>
+        <div id="formsintro">
+            <p>The email that will be sent to your teammates, will contain a link to a registration form.
+            <br>Select the registration form that should be used.</p>
+        </div>
+        <div>[% formsDD %]</div>
+        <br>
+    </div>
+    <div class="sectionheader">Invite teammates</div>
+    <div id="teammatesresult">
+        <p>Enter the email addresses of all your proposed teammates. Put a comma after each email address.
+        <br>You can put each (email address) on a new line if preferred.</p>
+        <p>When you have finished click 'Invite Teammates Now'.</p>
+    </div>
+    <div>
+        <textarea name="teammates" id="d_teammates" style="width:350px;height:150px;"></textarea>
+        <br><br>
+        <input type="button" id="inviteteammatesbtn" value=" Invite Teammates Now" class="button proceed-button">
+    </div>
+    <div style="clear:both;"></div>
+</form>
+<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.8.1/jquery.validate.min.js"></script>
+<script type="text/javascript">
+
+    function checkComps(){
+        if (jQuery("#d_compID option").length == 2 && jQuery("#d_compID option:selected").val() <= 1){
+            jQuery$("#d_compID").val(jQuery("#d_compID option:eq(1)").val());
+        }
+        if (jQuery("#d_compID option").length == 2 && jQuery("#d_compID option:selected").val()){
+            jQuery("#comps").hide();
+        }
+        else if (jQuery("#comps").is(":hidden")){
+            jQuery("#comps").show();
+        }
+    }
+
+    jQuery().ready(function(){
+        jQuery("#d_seasonID").change(function(e){
+            jQuery("#d_compID option:gt(0)").remove();
+            var seasonid = jQuery("#d_seasonID>option:selected").val();
+            if (jQuery.isNumeric(seasonid) && seasonid > 0) {
+                var deferred = jQuery.Deferred();
+                var url  = "ajax/aj_comps_for_team_season.cgi";
+                var args = "client=[% Client %]&amp;teamID=[% TeamID %]&amp;seasonID=" + jQuery("#d_seasonID>option:selected").val();
+                jQuery.getJSON(url, args, function(data){
+                    if (data.Error == undefined){
+                        jQuery.each(data, function(index, element){
+                            jQuery("#d_compID").append(jQuery("<option></option>").attr("value", element.id).text(element.desc));
+                        });
+                    }
+                    deferred.resolve();
+                });
+                deferred.done(function(aval){
+                    checkComps();
+                });
+            }
+        });
+
+        jQuery("#frmInviteTeammates").validate({
+            rules: {
+                seasonID:  "required",
+                compID:    "required",
+                formID:    "required",
+                teammates: "required",
+            },
+            messages: {
+                seasonID:  "A season must be selected",
+                compID:    "A competition must be selected",
+                formID:    "A registration form must be selected",
+                teammates: "At least one email address must be entered",
+            }
+        });
+
+        jQuery("#inviteteammatesbtn").click(function(){  
+            if (jQuery("#frmInviteTeammates").valid()) {
+                jQuery("#teammatesresult").load("ajax/aj_teaminvite.cgi", {
+                    teamID: [% TeamID %], 
+                    assocID: [% AssocID %], 
+                    compID: jQuery('#d_compID>option:selected').val(), 
+                    client: "[% Client %]", 
+                    formID: jQuery("#d_formID>option:selected").val(), 
+                    emails: jQuery("#d_teammates").val(), 
+                    useFormID: 1,
+                    alwaysNew: [% AlwaysNew %]
+                }, function(response, status, xhr) {
+                    jQuery("#d_teammates").val("");
+                });  
+            }
+        });
+
+        if (jQuery("#d_seasonID option").length != 2 || !jQuery("#d_seasonID option:selected").val()){
+            jQuery("#seasons").show();
+        }
+
+        jQuery("#d_seasonID").change();
+
+        if (jQuery("#d_formID option").length != 2 || !jQuery("#d_formID option:selected").val()){
+            jQuery("#regoforms").show();
+        }
+
+    });
+
+</script>

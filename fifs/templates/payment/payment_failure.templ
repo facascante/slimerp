@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="https://reg.sportingpulse.com/v5/css/style.css" type="text/css" rel="stylesheet">
+
+        [% head %]
+
+        <title>[% title %]</title>
+    </head>
+    <body>
+        [% page_begin %]
+
+        <div id="pagewrapper">
+            <div id="pageheader">
+                [% page_header %]
+            </div>
+
+            <div id="content">
+                <div style="font-size:14px;color:red;"><b>There was an Error with your Payment.</b></div>
+                <div style="font-size:14px;color:red;"><b>See below for details, please close this window and click <b>Pay Now</b> to try again</b></div>
+
+                <table class="confirm-intro">
+                <tbody>
+                    <tr>
+                        <td>Error:</td>
+                        <td>[% strResponseText %]</td>
+                    </tr>
+                    <tr>
+                        <td>Amount:</td>
+                        <td>\$[% intAmount %]</td>
+                    </tr>
+                    <tr>
+                        <td>Payment for:</td>
+                        <td>[% AssocName %] [% ClubName %]</td>
+                    </tr>
+                    <tr>
+                        <td>Payment ID:</td>
+                        <td>[% intLogID %]</td>
+                    </tr>					
+                </tbody>
+                </table>
+                    [% page_content %]
+                </div> <!-- End Content --> 
+
+                <div id="pagefooter">
+                [% page_footer %]
+
+                <div style="clear:both;"></div>
+            </div>
+        </div> <!-- End Page Holder --> 
+    
+        [% page_end %]
+    </body>
+</html>

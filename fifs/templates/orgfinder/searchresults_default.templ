@@ -1,0 +1,150 @@
+[% WRAPPER orgfinder/page.templ %]
+
+<div id="page_container">
+
+  [% FOREACH r = results %]
+
+  <div id="result">
+
+    [% BLOCK BLOCK_title_club %]
+      [% IF r.Details.ClubName %]
+        [% r.Details.ClubName %] 
+      [% END %]
+      [% IF r.Details.strName %]
+        ([% r.Details.strName %]) 
+      [% END %]
+      [% IF r.Details.SubRealmName %]
+        - [% r.Details.SubRealmName %] 
+      [% END %]
+    [% END %] 
+
+    [% BLOCK BLOCK_title_assoc %]
+      [% r.Details.strName %]
+      [% IF r.Details.SubRealmName %]
+        - [% r.Details.SubRealmName %] 
+      [% END %]
+    [% END %]
+
+    [% BLOCK BLOCK_location %]
+      [% IF r.Details.strVenueName or r.Details.strAddress or r.Details.strVenueSuburb or r.Details.strVenuePostalCode or r.Details.strVenueCountry %]
+        <span class="section_heading">Location</span> <br>
+        [% IF r.Details.strVenueName %]
+          <b>Venue Name:</b> [% r.Details.strVenueName %] <br>
+        [% END %]
+        [% IF r.Details.strVenueAddress %]
+          <b>Venue Address:</b> [% r.Details.strVenueAddress %] <br>
+        [% END %]
+        [% IF r.Details.strVenueSuburb %]
+          <b>Venue Suburb:</b> [% r.Details.strVenueSuburb %] <br>
+        [% END %]
+        [% IF r.Details.strVenuePostalCode %]
+          <b>Venue Postal Code:</b> [% r.Details.strVenuePostalCode %] <br>
+        [% END %]
+        [% IF r.Details.strVenueCountry %]
+          <b>Venue Country:</b> [% r.Details.strVenueCountry %] <br> 
+        [% END %]
+        <br>
+      [% END %]
+    [% END %]
+
+    [% BLOCK BLOCK_details %]
+      [% IF 
+        r.Details.days 
+        or (r.Details.niceStartDate and r.Details.niceStartDate != '00/00/00') 
+        or (r.Details.niceFinishDate and r.Details.niceFinishDate != '00/00/00')
+        or r.Details.strTimes 
+        or r.Details.strSessionDuration 
+      %]
+        <span class="section_heading">Details</span> <br>
+        [% IF r.Details.days %]
+          <b>Days of operation:</b> [% r.Details.days %] <br>
+        [% END %]
+        [% IF r.Details.niceStartDate and r.Details.niceStartDate != '00/00/00' %]
+          <b>Start Date:</b> [% r.Details.niceStartDate %] <br>
+        [% END %]
+        [% IF r.Details.niceFinishDate and r.Details.niceFinishDate != '00/00/00' %]
+          <b>Finish Date:</b> [% r.Details.niceFinishDate %] <br>
+        [% END %]
+        [% IF r.Details.strTimes %]
+          <b>Time:</b> [% r.Details.strTimes %] <br>
+        [% END %]
+        [% IF r.Details.strSessionDurations %]
+          <b>Duration:</b> [% r.Details.strSessionDurations %] <br>
+        [% END %]
+        <br>
+      [% END %]
+    [% END %]
+
+    [% BLOCK BLOCK_other %]
+      [% IF r.Details.strURL or r.Details.strNotes %]
+      <span class="section_heading">Other</span> <br>
+        [% IF r.Details.strURL %]
+          <b>URL:</b> [% r.Details.strURL %] <br>
+        [% END %]
+        [% IF r.Details.strNotes %]
+          <b>Notes:</b> [% r.Details.strNotes %] <br>
+        [% END %]
+      <br>
+      [% END %]
+    [% END %]
+
+  [% BLOCK BLOCK_contacts %]
+    <div id="contacts_container;">
+    [% IF r.Contacts.size > 0 or r.Details.intShowPresident == 1 or r.Details.intShowSecretary == 1 or r.Details.intShowRegistrar == 1 or r.Details.intShowTreasurer == 1 %]
+      <span class="section_heading">Contacts</span> <br>
+    [% END %]
+      [% FOREACH c = r.Contacts %]
+        <div id="contact"">
+          <b>Position:</b> [% c.Role %] <br>
+          <b>Name:</b> [% c.Firstname %] [% c.Surname %]<br>
+          <b>Email:</b> [% c.Email %] <br>
+          <b>Phone:</b> [% c.Mobile %] <br><br>
+        </div>
+      [% END %]
+    </div>
+  [% END %]
+
+    <div class="result_heading">
+      [% IF r.Details.ClubName %]
+        [% PROCESS BLOCK_title_club %]
+      [% ELSE %]
+        [% PROCESS BLOCK_title_assoc %]
+      [% END %]
+    </div>
+
+    <div style="clear:both;"></div>
+
+    [% PROCESS BLOCK_location %]
+
+    [% PROCESS BLOCK_details %]
+ 
+    [% PROCESS BLOCK_contacts %]
+
+    <div style="clear:both;"></div>
+
+    [% PROCESS BLOCK_other %]
+
+    <div class="button"> [% r.Details.register_btn %] </div>
+
+    <div class="button">
+      <form name="EOI_form" action="clubfinder.cgi" method="post">
+        <input type="submit" name="" value="Register Interest">
+        <input type="hidden" name="a" value="EOI_DTA">
+        <input type="hidden" name="assocID" value="[% r.Details.intAssocID %]">
+        <input type="hidden" name="clubID" value="[% r.Details.intClubID %]">
+        <input type="hidden" name="postcode" value="[% r.Details.postcode %]">
+        <input type="hidden" name="club_search_all" value="[% r.Details.club_search_all %]">
+        <input type="hidden" name="yob" value="[% r.Details.yob %]">
+        <input type="hidden" name="r" value="[% r.Details.realmID %]">
+      </form>
+    </div>
+ 
+    <br>
+ 
+  </div>
+
+  [% END %]
+
+</div>
+
+[% END %]

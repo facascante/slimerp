@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>[% Title %]</title>
+    <script>
+var _prum = [['id', '53101fc1abe53d5827000000'],
+             ['mark', 'firstbyte', (new Date()).getTime()]];
+(function() {
+    var s = document.getElementsByTagName('script')[0]
+      , p = document.createElement('script');
+    p.async = 'async';
+    p.src = '//rum-static.pingdom.net/prum.min.js';
+    s.parentNode.insertBefore(p, s);
+})();
+</script>
+    
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
+		[% TopJSFiles %]
+		[% TopJSInline %]
+		<link rel="stylesheet" type="text/css" href="js/jquery-ui/css/theme/jquery-ui-1.8.22.custom.css">
+    <link rel="stylesheet" type="text/css" href="js/chosen/chosen.css">
+		[% CSSFiles %]
+    <link rel="stylesheet" type="text/css" href="css/style.css?2012022201">
+    <link rel="stylesheet" type="text/css" href="css/spfont.css">
+		<link rel="stylesheet" type="text/css" href="css/print.css" media="print">
+		[% CSSInline %]
+		<!--[if IE]>
+			<link rel="stylesheet" type="text/css" href="css/style_ie.css" />
+		<![endif]-->
+		<!--[if lt IE 9]>
+			<link rel="stylesheet" type="text/css" href="css/style_ie_old.css" />
+		<![endif]-->
+		<!--[if lt IE 8]>
+	    <link rel="stylesheet" type="text/css" href="css/style_ie7.css" />
+    <![endif]-->
+[% IF FullScreen %]
+		<style type="text/css">
+			/* This is the fullscreen CSS  */
+			#content-wrap {min-width:1252px;}
+			#content-wrap, .membership-wrap #globalnav-inner, #dash-wrap {width:100%;}
+			#content {width:98%;margin:10px 1%;}
+			#nav_session_wrap a.window-resize {background:url(images/contract.png);} 
+			.quick-nav {top:auto;left:100px;bottom:0px;width:auto;height:54px;-webkit-border-radius: 10px 10px 0 0;-moz-border-radius: 10px 10px 0 0;border-radius: 10px 10px 0 0;background-image: #ededed;background-image: -webkit-linear-gradient(top, #f6f6f6 70%, #e4e4e4 100%);background-image: -moz-linear-gradient(top, #f6f6f6 70%, #e4e4e4 100%);background-image: -o-linear-gradient(top, #f6f6f6 70%, #e4e4e4 100%);background-image: -ms-linear-gradient(top, #f6f6f6 70%, #e4e4e4 100%);background-image: linear-gradient(top, #f6f6f6 70%, #e4e4e4 100%);background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.7, #f6f6f6), color-stop(1, #e4e4e4));filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f6f6f6", endColorstr="#e4e4e4",GradientType=0);border-right: 1px solid #D4D4D4; border-bottom:0px;}
+			.jump-item a {margin:0px 5px;}
+			.jump-item {float:left;}
+	</style>
+[% END %]
+		[% Ads_Config %]
+
+  </head>
+  <body>
+    <div id ="pagewrapper" class="membership-wrap">
+			[% GlobalNav %]
+    	<div id="content-wrap">
+				<div id="spheader">[% IF Header %][% Header %][% ELSE %]<img src="images/sp_membership.jpg" alt="" title="">[% END %]
+    			[% IF MemListURL OR TeamListURL OR ClubListURL OR CompListURL %]
+      			<div class="quick-nav">
+        			[% IF MemListURL %]
+          			<div class="jump-item jump-item-1">
+            			<a href="[% MemListURL %]"><img src="images/member.png" /><p>[% MemListName %]</p></a>
+          			</div>
+        			[% END %]
+        			[% IF TeamListURL %]
+          			<div class="jump-item jump-item-2">
+            			<a href="[% TeamListURL %]"><img src="images/team.png" /><p>[% TeamListName %]</p></a>
+          			</div>
+        			[% END %]
+        			[% IF ClubListURL %]
+          			<div class="jump-item jump-item-3">
+            			<a href="[% ClubListURL  %]"><img src="images/club.png" /><p>[% ClubListName %]</p></a>
+          			</div>
+        			[% END %]
+        			[% IF CompListURL %]
+          			<div class="jump-item jump-item-4">
+            			<a href="[% CompListURL %]"><img src="images/comp.png" /><p>[% CompListName %]</p></a>
+          			</div>
+        			[% END %]
+      			</div>
+    			[% END %]
+				</div>
+    		<div id="pageholder">
+    			<div id="navbar">[% NavBar %]</div>
+    			<div id="contentholder">
+    					<div id="content">[% Ads_Heading %][% Content %]</div> <!-- End Content -->
+    			</div> <!-- End Content Holder -->
+  				[% Ads_BottomLeaderboard %]
+	  		</div> <!-- End Page Holder -->
+				<div id="footer">
+            [% IF !NoSPLogo %]<a href="http://www.sportingpulse.com"><img src="images/SP_powered.png" alt="SportingPulse"></a>[% END %]
+            <div class="footerline">[% Lang.txt('COPYRIGHT') %]</div>
+          </div>
+    	</div>
+		<script type="text/javascript" src="js/reg.js"></script>
+    <script type="text/javascript" src="js/chosen/chosen.jquery.min.js"></script>
+		[% BottomJSFiles %]
+		[% BottomJSInline %]
+    [% StatsCounter %]
+    </div>
+		[% IF Wizard %]
+			[% Wizard %]
+		[% END %]
+ <!-- End Page Wrapper -->
+  </body>
+</html>

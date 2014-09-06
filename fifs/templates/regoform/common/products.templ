@@ -1,0 +1,146 @@
+[% IF !HideItemHeader %]
+<div class="sectionheader">Items</div>
+[% END %]
+
+<p>[% Lang.txt('Check the box against the items you would like to select') %]</p>
+[% IF AllowedCountText %]
+<p><b>[% AllowedCountText %]</b></p>
+[% END %]
+
+[% IF UnPaidItems.size > 0 %]
+[% UnPaidLastGroup = '' %]
+	<table class="listTable products-table">
+		<thead>
+		<tr>
+			<th class="col-1">[% Lang.txt('Select') %]</th>
+			<th class="col_i"></th>
+			<th class="col-2">[% IF !HideQty %]Qty[% END %]</th>
+			<th class="col-3">Name</th>
+		[% IF !HideCost %]
+			<th class="col-4">Cost</th>
+		[% END %]
+		</tr>
+</thead>
+<tbody>
+[% loopcount = 0 %]
+	[% FOREACH p IN UnPaidItems %]
+[% IF p.Group != UnPaidLastGroup %]
+	<tr>
+		<td colspan ="5" class = "rego-prodgroup">[% p.Group %]</td>
+	[% UnPaidLastGroup = p.Group %]
+	[% loopcount = 0 %]
+	</tr>
+[% END %]
+  [% SET rowclass='' %]
+  [% IF loopcount % 2 %]
+    [% SET rowclass='rowshade-prods' %]
+  [% END %]
+		<tr class ="product-row">
+			<td class="col-1">
+			[% IF p.TransactionID and !p.Status %]
+				[% IF p.DefaultProduct or p.Mandatory %]
+					<input type="hidden" name="txn_[% p.TransactionID %]" value="1">Yes
+				[% ELSE %]
+				<input type="checkbox" CHECKED name="txn_[% p.TransactionID %]" value="1" class="nc" id = "up_prod_[% p.ProductID %]">(already in cart)
+				[% END %]
+			[% ELSIF p.DefaultProduct or p.Mandatory %]
+				<input type="hidden" name="prod_[% p.ProductID %]" value="1">Yes
+			[% ELSE %]
+				<input type="checkbox" name="prod_[% p.ProductID %]" value="1" class="nc" id = "up_prod_[% p.ProductID %]">
+			[% END %]
+			</td>
+                        <td class="col-i">[% p.Photo %]</td>
+			<td class="col-2">
+[% IF !HideQty %]
+	[% IF p.AllowQty %]
+			[% IF p.TransactionID and !p.Status %]
+				<input type="text" size = "5" name="txnQTY_[% p.TransactionID %]" value="[% p.Qty %]">
+			[% ELSE %]
+				<input type="text" size="5" name="prodQTY_[% p.ProductID %]" value="" class="nc">
+			[% END %]
+	[% ELSE %]
+			[% IF p.TransactionID and !p.Status %]
+				1 <input type="hidden" name="txnQTY_[% p.TransactionID %]" value="1">
+			[% ELSE %]
+				1 <input type="hidden" name="prodQTY_[% p.ProductID %]" value="1">
+			[% END %]
+	[% END %]
+[% ELSE %]
+			[% IF p.TransactionID and !p.Status %]
+		<input type="hidden" name="txnQTY_[% p.TransactionID %]" value="1">
+			[% ELSE %]
+		<input type="hidden" name="prodQTY_[% p.ProductID %]" value="1">
+			[% END %]
+[% END %]
+			</td>
+			<td class="col-3"><label for = "up_prod_[% p.ProductID %]">[% p.Name %]</label></td>
+[% IF !HideCost %]
+			<td class="col-4">[% CurrencySymbol %][% p.Amount %]</td>
+[% END %]
+		</tr>
+[% IF !HideNotes and p.ProductNotes %]
+		<tr class ="[% rowclass %]" style="border-top:0px;">
+			<td colspan="4"><span class="notes">[% p.ProductNotes %]</span></td>
+[% IF !HideCost %]
+			<td>&nbsp;</td>
+[% END %]
+		</tr>
+[% END %]
+[% loopcount = loopcount + 1 %]
+	[% END %]
+	</tbody>
+	</table>
+[% END %]
+
+
+[% IF PaidItems.size > 0 %]
+<p>Below is a list of <b>previously selected</b> items</p>
+[% loopcount = 0 %]
+
+	<table class="listTable">
+		<tr>
+<th class ="col_i"></th>
+[% IF !HideQty %]
+			<th class="col-2">Qty</th>
+[% END %]
+			<th class="col-3">Name</th>
+[% IF !HideAmountPaid %]
+			<th class="col-4">Amount Paid</th>
+[% END %]
+		</tr>
+	[% FOREACH p IN PaidItems %]
+[% IF p.Group != PaidLastGroup %]
+	<tr>
+		<td colspan ="3" class = "rego-prodgroup">[% p.Group %]</td>
+	[% PaidLastGroup = p.Group %]
+[% loopcount = 0 %]
+	</tr>
+[% END %]
+  [% SET rowclass='' %]
+  [% IF loopcount % 2 %]
+    [% SET rowclass='rowshade-prods' %]
+  [% END %]
+		<tr class ="[% rowclass %]">
+            <td class= "col_i">[% p.Photo %]</td>
+[% IF !HideQty %]
+			<td class="col-2">
+				[% p.Qty || 1 %]
+			</td>
+[% END %]
+			<td class="col-3">[% p.Name %]</td>
+[% IF !HideCost %]
+			<td class="col-4">[% CurrencySymbol %][% p.Amount %]</td>
+[% END %]
+		</tr>
+[% IF !HideNotes and p.ProductNotes %]
+		<tr>
+[% IF !HideQty %]
+			<td>&nbsp;</td>
+[% END %]
+			<td><span class="notes">[% p.ProductNotes %]</span></td>
+		</tr>
+[% END %]
+[% loopcount = loopcount + 1 %]
+	[% END %]
+	</table>
+[% END %]

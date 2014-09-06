@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move &apos;logs&apos; to &apos;slimerp&apos;" description="Move &apos;logs&apos; to &apos;slimerp&apos;" destination="/slimerp" element1="public/logs" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="1" stamp="1409401614386" updateReferences="true"/>
+</session>

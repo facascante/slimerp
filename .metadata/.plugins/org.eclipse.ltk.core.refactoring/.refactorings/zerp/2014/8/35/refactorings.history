@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;zerp/public/assets/scripts/datatable/user.index.js&apos; to &apos;users.index.js&apos;" description="Rename resource &apos;user.index.js&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="public/assets/scripts/datatable/user.index.js" name="users.index.js" stamp="1408860463659" updateReferences="true"/>
+</session>

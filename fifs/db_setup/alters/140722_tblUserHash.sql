@@ -1,0 +1,1 @@
+ALTER TABLE tblUserHash ADD strPasswordChangeKey VARCHAR(50) NOT NULL AFTER ts; 

@@ -1,0 +1,57 @@
+[% WRAPPER membercard/MemberCard_Wrapper.templ %]
+
+	[% USE date %]
+	[% varDate =  date.format(date.now(), '%d/%m/%Y') %]
+
+
+	<style type="text/css">
+		.line {
+			margin-bottom:10px;
+		}
+	</style>
+
+	[% FOREACH m = Members %]
+
+		<!-- [% m.intMemberID %] -->
+		[% varClub = '' %]
+		[% varDefaultClub = '' %]
+		[% FOREACH c = m.Clubs %] 
+			[% NEXT IF c.intStatus != 1 %]
+			[% varDefaultClub = c.strName %]
+			[% NEXT IF c.intPrimaryClub == 1 %]
+			[% varClub = c.strName %]
+		[% END %]
+
+    [% FOREACH s = m.Seasons %]
+      [% FOREACH c = m.Clubs %]
+        [% NEXT IF s.intAssocID != 7721 %]
+        [% IF s.intClubID == c.intClubID %]
+          [% varClub = c.strName %]
+        [% END %]
+      [% END %]
+    [% END %]
+
+		[% IF varClub == '' %]
+			[% varClub = varDefaultClub %]
+		[% END %]
+
+		<div style="font-size:10px;width:319px;height:192px;">
+		<table border="0" style="width:319px;margin-top:55px;">
+			<tr>
+				<td colspan="2"><img src="/formsimg/fsc_logo.jpg" height="40px" align="left"><span style="line-height:40px;font-size:16px;font-weight:bold;">Football South Coast</span></td>
+			</tr>
+			<tr>
+				<td valign="top" style="font-size:14px;font-weight:bold;">
+					[% varClub %] <br> [% m.strFirstname %] [% m.strSurname %]
+					<br><br>
+					<div style="background:blue;border:1px solid black;padding:5px;font-size:12px;">Committee <br> 2012</div>
+				</td>
+				<td valign="top" style="width:120px;font-weight:11px;">
+					<img src="https://reg.sportingpulse.com/getphoto.cgi?client=[% m.client %]" alt="" height="100" align="right">
+				</td>
+		</table>
+		</div>
+
+	[% END %]
+
+[% END %]

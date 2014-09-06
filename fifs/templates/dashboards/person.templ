@@ -1,0 +1,186 @@
+<div class="member-home-page">
+<div class = "changeoptions">
+[% IF MarkDuplicateURL  and !ReadOnlyLogin %]
+<span class = "button-small generic-button"><a href = "[% MarkDuplicateURL %]">[% Lang.txt("Mark as Duplicate") %]</a></span>
+[% END %]
+[% IF CardPrintingURL  and !ReadOnlyLogin %]
+<span class = "button-small generic-button"><a href = "[% CardPrintingURL %]">[% Lang.txt("Member Cards") %]</a></span>
+[% END %]
+</div>
+<div class = "pageHeading dash-heading">[% Name %]
+	[% IF Details.NationalNum %]<span class = "nationalnumber"> - #[% Details.NationalNum %]</span>[% END %]
+</div>
+<div class="member-edit-info" id="logo-status">
+  [% Photo %]
+	<div class="member-docs">
+		<div class = "sectionheader">[% Lang.txt('Documents') %]</div>
+			[% IF Documents.size() > 0 %]
+  			<ul>
+  				[% FOREACH doc = Documents %]
+    				<li><a href = "[% doc.URL %]" target = "_blank">[% doc.Title %]</a></li>
+  				[% END %]
+  			</ul>
+			[% ELSE %]
+  			<p>No Documents available</p>
+			[% END %]
+			[% IF AddDocumentURL and !ReadOnlyLogin  %]
+				<span class="button-small generic-button">
+					<a href = "[% AddDocumentURL %]">[% Lang.txt("Add Document") %]</a>
+				</span>
+			[% END %]
+		</div>	
+</div>
+<div class="member-col-2">
+<div class="member-detail">
+	<div class = "sectionheader">[% Lang.txt('Member Detail Summary') %]&nbsp;&nbsp;[% IF EditDetailsLink and !ReadOnlyLogin  %]<a href = "[% EditDetailsLink %]"         class="edit-link">[% Lang.txt('Edit') %]</a>[% END %]</div>
+	<div class="member-details">
+		[% IF Details.SquadNum %]
+		<span class="details-row">
+		  <span class="details-left">Squad Number:</span>
+			<span class="details-right">[% Details.SquadNum %]</span>
+		</span>
+		[% END %]
+		[% IF Details.Gender %]
+		<span class="details-row">
+			<span class="details-left">Gender:</span>
+			<span class="details-right">[% Details.Gender %]</span>
+		</span>
+		[% END %]
+		[% IF Details.DOB %]
+    <span class="details-row">
+      <span class="details-left">Date of Birth:</span>
+      <span class="details-right">[% Details.DOB %]</span>
+    </span>
+		[% END %]
+		[% IF Details.BirthCountry %]
+    <span class="details-row">
+      <span class="details-left">Country of Birth:</span>
+      <span class="details-right">[% Details.BirthCountry %]</span>
+    </span>
+		[% END %]
+		[% IF Details.PassportNat %]
+    <span class="details-row">
+      <span class="details-left">Nationality:</span>
+      <span class="details-right">[% Details.PassportNat %]</span>
+    </span>
+		[% END %]
+	</div>
+</div>
+</div>
+<div class="member-col-3">
+<div class = "contact_details">
+	<div class = "sectionheader">[% Lang.txt('Contact Details') %]&nbsp;&nbsp;[% IF EditDetailsLink and !ReadOnlyLogin  %]<a href = "[% EditDetailsLink %]#seccontact" class="edit-link">[% Lang.txt('Edit') %]</a>[% END %]</div>
+	[% IF Details.Address1 %]
+	<span class="details-row">
+  	<span class="details-left">[% Lang.txt('Address') %]</span>
+  	<span class="details-right">
+			[% Details.Address1 %]<br>
+			[% IF Details.Address2 %][% Details.Address2 %]<br>[% END %]
+			[% Details.Suburb %]&nbsp;[% Details.State %]&nbsp;[% Details.PostalCode %]
+		</span>
+  </span>
+	[% END %]
+	[% IF Details.PhoneHome %]
+	<span class="details-row">
+  	<span class="details-left">Home Phone:</span>
+    <span class="details-right">[% Details.PhoneHome %]</span>
+  </span>
+	[% END %]
+	[% IF Details.PhoneMobile %]
+	<span class="details-row">
+  	<span class="details-left">Mobile:</span>
+    <span class="details-right">[% Details.PhoneMobile %]</span>
+  </span>
+	[% END %]
+	[% IF Details.Email %]
+	<span class="details-row">
+  	<span class="details-left">Email:</span>
+    <span class="details-right"><a href="mailto:[% Details.Email %]">[% Details.Email %]</a></span>
+  </span>
+	[% END %]
+</div>
+	<div class = "contacts">
+		[% secondcount = 0 %]
+		[% IF GroupData.identification %]
+			[% secondcount = secondcount + 1 %]
+			<div class = "sectionheader">[% Lang.txt('Identification') %]</div>
+			[% GroupData.identification %]
+		[% END %]
+		[% IF GroupData.parent %]
+			[% secondcount = secondcount + 1 %]
+			<div class = "sectionheader">[% Lang.txt('Parent/Guardian') %]</div>
+			[% GroupData.parent %]
+		[% END %]
+		[% IF GroupData.financial && secondcount < 2%]
+			[% secondcount = secondcount + 1 %]
+			[% donefinancial = 1 %]
+			<div class = "sectionheader">[% Lang.txt('Financial') %]</div>
+			[% GroupData.financial%]
+		[% END %]
+		[% IF GroupData.medical && secondcount < 2%]
+			[% secondcount = secondcount + 1 %]
+			[% donemedical = 1 %]
+			<div class = "sectionheader">[% Lang.txt('Medical') %]</div>
+			[% GroupData.medical %]
+		[% END %]
+		[% IF GroupData.other && secondcount < 2%]
+			[% secondcount = secondcount + 1 %]
+			[% doneother = 1 %]
+			<div class = "sectionheader">[% Lang.txt('Other Details') %]</div>
+			[% GroupData.other %]
+		[% END %]
+        [% IF GroupData.jumpers && secondcount < 2%]
+            [% secondcount = secondcount + 1 %]
+            [% doneother = 1 %]
+            <div class = "sectionheader">[% Lang.txt('Jumper Numbers') %]</div>
+            [% GroupData.jumpers %]
+        [% END %]
+	</div>
+	</div>
+<div class="member-col-4">
+[% StatusPanel %]
+<div id = "member_home_extra" class = "m_extrafields_div" style = "display:none;">
+[% extrafieldsavailable = 0 %]
+[% IF GroupData.financial && !donefinancial %]
+		[% extrafieldsavailable = 1 %]
+			<div class = "sectionheader">[% Lang.txt('Financial') %]</div>
+			[% GroupData.financial %]
+[% END %]
+[% IF GroupData.medical && !donemedical %]
+		[% extrafieldsavailable = 1 %]
+			<div class = "sectionheader">[% Lang.txt('Medical') %]</div>
+			[% GroupData.medical%]
+[% END %]
+[% IF GroupData.other && !doneother %]
+		[% extrafieldsavailable = 1 %]
+			<div class = "sectionheader">[% Lang.txt('Other Details') %]</div>
+			[% GroupData.other%]
+[% END %]
+[% IF GroupData.jumper && !donejumpers %]
+        [% extrafieldsavailable = 1 %]
+            <div class = "sectionheader">[% Lang.txt('Jumper Numbers') %]</div>
+            [% GroupData.jumpers%]
+[% END %]
+</div>
+[% IF extrafieldsavailable %]
+<div class = "m_extrafields_div">
+<a href = "" onclick = "jQuery('.m_extrafields_div').toggle();return false;">----More ---</a>
+</div>
+[% END %]
+</div>
+<style type="text/css">.pageHeading{font-size:48px;font-family:"DINMedium",sans-serif;letter-spacing:-2px;margin:20px 0 40px 0;}</style>
+[% IF Accreditations.size() > 0 %]
+<div class = "sectionheader">[% Lang.txt('Accreditations') %]</div>
+	<table>
+	[% FOREACH accred = Accreditations %]
+		<tr>
+			<td>[% accred.Type %]</td>
+			<td>[% accred.strName %]</td>
+			<td>[% accred.Level %]</td>
+			<td>[% accred.dtDate1 %]</td>
+			<td>[% accred.dtDate2 %]</td>
+		</tr>
+	[% END %]
+	</table>
+[% END %]
+</div>

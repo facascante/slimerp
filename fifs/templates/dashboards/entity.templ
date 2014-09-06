@@ -1,0 +1,43 @@
+<div class = "pageHeading dash-heading">[% Name %]</div>
+<div id="logo-status">
+	[% Logo %]	
+	[% ContactsMenu %]
+</div>
+
+<div class = "home_details">
+	<div class = "sectionheader">[% Lang.txt('Details') %]&nbsp;&nbsp;[% IF EditDetailsLink and !ReadOnlyLogin  %]<a href = "[% EditDetailsLink %]" class="edit-link">[% Lang.txt('Edit') %]</a>[% END %]</div>
+	[% IF Details.Address1 or Details.Suburb %]
+	<div class = "details-address">
+		<span class = "label">[% Lang.txt('Address') %]</span><br>
+		[% IF Details.Address %][% Details.Address %]<br>[% END %]
+		[% IF Details.Town%][% Details.Town%]<br>[% END %]
+		[% IF Details.Region%][% Details.Region%],&nbsp;[% END %][% IF Details.Country %][% Details.Country %],&nbsp;[% END %][% IF Details.PostalCode %][% Details.PostalCode %][% END %]
+	</div>
+	[% END %]
+	<div class = "details-phone">
+		[% IF Details.Contact %]<span class = "label">[% Lang.txt('Contact') %]</span> [% Details.Contact%]<br>[% END %]
+		[% IF Details.Phone %]<span class = "label">[% Lang.txt('Phone') %]</span> [% Details.Phone %]<br>[% END %]
+		[% IF Details.Fax %]<span class = "label">[% Lang.txt('Fax') %]</span> [% Details.Fax %]<br>[% END %]
+		[% IF Details.Email %]<span class = "label">[% Lang.txt('Email') %]</span> <a href = "mailto:[% Details.Email %]" class="mail-link">[% Details.Email %]</a><br>[% END %]
+	</div>
+</div>
+[% IF Notifications.size() > 0 and !ReadOnlyLogin  %]
+<div class = "notifications">
+	<div class="notifications-inner">
+		<div class = "sectionheader">[% Lang.txt('Notifications') %]</div>
+    <div class = "sectionsubheader">The following items require your attention:</div>
+		[% FOREACH nitem IN Notifications %]
+      <div class="notification-item">
+        <a href = "#" class="delete-icon"></a>&nbsp;&nbsp;<a href = "[% nitem.url %]" class="notification-link">[% nitem.title %]</a>
+      </div>		
+		[% END %]
+	</div>
+</div>
+[% END %]
+<div class ="welcome">
+	[% Welcome %]
+</div>
+<div id="dash-wrap">
+	<div class = "sectionheader">Dashboard&nbsp;&nbsp;[% IF EditDashboardLink and !ReadOnlyLogin  %]<a href = "[% EditDashboardLink %]" class="edit-link">Configure</a>[% END %]</div>
+	[% Dashboard %]
+</div>

@@ -1,0 +1,101 @@
+<h1 class="page-header">Emergency Contact</h1>
+[% ErrorMessage %]
+<form class="form-horizontal" role="form" method="post" action="[% Target %]">
+    [% FormParams %]
+    <div class="form-group">
+        <label for="strFirstName" class="col-sm-2 control-label">First Name</label>
+        <div class="col-sm-3">
+            <input type="text" name="FirstName" value="[% FirstName %]" id="strFirstName" class="form-control" placeholder="First Name">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="strSurname" class="col-sm-2 control-label">Last Name</label>
+        <div class="col-sm-3">
+            <input type="text" name="LastName" value="[% LastName %]" id="strSurname" class="form-control" placeholder="Last Name">
+        </div>
+    </div>  
+    <div class="form-group">
+        <label for="strDOB" class="col-sm-2 control-label">Date of Birth</label>
+        <div class="col-sm-2">
+            <input type="text" name="DOB" value="[% DOB %]" id="strDOB" class="form-control" placeholder="DD/MM/YY">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="strGender" class="col-sm-2 control-label">Gender</label>
+        <div class="col-sm-2">
+            <select class="form-control" name="Gender" id="strGender">
+                <option value=""></option>
+                <option value="2" [% IF Gender == 2 %]selected="selected"[% END %]>Female</option>
+                <option value="1" [% IF Gender == 1 %]selected="selected"[% END %]>Male</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="strHomePhone" class="col-sm-2 control-label">Home Phone</label>
+        <div class="col-sm-2">
+            <input type="tel" name="HomePhone" value="[% HomePhone %]" id="strHomePhone" class="form-control" placeholder="Home Phone">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="strWorkPhone" class="col-sm-2 control-label">Work Phone</label>
+        <div class="col-sm-2">
+            <input type="tel" name="WorkPhone" value="[% WorkPhone %]" id="strWorkPhone" class="form-control" placeholder="Work Phone">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="strMobile" class="col-sm-2 control-label">Mobile</label>
+        <div class="col-sm-2">
+            <input type="tel" name="Mobile" value="[% Mobile %]" id="strMobile" class="form-control" placeholder="Mobile">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="strEmail" class="col-sm-2 control-label">Email</label>
+        <div class="col-sm-4">
+            <input type="email" name="Email" value="[% Email %]" id="strEmail" readonly="readonly" class="form-control" placeholder="Email Address">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="strAddress" class="col-sm-2 control-label">Address</label>
+        <div class="col-sm-4">
+            <input type="text" name="Address" value="[% Address %]" id="strAddress" class="form-control" placeholder="e.g. 10 Smith Street">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="strSuburb" class="col-sm-2 control-label">Suburb</label>
+        <div class="col-sm-4">
+            <input type="text" name="City" value="[% City %]" id="[% MemberDetails.strSuburb %]" class="form-control" placeholder="Suburb">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="strState" class="col-sm-2 control-label">State</label>
+        <div class="col-sm-2">
+            <select class="form-control" name="State" id="strState">
+                <option disabled selected>Select</option>
+                <option>ACT</option>
+                <option>NSW</option>
+                <option>NT</option>
+                <option>QLD</option>
+                <option>SA</option>
+                <option>TAS</option>
+                <option>VIC</option>
+                <option>WA</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="strPostcode" class="col-sm-2 control-label">Postcode</label>
+        <div class="col-sm-2">
+            <input type="number" name="Postcode" value="[% Postcode %]" id="strPostCode" class="form-control" placeholder="Postcode">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="strCountry" class="col-sm-2 control-label">Country</label>
+        <div class="col-sm-4">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Update Emergency Contact</button>
+        </div>
+    </div>
+</form>

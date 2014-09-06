@@ -1,0 +1,64 @@
+#nav_session_wrap {
+	background-color: #3d3d3d;
+}
+
+.proceed-button a, input.proceed-button {
+  background-color: #61c13a;
+}
+
+.proceed-button a:hover, input.proceed-button:hover {
+	background-color: #74ce46;
+}
+
+.cancel-button a, input.cancel-button {
+	background-color: #dc1212;
+}
+
+.cancel-button a:hover, input.cancel-button:hover {
+	background-color: #e31616;
+}
+
+.generic-button a, input.generic-button {
+	background-color: #357db0;
+}
+
+.generic-button a:hover, input.generic-button:hover {
+	background-color: #4096c0;
+}
+
+.special-button a, input.special-button {
+	background-color: #ff8a00;
+}
+
+.special-button a:hover, input.special-button:hover {
+	background-color: #ffa600;
+}
+
+
+label.stepNumber, ul.form-nav li span.stepDesc {
+	height: 38px;
+	line-height: 38px;
+	margin: 0 10px;
+}
+
+#footer {
+	background: #333;
+}
+
+input.nc {
+	border: 0px;
+}
+
+td.value {
+	font-size: 16px;
+}
+
+td.col-2 input {
+	border: 1px solid #B5B8C8;
+}
+
+td.value input.input_large, .description td.value input {
+	font-size: 18px;
+	line-height: 28px;
+}
+

@@ -1,0 +1,74 @@
+<h1>Suspended Riders</h1>
+
+[% var_COUNT = 0 %]
+[% var_STATE_COUNT = 0 %]
+[% var_STYLE = 'even' %]
+[% var_STATE = '' %]
+
+[% FOREACH m = ReportData %]
+	[% IF m.intNatCustomBool1 == 1 %]
+		[% m.intNatCustomBool1 = 'Yes' %]
+	[% ELSE %]
+		[% m.intNatCustomBool1 = 'No' %]
+	[% END %]
+	[% IF m.intNatCustomBool2 == 1 %]
+		[% m.intNatCustomBool2 = 'Yes' %]
+	[% ELSE %]
+		[% m.intNatCustomBool2 = 'No' %]
+	[% END %]
+  [% IF m.intRecStatus == 1 %]
+    [% m.intRecStatus = 'Active' %]
+  [% ELSE %]
+    [% m.intRecStatus = 'Inactive' %]
+  [% END %]
+	[% IF m.strName != var_STATE %]
+	[% IF var_COUNT > 0 %]
+    </tbody>
+    <tfoot>
+      <th colspan = "17"><span class="report-daterun">Report Run [% DateRun %] - [% var_STATE_COUNT %] records found</span></th>
+    </tfoot>
+	</table>
+  [% END %]
+
+<table class="report-table">
+  <caption>
+    <h1>[% m.strName %]</h1>
+  </caption>
+  <thead>
+  <tr>
+    <th>National Number</td>
+    <th>First Name</td>
+    <th>Last Name</td>
+    <th>Date of Birth</td>
+    <th>Suspended</td>
+    <th>Medical Suspension</td>
+    <th>Status</td>
+  </tr>
+  </thead>
+  <tbody>
+	[% var_STATE_COUNT = 0 %]
+	[% END %]
+	<tr class='[% var_STYLE %]'>
+ 		<td>[% m.strNationalNum %]</td>
+		<td>[% m.strFirstName %]</td>
+		<td>[% m.strLastName %]</td>
+		<td>[% m.dtDOB %]</td>
+		<td>[% m.intNatCustomBool1 %]</td>
+		<td>[% m.intNatCustomBool2 %]</td>
+		<td>[% m.intRecStatus %]</td>
+	</tr>
+	[% var_COUNT = var_COUNT + 1 %]
+	[% var_STATE_COUNT = var_STATE_COUNT + 1 %]
+	[% IF var_STYLE == 'odd' %]
+		[% var_STYLE = 'even' %]
+	[% ELSE %]
+		[% var_STYLE = 'odd' %]
+	[% END %]
+	[% var_STATE = m.strName %]
+[% END %]
+  </tbody>
+  <tfoot>
+    <th colspan = "17"><span class="report-daterun">Report Run [% DateRun %] - [% var_STATE_COUNT %] records found</span></th>
+  </tfoot>
+</table>
+

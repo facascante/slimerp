@@ -1,0 +1,392 @@
+[% WRAPPER membercard/MemberCard_Wrapper.templ %]
+
+
+<style>
+body {
+	padding: 0px;
+	margin: 0px;
+}
+
+#wrap {
+	width: 910px;
+	height: 1290px;
+}
+
+.header {
+	float:left;
+	height:174px;
+	width:794px;
+	background-image: url(formimages/fnc_nsw_futsal.gif);
+	background-repeat: no-repeat;
+}
+
+.regnum {
+	float:right;
+	height:20px;
+	margin-right:60px;
+	margin-top:140px;
+	text-align:center;
+	width:190px;
+	color:#ffffff;
+}
+
+.regnum input {
+	width: 170px;
+	height: 18px;
+	font-size: 10px;
+	text-align: center;
+	font-weight: bold;
+	color: #005DAB;
+	border: none;	
+}
+.leftcolwrap {
+	display:inline;
+	float:left;
+	height:1000px;
+	margin:5px 10px 40px 30px;
+	width:380px;
+}
+.leftcoltop {
+	display: inline;
+}
+.leftcolbottom {
+	background-image: url(formimages/ffa/leftbottom.gif);
+	width:300px;	
+	float:left;	
+	margin-top:5px;	
+}
+.date {
+	float:left;
+	margin-left:70px;
+	margin-top:25px;
+	width:100px;
+}
+.entered {
+	float:left;
+	margin-left:50px;
+	margin-top:25px;
+	width:180px;
+}
+.rightcolwrap {
+	display:inline;
+	float:left;
+	height:1000px;
+	margin: 5px 0px 40px 0px;
+	width:355px;
+}
+.rightcoltop {
+	width:355px;
+	float:left;
+	display: inline;
+}
+.rightcolbottom {
+	background-image: url(formimages/ffa/rightbottom.gif);
+	width:395px;
+	float:left;	
+	height: 240px;
+	margin-top: 10px;
+	background-repeat: no-repeat;
+	display: inline;
+}
+.year {
+	float:left;
+	margin-left:190px;
+	margin-top:25px;
+	width:50px;
+	display:inline;
+}
+
+.year input {
+	width: 48px;
+	height: 18px;
+	font-size: 10px;
+	text-align: center;
+	font-weight: bold;
+	color: #005DAB;
+}
+.ffa {
+	float:left;
+	margin-left:-75px;
+	margin-top:92px;
+	width:115px;
+	height: 25px;
+	display: inline;
+}
+
+.ffa input {
+	width: 110px;
+	height: 18px;
+	font-size: 14px;
+	text-align: center;
+	border: none;
+	font-weight: bold;
+	color: #005DAB;
+}
+
+.dob {
+	float:left;
+	margin-left:160px;
+	margin-top:14px;
+	width:170px;
+	display: inline;
+}
+
+.dob input {
+	width: 150px;
+	height: 18px;
+	font-size: 10px;
+	text-align: center;
+	border: none;
+	font-weight: bold;	
+	color: #005DAB;
+}
+
+.psign {
+	float:left;
+	margin-left:25px;
+	margin-top:10px;
+	width:350px;
+	height: 34px;
+	display: inline;
+}
+.pname {
+	float:left;
+	margin-left:85px;
+	margin-top:16px;
+	width:290px;
+	display: inline;
+}
+
+.pname input {
+	width: 280px;
+	height: 18px;
+	font-size: 10px;
+	text-align: center;
+	border: none;
+	font-weight: bold;	
+	color: #005DAB;
+}
+
+label {
+	color:#000000;
+	font-family:arial;
+	font-size:11px;
+	font-weight:bold;
+	float: left; width:60px; margin-right:70px; margin-bottom:12px; text-align: left;
+}
+
+p {
+	color:#000000;
+	font-family:arial;
+	font-size:11px;
+	font-weight:bold;
+	clear:both;
+	text-align:left;
+	margin: 2px 0px;
+}
+h2 {
+	color:#000000;
+	font-family: Arial;
+	font-size:15px;
+	font-weight:bold;
+	clear: both;
+	margin: 2px 0;
+}
+
+h6 {
+	margin: 0px; 
+	color:#000000; 
+	font-family:arial; 
+	font-size:11px; 
+	font-weight:bold; 
+	clear:both;
+	text-align:left;
+	 margin-left: 5px;
+}
+
+.rowc {
+	text-align:left; 
+	margin: 2px 0; 
+	clear:both; 
+	padding: 2px 0; 
+	float:left; 
+	width: 370px; 
+	border-bottom: 1px solid #CCC;
+}
+
+.rowc label {
+	float:left; 
+	margin-bottom:6px; 
+	margin-right:30px; 
+	text-align:left; 
+	width:170px; 
+}
+
+span.rowc-label {
+	font-weight:bold;
+}
+
+.rowc input {
+	text-align:left; 
+	margin:5px; 
+	margin-bottom:2px; 
+	clear:both;
+}
+
+.rowc label p {}
+
+.state label {
+	float:left; 
+	margin-bottom:12px; 
+	margin-right:20px; 
+	text-align:left; 
+	width:60px; 
+}
+
+.state input {
+	text-align:left; 
+	margin:5px; 
+	margin-bottom:10px; 
+	clear:both; 
+	width:100px;
+}
+
+.state {
+	float: left; 
+	clear: none; 
+	width: 190px;
+}
+
+.sign label {
+	float:left; 
+	margin-bottom:12px; 
+	margin-right:20px; 
+	text-align:left; 
+	width:60px; 
+}
+
+.sign input {
+	text-align:left; 
+	margin-bottom:2px; 
+	clear:both; 
+	width:180px;
+}
+
+.sign {
+	float: left; 
+	clear: none; 
+	width: 190px;
+}
+
+.signtext {
+	margin-top: 10px; 
+	float: left; 
+	width:400px;
+}
+
+p.small-text {
+	font-size:9px;
+	clear:none;
+	margin:0;
+}
+
+input[type="checkbox"]{
+	width:0px;
+}
+
+.long label, .long h6 {
+	width: 400px;
+}
+
+.rightcolwrap .rowc {
+	width: 370px;
+}
+
+.check input {
+	float:left;
+}
+
+.check h6 {
+	clear:none;
+}
+
+</style>
+[% FOREACH m = Members %]
+
+<div id="wrap">
+<div class="header"><div class="regnum">[% m.strMemberNo %]</div></div>
+	<div class="leftcolwrap">
+		<div class="leftcoltop">
+		<h2>PLAYER DETAILS</h2>
+		<form>
+		<div class="rowc"><label for="title">1. Title</label></div>
+		<div class="rowc"><label for="firstname">2. First name </label>[% m.strFirstname %]</div>
+		<div class="rowc"><label for="middlename">3. Middle name </label>[% m.strMiddlename %]</div>
+		<div class="rowc"><label for="lastname">4.Last name </label>[% m.strSurname %]</div>
+		<div class="rowc"><label for="dob">5. Date of birth </label>[% m.dtDOB %]</div>
+		<div class="rowc"><label for="agegroup">6. Age Group </label> </div>
+		<div class="rowc"><label for="Gender">7. Gender </label> [%IF m.intGender  == 1 %]Male[% ELSIF m.intGender == 2 %]Female[% END %]</div>
+		<div class="rowc"><label for="Street">8. Street/Mailing address </label> [% m.strAddress1 %]<br>[% m.strAddress2 %]</div>		
+		<div class="rowc"><label for="Suburb">	Suburb </label> [% m.strSuburb %]</div>
+		<div class="rowc state"><label for="State">	State </label> [% m.strState %]</div>
+		<div class="rowc state"><label for="postcode">	Post code </label> [% m.strPostalCode %]</div>
+		<div class="rowc med"><label for="disability1">9. If you have a disability please specify </label> [% DefCodes.item(m.intNatCustomLU3) %]</div>
+		<p>10. Player contact phone/email <span style="font-size:10px;font-style:italic;">(please provide at least one phone number)</span></p>
+		<div class="rowc state"><label for="hm">home</label> [% m.strPhoneHome %]</div>
+		<div class="rowc "><label for="mobile">mobile</label> [% m.strPhoneMobile %]</div>
+		<div class="rowc"><label for="email">	email </label> [% m.strEmail %]</div>
+		<p>11. Emergency contact </p>
+		<div class="rowc"><label for="name">	name </label> [% m.strEmergContName %]</div>
+		<div class="rowc"><label for="phone">	phone </label> [% m.strEmergContNo %]	</div>		
+		<div class="rowc"><label for="mobile">	mobile </label> [% m.strEmergContNo2 %]		</div>
+		</form> 
+		<h2>REGISTRATION DETAILS</h2>
+		<form>
+		<div class="rowc"><label for="club">12. Name of Club </label> [% m.Clubs.0.strName %] [% m.Clubs.1.strName %] [% m.Clubs.2.strName %]</div>
+		<div class="rowc"><label for="assoc">13. Association </label> [% m.strAssocName %]</div>
+		<div class="rowc"><label for="register">14. Registering to play </label>[% DefCodes.item(m.intCustomLU2) %]</div>
+		<div class="rowc"><label for="prevclub">15. Previous Club </label> [% m.strCustomStr4 %]</div>
+		</form> 
+		</div>
+	</div>
+	<div class="rightcolwrap">
+		<div class="rightcoltop">
+		<h2>PARENT DETAILS</h2><p>(to be completed if player is under the age of 18 years)</p>
+		<form>
+		<div class="rowc"><label for="title2">16. Title </label> [% m.strP1Salutation %]</div>
+		<div class="rowc"><label for="firstname2">17. First name </label> [% m.strP1FName %]</div>
+		<div class="rowc"><label for="lastname2">18. Last name </label> [% m.strP1SName %]</div>
+		<div class="rowc"><label for="Gender2">19. Gender </label> [%IF m.intP1Gender  == 1 %]Male[% ELSIF m.intP1Gender == 2 %]Female[% END %]</div>
+		<p>20. Parent Cconract phone/email <br> (please provide at least one phone number)</p>
+		<div class="rowc state"><label for="hm2">Home</label> [% m.strP1Phone %]</div>
+		<div class="rowc"><label for="mobile2">Mobile </label> [% m.strP1PhoneMobile %]</div>
+		<div class="rowc"><label for="email2">Email</label> [% m.strP1Email %]</div>
+		</form> 
+		<h2>FOOTBALL CLUB REGISTRATION DETAILS</h2>
+		<form>
+		<div class="rowc"><label for="student">21. Are you a current FFNC registered winter football player?</label> </div>
+		<div class="rowc long"><label for="schoolname">	22. If yes to which club are you registered to?</label> <br><br></div>
+		<h2>FEES</h2>
+		<div class="rowc long"><label for="playschool">23. Registration Fee</label></div>
+		<div class="rowc long"><label for="playschool">Games Fees</label></div>
+		<div class="rowc long"><label for="playschool">Total Fees</label></div>
+		</form>	
+		<h2>SIGNING</h2>
+		<h6 style="margin-bottom: 5px;"><i>The Club and the Player as listed above apply to the FNC NSW Futsal tp register the player with that Club as an AMATEUR PLAYER.<br>
+			By Signing this Form, the player (or if the Player is under 18 years of age at the time of signing the Form, that Player's parent or legal guardian) agrees to comply with the Terms (as specified overleaf) and its incorporated documents, including the FFA Statutes and Spectator Code of Behaviour.</i></h6>
+		<form>
+		<div class="sign long"><input type="text" name="playersign"/><h6>(Signature of Player or Parent/Legal Guardian)</h6></div>
+		<div class="sign"><h6>[% m.dtCustomDt1 %]</h6></div>
+		<div class="signtext"><h6>By signing this form, the Club warrants that it has confirmed the Player's name and identity.</h6></div>
+		<div class="sign"><input type="text" name="clubnamesign"/><h6>(Name of Club Representative)</h6></div>
+		<div class="sign">[% IF m.intCustomBool2 %]Yes[% ELSE %]No[% END %]<h6>(Signature of Club Representative)</h6></div>
+		<div class="sign"><input type="text" name="clubsignpos"/><h6>(Position of Club Representative)</h6></div>
+		<div class="sign">[% m.dtCustomDt2 %]<h6>(date)</h6></div>
+		<div class="signtext check"><input type="checkbox" name="offers" [% IF intMailingList != 0 %] CHECKED [% END %]><h6>I do NOT want to recieve special offers from Football Administrators partners</h6></div>
+		</form>
+		</div>
+	</div>
+</div>
+<div id="termspage"><img src="formimages/fnc_nsw_futsal_tc.gif" /></div>
+[% END %]
+[% END %]

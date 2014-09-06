@@ -1,0 +1,50 @@
+08-30 12:40:24 pageStore: Transaction log could not be truncated; size: 16 MB
+08-31 09:33:52 jdbc[5]: null
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-168]
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.message.DbException.get(DbException.java:135)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:172)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:119)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:92)
+	at org.h2.Driver.connect(Driver.java:72)
+	at org.h2.jdbcx.JdbcDataSource.getJdbcConnection(JdbcDataSource.java:181)
+	at org.h2.jdbcx.JdbcDataSource.getXAConnection(JdbcDataSource.java:315)
+	at org.h2.jdbcx.JdbcDataSource.getPooledConnection(JdbcDataSource.java:341)
+	at org.h2.jdbcx.JdbcConnectionPool.getConnectionNow(JdbcConnectionPool.java:226)
+	at org.h2.jdbcx.JdbcConnectionPool.getConnection(JdbcConnectionPool.java:199)
+	at org.eclipse.dltk.internal.core.index.sql.h2.H2DbFactory.createConnection(H2DbFactory.java:145)
+	at org.eclipse.dltk.internal.core.index.sql.SqlIndexer.indexDocument(SqlIndexer.java:96)
+	at org.eclipse.dltk.internal.core.index2.AddSourceModuleRequest.run(AddSourceModuleRequest.java:47)
+	at org.eclipse.dltk.core.search.indexing.AbstractJob.execute(AbstractJob.java:76)
+	at org.eclipse.dltk.internal.core.search.processing.JobManager.run(JobManager.java:467)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.h2.jdbc.JdbcSQLException: The connection was not closed by the application and is garbage collected [90018-168]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	... 18 more
+09-06 17:07:22 jdbc[4]: null
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-168]
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.message.DbException.get(DbException.java:135)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:172)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:119)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:92)
+	at org.h2.Driver.connect(Driver.java:72)
+	at org.h2.jdbcx.JdbcDataSource.getJdbcConnection(JdbcDataSource.java:181)
+	at org.h2.jdbcx.JdbcDataSource.getXAConnection(JdbcDataSource.java:315)
+	at org.h2.jdbcx.JdbcDataSource.getPooledConnection(JdbcDataSource.java:341)
+	at org.h2.jdbcx.JdbcConnectionPool.getConnectionNow(JdbcConnectionPool.java:226)
+	at org.h2.jdbcx.JdbcConnectionPool.getConnection(JdbcConnectionPool.java:199)
+	at org.eclipse.dltk.internal.core.index.sql.h2.H2DbFactory.createConnection(H2DbFactory.java:145)
+	at org.eclipse.dltk.internal.core.index.sql.SqlSearchEngine.search(SqlSearchEngine.java:66)
+	at org.eclipse.dltk.core.index2.search.ModelAccess.findElements(ModelAccess.java:285)
+	at org.eclipse.dltk.core.index2.search.ModelAccess.findElements(ModelAccess.java:263)
+	at org.eclipse.dltk.core.index2.search.ModelAccess.findMethods(ModelAccess.java:137)
+	at org.eclipse.php.internal.core.model.PhpModelAccess.findMethods(PhpModelAccess.java:64)
+	at org.eclipse.php.internal.core.PHPCorePlugin.initializeAfterLoad(PHPCorePlugin.java:415)
+	at org.eclipse.php.internal.ui.InitializeAfterLoadJob$RealJob.run(InitializeAfterLoadJob.java:29)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: org.h2.jdbc.JdbcSQLException: The connection was not closed by the application and is garbage collected [90018-168]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	... 21 more

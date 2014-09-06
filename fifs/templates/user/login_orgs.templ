@@ -1,0 +1,51 @@
+<div class="link-account-page">
+[% IF AuthData.size %]
+[% IF ResultsEntry %]
+<div class="results-org-list">
+<h2 class="not-mobile"><span class="sp-membership">SP Online Results</span> Accounts</h2>
+<p class="auth-intro">[% Lang.txt("Select the") %] <span class="sp-membership">[% Lang.txt("SP Online Results") %]</span> [% Lang.txt("account you would like to access from the list below.") %]</p>
+[% ELSE %]
+<h2><span class="sp-membership">[% Lang.txt("SP Membership") %]</span> [% Lang.txt("Accounts") %]</h2>
+<p class="auth-intro">[% Lang.txt("Select the") %] <span class="sp-membership">[% Lang.txt("SP Membership") %]</span> [% Lang.txt("account you would like to access from the list below.") %]</p>
+[% END %]
+<div class = "org-list">
+[% FOREACH a IN AuthData %]
+	<div class = "org-list-entry">
+		<a href ="[% a.URL %]" class="org-link-wrap">
+			<span class="org-logo">[% a.Logo %]</span>
+			<span class="org-text-wrap">
+				<span class="org-name ">[% a.Name %]</span>
+				[% IF a.AssocName %]
+	    		<span class="org-assoc-name ">[% a.AssocName %]</span>
+	    	    [% END %]
+				[% IF a.CompName %]
+	    		<span class="org-type">[% a.CompName %]</span>
+	    	    [% END %]
+	    	<span class ="org-type">[% a.LevelName %]</span>
+	    	[% IF NumberOfRealms > 1 %]
+	    		<span class ="org-realm">[% a.Realm %]</span>
+	    	[% END %]
+			</span>
+		</a>
+	</div>
+[% END %]
+</div>
+[% ELSE %]
+
+<p class="auth-intro">[% Lang.txt("You currently have no linked") %] <span class="sp-membership">[% IF ResultsEntry %][% Lang.txt("SP Online Results") %][% ELSE %][% Lang.txt("SP Membership") %][% END %]</span> [% Lang.txt("accounts to your") %] <span class="sp-passport">[% Lang.txt("SP Passport") %]</span>.</p>
+
+[% END %]
+<p class="auth-intro">[% Lang.txt("If you'd like to link to another database to this page please contact the administrator for the organisation you desire to be added to and ask them to add you in") %] <a href="https://sportingpulse.zendesk.com/entries/21987142-Membership-Manage-User-Access-to-your-Database" target="_BLANK">[% Lang.txt("User Management") %]</a>.</p>  
+</div>
+  <script>
+    // When ready...
+	if(window.addEventListener) {
+    	    window.addEventListener("load",function() {
+    	      // Set a timeout...
+    	     setTimeout(function(){
+    	       // Hide the address bar!
+    	       window.scrollTo(0, 1);
+   	     }, 0);
+   	    }); 
+}
+  </script>

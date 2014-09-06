@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block styles %}
+    <h1>{{sample}}</h1>
+{% endblock %}
+{% block content %}
+    <h1>{{sample}}</h1>
+{% endblock %}
+{% block scripts %}
+    <script>alert("ace tanga")</script
+{% endblock %}

@@ -1,0 +1,57 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="https://reg.sportingpulse.com/v5/css/style.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+	[% headerImage %]
+	<div id="site-wrap" style="padding-left:20px;">
+<br><br>
+		<div id="bodycontent">
+<div style="font-size:14px;color:red;"><b>There was an Error with your Payment.</b></div>
+<div style="font-size:14px;color:red;"><b>See below for details, please close this window and click <b>Pay Now</b> to try again</b></div>
+<br><br>
+				<table class="confirm-intro">
+				<tbody>
+					<tr>
+						<td>Error:</td>
+						<td><b>[% strResponseText %]</b></td>
+					</tr>
+					<tr>
+						<td>Amount:</td>
+						<td>\$[% intAmount %]</td>
+					</tr>
+					<tr>
+						<td>Payment for:</td>
+						<td>[% AssocName %] [% ClubName %]</td>
+					</tr>
+					<tr>
+						<td>Payment ID:</td>
+						<td>[% intLogID %]</td>
+					</tr>					
+				</tbody>
+				</table>
+						<br><br>
+		</div>
+	</div>
+<br><br><br><br>
+<div id="footer-links">
+        <div class="footer-nav">
+                <a class="footer-nav-item gd" title="GameDay.com.au" alt="GameDay.com.au" href="http://www.gameday.com.au/" target="_blank"></a>
+                <a class="footer-nav-item sp" title="SportingPulse.com" alt="SportingPulse.com" href="http://www.sportingpulse.com/" target="_blank"></a>
+                <a class="footer-nav-item au" title="About Us" alt="About Us" href="http://corp.sportingpulse.com/index.php?id=6" target="_blank"></a>
+                <a class="footer-nav-item ad" title="Advertise" alt="Advertise" href="http://corp.sportingpulse.com/index.php?id=55" target="_blank"></a>
+                <a class="footer-nav-item cu" title="Contact Us" alt="Contact Us" href="http://corp.sportingpulse.com/index.php?id=66" target="_blank"></a>
+                <a class="footer-nav-item s" title="Support" alt="Support" href="http://support.sportingpulse.com/" target="_blank"></a>
+                <a class="footer-nav-item pr" title="Privacy" alt="Privacy" href="http://corp.sportingpulse.com/index.php?id=75" target="_blank"></a>
+                <a class="footer-nav-item se" title="Search" alt="Search" href="http://sport.gameday.com.au/index.php?id=103" target="_blank"></a>
+        </div>
+        <div class="sp-logo">
+                <a class="ps" title="Powered by SportingPulse" alt="Powered by SportingPulse" href="http://www.sportingpulse.com/" target="_top"></a>
+        </div>
+</div>
+<div class="copyright">[% Copyright %]</div>
+        <div id = "dialogform"></div>
+</div>
+</body>
+</html>

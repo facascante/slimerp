@@ -1,0 +1,246 @@
+[% TopText %]
+
+[% IF CompulsoryPayment %]
+<div class = "compulsorypaymentwarning">
+    <p>To complete this process you will need to pay online via credit card.</p>
+    <p>Please have your Visa or Mastercard ready.</p>
+</div>
+[% END %]
+
+[% IF Errors.size %]
+<div class = "warningmsg">
+    <ul>
+        [% FOREACH error IN Errors %]
+        <li>[% error %]</li>
+        [% END %]
+    </ul>
+</div>
+[% END %]
+
+<script type="text/javascript" src = "js/regoformfrontpage.js"></script>
+[% ShowNewMembers = 1 %]
+[% IF SystemNoNewMembers%][% ShowNewMembers = 0 %][% END %]
+[% IF AllowNewRegos == 2 %][% ShowNewMembers = 0 %][% END %]
+[% IF HideNewButton == 1 %][% ShowNewMembers = 0 %][% END %]
+[% IF HideNewButton == 3 %][% ShowNewMembers = 0 %][% END %]
+
+<h3>Please select a registration method:</h3>
+
+[% IF PassportID %]
+<div class="option no-hover">
+<!-- Passport -->
+    <h4>Register a person already attached to your Passport</h4>
+    <p>The people below are attached to your Passport. Select one from the drop down to register them.</p>
+    <form method="post" action="[% Target %]" enctype="multipart/form-data">
+        <input type="hidden" name="rfp" value="vt">
+        <input type="hidden" name="a" value="LOGIN">
+        [% HiddenFields %]
+        <select name="d_ppmID" onChange="this.form.submit()">
+            <option>Select a person</option>
+            [% FOREACH member IN PassportEntities %]
+            <option value="[% member.id %]">[% member.name %]</option>
+            [% END %]
+        </select>
+    </form>
+ <!--
+    <ul>
+        [% FOREACH member IN PassportEntities %]
+        <li>[% IF member.problem %]<span class = "rf_pp_m_unavailable">[% member.name %]</span>&nbsp;-&nbsp;[% member.problem %][% ELSE %]<a href = "[% Target %]?rfp=vt&amp;a=LOGIN&amp;d_ppmID=[% member.id %]&amp;[% HiddenFieldsString %]">[% member.name %]</a>[% END %]</li>
+        [% END %]
+    </ul>
+---!>
+</div>
+
+[%IF ShowNewMembers %]
+<a class="option" href="[% Target %]?rfp=vt&amp;a=NEW&amp;[% HiddenFieldsString %]">
+    <h4>Register as a new person</h4>
+    <p>You are registering for the first time or wish to add a new person to your SP Passport.</p>
+</a>
+[% END %]
+
+[%IF AllowNewRegos != 3 %]
+<div class="option accordianheader inactivebar" id="existinghdr">
+    <h4>[% ReturningRegoTitle_CLUB %]</h4>
+</div>
+
+<div id="existingmember" class="accordianblock" style="display:none;">
+<form method="post" action="[% Target %]" enctype="multipart/form-data">
+    <input type="hidden" name="rfp" value="vt">
+    <input type="hidden" name="a" value="LOGIN">
+    [% HiddenFields %]
+    [% IF EnableMyProfile %]
+    <p>Please enter your passport email address and password below.</p>
+    <table border="0" cellspacing="0" cellpadding="2" class="rego-form-table">
+        <tr>
+            <td class="label">Email:</td> 
+            <td class="value"><input name="email" type="text" value=""></td>
+        </tr> 
+        <tr>
+            <td class="label">Password:</td> 
+            <td class="value"><input name="password" type="password" value=""></td>
+        </tr> 
+    </table>
+    [% ELSE %]
+    <p>Please enter your username and password below.</p>
+    <table border="0" cellspacing="0" cellpadding="2" class="rego-form-table">
+        <tr>
+            <td class="label">Username:</td> 
+            <td class="value"><input name="d_username" type = "text" value=""></td>
+        </tr> 
+        <tr>
+            <td class="label">Password:</td> 
+            <td class="value"><input name="d_password" type = "password" value=""></td>
+        </tr> 
+    </table>
+    [% END %]
+    <input name="submit" type="submit" value="Continue" class="button proceed-button">
+</form>
+</div>
+
+<div class="option accordianheader inactivebar" id="remindhdr">
+    <h4>I would like to request my username and password</h4>
+</div>
+<div id="forgottenpassword" style="display:none;" class="accordianblock">
+<form method="post" action="[% Target %]" enctype="multipart/form-data">
+    [% HiddenFields %]
+    <input type="hidden" name="a" value="PWD">
+    <input type="hidden" name="rfp" value="vt">
+    <p>Please enter your email address below</p>
+    <table class="rego-form-table" border="0" cellspacing="0" cellpadding="2">
+    <tr>
+        <td class="label">Email Address:</td>
+        <td class="value"><input type="text" value="" name="emailaddress" size="50"></td>
+    </tr>
+    </table>
+    <p>When you click <span class="bold">Send me my Username and Password</span> you will receive an email with all usernames and passwords that are assigned to this emails address.<br> Please make sure that you have allowed incoming email from sportingpulse.com, and check your junk mail for your password reminder.  </p>
+    <input name="submit" type="submit" value="Send me my Username and Password" class="button proceed-button">
+
+    <p class="p-note"><b>Please Note:</b> This will only be successful if the email address entered is already in the database.</p>
+</form>
+</div>
+[% END %]
+
+
+[% ELSE %]
+<!-- No Passport -->
+[% IF MultipleMemberNumber == 1 %]
+<div style = "border:1px solid #666">
+    <p>No Passport - you should get one - really nice</p>
+    <p>
+        <a href = "[% PassportLoginURL %]">Login</a>
+        <a href = "[% PassportSignupURL %]">Signup</a>
+    </p>
+</div>
+[% END %]
+
+[%IF AllowNewRegos != 3 %]
+<div class="accordianheader inactivebar" id="existinghdr">
+    <div class="baricon"></div>
+    [% ReturningRegoTitle_CLUB %]
+    <div class="barend"></div>
+</div>
+
+<div id="existingmember" class="accordianblock" style="display:none;">
+<form method="post" action="[% Target %]" enctype="multipart/form-data">
+    <input type="hidden" name="rfp" value="vt">
+    <input type="hidden" name="a" value="LOGIN">
+    [% HiddenFields %]
+    <p>Please enter your username and password below.</p>
+    <table border="0" cellspacing="0" cellpadding="2">
+        <tr>
+            <td class="label">Username:</td> 
+            <td class="value"><input name="d_username" type = "text" value=""></td>
+        </tr> 
+        <tr>
+            <td class="label">Password:</td> 
+            <td class="value"><input name="d_password" type = "password" value=""></td>
+        </tr> 
+    </table>
+    <input name="submit" type="submit" value="Continue" class="continue-btn">
+</form>
+</div>
+
+<div class="accordianheader inactivebar" id="remindhdr">
+    <div class="baricon"></div>
+    I would like to request my username and password
+    <div class="barend"></div>
+</div>
+
+<div id="forgottenpassword" style="display:none;" class="accordianblock">
+<form method="post" action="[% Target %]" enctype="multipart/form-data">
+    [% HiddenFields %]
+    <input type="hidden" name="a" value="PWD">
+    <input type="hidden" name="rfp" value="vt">
+    <p>Please enter your email address below</p>
+    <p> <b>Email Address</b>&nbsp;<input type="text" value="" name="emailaddress" size="50"> </p>
+    <p>When you click <b>Continue</b> you will receive an email with all usernames and passwords that are assigned to this email address.</p>
+    <p>If you don't receive the email, please remember to check your junk mail for your password reminder. It comes from "DoNotReply" and the Subject is "Password reminder for Your League Name"</p>
+    <input name="submit" type="submit" value="Continue" class="continue-btn">
+
+    <p>PLEASE NOTE: This will only be successful if the email address entered is already in the database.</p>
+</form>
+</div>
+
+[% END %]
+
+[%IF ShowNewMembers %]
+<div class="accordianheader inactivebar" id="newhdr1">
+    <div class="baricon"></div>
+    [% NewRegoTitle_Club  %]
+    <div class="barend"></div>
+</div>
+
+<div id="newmember" class="accordianblock" style="display:none;">
+    <form method="post" action="[% Target %]" enctype="multipart/form-data">
+        <input type="hidden" name="rfp" value="vt">
+        <input type="hidden" name="a" value="NEW">
+        [% HiddenFields %]
+        [% IF ClubID %]
+        <p><span class="bold">[% ClubName %]</span></p>
+        [% ELSE %]
+        <p>
+        <select name="clubID" >
+            [% FOREACH club IN ClubList %]
+            <option value ="[% club.intClubID %]">[% club.strName %]</option>
+            [% END %]
+        </select>
+        </p>
+        [% END %]
+        <p>[% NewMemberText %]</p>
+        <input name="submit" type="submit" value="Next" class="button proceed-button">
+    </form>
+</div>
+[% END %]
+
+[%IF SystemNewCodeRequired and AllowNewRegos != 2 and HideNewButton != 2 and HideNewButton != 3 %]
+<div class="accordianheader inactivebar" id="newhdr2">
+    <div class="baricon"></div>I have a New Registration Code from the PlayAFL system given to me by a Club<div class="barend"></div>
+</div>
+
+<div id="newmember" class="accordianblock"  style="display:none;">
+<form method="post" action="[% Target %]" enctype="multipart/form-data">
+    [% HiddenFields %]
+    <input type="hidden" name="rfp" value="vt">
+    <input type="hidden" name="UseNewCode" value="1">
+    <table border="0" cellspacing="0" cellpadding="2" class="rego-form-table">
+        <tr>
+            <td class="label">New Individual Code:</td> 
+            <td class="value"><input name="newCode" type = "text" value = ""></td>
+        </tr>
+    </table>
+    [% NewCodeText %]
+    <input name="submit" type="submit" value="Next" class="button proceed-button">
+</form>
+</div>
+[% END %]
+
+[% END %]
+
+[% IF CartMembers %]
+<div><b>Member transactions waiting to be paid for your current session:</b></div>
+<ul>
+    [% FOR m IN CartMembers %]
+    <li>[% m.FirstName %] [% m.Surname %] ([% m.Type %])</li>
+    [% END %]
+</ul>
+[% END %]

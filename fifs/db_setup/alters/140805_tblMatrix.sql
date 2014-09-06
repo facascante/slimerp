@@ -1,0 +1,1 @@
+ALTER TABLE tblMatrix ADD COLUMN intOfEntityLevel TINYINT DEFAULT 0;

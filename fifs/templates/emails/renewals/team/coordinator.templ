@@ -1,0 +1,16 @@
+<p>Hi [% TeamContact %],</p>
+
+[% IF !editable_1 %]
+    <p class="editable" id="editable_1">[% AssocName %] is starting our new competition [% IF StartDate %]on [% StartDate %][% ELSE %]soon[% END %].
+
+We want to make sure your team is registered so we have made it even easier for you to join our competition.</p>
+[% ELSE %]
+    <p>[% editable_1 %]</p>
+[% END %]
+
+<p>We have prepared an online registration form and we can also accept online payment via credit card.</p>
+
+<p>Click <a href="[% SignupURL %]">here</a> to commence the registration process.</p>
+
+<p>[% AssocName %]</p>
+

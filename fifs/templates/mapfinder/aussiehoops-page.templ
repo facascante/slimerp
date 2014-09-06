@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6 no-js" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7 no-js" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8 no-js" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="ie ie9 no-js" lang="en"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>[% Title %]</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+	[% IF CSS %]<link rel="stylesheet" type="text/css" href="css/[% CSS %]">[% END %]
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<script type="text/javascript">
+		var json_data = [% json_file %];
+		var infowindow = null;
+        var markerNum;
+		var markers = [];
+        var iconImageURL = '../images/numbers/ah/';
+        var programName= '';
+		
+		var infoWnd, mapCanvas, station;
+		[% IF json_file != '[]' %]
+
+			function initialize() {
+				//Creates a map object.
+				var mapDiv = document.getElementById("map_canvas");
+				mapCanvas = new google.maps.Map(mapDiv);
+				mapCanvas.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+            
+				//Creates a infowindow object.
+				infoWnd = new google.maps.InfoWindow();
+
+				//Mapping markers on the map
+				var bounds = new google.maps.LatLngBounds();
+				var station, i, latlng;
+
+				for (i in json_data) {
+				//Creates a marker
+				station = json_data[i];
+				latlng = new google.maps.LatLng(station.lat, station.lng);
+				bounds.extend(latlng);
+				var marker = createMarker(
+				  mapCanvas, latlng, station.name, station.rank
+				);
+
+				//Creates a sidebar button for the marker
+				createMarkerButton(marker);
+				}
+				//Fits the map bounds
+				mapCanvas.fitBounds(bounds);
+                var listener = google.maps.event.addListener(mapCanvas, "idle", function() {
+                if (mapCanvas.getZoom() > 16) mapCanvas.setZoom(12);
+                    google.maps.event.removeListener(listener);
+                });
+			}
+			
+		[% ELSE %]
+			jQuery(function() {
+				jQuery('#map_canvas').before("<div id='intro_popup'></div>");
+			});
+			
+			function initialize() {
+			  var mapOptions = {
+				zoom: 4,
+				center: new google.maps.LatLng(-25.901820984476252, 134.00135040279997)
+			  };
+			  var mapDiv = document.getElementById('map_canvas');
+			  var map = new google.maps.Map(mapDiv, mapOptions);
+			}	
+		[% END %]
+
+		function createMarker(map, latlng, title, rank) {
+			//Creates a marker
+			var marker = new google.maps.Marker({
+				position : latlng,
+				map : map,
+				id : 'mk_' + rank,
+				icon : iconImageURL + (rank + 1) + '.png',
+				title : title
+			});
+
+			var contentString = '<div id="content">'+
+			  '<div id="firstHeading" class="firstHeading"><span class="letter">'+ (rank + 1) + '</span><span class="program-title">' + title + '</span><span class="program-size-wrap">' + (jQuery('#row_' + rank  + ' .location-btn-wrap .program-size').html() || '') + '</span></div>' +
+			  '<div id="bodyContent">' + (jQuery('#row_' + rank  + ' .location-btn-wrap').html() || '') +
+			  '</div>'+
+			  '</div>'; 
+
+			//The infoWindow is opened when the sidebar button is clicked
+			google.maps.event.addListener(marker, "click", function(){
+                if (markerNum) {
+                    //markerNum.setIcon(iconImageURL + (rank + 1)  + '.png');
+                }
+                infoWnd.close();
+				infoWnd.setContent(contentString);
+				infoWnd.open(map, marker);
+                //marker.setIcon('../images/ba-pin.png');
+                markerNum = marker;
+			});
+			return marker;
+		}
+
+		function createMarkerButton(marker) {
+			//Creates a sidebar button
+
+			var ul = document.getElementById("marker_list");
+			var li = document.createElement("li");
+			var title = marker.getTitle();
+			li.innerHTML = title;
+			ul.appendChild(li);
+
+			//Trigger a click event to marker when the button is clicked.
+			google.maps.event.addDomListener(li, "click", function(){
+				google.maps.event.trigger(marker, "click");
+			});
+		}
+
+		google.maps.event.addDomListener(window, "load", initialize);
+
+		jQuery(document).on('click', '.finder_more_info_btn', function (event) {
+			var id = jQuery(this).attr('id');
+			jQuery('#dialogform').empty();
+			jQuery('#dialogform').append(jQuery('#' + id + '_data').html());
+			jQuery('#dialogformwrap, #overlay').show();
+            programName = jQuery('#firstHeading .program-title').text();
+            _gaq.push(['news._trackEvent', 'aussiehoops', 'View Program Details', programName]);
+		});
+		
+		//on smaller screen sizes eg mobile popup more info straight away
+		jQuery(document).on('click', '.ui-buttonset a', function (event) {
+			var id = jQuery(this).next().attr('id');
+			var width = jQuery( window ).width()
+			jQuery('#dialogformwrap').css( "margin-left", -(width/2) );
+			jQuery('#dialogform').empty();
+			jQuery('#dialogform').append(jQuery('#' + id + '_more_info_data').html());
+			jQuery('#dialogformwrap, #overlay').show();
+		});		
+
+		jQuery(document).on('click', '#close-dialog', function (event) {
+			jQuery('#dialogformwrap, #overlay').hide();
+		});
+
+		jQuery(document).on('click', '.ui-button', function (event) {
+			jQuery(this).toggleClass('active');
+		});
+
+		jQuery(document).on('click', '#intro_popup', function (event) {
+			jQuery(this).hide();
+		});
+
+        jQuery(document).on('click', '.programs-wrap table td a', function (event) {
+            programName = jQuery('#dialogform .program-title').text();
+            _gaq.push(['news._trackEvent', 'aussiehoops', 'Register', programName]);
+        });
+
+        jQuery(document).on('submit', '.EOI_form', function (e) {
+            e.preventDefault();
+            var formdata = jQuery(this).serialize();
+            jQuery.ajax({
+                url: this.action,
+                data: formdata,
+                success: jQuery( "#dialogform" ).fadeIn('slow').load( this.action + '?' + formdata + ' #n_formID' )
+            });
+            jQuery('#n_formID').prepend('<div class="program-title">Expression of Interest</div>');
+            programName = jQuery('#dialogform .program-title').text();
+            _gaq.push(['news._trackEvent', 'aussiehoops', 'Register Interest', programName]);
+
+        });
+
+        jQuery(document).on('submit', '.search_value_form', function (event) {
+           var searchVal = jQuery('#search_value').val();
+            _gaq.push(['news._trackEvent', 'aussiehoops', 'Search Value', searchVal]);
+        });
+
+        jQuery(document).on('submit', '#n_formID', function (e) {
+           var assocVal = jQuery('input[name="assocID"]').val();
+           _gaq.push(['news._trackEvent', 'aussiehoops', 'Send Expression of Interest', assocVal]);
+        });
+
+		jQuery(window).load(function(){
+			jQuery('#marker_list li').addClass(function( index ) {
+				return "ui-button item-" + (index + 1);
+			});
+			jQuery('#marker_list li').wrapInner(function( index ) {
+				return "<div class='program-title'></div>";
+			});
+			jQuery('#marker_list li .program-title').before(function( index ) {
+				return "<span class='letter'>" + (index + 1) + "</span>";
+			});			
+			jQuery('#marker_list li').append(function( index ) {
+				return "<span class='program-size-wrap'>" + (jQuery('#row_' + index  + ' .location-btn-wrap .program-size').html() || '') + "</span>";
+			});
+
+		});
+
+		[% IF realmID == 2 && subRealmID == 7 %]
+		jQuery(document).ready(function() {
+			var request = {};
+			var pairs = location.search.substring(1).split('&');
+			for (var i = 0; i < pairs.length; i++) {
+				var pair = pairs[i].split('=');
+				request[pair[0]] = pair[1];
+			}
+
+			var showmore = request['showmore'];
+			if (showmore == 1) {
+				jQuery("body").addClass("showmore");
+			}
+
+			else {
+				jQuery("body").removeClass("showmore");
+			}
+
+		});
+		[% END %]
+	</script>
+[% IF json_file == '[]' %]
+<style>
+	.ui-buttonset, #marker_list {
+		background: url("images/fiba/aussiehoops/left-bg.jpg") no-repeat scroll 0 0 #333333;
+	}
+</style>
+[% END %]
+<div id="wrapper" class = "[% ExtraWrapperClass %]">
+[% GlobalNav %]
+    <div id="content">
+        <div id="map_canvas"></div>
+        <div class="map-control">
+			<div class="map-title"></div>
+			<div id="accordion_container">
+				<div class="map-intro">
+					<h3>Enter your postcode below to search for your nearest program</h3>
+					<p></p>
+					<div id="search-box" style="padding:10px">
+						<form class="search_value_form">
+							<input type="hidden" name="r" value="[% realmID %]">
+							<input type="hidden" name="sr" value="[% subRealmID %]">
+							<input type="hidden" name="type" value="[% type %]">
+                            <input type="hidden" name="stt" value="pc">
+                            [% IF assocID > 0 %]
+                                <input type="hidden" name="aID" value="[% assocID %]">
+                            [% END %]
+							<div class="search-box-wrap">
+									<input type="text" id="search_value" name="search_value" value="[% search_value %]">
+									<input type="submit" value="Search">
+							</div>							
+							<span id="locator-type">
+								[% IF ShowDays %]
+								<span id="advanced_ShowDays">
+								<br>
+								<span class="daytitle">Day</span>                                
+								<span class="day"><input type="checkbox" name="days" value="Mon" [% IF SelectedDays.Mon %]checked[% END %]><span>Mon</span></span>
+								<span class="day"><input type="checkbox" name="days" value="Tue" [% IF SelectedDays.Tue %]checked[% END %]><span>Tue</span></span>
+								<span class="day"><input type="checkbox" name="days" value="Wed" [% IF SelectedDays.Wed %]checked[% END %]><span>Wed</span></span>
+								<span class="day"><input type="checkbox" name="days" value="Thu" [% IF SelectedDays.Thu %]checked[% END %]><span>Thu</span></span>
+								<span class="day"><input type="checkbox" name="days" value="Fri" [% IF SelectedDays.Fri %]checked[% END %]><span>Fri</span></span>
+								<span class="day"><input type="checkbox" name="days" value="Sat" [% IF SelectedDays.Sat %]checked[% END %]><span>Sat</span></span>
+								<span class="day"><input type="checkbox" name="days" value="Sun" [% IF SelectedDays.Sun %]checked[% END %]><span>Sun</span></span>
+								</span>
+								[% END %]
+							</span>
+						</form>
+					</div>				
+				</div>		
+				[% content %]
+				<ul id="marker_list"></ul>
+			</div>
+		</div>
+    </div>
+[% Footer %]
+<div class="copyright">[% Copyright %]</div>
+<div id="overlay"></div>
+
+<div id="dialogformwrap">
+	<div id="close-dialog">x</div>
+	<div id="dialogform"></div>
+</div>
+
+</div>
+[% TagManagement %]
+</body>
+</html>

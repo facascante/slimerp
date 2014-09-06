@@ -1,0 +1,9 @@
+<?php 
+
+$app->get('/v0.1/realms', function () use ($app) {	
+	
+	$oLaboratory = new Realms ();
+	$users = $oLaboratory->getRealms();
+	$app->contentType('application/json');
+	echo json_encode($users);
+});

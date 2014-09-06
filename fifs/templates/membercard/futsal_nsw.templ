@@ -1,0 +1,102 @@
+[% WRAPPER membercard/MemberCard_Wrapper.templ %]
+	<style type="text/css">
+		body {
+			font-family: arial;
+			padding: 0px;
+			margin: 0px;
+		}
+		#card {
+			width: 320px;
+		}
+		#photo {
+			float: left;
+			width: 79px;
+			padding-left:10px;
+			padding-right:10px;
+			margin-top:15px;
+		}
+		#details {
+			float: left;
+			width: 150px;
+			height: 111px;
+			line-height: 18px;
+			padding-top: 25px;
+			margin-bottom: 2px;
+		}
+		.club {
+			height:40px;
+			font-weight: bold;
+			color: #007350;
+		}
+		.name {
+			height: 40px;
+			line-height: 20px;
+			font-size: 16px;
+			font-weight: bold;
+		}
+		.content_label {
+			float: left;
+			width: 50px;
+			line-height: 14px;
+			font-size: 11px;
+		}
+		.content_value {
+			float: left;
+			width: 80px;
+			line-height: 14px;
+			font-size: 11px;
+			font-weight: bold;
+		}
+		#age {
+			float: left;
+			width: 55px;
+			height: 30px;
+			padding-top: 100px;
+			text-align: center;
+			font-size: 20px;
+			font-weight: bold;
+			color: #B80D2A;
+		}
+		#assoc {
+			clear: both;
+			text-align: center;
+			padding: 5px;
+			font-size: 18px;
+			font-weight: bold;
+			color: #ffffff;
+			background-color: #007350;
+		}
+		#season {
+			float: right;
+			width: 105px;
+			clear: both;
+			text-align: center;
+			font-size: 18px;
+			font-weight: bold;
+			color: #007350;
+		}
+	</style>
+	[% FOREACH m = Members %]
+		<div id="card">
+			<!-- [% m.intMemberID %] -->
+			[% IF m.intPhoto == 1 %]
+				<div id="photo"><img src="https://reg.sportingpulse.com/getphoto.cgi?client=[% m.client %]" alt="" height="100"></div>
+			[% ELSE %]
+				<div id="photo">&nbsp;</div>
+			[% END %]
+			<div id="details">
+				<div class="club">
+					[% FOREACH c = m.Clubs %]
+						[% c.strName %] <br>
+					[% END %]
+				</div>
+				<div class="name">[% m.strFirstname %] [% m.strSurname %] </div>
+				<div class="content_label">D.O.B.</div> <div class="content_value">[% m.dtDOB %]</div>
+				<div class="content_label">FFA#</div> <div class="content_value">[% m.strMemberNo %]</div>
+			</div>
+			<div id="age">[% m.intAge %]</div>
+			<div id="assoc">[% m.strAssocName %]</div>
+			<div id="season">[% m.strSeasonName %]</div>
+		</div>
+	[% END %]
+[% END %]

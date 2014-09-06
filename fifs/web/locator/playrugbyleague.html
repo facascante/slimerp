@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>playrugbyleague.com.au</title>
+
+<style type="text/css">
+<!--
+body {
+background-color: #013a1a;
+background-image: url(images/prl_bg.jpg);
+background-repeat: no-repeat;
+background-position:center top;
+margin-left: 0px;
+margin-top: 0px;
+margin-right: 0px;
+margin-bottom: 0px;
+text-align:center;
+}
+
+#search_wrap {
+width:473px;
+margin-right:auto;
+margin-left: auto;
+}
+
+#search_area {
+width: 145px;
+text-align: left;
+height: 34px;
+margin-top: 335px;
+margin-left: 198px;
+float: left;
+}
+
+#search_btn {
+float: left;
+margin-top: 330px;
+margin-left: 10px;
+}
+
+#search_btn input {
+	margin: 4px 0 0 6px;
+}
+
+#prl_footer {
+width: 473px;
+margin-top: 28px;
+}
+
+#powered {
+width: 473px;
+text-align:right;
+margin-top: 10px;
+}
+
+.form1 {
+}
+
+-->
+</style>
+
+<!--[if IE 8]>
+	<style type="text/css">
+		#prl_footer img {
+			margin-left: 1px;
+		}
+	</style>
+<![endif]-->
+<!--[if IE 7]>
+	<style type="text/css">
+		#search_area {
+			margin-top: 355px;
+		}
+		#search_btn {
+			margin-top: 350px;
+		}
+		#prl_footer {
+			margin-top: 0px;
+		}
+	</style>
+<![endif]-->
+
+
+</head>
+
+<body>
+
+<script type="text/javascript">
+function validate(f) {
+  var err={};        
+  if( f.club_search_all.value=="") {
+    err.message="Please enter a club or suburb name";
+    err.field=f.club_search_all;
+  }
+  if(err.message) {
+    alert(err.message);
+    err.field.focus();
+    return false;
+  }
+    window.open('', 'WhereCanIPlayPopup', 'height=720,width=650,toolbar=no, location=no, status=yes, menubar=no, scrollbars=yes');
+    return true;
+}
+</script>
+
+<br><br><br>
+
+<form action="http://tc.devel.pnp-local.com.au/tim/regoSWM/trunk/web/locator/clubfinder.cgi" method="post" name="playrugbyleague" target="WhereCanIPlayPopup" onsubmit="return validate(this);">
+  <input type="hidden" name="centre_search_type" value="1" /> 
+  <input type="hidden" name="r" value="3" />
+  <label>
+    <input type="text" name="club_search_all" id="search" />
+  </label>
+  <input type="submit" value="SEARCH" id="find" />
+</form>
+
+
+</body>
+
+</html>

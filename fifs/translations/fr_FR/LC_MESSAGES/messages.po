@@ -1,0 +1,1758 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Warren Rodie <w.rodie@sportingpulseinternational.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr_FR\n"
+"X-Generator: Poedit 1.5.4\n"
+
+msgid "Club Id"
+msgstr "le Club Id"
+
+msgid "Colours"
+msgstr "Couleurs"
+
+msgid "Other Details"
+msgstr "Autres détails"
+
+msgid "Secretary"
+msgstr "Secrétaire"
+
+msgid "View Type"
+msgstr "View Type"
+
+msgid "Amount"
+msgstr "Amount"
+
+msgid "EXPORT_WARNING"
+msgstr ""
+"Cette option a un ensemble déterminé de domaines qu'elle exporte, mais le"
+
+msgid "Copy"
+msgstr "Copier"
+
+msgid "Club Season Summary"
+msgstr "Résumé Saison Club"
+
+msgid "International Zone"
+msgstr "International Zone"
+
+msgid "Selections"
+msgstr "Sélections"
+
+msgid "Hidden"
+msgstr "Hidden"
+
+msgid "No Limit"
+msgstr "Aucune limite"
+
+msgid "Contact Person"
+msgstr "Nom du Contact"
+
+msgid "International Region"
+msgstr "International Region"
+
+msgid "Courses"
+msgstr "Cours"
+
+msgid "Edit Welcome Message"
+msgstr "Editer le message de bienvenue"
+
+msgid "Phone 2"
+msgstr "Téléphone 2"
+
+msgid "Title of Contact 3"
+msgstr "Titre du Contact 3"
+
+msgid "Passport Country of Issue"
+msgstr "Passport Country of Issue"
+
+msgid "Under 1 minute"
+msgstr "Moins de 1 minute"
+
+msgid "Save Options"
+msgstr "Save Options"
+
+msgid "Deregistered"
+msgstr "Deregistered"
+
+msgid "State Team Supported"
+msgstr "State Team Supported"
+
+msgid "Start Date"
+msgstr "Start Date"
+
+msgid "Photo Present?"
+msgstr "Photo inclues?"
+
+msgid "is not a valid email address"
+msgstr "is not a valid email address"
+
+msgid "Parent/Guardian 1 Gender"
+msgstr "Parent/Guardian 1 Gender"
+
+msgid "Limit"
+msgstr "Limite"
+
+msgid "No Payment Records can be found in the database."
+msgstr "No Payment Records can be found in the database."
+
+msgid "Feb"
+msgstr "Févr"
+
+msgid "REPORT_INTRO_DESC_TEXT"
+msgstr "<p>Il existe deux types de rapports présents dans le système.</p"
+
+msgid "Products"
+msgstr "Produits"
+
+msgid "Home Venue Post Code"
+msgstr "Code postal du Lieu de domicile"
+
+msgid "Manager"
+msgstr "Directeur"
+
+msgid "Parent/Guardian 1 Email 2"
+msgstr "Parent/Guardian 1 Email 2"
+
+msgid ""
+"Please enter your username and password below and then press the Sign in "
+"button."
+msgstr ""
+"Merci d'entrer vos nom d'utilisateur et mot de passe ci-dessous et d'appuyer "
+"sur le bouton Connexion."
+
+msgid "Alternate Uniform Number Colour"
+msgstr "Alterner nombre de couleur uniforme"
+
+msgid "Parent/Guardian 2 Phone"
+msgstr "Parent/Guardian 2 Phone"
+
+msgid "Association Status"
+msgstr "Statut de l’association"
+
+msgid "National Team"
+msgstr "National Team"
+
+msgid "Date First Registered"
+msgstr "Date First Registered"
+
+msgid "Allergies?"
+msgstr "Allergies?"
+
+msgid "Family name"
+msgstr "Nom de famille"
+
+msgid "Eye Colour"
+msgstr "Couleur des yeux"
+
+msgid "Alternate Uniform Number"
+msgstr "Alternate Uniform Number"
+
+msgid "Passport Number"
+msgstr "Numéro de passeport"
+
+msgid "Search Again"
+msgstr "Chercher à nouveau"
+
+msgid "None Available"
+msgstr "Aucun disponible"
+
+msgid "Exclude from Club Championships"
+msgstr "Exclude from Club Championships"
+
+msgid "Phone 3"
+msgstr "Téléphone 3"
+
+msgid "Parent/Guardian 1 Phone"
+msgstr "Parent/Guardian 1 Phone"
+
+msgid "Last Updated"
+msgstr "Last Updated"
+
+msgid "Unknown export format"
+msgstr "Format d'exportation Inconnue"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Event Number"
+msgstr "Numéro d'événement"
+
+msgid "International"
+msgstr "International"
+
+msgid "Modify Member List"
+msgstr "Modifier la liste des membres"
+
+msgid "Name"
+msgstr "Nom"
+
+msgid "Association Season Member Package"
+msgstr "Paquet membres de l'Association saison"
+
+msgid "Not Equals"
+msgstr "Pas Égal"
+
+msgid "Custom Fields"
+msgstr "Custom Fields"
+
+msgid "Edit Personal Details"
+msgstr "Modifier les détails personnels"
+
+msgid "Member marked as a duplicate"
+msgstr "Membre marqué comme duplicata"
+
+msgid "Notes"
+msgstr "Notes"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Country"
+msgstr "Pays"
+
+msgid "Sep"
+msgstr "Sept"
+
+msgid "No Data to Export"
+msgstr "Aucune donnée à l'exportation"
+
+msgid "Match Official Registration No."
+msgstr "Match Official Registration No."
+
+msgid "Date of Birth"
+msgstr "Date de naissance"
+
+msgid "An invalid Action Code has been passed to me."
+msgstr "Une action Code non valide a été effectuée."
+
+msgid "Search for Person"
+msgstr "Recherche de personne"
+
+msgid "Player?"
+msgstr "Joueur?"
+
+msgid "Title of Contact 2"
+msgstr "Titre du Contact 2"
+
+msgid "Delete Photo"
+msgstr "Supprimer la photo"
+
+msgid "Is Blank"
+msgstr "Vide"
+
+msgid "Email 2"
+msgstr "E-mail 2"
+
+msgid "MARK_AS_DUPLICATE_WARNING"
+msgstr "NOTER: Seuls marquer le [_1] supplémentaire, pas le [_1] vous croye"
+
+msgid "Apr"
+msgstr "Avril"
+
+msgid "Contact Details"
+msgstr "Coordonnées"
+
+msgid "MODIFY_PHOTO_FORM_HEADER"
+msgstr "<p"
+
+msgid "Address 1"
+msgstr "Adresse 1"
+
+msgid "Field"
+msgstr "Domaine"
+
+msgid "Season Match Official Financial?"
+msgstr "Season Match Official Financial?"
+
+msgid "Members"
+msgstr "Membres"
+
+msgid "Parent/Guardian 2 Surname"
+msgstr "Parent/Guardian 2 Surname"
+
+msgid "No Season"
+msgstr "Aucune saison"
+
+msgid "Member Reports"
+msgstr "Rapports du membre"
+
+msgid "EVENTCOPY_info"
+msgstr ""
+"Cette option permet la copie d'un jeu d'informations d'un tiers évènemen"
+
+msgid "Jumper Numbers"
+msgstr "Jumper Numbers"
+
+msgid "is not less than [_1]"
+msgstr "is not less than [_1]"
+
+msgid "Yes"
+msgstr "Oui"
+
+msgid "Rotate Left 90 degrees"
+msgstr "Tourner à gauche à 90 degrés"
+
+msgid "Communicator"
+msgstr "Communicator"
+
+msgid "Organisation"
+msgstr "Organisation"
+
+msgid "Phone (Mobile)"
+msgstr "Téléphone (Portable)"
+
+msgid "Allow Clubs to"
+msgstr "Allow Clubs to"
+
+msgid "OR"
+msgstr "OU"
+
+msgid "Member Tags"
+msgstr "Member Tags"
+
+msgid "Police Check Number"
+msgstr "Police Check Number"
+
+msgid "Is Not Blank"
+msgstr "Pas Vide"
+
+msgid "Resolve Duplicates"
+msgstr "Résoudre les Doublons"
+
+msgid "Personal Details"
+msgstr "Informations personnelles"
+
+msgid "Choose what you want to bulk print from the options below."
+msgstr ""
+"Choisissez ce que vous souhaitez imprimer en vrac à partir des options ci-"
+"dessous."
+
+msgid "Medical"
+msgstr "Médical"
+
+msgid "This will assign the status to all matching records"
+msgstr "Cela affectera l'état de tous les enregistrements correspondants"
+
+msgid "Database Home"
+msgstr "Accueil de la base de données"
+
+msgid "Parent/Guardian 1 Firstname"
+msgstr "Parent/Guardian 1 Firstname"
+
+msgid "Summary Data"
+msgstr "Résumé des données"
+
+msgid "MARK_AS_DUPLICATE_INSTRUCTIONS"
+msgstr "<p"
+
+msgid "Connection"
+msgstr "Connexion"
+
+msgid "Selected by"
+msgstr "Choisis par"
+
+msgid "Month"
+msgstr "Mois"
+
+msgid "None Specified"
+msgstr "Non indiqué"
+
+msgid "Club"
+msgstr "Club"
+
+msgid "You have [_1] duplicate to resolve."
+msgstr "Vous avez [quant,_1,doublon,doublons] à résoudre."
+
+msgid "Place (Town) of Birth"
+msgstr "Lieu (Ville) de naissance"
+
+msgid "Their Details"
+msgstr "Their Details"
+
+msgid "is not a valid number"
+msgstr "is not a valid number"
+
+msgid "Coach Registration No."
+msgstr "Coach Registration No."
+
+msgid "Less Than"
+msgstr "Moins Que"
+
+msgid "Add Season Club Record"
+msgstr "Add Season Club Record"
+
+msgid "Both"
+msgstr "Les deux"
+
+msgid "Match Official in<br>Club?"
+msgstr "Match Officiel dans<br>le Club?"
+
+msgid "Identification Type"
+msgstr "Identification Type"
+
+msgid "Salutation"
+msgstr "Salutations"
+
+msgid "Audit Log"
+msgstr "Journal d'Audit"
+
+msgid "Edit Event"
+msgstr "Modifier un événement"
+
+msgid "CHOOSE_EXPORT_FORMAT"
+msgstr "Choisissez le format d'exportation que vous souhaitez utilise"
+
+msgid "Delete Member"
+msgstr "Supprimer membres"
+
+msgid "City of Residence"
+msgstr "Ville de résidence"
+
+msgid "Parent/Guardian 2 Firstname"
+msgstr "Parent/Guardian 2 Firstname"
+
+msgid "COPYRIGHT"
+msgstr "© Copyright SportingPulse."
+
+msgid "Club Name"
+msgstr "Nom du Club"
+
+msgid "You must enter a number"
+msgstr "Vous devez entrer un numéro"
+
+msgid "No"
+msgstr "Non"
+
+msgid "Nov"
+msgstr "Nov"
+
+msgid "Include All records in Rollover"
+msgstr "Inclus tous les rapports dans le remaniement"
+
+msgid "Work Phone"
+msgstr "Téléphone au travail"
+
+msgid "Modify Photo"
+msgstr "Modifier Photo"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Password Management"
+msgstr "Gestion des mots de passe"
+
+msgid "Volunteer?"
+msgstr "Volunteer?"
+
+msgid "is not more than [_1]"
+msgstr "is not more than [_1]"
+
+msgid "Parent/Guardian 2 Mobile"
+msgstr "Parent/Guardian 2 Mobile"
+
+msgid "No Grouping"
+msgstr "Pas de regroupement"
+
+msgid "Official?"
+msgstr "Official?"
+
+msgid "Maximum no. of rows to display"
+msgstr "Nombre maximum de lignes à afficher"
+
+msgid "Menu"
+msgstr "Menu"
+
+msgid "REPORT_INTRO_TEXT"
+msgstr "<p"
+
+msgid "Club Season Member Package"
+msgstr "Paquet membre du Club Saison"
+
+msgid "Save Tags"
+msgstr "Save Tags"
+
+msgid "Test approval"
+msgstr "Approbation du test"
+
+msgid "Allow Teams to"
+msgstr "Allow Teams to"
+
+msgid "Veteran?"
+msgstr "Veteran?"
+
+msgid "Ascending"
+msgstr "Ascendant"
+
+msgid "Select a Status to Assign"
+msgstr "Sélectionnez un statut à attribuer"
+
+msgid "Regions"
+msgstr "Régions"
+
+msgid "Member Financial Balance"
+msgstr "Member Financial Balance"
+
+msgid "Team Passwords"
+msgstr "Team Passwords"
+
+msgid "Welcome"
+msgstr "Bienvenue"
+
+msgid "Username"
+msgstr "Nom d'utilisateur"
+
+msgid "Financial?"
+msgstr "Financial?"
+
+msgid "There was a problem changing the welcome message"
+msgstr "Il y avait un problème modifiant le Message de Bienvenue"
+
+msgid "Date Suspended Until"
+msgstr "Date Suspended Until"
+
+msgid "Health Care Number"
+msgstr "Health Care Number"
+
+msgid "Choose an option from the list below"
+msgstr "Choose an option from the list below"
+
+msgid "Member Summary Reports"
+msgstr "Résumé des rapports du membre"
+
+msgid "School Suburb "
+msgstr "School Suburb "
+
+msgid "Mobile Phone"
+msgstr "Téléphone portable"
+
+msgid "Group By"
+msgstr "Groupe par"
+
+msgid "ENTER_USER_PASSWORD"
+msgstr ""
+"Merci d'entrer vos nom d'utilisateur et mot de passe ci-dessous et d'appuye"
+
+msgid "Other Code"
+msgstr "Autre code"
+
+msgid "Parent/Guardian 2 Salutation"
+msgstr "Parent/Guardian 2 Salutation"
+
+msgid "Player Active?"
+msgstr "Player Active?"
+
+msgid "Emergency Contact Relationship"
+msgstr ""
+
+msgid "Phone (Work)"
+msgstr "Téléphone (Travail)"
+
+msgid "Emergency Contact Number 2"
+msgstr ""
+
+msgid "View Types"
+msgstr "Voir les types"
+
+msgid "Active?"
+msgstr "Actif?"
+
+msgid "Cards Printed"
+msgstr "Cartes imprimées"
+
+msgid "Surname"
+msgstr "Nom de Famille"
+
+msgid "Seasons"
+msgstr "Saisons"
+
+msgid "Mobile"
+msgstr "Portable"
+
+msgid "Quick Link to record"
+msgstr "Lien rapide pour enregistrer"
+
+msgid "National Body"
+msgstr "Organisme national"
+
+msgid "Medical Notes"
+msgstr "Notes médicales"
+
+msgid "Association Name"
+msgstr "Nom de l'Association"
+
+msgid "Season Player Financial?"
+msgstr "Season Player Financial?"
+
+msgid "Read Only"
+msgstr "Read Only"
+
+msgid "Cable"
+msgstr "Câble"
+
+msgid "Date Added"
+msgstr "Date d'ajout"
+
+msgid "May"
+msgstr "Mai"
+
+msgid "Welcome Message Updated"
+msgstr "Le Message de Bienvenue a été mis à jour"
+
+msgid "Reports"
+msgstr "Rapports"
+
+msgid "Competitions"
+msgstr "Compétitions"
+
+msgid "Update Permissions"
+msgstr "Update Permissions"
+
+msgid "Replace Photo"
+msgstr "Remplacer photo"
+
+msgid "Application Date"
+msgstr "Application Date"
+
+msgid "Rollover"
+msgstr "Remaniement"
+
+msgid "Save Report as"
+msgstr "Rappelez-vous le rapport comme"
+
+msgid "Offline Number"
+msgstr "Offline Number"
+
+msgid "Parent/Guardian 1 Surname"
+msgstr "Parent/Guardian 1 Surname"
+
+msgid "No entries match your Search criteria. Please try again"
+msgstr ""
+"Aucune entrée ne correspond aux critères de recherche. S'il vous plaît "
+"essayez de nouveau."
+
+msgid "Active"
+msgstr "Actif"
+
+msgid "Zones"
+msgstr "Zones"
+
+msgid "President"
+msgstr "Président"
+
+msgid "minutes"
+msgstr "minutes"
+
+msgid "Any (or No) Sport"
+msgstr "Tous les Sports (ou pas)"
+
+msgid "All Seasons"
+msgstr "Toutes saisons"
+
+msgid "Assign Approval Statuses"
+msgstr "Attribution des statuts approuvés"
+
+msgid "Suburb"
+msgstr "Banlieue/Quartier"
+
+msgid "Season"
+msgstr "Saison"
+
+msgid "Website"
+msgstr "Site internet"
+
+msgid "Active in Association"
+msgstr "Actif dans l'association"
+
+msgid "Preferred name"
+msgstr "Nom préféré"
+
+msgid "To resolve this duplicate click"
+msgstr "Pour résoudre ce double exemplaire cliquez sur"
+
+msgid "Update Member"
+msgstr "Mise à jour Membre"
+
+msgid "First name"
+msgstr "Prénom"
+
+msgid "Status Reports"
+msgstr "Rapports des statuts"
+
+msgid "Middle Name"
+msgstr "Deuxième prénom"
+
+msgid "on your Accreditation pass"
+msgstr "sur votre accréditation passer"
+
+msgid "Mark as Duplicate"
+msgstr "Marquer comme en double"
+
+msgid "Display details for [_1]"
+msgstr "Display details for [_1]"
+
+msgid "Parent/Guardian 1 Email"
+msgstr "Parent/Guardian 1 Email"
+
+msgid "Season Coach Financial?"
+msgstr "Season Coach Financial?"
+
+msgid "Configure Event Details"
+msgstr "Configurez les détails de l'événement"
+
+msgid "Payment Type"
+msgstr "Payment Type"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Season Player?"
+msgstr "Season Player?"
+
+msgid "Original Photo"
+msgstr "Photo Originale"
+
+msgid "Parent/Guardian 2 Assistance Area"
+msgstr "Parent/Guardian 2 Assistance Area"
+
+msgid "Select your report type below."
+msgstr "Sélectionnez votre type de rapport ci-dessous"
+
+msgid "Bulk Change"
+msgstr "Changement en vrac"
+
+msgid "Delete"
+msgstr "Effacer"
+
+msgid "Parent/Guardian 2 Phone 2"
+msgstr "Parent/Guardian 2 Phone 2"
+
+msgid "Invalid or Blank Email Address"
+msgstr "Blancs ou Nuls Adresse Email"
+
+msgid "Member Number"
+msgstr "Numéro de membre"
+
+msgid "System ID"
+msgstr "Numéro d'identification du système"
+
+msgid "BULK_PRINT_BUTTON_INFO"
+msgstr ""
+"Appuyez sur la <b> '[_1]' </b> bouton pour générer une liste de passages "
+
+msgid "or"
+msgstr "ou"
+
+msgid "Name (or part of name)"
+msgstr "Nom (ou partie du nom)"
+
+msgid "Occupation"
+msgstr "Occupation"
+
+msgid "Copy Event Details"
+msgstr "Copier les détails de l'évènement"
+
+msgid "Permissions Updated"
+msgstr "Permissions Updated"
+
+msgid "Allow Medical Treatment"
+msgstr "Allow Medical Treatment"
+
+msgid "Postal Code"
+msgstr "Code postal"
+
+msgid "Misc?"
+msgstr "Misc?"
+
+msgid "Information to copy"
+msgstr "Information à copier"
+
+msgid "System developed and powered by [_1]."
+msgstr "Système développé et propulsé par [_1]."
+
+msgid "Update status required for pass printing"
+msgstr "Mettre à jour les statuts requis l'impression d'une accréditation"
+
+msgid "National Bodies"
+msgstr "National Bodies"
+
+msgid "Their Member Types"
+msgstr "Their Member Types"
+
+msgid "Email"
+msgstr "E-mail"
+
+msgid "Venue Name"
+msgstr "Nom du site"
+
+msgid "Jun"
+msgstr "Juin"
+
+msgid "Descending"
+msgstr "Descendant"
+
+msgid "Address 2"
+msgstr "Adresse 2"
+
+msgid "Dec"
+msgstr "Déc"
+
+msgid "Abbreviation"
+msgstr "Abréviation"
+
+msgid "Incorporation Number"
+msgstr "Numéro d'Incorporation"
+
+msgid "Title of Contact"
+msgstr "Titre du Contact"
+
+msgid "Report Output"
+msgstr "Rapport de sortie"
+
+msgid "Sportzware Membership Login Page"
+msgstr "Page de connexion à Sportzware Membership"
+
+msgid "Police Check Expiry Date"
+msgstr "Police Check Expiry Date"
+
+msgid "Login"
+msgstr "Connexion"
+
+msgid "Update Club"
+msgstr "Update Club"
+
+msgid "Services"
+msgstr "Services"
+
+msgid "Add Season Record"
+msgstr "Add Season Record"
+
+msgid "APPNAME"
+msgstr "SportingPulse - Sportzware Membership"
+
+msgid "Password"
+msgstr "Mot de Passe"
+
+msgid "Edit Member"
+msgstr "Modifier membres"
+
+msgid "Update Welcome Message"
+msgstr "Mettre à jour le Message de Bienvenue"
+
+msgid "To Season"
+msgstr "Prendre en compte la saison"
+
+msgid "Coach?"
+msgstr "Entraîneur?"
+
+msgid "Rotate Right 90 degrees"
+msgstr "Tourner à droite à 90 degrés"
+
+msgid "Police Check Date"
+msgstr "Police Check Date"
+
+msgid "ADV_REPORT_INTRO"
+msgstr "<p"
+
+msgid "Venue Code"
+msgstr "Code du site"
+
+msgid "School Name"
+msgstr "School Name"
+
+msgid "Additional Contacts"
+msgstr "Contacts Supplémentaires "
+
+msgid "Event Options"
+msgstr "Options de l'événement"
+
+msgid "Search Entity"
+msgstr "Rechercher une entité"
+
+msgid "Added By"
+msgstr "Ajouté par"
+
+msgid "Contact Person 3"
+msgstr "Nom du Contact 3"
+
+msgid "Tags Updated"
+msgstr "Tags Updated"
+
+msgid "Problems"
+msgstr "Problems"
+
+msgid "Business Number"
+msgstr "Numéro d'affaires"
+
+msgid "Zone"
+msgstr "Zone"
+
+msgid "Contact Email 3"
+msgstr "Contact e-mail 3"
+
+msgid "Are you sure you want to Delete this Member"
+msgstr "Etes-vous sûr de vouloir supprimer ce membre"
+
+msgid "Options"
+msgstr "Options"
+
+msgid "NO_BODY "
+msgstr "Attention, cela ne devrait pas se produire. Merci de contacte"
+
+msgid "Zone Code"
+msgstr "Code de la zone"
+
+msgid "Fill in the appropriate filter boxes below to search."
+msgstr "Remplissez les cases appropriées ci-dessous pour filtrer la recherche."
+
+msgid "Contact Email 2"
+msgstr "Contact e-mail 2"
+
+msgid "Sport"
+msgstr "Sport"
+
+msgid "Saved Reports"
+msgstr "Rapports rappeler"
+
+msgid "Parent/Guardian"
+msgstr "Parent/Tuteur"
+
+msgid "Choose"
+msgstr "Choisissez"
+
+msgid "Season Participating?"
+msgstr "Season Participating?"
+
+msgid "Aug"
+msgstr "Août"
+
+msgid "Permissions"
+msgstr "Permissions"
+
+msgid "Member Types"
+msgstr "Member Types"
+
+msgid "Uploading"
+msgstr "Téléchargé"
+
+msgid "The estimated time to upload a 400Kb image is"
+msgstr "Le temps estimé pour télécharger une image 400Kb est"
+
+msgid "Please be Patient"
+msgstr "S'il vous plaît être patient"
+
+msgid "UPLOAD_PHOTO_FORM_TEXT"
+msgstr "<p"
+
+msgid "Jan"
+msgstr "Janv"
+
+msgid "HTMLFORM_INTROTEXT"
+msgstr "auto"
+
+msgid "Full Season Summary"
+msgstr "Résumé de la saison complète"
+
+msgid "Fax"
+msgstr "Fax"
+
+msgid "Accreditation Bulk Print"
+msgstr "Impression en vrac d'accréditation"
+
+msgid "Bulk Printing"
+msgstr "Impression en vrac"
+
+msgid "Home Venue Suburb"
+msgstr "Banlieue/Quartier du Lieu de domicile"
+
+msgid "Normal (Tab Delimited)"
+msgstr "Normal (délimité par des tabulations)"
+
+msgid "Add new record"
+msgstr "Ajouter nouvelle donnée"
+
+msgid "is not a valid date"
+msgstr "is not a valid date"
+
+msgid "Team"
+msgstr "Equipe"
+
+msgid "Registration Number"
+msgstr "Registration Number"
+
+msgid "Include Club Records in Rollover"
+msgstr "Inclus les rapports des clubs dans le remaniement"
+
+msgid "is not less than or equal to [_1]"
+msgstr "is not less than or equal to [_1]"
+
+msgid "States"
+msgstr "Etats"
+
+msgid "Add Photo"
+msgstr "Ajouter une photo"
+
+msgid "Identifications"
+msgstr "Identifications"
+
+msgid "Showing"
+msgstr "Monter"
+
+msgid "Passport Expiry"
+msgstr "Date d'expiration du passeport"
+
+msgid "Parent/Guardian 2 Email 2"
+msgstr "Parent/Guardian 2 Email 2"
+
+msgid "Run Report"
+msgstr "Exécuter un rapport"
+
+msgid "Generate Bulk Print"
+msgstr "Imprimer Générer vrac"
+
+msgid "Alternate Uniform Bottom Colour"
+msgstr "Alterner couleur basse uniforme"
+
+msgid "Database Error in Addition"
+msgstr "Database Error in Addition"
+
+msgid "Preview"
+msgstr "Aperçu"
+
+msgid "Parent/Guardian 2 Gender"
+msgstr "Parent/Guardian 2 Gender"
+
+msgid "Maiden Name"
+msgstr "Nom de jeune fille"
+
+msgid "No Results could be found"
+msgstr "Aucun résultat n'a pu être trouvé"
+
+msgid "Allow Parent Body"
+msgstr "Allow Parent Body"
+
+msgid "Departure Date"
+msgstr "Date de départ"
+
+msgid "There are no available Tags to assign"
+msgstr "There are no available Tags to assign"
+
+msgid "FIELDS_intro"
+msgstr "Choose the options for each Member field."
+
+msgid "Click to Open/Close Group"
+msgstr "Cliquez pour ouvrir/fermer le groupe"
+
+msgid "Player Age Group"
+msgstr "Groupe d'Âge Joueur"
+
+msgid "Member"
+msgstr "Membre"
+
+msgid "Season Coach?"
+msgstr "Season Coach?"
+
+msgid "Parent/Guardian 1 Mobile"
+msgstr "Parent/Guardian 1 Mobile"
+
+msgid "Filter"
+msgstr "Filtre"
+
+msgid "CHOOSE_HOW_REPORTS"
+msgstr "Choisissez comment vous souhaitez recevoir les données de ce rapport"
+
+msgid "Search using the options below"
+msgstr "Recherche en utilisant les options ci-dessous"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "International Regions"
+msgstr "International Regions"
+
+msgid "Mar"
+msgstr "Mars"
+
+msgid "Alternate Uniform Top Colour"
+msgstr "Alterner couleur haute uniforme"
+
+msgid "Player in<br>Association?"
+msgstr "Joueur dans<br>l'Association?"
+
+msgid "Age Group"
+msgstr "Groupe d'Âge"
+
+msgid "Defaulter"
+msgstr "Defaulter"
+
+msgid "TO_UPD_WELCOME"
+msgstr "<p"
+
+msgid "Logout"
+msgstr "Déconnexion"
+
+msgid "Fields Updated"
+msgstr "Fields Updated"
+
+msgid "Show"
+msgstr "Montrer"
+
+msgid "Edit"
+msgstr "Éditer"
+
+msgid "School"
+msgstr "School"
+
+msgid "National Number"
+msgstr "National Number"
+
+msgid "Editable"
+msgstr "Editable"
+
+msgid "Sort By"
+msgstr "Trier par"
+
+msgid "Field options"
+msgstr "Field Options"
+
+msgid "Address Line 2"
+msgstr "Adresse Ligne 2"
+
+msgid "Secondary Sort By"
+msgstr "Tri secondaire par"
+
+msgid "in"
+msgstr "dans"
+
+msgid "Arrival Date"
+msgstr "Date d'arrivée"
+
+msgid "Details"
+msgstr "Détails"
+
+msgid "Accreditation Provider"
+msgstr "Accreditation Provider"
+
+msgid "Age Groups"
+msgstr "Groupes d'âge"
+
+msgid "Area of Expertise"
+msgstr "Domaine d'expertise"
+
+msgid "Unique Records Only"
+msgstr "Données uniques seulement"
+
+msgid "Place of Birth"
+msgstr "Lieu de naissance"
+
+msgid "Add"
+msgstr "Ajouter"
+
+msgid "All the filters are additive."
+msgstr "Tous les filtres sont additifs."
+
+msgid ""
+"These configuration options allow you to modify the data and behaviour of "
+"the system."
+msgstr ""
+"These configuration options allow you to modify the data and behaviour of "
+"the system."
+
+msgid "Bank Account Details"
+msgstr "Détails du compte en banque"
+
+msgid "Member Events Summary"
+msgstr "Résumé des évènements du membre"
+
+msgid "Competition"
+msgstr "Compétition"
+
+msgid "cannot contain HTML"
+msgstr "cannot contain HTML"
+
+msgid "Season Member Package"
+msgstr "Paquet membre de la Saison"
+
+msgid "PERMISSIONS_intro"
+msgstr ""
+"Choose the options below to set the permissions various users have to "
+"perform tasks in the database. When you have selected the permissions press "
+"the <b>'Update Permissions'</b> button to save your settings. <br><b>NB.</b> "
+"The permissions only apply to the Members/Club/Teams that the user has "
+"access to already.  It does not convey extra permissions."
+
+msgid "Association"
+msgstr "Association"
+
+msgid "Upload Photo"
+msgstr "Envoyer la photo"
+
+msgid "Configuration"
+msgstr "Configuration"
+
+msgid "Player in<br>Club?"
+msgstr "Joueur dans<br>le le Club?"
+
+msgid "Height"
+msgstr "Taille"
+
+msgid "This member has been associated with the following tags."
+msgstr "This member has been associated with the following tags."
+
+msgid "Compulsory"
+msgstr "Compulsory"
+
+msgid "Family Name"
+msgstr "Nom de famille"
+
+msgid "Make selected members Active in Association during Rollover"
+msgstr "Sélectionner les members actifs en association pendant le remaniement"
+
+msgid "Default"
+msgstr "Par défaut"
+
+msgid "Member has been marked as a duplicate"
+msgstr "Ce membre a été marqué comme duplicata"
+
+msgid "Athletics Associations"
+msgstr "Associations d'athlétisme"
+
+msgid "Junior?"
+msgstr "Junior?"
+
+msgid "Contact Phone 2"
+msgstr "Contact Phone 2"
+
+msgid "Team Name"
+msgstr "Team Name"
+
+msgid "From here you can login to your Sportzware Membership online system."
+msgstr ""
+"D'ici vous pouvez vous connecter via votre code d'accès Sportzware en ligne."
+
+msgid "How did you find out about us?"
+msgstr "How did you find out about us?"
+
+msgid "Position"
+msgstr "Position"
+
+msgid "Name (or part of)"
+msgstr "Nom (ou partie)"
+
+msgid "Level"
+msgstr "Niveau"
+
+msgid "Database Error in Update"
+msgstr "Database Error in Update"
+
+msgid "Member Sport Detail Reports"
+msgstr "Rapports des détails sportifs du membre"
+
+msgid "Nickname"
+msgstr "Surnom"
+
+msgid "Sort Order"
+msgstr "Ordre de tri"
+
+msgid "Birth Certificate Number"
+msgstr "Birth Certificate Number"
+
+msgid "Season Match Official?"
+msgstr "Season Match Official?"
+
+msgid "Generic (Tab Delimited)"
+msgstr "Générique (délimité par des tabulations)"
+
+msgid "Invalid Date"
+msgstr "Invalid Date"
+
+msgid "Record added successfully"
+msgstr "Record added successfully"
+
+msgid "Record updated successfully"
+msgstr "La base de données a été mise à jour avec succès"
+
+msgid "Loyalty Number"
+msgstr "Loyalty Number"
+
+msgid "Search"
+msgstr "Recherche"
+
+msgid "Phone (Home)"
+msgstr "Téléphone (Domicile)"
+
+msgid "Save"
+msgstr "Enregistrer"
+
+msgid "Ref. No."
+msgstr "N° de référence"
+
+msgid "Any Category"
+msgstr "Toute Catégorie"
+
+msgid "Inactive"
+msgstr "Inactif"
+
+msgid "Clubs"
+msgstr "Clubs"
+
+msgid "CHOOSE_AND_REPORT"
+msgstr ""
+"Choisissez les champs que vous voulez sur votre rapport et les filtres qu"
+
+msgid "Equals"
+msgstr "Egal"
+
+msgid "Not Available"
+msgstr "Non disponible"
+
+msgid "is not between [_1] and [_2]"
+msgstr "is not between [_1] and [_2]"
+
+msgid "Passport Nationality"
+msgstr "Nationalité Passeport"
+
+msgid "First Name"
+msgstr "Prénom"
+
+msgid "Medical Conditions?"
+msgstr "Conditions Médicales?"
+
+msgid "Female"
+msgstr "Femme"
+
+msgid "Date Registered Until"
+msgstr "Date Registered Until"
+
+msgid "Pager"
+msgstr "Téléavertisseur"
+
+msgid "Any Medical Conditions?"
+msgstr "Conditions Médicales?"
+
+msgid "Region"
+msgstr "Région"
+
+msgid "View"
+msgstr "Vue"
+
+msgid "Welcome Message"
+msgstr "Message de Bienvenue"
+
+msgid "Problem Updating Permissions"
+msgstr "Problem Updating Permissions"
+
+msgid "End Date"
+msgstr ""
+
+msgid "Problem updating status"
+msgstr "Problème mise à jour le statut"
+
+msgid "Associations"
+msgstr "Associations"
+
+msgid "Current Level"
+msgstr "Niveau actuel"
+
+msgid "Member Financial?"
+msgstr "Member Financial?"
+
+msgid "Contact Email"
+msgstr "Contact e-mail"
+
+msgid "Date Created Online"
+msgstr "Date Created Online"
+
+msgid "Venue"
+msgstr "Site"
+
+msgid "Career Games"
+msgstr "Career Games"
+
+msgid "Male"
+msgstr "Homme"
+
+msgid "Jul"
+msgstr "Juil"
+
+msgid "Match Official?"
+msgstr "Officiel de Match?"
+
+msgid "Ethnicity"
+msgstr "Ethnie"
+
+msgid "Invalid number"
+msgstr "Nombre incorrect"
+
+msgid "All Records"
+msgstr "Tous les dossiers"
+
+msgid "Zone Name"
+msgstr "Nom de la zone"
+
+msgid "Oct"
+msgstr "Oct"
+
+msgid "Show Members for Rollover"
+msgstr "Montrer les membres pour un remaniement"
+
+msgid "Filter Only"
+msgstr "Filtre uniquement"
+
+msgid "Coach Active?"
+msgstr "Coach Active?"
+
+msgid "ROWS_FOUND"
+msgstr "[_1] rangées trouvées"
+
+msgid "Contact Phone 3"
+msgstr "Contact Phone 3"
+
+msgid "Association Season Summary"
+msgstr "Résumé de la saison Association"
+
+msgid "Upload Photos"
+msgstr "Télécharger des photos"
+
+msgid "Entity ID"
+msgstr "Entity ID"
+
+msgid "Instructor Registration No"
+msgstr "Instructor Registration No"
+
+msgid "Mixed"
+msgstr "Mixte"
+
+msgid "Senior?"
+msgstr "Senior?"
+
+msgid "Between"
+msgstr "Entre"
+
+msgid "Error Sending Mail"
+msgstr "Erreur envoi de courrier électronique"
+
+msgid "Their Password"
+msgstr "Their Password"
+
+msgid "Match Official Active?"
+msgstr "Match Official Active?"
+
+msgid "Statistics"
+msgstr "Statistiques"
+
+msgid "Home Venue Address"
+msgstr "Adresse du lieu de domicile"
+
+msgid "The list is limited to the first [_1] entries."
+msgstr "La liste est limitée aux [_1] premières entrées."
+
+msgid "All Age Groups"
+msgstr "Toutes les catégories d’âge"
+
+msgid "Compulsory Field"
+msgstr "Compulsory Field"
+
+msgid "None"
+msgstr "Aucun"
+
+msgid "The following fields are compulsory and need to be filled in"
+msgstr "The following fields are compulsory and need to be filled in"
+
+msgid "Contact Person 2"
+msgstr "Nom du Contact 2"
+
+msgid "State"
+msgstr "Etat"
+
+msgid "is not more than or equal to [_1]"
+msgstr "is not more than or equal to [_1]"
+
+msgid "Approx. Time"
+msgstr "Temps Approximatif"
+
+msgid "No Tags Found"
+msgstr "No Tags Found"
+
+msgid "Any Allergies"
+msgstr "Allergies"
+
+msgid "Home Venue Name"
+msgstr "Nom du lieu de domicile"
+
+msgid "Last Recorded Game"
+msgstr "Last Recorded Game"
+
+msgid "Username/Code"
+msgstr "Nom d'utilisateur/code"
+
+msgid "Parent/Guardian 1 Assistance Area"
+msgstr "Parent/Guardian 1 Assistance Area"
+
+msgid "Parent/Guardian 1 Phone 2"
+msgstr "Parent/Guardian 1 Phone 2"
+
+msgid "Any Organisation"
+msgstr "Toute Organisation"
+
+msgid "DISPLAY_REPORT"
+msgstr "Ouvrez l'état pour l'affichage sur l'écran"
+
+msgid "Coach in<br>Association?"
+msgstr "Entraîneur<br>en Association?"
+
+msgid "Weight"
+msgstr "Poids"
+
+msgid "[_1] updated successfully"
+msgstr "[_1] a été a mis à jour avec succès"
+
+msgid "Passport Expiry Date"
+msgstr "Date d'expiration du passeport"
+
+msgid "Accreditation Category"
+msgstr "Catégorie d'accréditation"
+
+msgid "School Grade"
+msgstr "School Grade"
+
+msgid "More Than"
+msgstr "Plus Que"
+
+msgid "ROLLOVER_INSTRUCTIONS"
+msgstr "<p"
+
+msgid "View Receipt"
+msgstr "View Receipt"
+
+msgid "Problem Updating Fields"
+msgstr "Problem Updating Fields"
+
+msgid "Teams"
+msgstr "Equipes"
+
+msgid "cannot have spaces"
+msgstr "cannot have spaces"
+
+msgid "Response Code"
+msgstr "Response Code"
+
+msgid "This is the list of the last 20 changes peformed."
+msgstr "This is the list of the last 20 changes peformed."
+
+msgid "Phone"
+msgstr "Téléphone"
+
+msgid "International Zones"
+msgstr "International Zones"
+
+msgid "No Photo Found"
+msgstr "Aucune photo trouvée"
+
+msgid "EMAIL_REPORT"
+msgstr "E-mail du rapport dans un format adapté à être importé dans un autr"
+
+msgid "Hair Colour"
+msgstr "Couleur des cheveux"
+
+msgid "You have entered an Invalid Date of birth"
+msgstr "La date de naissance entrée n'est pas valide"
+
+msgid "must be [_1] characters long"
+msgstr "must be [_1] characters long"
+
+msgid "Click here to resolve it."
+msgstr "Cliquez ici pour résoudre."
+
+msgid "Association Summary"
+msgstr "Résumé des associations"
+
+msgid "Gender"
+msgstr "Sexe"
+
+msgid "Help"
+msgstr "Aide"
+
+msgid "All"
+msgstr "Tous"
+
+msgid "Venues"
+msgstr "Sites"
+
+msgid "WELCOME"
+msgstr "<p"
+
+msgid "Like"
+msgstr "Ressemble"
+
+msgid "Duplicate Resolution"
+msgstr "Résolution des Doublons"
+
+msgid "Signature Sighted"
+msgstr "Signature Voyants"
+
+msgid "Accreditation Result"
+msgstr "Accreditation Result"
+
+msgid "Update"
+msgstr "Mettre à jour"
+
+msgid "Photo"
+msgstr "Photo"
+
+msgid "I cannot find any records of changes"
+msgstr "Il n'y a pas de rapport des modifications"
+
+msgid "Choose the options below to set up your event"
+msgstr "Choisissez les options ci-dessous pour configurer votre événement :"
+
+msgid "Maiden name"
+msgstr "Nom de jeune fille"
+
+msgid "Reset"
+msgstr "Réinitialiser"
+
+msgid "Search found the following results"
+msgstr "La recherche a trouvé les résultats suivants"
+
+msgid "Identification Number"
+msgstr "Identification Number"
+
+msgid "Home Phone"
+msgstr "Téléphone à la maison"
+
+msgid "Date Last Registered"
+msgstr "Dernière Date Enregistrée"
+
+msgid "Manage Lookup Information"
+msgstr "Manage Lookup Information"
+
+msgid "Edit Details"
+msgstr "Modifier les détails"
+
+msgid "No Age Group"
+msgstr "Aucune catégorie d’âge"
+
+msgid "Re-Accreditation"
+msgstr "Re-Accreditation"
+
+msgid "Emergency Contact Number"
+msgstr ""
+
+msgid "List of Payment Records"
+msgstr "Liste des rapports de paiement"
+
+msgid "Accreditation"
+msgstr "Accréditation"
+
+msgid "Saved Report"
+msgstr "Rappeler rapport"
+
+msgid "Mark Member as Duplicate"
+msgstr "Marquer membre comme un doublon"
+
+msgid "Ask for Photo?"
+msgstr "Demander pour la photo"
+
+msgid "Other Fields"
+msgstr "Autres domaines"
+
+msgid "Search Results"
+msgstr "Résultats de la recherche"
+
+msgid "Parent/Guardian 1 Salutation"
+msgstr "Parent/Guardian 1 Salutation"
+
+msgid "Address Line 1"
+msgstr "Adresse Ligne 1"
+
+msgid "Emergency Contact Name"
+msgstr ""
+
+msgid "Fitness Tests"
+msgstr "Tests Sportifs"
+
+msgid "Update Information"
+msgstr "Mettre à jour les Informations"
+
+msgid "Parent/Guardian 2 Email"
+msgstr "Parent/Guardian 2 Email"
+
+msgid "Display"
+msgstr "Affichage"
+
+msgid "Middle name"
+msgstr "Deuxième prénom"
+
+msgid "Status Updated"
+msgstr "Statut mis à jour"
+
+msgid "Coach in<br>Club?"
+msgstr "Entraîneur dans<br>le Club?"
+
+msgid "Deceased?"
+msgstr "Décédé?"
+
+msgid "AUTO_INTROTEXT"
+msgstr "Modifier les données dans les cases ci-dessous tel que requis. Lorsqu"
+
+
+msgid "No outstanding tasks"
+msgstr ""
+
+msgid "The following are the outstanding tasks to be authorised"
+msgstr ""
+
+msgid "Registration Authorisation"
+msgstr ""
+
+"Registration constants 
+
+msgid "Player"
+msgstr ""
+
+msgid "Coach"
+msgstr ""
+
+msgid "Referee"
+msgstr ""
+
+msgid "Amateur"
+msgstr ""
+
+msgid "Professional"
+msgstr ""
+
+msgid "Football"
+msgstr ""
+
+msgid "Beach Soccer"
+msgstr ""
+
+msgid "Futsal"
+msgstr ""
+
+msgid "New Registration"
+msgstr ""
+
+msgid "Renewal"
+msgstr ""
+
+msgid "Amendment"
+msgstr ""
+
+msgid "Transfer"
+msgstr ""
+
+msgid "Senior"
+msgstr ""
+
+msgid "Youth"
+msgstr ""

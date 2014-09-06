@@ -1,0 +1,64 @@
+<script src="js/jquery.tools.min.js"></script>
+<script src="js/defcodeoptionsorder.js"></script>
+
+<link rel="stylesheet" type="text/css" href="css/defcodeoptionsorder.css">
+
+<div style="display:none">
+    <form>
+        <input type="hidden" id="cff_client" value="[% client %]">
+        <input type="hidden" id="cff_type" value="[% dcType %]">
+        <input type="hidden" id="cff_key" value="[% tkey %]">
+    </form>
+</div>
+
+<div id="reorder">
+    <p>Choose a value from the list below to edit.  Some options may be locked by your national/international body and cannot be edited.</p>
+    <p>Reorder the options by dragging them to position. The new order is saved automatically.</p>
+
+    [% IF defCodes.size %]
+        <div class="dbdata">
+            <div id="avfields">
+                <ul id="sortable">
+                    [% FOREACH defCode IN defCodes %]
+                        <li class="fieldblock-li" id="foo_[% defCode.intCodeID %]">
+                            <div class="RO_fieldblock">
+                                <div class="move-icon"></div>
+                                <div class="RO_fieldname" id="joo_[% defCode.intCodeID %]">[% defCode.strName %]</div>
+                                <div class="fieldlinks">
+                                    [% IF defCode.intAssocID %]
+                                        <a href="[% target %]?client=[% client %]&amp;lki=[% defCode.intCodeID %]&amp;a=[% editAction %]&amp;t=[% dcType %]">Edit</a>
+                                    [% ELSE %]
+                                        <<span class="button-small generic-button">Locked</span>
+                                    [% END %]
+                                    [% IF allowBulkTags AND dcType == -24 %]
+                                        <a href="[% target %]?client=[% client %]&amp;lki=[% defCode.intCodeID %]&amp;a=[% clearAction %]&amp;t=[% dcType %]">Clear All</a>
+                                        <a href="[% target %]?client=[% client %]&amp;lki=[% defCode.intCodeID %]&amp;a=[% selectAction %]&amp;t=[% dcType %]">Select All</a>
+                                    [% END %]
+                                    [% IF defCode.intAssocID %]
+                                        <a class="delopt" id="del_[% defCode.intCodeID %]" href="">Delete</a>
+                                    [% END %]
+                                </div>
+                            </div>
+                        </li>
+                    [% END %]
+                </ul>
+            </div>
+        </div>
+
+        [% IF allowAdds %]
+	        <p><span class="button-small generic-button"><a href="[% target %]?client=[% client %]&amp;a=[% editAction %]&amp;t=[% dcType %]">Add a New Option</a></span></p>
+        [% END %]
+    [% ELSE %]
+		<div class="warningmsg">No Records could be found</div>
+        [% IF allowAdds %]
+	        <p><span class="button-small generic-button"><a href="[% target %]?client=[% client %]&amp;a=[% editAction %]&amp;t=[% dcType %]">Add a New Option</a></span></p>
+        [% END %]
+    [% END %]
+</div>
+
+<div id="dialog-modal" title="Option Deletion" style="display:none">
+    <div class="warningmsg">
+      <p>If you proceed, this record plus all the corresponding data stored against members will be deleted.</p>
+      <p>Once deletion has occurred, there is no way to restore. It is therefore important that you are sure that this is what you want to do.</p>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+.tablescroll
+{ font: 12px normal Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif; background-color:#fff; }
+
+.tablescroll {
+    border:1px solid #ccc;
+    border-top:0;
+    border-right:0;
+    border-bottom:0;
+}
+
+.tablescroll td
+{ padding:3px 5px; }
+
+.tablescroll_wrapper
+{ border-left:0; 
+  border-bottom:1px solid #ccc;
+  border-right:1px solid #ccc;
+}
+
+.tablescroll_head
+{ font-size:11px; font-weight:bold; background-color:#eee; border-left:0; border-top:1px solid #ccc;
+  border-right:1px solid #ccc; }
+
+.tablescroll thead th {
+  color: #000000;
+  font-family:Arial, Verdana, Geneva, sans-serif;
+  font-size:12px;
+  border-bottom:1px solid #ccc;
+  padding:5px;
+  text-align:left;
+  background:url(../js/ext-2.2/resources/images/default/toolbar/bg.gif) repeat-x bottom;
+  background-color: #DDDDDD;
+}
+
+.tablescroll thead td
+{ border-right:0; border-bottom:0; }
+
+.tablescroll tbody td
+{ border-right:0; border-bottom:0;  padding-left:5px; }
+
+.tablescroll tbody tr.first td
+{ border-top:0; }
+
+.tablescroll_foot
+{ font-weight:bold; background-color:#eee; border-left:0; border-top:0; margin-top:3px; }
+
+.tablescroll tfoot td
+{ border-right:0; border-bottom:0; }
+
+.tablescroll td.rowshade {
+		background-color:#F8F8F8;
+		border:0px;
+		border-top:1px solid #EDEDED;
+		border-bottom:1px solid #EDEDED;
+}
+

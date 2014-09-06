@@ -1,0 +1,28 @@
+[% IF SalesAdBlock %]
+<div align="right">[% SalesAdBlock %]</div>
+[% END %]
+<p>Hi, you have successfully joined [% ClubName %].</p>
+
+[% IF !UsePassport %]
+<p>We have issued you with a username and password, you might need this in the future so please retain this email.</p>
+
+<b>
+<table>
+  <tr>
+    <td>Username</td>
+    <td>[% Username %]</td>
+        </tr>
+        <tr>
+    <td>Password:</td>
+    <td>[% Password %]</td>
+  </tr>
+</table>
+</b>
+[% END %]
+
+<p>[% AuthEmailText  %]</p>
+[% IF !regoEmail_HideThankYou %]
+<p>Thank you for being part of our organisation.</p>
+[% END %]
+
+<p>[% ClubName %]</p>

@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+       <script>
+        var _prum = [['id', '53101fc1abe53d5827000000'],
+             ['mark', 'firstbyte', (new Date()).getTime()]];
+        (function() {
+            var s = document.getElementsByTagName('script')[0]
+            , p = document.createElement('script');
+            p.async = 'async';
+            p.src = '//rum-static.pingdom.net/prum.min.js';
+            s.parentNode.insertBefore(p, s);
+         })();
+         </script>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.22/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="js/jquery-ui/css/theme/jquery-ui-1.8.22.custom.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href="css/spfont.css"> 
+        <link rel="stylesheet" type="text/css" href="css/regoform.css">
+        <link rel="stylesheet" type="text/css" href="css/regoform_2013.css">
+
+        <script type="text/javascript" src="js/regoform.js"></script>
+
+        [% head %]
+        <title>[% title %]</title>
+    </head>
+    <body>
+        <div id="pagewrapper">
+            <div id="pageheader">
+                [% page_header %]
+            </div>
+            <div id="pageholder">
+                <div id="content">
+                    [% page_content %]
+                </div> <!-- End Content --> 
+                <div id="pagefooter">
+                    [% page_footer %]
+                </div>
+            </div> <!-- End Page Holder --> 
+        </div> <!-- End Page Wrapper --> 
+        [% page_end %]
+    </body>
+</html>

@@ -1,0 +1,73 @@
+/* DEFAULT CLUB FINDER STYLESHEET */
+
+body {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 11px;
+	color: #000000;
+	background-color: #FFFFFF;
+	padding: 0px;
+  margin: 0px auto;
+  text-align: center;
+  width: 620px;
+}
+
+#content {
+  padding-left:5px;
+  padding-right:10px;
+}
+
+#page_container {
+  text-align:left;
+  width: 610px;
+}
+
+#result {
+  border-bottom: 1px solid #0A3E6D;
+  margin-bottom: 10px;
+}
+
+.result_heading {
+	color: #1864A0;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.section_heading  {
+	text-decoration: none;
+	color: #01519A;
+	font-weight: bold;
+	vertical-align: top;
+}
+
+#contacts_container {
+  width: 620px;
+}
+
+#contact {
+  float: left;
+  width: 200px;
+}
+
+p {
+  text-align:left;
+}
+
+.value {
+  text-align:left;
+}
+
+.label {
+  text-align:right;
+}
+
+.copyright {
+	background-color: #0A3E6D;  
+  color: #ffffff;
+  height: 25px;
+  line-height: 25px;
+  margin-top:15px;
+}
+
+[name="EOI_form"] {
+    display: none;
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>[% PageTitle %]</title>
+
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+        <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1/themes/redmond/jquery-ui.css" />
+        <link rel="stylesheet" href="../css/dashboard/dashboard.css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        [% PageHead %]
+
+    </head>
+    <body class="[% BodyClass %]">
+        [% PageBegin %]
+        <nav class="navbar navbar-yachting navbar-static-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Profile</a>
+                </div>
+                [% IF LoggedIn %]
+                    <p class="navbar-text navbar-right"></p>
+                [% END %]    
+            </div>
+        </nav>    
+        <div class="container main">
+            <div class="row">
+                <div id="spheader">
+                    [% PageHeader %]
+                </div>
+            </div>
+
+            <div class="row">
+                [% IF LoggedIn %]
+                    <div class="col-md-3 sidebar">
+                        <div class="user-image">
+                            <img class="profile-pic img-rounded img-responsive">
+                        </div>
+                        <ul class="nav nav-sidebar">
+                            <li><a href="[% Target %]?Section=home;m=[% MemberKey %]" class="nav-details-form">Home</a></li>
+                            <li><a href="[% Target %]?Section=md;m=[% MemberKey %]" class="nav-details-form">Personal Details</a></li>
+                            <li><a href="[% Target %]?Section=ec;m=[% MemberKey %]" class="nav-emerg-form" style="display:none;">Emergency Contact</a></li>
+                            <li><a href="[% Target %]?Section=auth;a=Logout">Logout</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-9">
+                [% ELSE %]
+                    <div class="col-md-12">
+                [% END %]
+                    [% PageContent %]
+                </div>
+            </div>
+        </div>
+        <div class="sticky-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img class="ya-logo footer-logo" src="../images/dashboard/footer_logo.png">
+                    </div>
+                    <div class="col-md-4">
+                        <p><small>&copy; FOX SPORTS PULSE 2014. All rights reserved.</small></p>
+                    </div>
+                    <div class="col-md-4">
+                        <img class="pull-right fsp-logo" src="../images/dashboard/fsplogo_footer_darkbg.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+        [% PageEnd %]
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../js/dashboard/hideShowPassword.min.js"></script>
+        <script type="text/javascript" src="../js/dashboard/dashboard.js"></script>
+    </body>
+</html>

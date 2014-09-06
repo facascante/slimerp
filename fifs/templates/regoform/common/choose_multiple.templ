@@ -1,0 +1,69 @@
+[% IF Errors.size %]
+<div class = "warningmsg">
+	<ul>
+	[% FOREACH error IN Errors %]
+		<li>[% error %]</li>
+	[% END %]
+	</ul>
+</div>
+[% END %]
+
+<style type="text/css">.progress{display:none;}</style>
+
+[% TopText %]
+
+<form action = "[% Target %]" method = "POST" id = "m_formID" class="multi-rego">
+
+[% IF MultiAdult AND MultiChild %] 
+<div class="rego-multi-wrap both-active">
+[% ELSE %]
+<div class="rego-multi-wrap">
+[% END %]
+
+<p class="intro-text">How many people are you registering?</p>
+
+[% IF MultiAdult %]
+<div class = "rego-multi-adult">
+	<p>Adults</p>
+	<select name ="num_adults" size = "1">
+		<option value = "0">0</option>
+		<option SELECTED value = "1">1</option>
+		<option value = "2">2</option>
+		<option value = "3">3</option>
+		<option value = "4">4</option>
+		<option value = "5">5</option>
+		<option value = "6">6</option>
+		<option value = "7">7</option>
+		<option value = "8">8</option>
+		<option value = "9">9</option>
+		<option value = "10">10</option>
+	</select>
+</div>
+[% END %]
+
+[% IF MultiChild %]
+<div class = "rego-multi-child">
+	<p>Children</p>
+	<select name ="num_child" size = "1">
+		<option [% IF MultiAdult %] SELECTED [% END %] value = "0">0</option>
+		<option [% IF !MultiAdult %] SELECTED [% END %] value = "1">1</option>
+		<option value = "2">2</option>
+		<option value = "3">3</option>
+		<option value = "4">4</option>
+		<option value = "5">5</option>
+		<option value = "6">6</option>
+		<option value = "7">7</option>
+		<option value = "8">8</option>
+		<option value = "9">9</option>
+		<option value = "10">10</option>
+	</select>
+</div>
+[% END %]
+
+</div>
+
+	<input type = "submit" value = " [% Lang.txt('Continue') %] " class = "button proceed-button">
+	<input type = "hidden" name ="rfp" value ="vm">
+	[% HiddenFields %]
+
+</form>

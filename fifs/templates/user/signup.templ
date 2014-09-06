@@ -1,0 +1,87 @@
+    <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+<div id="signup-page-wrap">
+
+<div id="register-wrap">
+<div id="register-form">
+[% IF Errors.size %]
+<div id="form-errors-old">
+  <div class = "warningmsg">
+      [% FOREACH error IN Errors %]
+        <div class="error-msg">[% error %]</div>
+      [% END %]
+  </div>
+</div>
+[% ELSE %]
+
+ <form id = "signup-form" action = "[% BaseURL %]/user/signup.cgi" method ="POST">
+    <div class = "signup_prompt">[% Lang.txt('') %]</div>
+    <div id = "signup-email-div" class = "formfield">
+<label for="email">[% Lang.txt('Email Address') %]</label>
+<input type = "text" name = "email" value = "[% strEmail %]" id = "signup-email" class="fields required" title="email address">
+</div>
+    <div id = "signup-fname-div" class = "formfield">
+			<label for="firstname">[% Lang.txt('First Name') %]</label>
+			<input type = "text" name = "firstname" value = "[% strFirstName %]" size = "50" id = "signup-fname" class="fields required" title="first name">
+		</div>
+    <div id = "signup-sname-div" class = "formfield">
+			<label for="familyname">[% Lang.txt('Family Name') %]</label>
+			<input type = "text" name = "familyname" value = "[% strFamilyName %]" size = "50" id = "signup-sname" class="fields required" title="family name">
+	</div>
+<div id = "signup-password-div" class = "formfield">	<label for="password">[% Lang.txt('Password') %]</label>
+   <input type = "password" name = "password" value = "" size = "15" maxsize = "50" id = "signup-password" class="fields required" title="password"></div>
+<div id = "signup-password2-div" class = "formfield">  
+<label for="password2">[% Lang.txt('Re-enter Password') %]</label>
+	  <input type = "password" name = "password2" value = "" size = "15" maxsize = "50" id = "signup-password2" class="fields required" title="re-enter password"></div>
+
+    <input type = "submit" class = "button proceed-button" value =" [% Lang.txt('Signup') %] ">
+    <input type = "hidden" name = "a" value = "SIGNUP">
+	<small class="terms">By clicking <span class="sp-passport">Signup</span> you agree to the <span class="sp-passport">SportingPulse</span> <a href="http://sportingpulse.com/terms" target="_blank">terms & conditions</a></small>
+  </form>
+</div>
+
+</div>
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		jQuery("#signup-form").validate({
+			rules: {
+				email : {
+					required: true,
+					email: true
+				},
+				firstname : {
+					required: true,
+					minlength: 2
+				},
+				familyname : {
+					required: true,
+					minlength: 2
+				},
+				password : {
+					required: true,
+					minlength: 6
+				},
+				password2 : {
+					required: true,
+					minlength: 6,
+					equalTo: "#signup-password"
+				},
+			},
+			messages: {
+				firstname: "[% Lang.txt('Please enter your First Name') %]",
+				familyname: "[% Lang.txt('Please enter your Family Name') %]",
+				password: {
+					required: "[% Lang.txt('Please provide a password') %]",
+					minlength: "[% Lang.txt('must be at least 6 characters long') %]"
+				},
+				password2 : {
+					required: "[% Lang.txt('Please provide a password') %]",
+					minlength: "[% Lang.txt('must be at least 6 characters long') %]",
+					equalTo: "[% Lang.txt('Passwords do not match') %]"
+				},
+				email: "[% Lang.txt('Please enter a valid email address') %]",
+			}
+		});
+	});
+</script>
+[% END %]
+</div>

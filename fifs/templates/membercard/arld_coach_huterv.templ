@@ -1,0 +1,55 @@
+[% WRAPPER membercard/MemberCard_Wrapper.templ %]
+
+	[% USE date %]
+	[% varDate =  date.format(date.now(), '%d/%m/%Y') %]
+
+
+	<style type="text/css">
+		.line {
+			margin-bottom:10px;
+			padding-left:5px;
+		}
+	</style>
+
+	[% FOREACH m = Members %]
+
+		<!-- [% m.intMemberID %] -->
+		[% varClub = '' %]
+		[% varDefaultClub = '' %]
+		[% FOREACH c = m.Clubs %] 
+			[% NEXT IF c.intAssocID != 7799 %]
+			[% NEXT IF c.intStatus != 1 %]
+			[% varDefaultClub = c.strName %]
+			[% NEXT IF c.intPrimaryClub == 1 %]
+			[% varClub = c.strName %]
+		[% END %]
+
+		[% IF varClub == '' %]
+			[% varClub = varDefaultClub %]
+		[% END %]
+
+		<div style="font-size:12px;width:310px;height:170px;">
+		<table border="0" style="width:319px;">
+			<tr>
+				<td style="text-align:center;"><img src="formimages/HunterValleyJRL.jpg" border="0" width="80"></td>
+				<td style="text-align:center;font-size:12px;"><div style="border: 1px solid black;padding:5px;"><b>COACH 2011</b></div></td>
+				<td style="text-align:center;"><img src="formimages/arld_card_crl.gif" border="0" height="50"></td>
+			</tr>
+		</table>
+		<table border="0" style="width:319px;margin-top:0px;">
+			<tr>
+				<td valign="top">
+					<div class="line">[% m.strNationalNum %]</div>
+					<div class="line"><b>[% m.strFirstname %] [% m.strSurname %]</b></div>
+					<div class="line">[% m.dtDOB %]</div>
+					<div class="line"><b>[% varClub %]</b></div>
+				</td>
+				<td valign="top" align="right">
+					<img src="https://reg.sportingpulse.com/getphoto.cgi?client=[% m.client %]" alt="" height="100">
+				</td>
+		</table>
+		</div>
+
+	[% END %]
+
+[% END %]

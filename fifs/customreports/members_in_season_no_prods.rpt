@@ -1,0 +1,33 @@
+{
+	SQL => qq[
+SELECT DISTINCT M.strFirstname, M.strNationalNum, M.strEmail, M.strPhoneHome, M.strSurname	
+FROM tblMember M
+INNER JOIN tblAssoc A ON A.intAssocID=###ASSOCID###
+INNER JOIN tblMember_Seasons_###REALMID### MS ON MS.intMemberID = M.intMemberID  AND MS.intSeasonID=A.intNewRegoSeasonID AND MS.intAssocID=###ASSOCID### AND (IF(###CLUBID###, MS.intClubID=###CLUBID###, MS.intClubID=0)) AND intMSRecStatus>-1
+LEFT JOIN (SELECT DISTINCT M.intMemberID	
+FROM tblMember M
+INNER JOIN tblAssoc A ON intAssocID=###ASSOCID###
+INNER JOIN tblMember_Seasons_###REALMID###  MS ON MS.intMemberID = M.intMemberID  AND MS.intSeasonID=A.intNewRegoSeasonID AND MS.intAssocID=###ASSOCID### AND (IF(###CLUBID###, MS.intClubID=###CLUBID###, MS.intClubID=0)) AND intMSRecStatus>-1
+LEFT JOIN tblProducts P ON P.intProductSeasonID = A.intNewRegoSeasonID 
+LEFT JOIN tblTransactions T ON  P.intProductID = T.intProductID AND T.intTableType=1 AND T.intID=M.intMemberID AND T.intStatus>-1 AND T.intAssocID=A.intAssocID
+WHERE 
+T.intTransactionID IS NOT NULL) `temp` ON `temp`.intMemberID = M.intMemberID
+WHERE `temp`.intMemberID IS NULL
+	],
+	StatsReport => 0,
+	MemberTeam => 0,
+	ReportEntity => 5,
+	ReportLevel => 0,
+	Template => 'default',
+	DistinctValues => 1,
+	Labels => [
+		['strNationalNum','Member Number'],
+		['strFirstname','First Name'],
+		['strSurname','Surname'],
+		['strPhone','Phone'],
+		['strEmail','Email'],
+	],
+	Sort => [
+		['strSurname','ASC','string'],
+	],
+}

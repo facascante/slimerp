@@ -1,0 +1,48 @@
+[% WRAPPER membercard/MemberCard_Wrapper.templ %]
+
+	[% USE date %]
+	[% varDate =  date.format(date.now(), '%d/%m/%Y') %]
+
+
+	<style type="text/css">
+		.line {
+			margin-bottom:5px;
+		}
+	</style>
+
+	[% FOREACH m = Members %]
+
+    <!-- [% m.intMemberID %] -->
+    [% varClub = '' %]
+    [% varDefaultClub = '' %]
+    [% FOREACH c = m.Clubs %]
+      [% NEXT IF c.intAssocID != 108 %]
+      [% NEXT IF c.intStatus != 1 %]
+      [% varDefaultClub = c.strName %]
+      [% NEXT IF c.intPrimaryClub == 1 %]
+      [% varClub = c.strName %]
+    [% END %]
+
+    [% IF varClub == '' %]
+      [% varClub = varDefaultClub %]
+    [% END %]
+
+    <div style="font-size:10px;width:310px;height:181px;background:url(/formsimg/group7_official_card.gif);">
+    <table border="0" style="width:310px;">
+      <tr>
+        <td valign="top" style="padding-left:60px;padding-top:75px;">
+          <div class="line">NRLID: [% m.strNationalNum %]</div>
+          <div class="line"><b>[% m.strFirstname %] [% m.strSurname %]</b></div>
+          <div class="line"><b>[% varClub %]</b></div>
+					<div class="line"><b>FAO</b></div>
+        </td>
+        <td valign="top" style="width:130px;text-align:right;">
+          <img src="https://reg.sportingpulse.com/getphoto.cgi?client=[% m.client %]" alt="" height="160">
+        </td>
+      </tr>
+    </table>
+    </div>
+
+	[% END %]
+
+[% END %]

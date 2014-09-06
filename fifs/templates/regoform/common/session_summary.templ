@@ -1,0 +1,16 @@
+[% IF Summary.Members.count %]
+<div id = "session_summary">
+<div class = "session_summary_mlist">
+[% FOR m IN Summary.Members %]
+	<div class = "session_summary_member">
+<b>[% m.Details.Type %]</b><br>
+[% m.Details.FirstName %] [% m.Details.Surname %]<br>
+Cost [% CurrencySymbol %][% m.MemberCost %]
+	</div>
+[% END %]
+</div>
+<div>
+<b>Total Cost: [% CurrencySymbol %][% Summary.TotalCost %]</b>
+</div>
+</div>
+[% END %]

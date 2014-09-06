@@ -1,0 +1,74 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="https://reg.sportingpulse.com/v5/css/style.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+	[% header %]
+	[% Style %]
+	<div id="site-wrap" style="padding-left:20px;">
+<br><br>
+		<div id="bodycontent">
+<div id="content">
+		</div>
+	</div>
+	</div>
+[% IF checkout %]
+	[% checkout %]
+[% ELSE %]
+<form method="POST" action="invoice_pay.cgi">
+	<div><b>Association Name:</b> [% AssocName %]</div>
+[% IF ClubName %]
+	<div><b>Club Name:</b> [% ClubName %]</div>
+[% END %]
+		<div>Payee Name: <input type="text" name="payee"></div>
+		<div>Payee Notes: <textarea name="payee_notes" rows="2" cols="20"></textarea></div>
+[% CountOwing =0 %]
+[% FOREACH txn = TXNs %]
+	<p>-------------------</p>
+	<div><b>ITEM [% txn.productName %]</b><br>
+	<b>Purchasing for: [% txn.PurchasingForName %]</b><br>
+	Original Amount \$[% txn.curAmount %]<br>
+	Amount owing \$[% txn.AmountOwing %]<br>
+	[% IF txn.intStatus==0 AND txn.AmountOwing > 0 %]
+		[% CountOwing=1 %]
+		Amount to Pay \$<input type="text" name="[% txn.intTransactionID %]_amount_paying" size="5"><br>
+		<input type="hidden" name="[% txn.intTransactionID %]_txnID" value="[% txn.intTransactionID %]">
+	[% ELSE %]
+		<b>Already Paid</b><br>
+	[% END %]
+	</div>
+[% END %]
+	<p>-------------------</p><br>
+[% IF CountOwing > 0 %]
+<input type="hidden" name="a" value="submit">
+<input type="hidden" name="txns" value="[% txns %]">
+<input type="hidden" name="t" value="[% txnPPID %]">
+<input type="hidden" name="XXclubID" value="[% clubID %]">
+<input type="hidden" name="aID" value="[% assocID %]">
+<input type="submit" name="submit" value="P R O C E E D"><br><br>
+<div id="footer-links">
+        <div class="footer-nav">
+                <a class="footer-nav-item gd" title="GameDay.com.au" alt="GameDay.com.au" href="http://www.gameday.com.au/" target="_blank"></a>
+                <a class="footer-nav-item sp" title="SportingPulse.com" alt="SportingPulse.com" href="http://www.sportingpulse.com/" target="_blank"></a>
+                <a class="footer-nav-item au" title="About Us" alt="About Us" href="http://corp.sportingpulse.com/index.php?id=6" target="_blank"></a>
+                <a class="footer-nav-item ad" title="Advertise" alt="Advertise" href="http://corp.sportingpulse.com/index.php?id=55" target="_blank"></a>
+                <a class="footer-nav-item cu" title="Contact Us" alt="Contact Us" href="http://corp.sportingpulse.com/index.php?id=66" target="_blank"></a>
+                <a class="footer-nav-item s" title="Support" alt="Support" href="http://support.sportingpulse.com/" target="_blank"></a>
+                <a class="footer-nav-item pr" title="Privacy" alt="Privacy" href="http://corp.sportingpulse.com/index.php?id=75" target="_blank"></a>
+                <a class="footer-nav-item se" title="Search" alt="Search" href="http://sport.gameday.com.au/index.php?id=103" target="_blank"></a>
+        </div>
+        <div class="sp-logo">
+                <a class="ps" title="Powered by SportingPulse" alt="Powered by SportingPulse" href="http://www.sportingpulse.com/" target="_top"></a>
+        </div>
+</div>
+<div class="copyright">[% Copyright %]</div>
+        <div id = "dialogform"></div>
+</div>
+[% END %]
+</form>
+16096822<br>
+http://bi.devel.pnp-local.com.au/swm/trunk/web/regoform.cgi?aID=5166&formID=16860
+[% END %]
+</body>
+</html>

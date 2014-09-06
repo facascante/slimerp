@@ -1,0 +1,123 @@
+[% WRAPPER membercard/MemberCard_Wrapper.templ %]
+
+  <style type="text/css">
+    body {
+      font-family: arial;
+      padding: 0px;
+      margin: 0px;
+    }
+    #card {
+      width: 320px;
+      height: 192px;
+    }
+    #photo {
+      float: right;
+      width: 90px;
+      padding-left:10px;
+      padding-right:10px;
+    }
+    #details {
+      float: left;
+      width: 200px;
+      height: 160px;
+      line-height: 18px;
+      margin-bottom: 2px;
+    }
+    .club {
+      height:25px;
+      font-weight: bold;
+      font-size: 12px;
+    }
+    .name {
+      height: 45px;
+      line-height: 20px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .content_label {
+      float: left;
+      width: 50px;
+      line-height: 14px;
+      font-size: 11px;
+    }
+    .content_value {
+      float: left;
+      width: 80px;
+      line-height: 14px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    #age {
+      float: right;
+      width: 55px;
+      height: 30px;
+      padding-top: 40px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      color: #B80D2A;
+    }
+    #assoc {
+      clear: both;
+      text-align: center;
+      padding: 5px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #ffffff;
+      background-color: #CC5533;
+    }
+    #season {
+      float: right;
+      width: 105px;
+      clear: both;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      color: red;
+    }
+    #right_col {
+      float:right;
+      width:110px;
+    }
+  </style>
+
+
+  [% FOREACH m = Members %]
+    <div id="card">
+      <!-- [% m.intMemberID %] -->
+      <div id="right_col">
+        <div id="season">2012</div>
+        [% IF m.intPhoto == 1 %]
+          [% IF m.strNatCustomStr3 != '' %]
+            <div id="photo"><img src="https://live.myfootballclub.com.au/shared/Files/IndividualImages/[% m.strNatCustomStr3 %]" alt="" height="100"></div>
+          [% ELSE %]
+            <div id="photo"><img src="https://reg.sportingpulse.com/getphoto.cgi?client=[% m.client %]" alt="" height="100"></div>
+          [% END %]
+        [% ELSE %]
+          <div id="photo"></div>
+        [% END %]
+      </div>
+      <div id="details">
+        <img src="https://reg.sportingpulse.com/formimages/fnsw_logo.jpg" border="0">
+        <div class="club">
+          [% FOREACH s = m.Seasons %]
+            [% NEXT IF s.intMSRecStatus != 1 %]
+            [% NEXT IF s.intClubID < 1 %]
+						[% NEXT IF s.intAssocID != assocID %]
+            [% varClub = s.intClubID %]
+          [% END %]
+          [% FOREACH c = m.Clubs %]
+            [% NEXT IF c.intStatus != 1 %]
+            [% NEXT IF c.intClubID != varClub %]
+            [% c.strName %] <br>
+          [% END %]
+        </div>
+        <div class="name">[% m.strFirstname %] <br> [% m.strSurname %]</div>
+        <!--<div class="content_label">D.O.B.</div> <div class="content_value">[% m.dtDOB %]</div> <br>-->
+        <div class="content_label">FFA#</div> <br> <div class="content_value">[% m.strNationalNum %]</div>
+      </div>
+      <div id="assoc">MANAGER</div>
+    </div>
+  [% END %]
+
+[% END %]

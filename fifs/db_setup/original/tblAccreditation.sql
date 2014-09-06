@@ -1,0 +1,22 @@
+CREATE TABLE `tblAccreditation` (
+  `intAccreditationID` int(11) NOT NULL AUTO_INCREMENT,
+  `intMemberID` int(11) DEFAULT NULL,
+  `intQualificationID` int(11) DEFAULT NULL,
+  `intRealmID` int(11) DEFAULT NULL,
+  `intDataEntryPassportID` int(11) DEFAULT NULL,
+  `intSport` int(11) DEFAULT NULL,
+  `intLevel` int(11) DEFAULT NULL,
+  `intProvider` int(11) DEFAULT NULL,
+  `dtApplication` date DEFAULT NULL,
+  `dtStart` date DEFAULT NULL,
+  `dtExpiry` date DEFAULT NULL,
+  `intReaccreditation` int(11) DEFAULT NULL,
+  `intStatus` int(11) DEFAULT NULL,
+  `strCourseNumber` varchar(50) DEFAULT NULL,
+  `strNotes` varchar(200) DEFAULT NULL,
+  `intEducationID` int(11) DEFAULT NULL,
+  `intRecStatus` int(11) DEFAULT '1',
+  `tTimeStamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`intAccreditationID`),
+  INDEX index_MemberRealmStatus (intMemberID, intRealmID, intRecStatus)
+);

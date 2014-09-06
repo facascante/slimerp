@@ -1,0 +1,124 @@
+
+<style type="text/css">
+	#reptable td {
+		padding:5px;
+		text-align:center;
+	}
+</style>
+
+<table class="report-table">
+  <caption>
+    <h1>Team Demographics Report</h1>
+  </caption>
+  <thead>
+  <tr>
+    <th style="text-align:left;">Zone</th>
+    <th style="text-align:left;">League</th>
+    <th style="text-align:left;">Club</th>
+    <th>04 Years</th>
+    <th>05 Years</th>
+    <th>06 Years</th>
+    <th>07 Years</th>
+    <th>08 Years</th>
+    <th>09 Years</th>
+    <th>10 Years</th>
+    <th>11 Years</th>
+    <th>12 Years</th>
+    <th>13 Years</th>
+    <th>14 Years</th>
+    <th>15 Years</th>
+    <th>16 Years</th>
+    <th>17 Years</th>
+    <th>18 Years</th>
+    <th>Snrs 19+</th>
+    <th>Total</th>
+  </tr>
+  </thead>
+  <tbody>
+
+[% FOREACH m = ReportData %]
+
+	[% IF row == 'odd' %]
+		[% SET row = 'even' %]
+	[% ELSE %]
+		[% SET row = 'odd' %]
+	[% END %]
+	[% IF oldzone == m.strZone %]
+		[% SET zone = "" %]	
+	[% ELSE %]
+		[% SET zone = m.strZone %]	
+	[% END %]
+	[% SET oldzone =  m.strZone %]	
+
+	<tr class='[% row %]'>
+		<td style="text-align:left;">[% zone %]</td>
+ 		<td style="text-align:left;">[% m.strAssocName %]</td>
+ 		<td style="text-align:left;">[% m.strClubName %]</td>
+ 		<td>[% m.strFour %]</td>
+ 		<td>[% m.strFive %]</td>
+ 		<td>[% m.strSix %]</td>
+ 		<td>[% m.strSeven %]</td>
+ 		<td>[% m.strEight %]</td>
+ 		<td>[% m.strNine %]</td>
+ 		<td>[% m.strTen %]</td>
+ 		<td>[% m.strEleven %]</td>
+ 		<td>[% m.strTwelve %]</td>
+ 		<td>[% m.strThirteen %]</td>
+ 		<td>[% m.strFourteen %]</td>
+ 		<td>[% m.strFifteen %]</td>
+ 		<td>[% m.strSixteen %]</td>
+ 		<td>[% m.strSeventeen %]</td>
+ 		<td>[% m.strEighteen %]</td>
+ 		<td>[% m.strSenior %]</td>
+ 		<td>[% m.intTotal %]</td>
+	</tr>
+
+  [% SET year_04 = year_04 + m.strFour %]
+  [% SET year_05 = year_05 + m.strFive %]
+  [% SET year_06 = year_06 + m.strSix %]
+  [% SET year_07 = year_07 + m.strSeven %]
+  [% SET year_08 = year_08 + m.strEight %]
+  [% SET year_09 = year_09 + m.strNine %]
+  [% SET year_10 = year_10 + m.strTen %]
+  [% SET year_11 = year_11 + m.strEleven %]
+  [% SET year_12 = year_12 + m.strTwelve %]
+  [% SET year_13 = year_13 + m.strThirteen %]
+  [% SET year_14 = year_14 + m.strFourteen %]
+  [% SET year_15 = year_15 + m.strFifteen %]
+  [% SET year_16 = year_16 + m.strSixteen %]
+  [% SET year_17 = year_17 + m.strSeventeen %]
+  [% SET year_18 = year_18 + m.strEighteen %]
+  [% SET year_snr = year_snr + m.strSenior %]
+  [% SET total = total + m.intTotal %]
+
+[% END %]
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+  <tr class='[% row %]'>
+    <td></td>
+    <td></td>
+    <td>[% year_04 %]</td>
+    <td>[% year_05 %]</td>
+    <td>[% year_06 %]</td>
+    <td>[% year_07 %]</td>
+    <td>[% year_08 %]</td>
+    <td>[% year_09 %]</td>
+    <td>[% year_10 %]</td>
+    <td>[% year_11 %]</td>
+    <td>[% year_12 %]</td>
+    <td>[% year_13 %]</td>
+    <td>[% year_14 %]</td>
+    <td>[% year_15 %]</td>
+    <td>[% year_16 %]</td>
+    <td>[% year_17 %]</td>
+    <td>[% year_18 %]</td>
+    <td>[% year_snr %]</td>
+    <td><b>[% total %]</b></td>
+  </tr>
+
+  </tbody>
+</table>
+
+[% USE date %]
+<p align="center"><i>Report Generated: [% date.format(filemod_time) %]</i></p>

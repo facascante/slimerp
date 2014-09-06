@@ -1,0 +1,96 @@
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        jQuery('.clrdob').click(function(e){
+            e.preventDefault();
+            var minmax;
+            if (e.target.id == 'clrdob1') minmax = 'Min'; else minmax = 'Max';
+            jQuery('input[name=dt' + minmax + 'DOB_dd]').val('');
+            jQuery('select[name=dt' + minmax + 'DOB_mm]').prop('selectedIndex', 0);
+            jQuery('input[name=dt' + minmax + 'DOB_yyyy]').val('');
+        });
+        jQuery('.clrdob').hover(function(e){
+            var minmax;
+            if (e.target.id == 'clrdob1') minmax = 'Minimum'; else minmax = 'Maximum';
+            jQuery(this).append(jQuery('<span> Clear ' + minmax + ' DOB fields</span>'));
+        },function(){
+            jQuery(this).find("span:last").remove();
+        });
+    });
+</script>
+
+<style>
+    #rules { margin-left:30px; margin-bottom:10px; }
+    #rules .ruleslabel { float:left; display:block; text-align:left; }
+    #rules .ruleslabel1 { width:100px;}
+    #rules .ruleslabel2 { width:150px; }
+    #rules .rulesdob { margin-top:5px; }
+    #rules .clrdob { font-size:8px; vertical-align:2px; }
+    #rules .dob, #gender { height:25px;  margin-bottom:5px; }
+    #rules .dob, #gender, #regoas { margin-top:5px; }
+    #regoas { margin-bottom:10px; }
+</style>
+
+[% stepper_html %]
+<p>Enter the conditions which must be met before the field is displayed on the rego form.</p>
+<br>
+<form>
+    <input type='hidden' name='a' value='[% actn %]'>
+    <input type='hidden' name='fID' value=[% formID %]>
+    <input type='hidden' name='client' value=[% client %]>
+    <input type='hidden' name='selected_fieldID' value=[% fieldID %]>
+    <input type="submit" value="Save" class="button proceed-button">
+    <div id="rules">
+        <div class="rules-row">
+            <span class="label ruleslabel ruleslabel1">Name:</span> <span class='value'>[% fieldLabel %]</span>
+        </div>
+        [% regoAs %]
+        <div class="rules-row">
+            <div id="gender">
+                <span class="label ruleslabel ruleslabel1">Gender:</span>
+                <select name='strGender'>
+                    <option value=0></option>
+                    <option value=1 [% m_selected %]>Male</option>
+                    <option value=2 [% f_selected %]>Female</option>
+                </select>
+            </div>
+        </div>
+        <div class="rules-row">
+            <div class="dob">
+                <span class="label ruleslabel ruleslabel1 rulesdob">Minimum DOB:</span>
+                <input type=text size=2 name='dtMinDOB_dd' value='[% dob_min_dd %]'>
+                <select name='dtMinDOB_mm'>[% dob_min_mm_ddl %]</select>
+                <input type=text size=4 name='dtMinDOB_yyyy' value='[% dob_min_yyyy %]'>
+                <button type="button" class="clrdob" id="clrdob1">C</button>
+                                Older end of Date Range (eg 01 - Jan - 1970)
+            </div>
+        </div>
+        <div class="rules-row">
+            <div class="dob">
+            <span class="label ruleslabel ruleslabel1 rulesdob">Maximum DOB:</span>
+            <input type=text size=2 name='dtMaxDOB_dd' value='[% dob_max_dd %]'>
+            <select name='dtMaxDOB_mm'>[% dob_max_mm_ddl %]</select>
+            <input type=text size=4 name='dtMaxDOB_yyyy' value='[% dob_max_yyyy %]'>
+            <button type="button" class="clrdob" id="clrdob2">C</button>
+                                Younger end of Date Range (eg 31 - Dec - 2000)
+          </div>
+        </div>
+        [% FOREACH field_data = fields %]
+            [% IF field_data.type == 'select' %]
+                <div class="rules-row">
+                    <div>
+                        <span class="label ruleslabel ruleslabel1">[% field_data.label %]:</span>
+                        <select name='[% field_data.field %]'>
+                            [% FOREACH option = field_data.options %]
+                                <option value=[% option.value %] [% IF option.value == field_data.current_value %]selected[% END %]>[% option.label %]</option>
+                            [% END %]
+                        </select>
+                    </div>
+                </div>    
+            [% END %]
+        [% END %]
+        [% stepper_inpt %]
+    </div>
+    <div id="rules-save">
+        <input type="submit" value="Save" class="button proceed-button">
+    </div>
+</form>

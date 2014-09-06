@@ -1,0 +1,39 @@
+[% WRAPPER membercard/MemberCard_Wrapper.templ %]
+	[% FOREACH m = Members %]
+		<div id="card">
+				<b>Member ID:</b> [% m.intMemberID %] <br>
+				<b>FFA Number:</b> [% m.strNationalNum %] <br>
+				<b>Firstname:</b> [% m.strFirstname %] <br>
+				<b>Lastname:</b> [% m.strSurname %] <br>
+				<b>DOB:</b> [% m.dtDOB %] <br>
+				<b>Age In Year:</b> [% m.intAgeInYear %] <br>
+				<b>Season:</b> [% m.strSeasonName %] <br> 
+				<b>Age Group:</b> [% m.intAgeInYear %] <br>
+				<b>Assoc:</b> [% m.strAssocName %] <br>
+				<b>Clubs:</b>
+				[% FOREACH s = m.Seasons %]
+					[% NEXT IF s.intMSRecStatus != 1 %]
+					[% NEXT IF s.intClubID < 1 %]
+					[% varClub = s.intClubID %]
+				[% END %]
+				[% FOREACH c = m.Clubs %]
+					[% NEXT IF c.intStatus != 1 %]
+					[% NEXT IF c.intAssocID != 12371 %]
+					[% NEXT IF c.intClubID != varClub %] 
+					[% c.strName %] <br>
+				[% END %]
+				<br>
+				[% IF m.intPhoto == 1 %]
+					[% IF m.strNatCustomStr3 != '' %]
+						<b>FFA Photo:</b> <br>
+						<img src="https://live.myfootballclub.com.au/shared/Files/IndividualImages/[% m.strNatCustomStr3 %]" alt="" height="100"> <br>
+					[% ELSE %]
+						<b>SP Photo:</b> <br>
+						<img src="https://reg.sportingpulse.com/getphoto.cgi?client=[% m.client %]" alt="" height="100"> <br>
+					[% END %]
+				[% ELSE %]
+					<b>Photo:</b> No Photo <br>
+				[% END %]
+		</div>
+	[% END %]
+[% END %]

@@ -1,0 +1,45 @@
+[%#
+
+	aID		Association ID
+	tID		TeamID
+	mID		MatchID
+	config_ref (as normal)
+	match_ref (as normal)
+
+	data_TeamStaff
+		.staffDesc
+		.nationalNumber
+		.staffSelectBox
+		.StaffID (intAssocStaffID)
+		.staffManualName
+
+
+%]
+[% IF error %]
+	[% error %]
+[% ELSE %]
+<form action="[% Data.target %]" method="post">
+	<div id = "teamstaff_container_[% tID %]" class = "teamstaff_container">
+	<table class="listTable">
+		<tr>
+			<th>Group</th>
+			<th>Position</th>
+			<th>National Number</th>
+			<th>Staff Member</th>
+		</tr>
+		[% FOREACH staff IN data_TeamStaff %]
+			<tr>
+				<td><b>[% staff.Group %]</b></td>
+				<td><b>[% staff.staffDesc %]</b></td>
+				<td><b>[% staff.nationalNumber %]</b></td>
+				<td>[% staff.staffSelectBox %]</td>
+			</tr>
+		[% END %]
+	</table>
+	</div>
+	<input type = "submit" value = "Save " class = "button proceed-button">
+	<input type="hidden" name="client" value="[% client %]">
+	<input type="hidden" name="a" value="T_STAFFS">
+</form>
+<div style ="clear:both;"></div>
+[% END %]

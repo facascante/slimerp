@@ -1,0 +1,39 @@
+@font-face {
+  font-family: 'DINRegular';
+  src: url('../fonts/DINWeb.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/DINWeb.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../fonts/DINWeb.woff') format('woff'); /* Modern Browsers */
+}
+
+@font-face {
+  font-family: 'DINItalic';
+  src: url('../fonts/DINWeb-Ita.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/DINWeb-Ita.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../fonts/DINWeb-Ita.woff') format('woff'); /* Modern Browsers */
+  font-style: italic, oblique;
+}
+
+@font-face {
+	font-family: 'DINBold';
+	src: url('../fonts/DINWeb-Bold.eot'); /* IE9 Compat Modes */
+	src: url('../fonts/DINWeb-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	url('../fonts/DINWeb-Bold.woff') format('woff'); /* Modern Browsers */
+	font-weight:bold;
+}
+
+@font-face {
+	font-family: 'DINBoldIta';
+	src: url('../fonts/DINWeb-BoldIta.eot'); /* IE9 Compat Modes */
+	src: url('../fonts/DINWeb-BoldIta.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	url('../fonts/DINWeb-BoldIta.woff') format('woff'); /* Modern Browsers */
+  font-weight: bold;
+  font-style: italic, oblique;	
+}
+
+@font-face {
+	font-family: 'DINMedium';
+	src: url('../fonts/DINWeb-Medium.eot'); /* IE9 Compat Modes */
+	src: url('../fonts/DINWeb-Medium.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	url('../fonts/DINWeb-Medium.woff') format('woff'); /* Modern Browsers */
+	font-weight: 500;
+}

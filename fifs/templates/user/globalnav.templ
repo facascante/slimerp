@@ -1,0 +1,202 @@
+<div id="pushdown-wrapper" style="display:none;"></div>
+
+<div id="globalnav">
+        <div id="globalnav-inner">
+                <div class="gnav-logo">
+                        <div id="gnav-arrow-wrap"><div class="gnav-splogo"></div><div id="gnav-arrow"></div></div>
+                </div>
+<div class="sp-sign-in-out-wrap">
+        <div class="nav-tools">
+                        <div class = "navoptions">
+                                <span class="nav-link"><a href ="[% PassportURL %]/account/">[% Data.UserName %]</a></span>
+                                <span class="nav-link"><a href ="http://support.sportingpulse.com">Support</a></span>
+                                <span class="nav-link"><a href ="[% BaseURL %]/passport/logout.cgi">Sign out</a></span>
+                        </div>
+        </div>
+</div>
+</div>
+</div>
+<script>
+jQuery(document).ready(function()  {
+
+  function clickclear(thisfield, defaulttext) {
+    if (thisfield.value == defaulttext) {
+    thisfield.value = "";
+    }
+  }
+
+  function clickrecall(thisfield, defaulttext) {
+    if (thisfield.value == "") {
+    thisfield.value = defaulttext;
+    }
+  }
+});
+</script>
+<style>
+#global-nav-wrap {
+  /*      float: left; disabled due to being obscured */
+        font-family: 'DINRegular',sans-serif;
+        width: 100%;
+/*      height: 32px;*/
+	background: url("https://reg.sportingpulse.com/images/global_nav_sprite.png") repeat-x scroll 0 0 transparent;
+}
+
+#globalnav {
+	background: url("https://reg.sportingpulse.com/images/global_nav_sprite.png") repeat-x scroll 0 -33px transparent;
+        float: left;
+        height: 32px;
+        width: 100%;
+}
+#globalnav-inner, .membership-login #globalnav-inner {
+        margin: 0 auto;
+        width: 996px;
+}
+
+.gnav-logo {
+	background: url("https://reg.sportingpulse.com/images/global_nav_sprite.png") no-repeat scroll 0 0 transparent;
+        cursor: pointer;
+        display: block;
+        float: left;
+        height: 32px;
+        margin: 0;
+        position: relative;
+        width: 159px;
+}
+
+.gnav-splogo {
+	background: url("https://reg.sportingpulse.com/images/global_nav_sprite.png") repeat-x scroll 0 -162px transparent; 
+        display: inline;
+        float: left;
+        height: 26px;
+        margin: 2px 10px;
+        width: 104px;
+}
+
+.navoptions {
+        float: right;
+}
+
+.sp-sign-in-out-wrap {
+        float: right;
+        font-size: 12px;
+        line-height: 32px;
+}
+
+.sp-sign-in-out-wrap a {
+        float: left;
+        color: #FFF;
+        height: 32px;
+        padding: 0 10px;
+        display: block;
+}
+
+.sp-sign-in-out-wrap a:hover {
+        background-image: #116faa;
+        background-image: -webkit-linear-gradient(top, #2277b0 50%, #0066a4 50%);
+        background-image: -moz-linear-gradient(top, #2277b0 50%, #0066a4 50%);
+        background-image: -o-linear-gradient(top, #2277b0 50%, #0066a4 50%);
+        background-image: -ms-linear-gradient(top, #2277b0 50%, #0066a4 50%);
+        background-image: linear-gradient(top, #2277b0 50%, #0066a4 50%);
+}
+#gnav-arrow-wrap {
+        float: right;
+        display: inline;
+        width: 159px;
+        height: 32px;
+}
+
+#gnav-arrow {
+	background: url("https://reg.sportingpulse.com/images/global_nav_sprite.png") repeat scroll -23px -353px transparent; 
+        display: inline;
+        float: left;
+        height: 11px;
+        margin: 11px 9px 0;
+        width: 13px;
+}
+
+.arrowup #gnav-arrow {
+        background-position: -13px -352px;
+        width: 13px;
+}
+
+#no-passport {
+        display: none;
+}
+
+/* Media Queries for mobile registrations */
+
+/* Tablet Landscape Layout */
+@media screen and (max-width: 1000px) {
+	#global-nav-wrap {
+		float:none;
+	}
+	#globalnav-inner, .membership-login #globalnav-inner {
+    width: 100%;
+    margin: 0;
+  }
+	#pushdown-wrapper {
+		z-index:2000;
+	}
+	#pushdown-inner {
+		width: 100%;
+	}
+	#pushdown-network, #pushdown-solutions, #pushdown-social {
+    padding: 16px;
+  }
+}
+
+/* Desktop & Tablet Portrait */
+@media screen and (max-width: 768px) {
+	#pushdown-solutions {
+		display:none;
+	}	
+}
+
+/* Tablet Portrait & Mobile Landscape */
+@media screen and (max-width: 640px) {
+
+}
+
+/* Mobile Landscape */
+@media screen and (max-width: 480px) {
+	#pushdown-social {
+		display: none;
+	}
+}
+
+/* Mobile Portrait */
+@media screen and (max-width: 320px) {
+	#globalnav {
+		background:	url("https://reg.sportingpulse.com/images/global_nav_sprite.png") repeat-x scroll 0 0 transparent;
+	}
+	.gnav-logo {
+		width: 50px;
+	}
+	#gnav-arrow-wrap {
+		float:left;
+		width: 50px;
+	}
+	.gnav-splogo {
+		width: 24px;
+		margin: 2px 0px 10px 8px;
+	}
+	#gnav-arrow {
+		margin: 11px 0 0 0;
+	}
+	#pushdown-inner h4, #pushdown-inner h5 {
+		font-size: 16px;
+	}
+	#pushdown-wrapper {
+		height: 240px;
+	}
+	#pushdown-network {
+		width: 290px;
+		height: 220px;
+		padding: 8px;
+	}
+	#pushdown-network form {
+		width: 274px;
+	}
+}
+
+</style>

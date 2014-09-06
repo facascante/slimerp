@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no"> 
+    <meta name="format-detection" content="address=no"> 
+    <title>Payment Receipt</title>
+    <style type="text/css">
+        body {
+            margin:0;
+            padding:0;
+        }
+        table, tr, td, p, span {
+            font-family:Helvetica,Arial,sans-serif;
+            font-size:13px;
+        }
+    </style>
+</head>
+<body style="font-family:Helvetica,Arial,sans-serif;font-size:13px;margin:0;padding:0;background-color:#EDEDED;">
+    <table cellspacing="0" cellpadding="0" border="0" style="background-color:#EDEDED;width:100%;font-family:Helvetica,Arial,sans-serif;">
+        <tbody>
+            <tr>
+                <td width="10" style="font-size:0px;line-height:0em">
+                    <table width="10" cellspacing="0" cellpadding="0" border="0"><tbody><tr><td style="font-size:0px;line-height:0em">&nbsp;</td></tr></tbody></table>
+                </td>
+                <td align="center">
+                    <table cellspacing="0" cellpadding="0" border="0" width="650">
+                        <tbody>
+                            <tr><td height="8" style="font-size:0px;line-height:0em">&nbsp;</td></tr>
+                            <tr>
+                                <td colspan="2" align="center"><span style="font-weight:normal;font-size:10px;"></span></td>
+                            </tr>
+                            <tr><td height="30" style="font-size:0px;line-height:0em">&nbsp;</td></tr>
+                            <tr>
+                                <td width="25%" align="left"></td>
+                                <td width="75%" align="right" valign="middle" style="color:#f28300;font-size:24px"></td>
+                            </tr>
+                            <tr><td height="8" style="font-size:0px;line-height:0em">&nbsp;</td></tr>
+                        </tbody>
+                    </table>
+                    <table cellspacing="0" cellpadding="0" border="0" width="650" style="background-color:#FFFFFF;">
+                        <tbody>
+                            <tr>
+                                <td colspan="4" align="center"><span style="font-weight:normal;font-size:10px;">&nbsp;<br/></span></td>
+                            </tr>
+                            <tr>
+                                <td width="20" style="font-size:0px;line-height:0em">
+                                    <table width="20" cellspacing="0" cellpadding="0" border="0"><tbody><tr><td style="font-size:0px;line-height:0em">&nbsp;</td></tr></tbody></table>
+                                </td>
+                                <td width="330" align="left" valign="top"><img src="http://www-static.spulsecdn.net/images/fsp_eml_lge.png" title="FOX SPORTS PULSE Registrations" alt="FOX SPORTS PULSE Registrations" style="display:block;"></td>
+                                <td width="230" valign="top" align="left">
+                                    <h3 style="color:#005BA7;margin-top:0px;margin-bottom:6px;">Tax Invoice</h3>
+                                    <p>[% OrgName %]<br/>[% strBusinessNo %]</p>
+                                </td>
+                                <td width="20" style="font-size:0px;line-height:0em">
+                                    <table width="20" cellspacing="0" cellpadding="0" border="0"><tbody><tr><td style="font-size:0px;line-height:0em">&nbsp;</td></tr></tbody></table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" align="center"><span style="font-weight:normal;font-size:10px;">&nbsp;<br/></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table cellspacing="0" cellpadding="0" border="0" width="650" style="background-color:#005BA7;">
+                        <tbody>
+                            <tr>
+                                <td width="20" style="font-size:0px;line-height:0em">
+                                    <table width="20" cellspacing="0" cellpadding="0" border="0"><tbody><tr><td style="font-size:0px;line-height:0em">&nbsp;</td></tr></tbody></table>
+                                </td>
+                                <td width="610" align="left" valign="top"><h4 style="color:#FFFFFF;margin-top:8px;margin-bottom:6px;">Invoice No. [% PaymentID %]</h4></td>
+                                <td width="20" style="font-size:0px;line-height:0em">
+                                    <table width="20" cellspacing="0" cellpadding="0" border="0"><tbody><tr><td style="font-size:0px;line-height:0em">&nbsp;</td></tr></tbody></table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table cellspacing="0" cellpadding="0" border="0" width="650" style="background-color:#FFFFFF;">
+                        <tbody>
+                            <tr>
+                                <td align="center" colspan="3"><span style="font-weight:normal;font-size:10px;">&nbsp;<br/></span></td>
+                            </tr>
+                            <tr>
+                                <td width="20" style="font-size:0px;line-height:0em">
+                                    <table width="20" cellspacing="0" cellpadding="0" border="0"><tbody><tr><td style="font-size:0px;line-height:0em">&nbsp;</td></tr></tbody></table>
+                                </td>
+                                <td width="610" valign="top" align="left">
+                                    <h2 style="margin-top:6px;margin-bottom:12px;">Thank you</h2>
+                                    [% IF ReceiptHeader %]
+                                        <p>[% ReceiptHeader %]</p>
+                                    [% END %]
+                                    <p>You have successfully made a payment of <b>[% DollarSymbol %][% TotalAmount %]</b>[% IF AssocPaymentExtraDetails %]&nbsp;[% AssocPaymentExtraDetails %].[% END %]</p>
+                                    <table cellspacing="0" cellpadding="0" border="0" width="610">
+                                        <tbody>
+                                            <tr>
+                                                <td valign="top" align="left" width="140"><b>Date Purchased:</b></td>
+                                                <td valign="top" align="left">[% DatePurchased %]</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" align="center"><span style="font-weight:normal;font-size:10px;">&nbsp;<br/></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="top" align="left"><b>Bank Reference Number:</b></td>
+                                                <td valign="top" align="left">[% BankRef %]</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    [% IF Transactions.size > 1 %]
+                                        <p>The following <b>[% Transactions.size %]</b> invoices make up this payment:</p>
+                                    [% END %]
+                                    [% FOREACH t = Transactions %]
+                                        <hr style="border-top:0px;border-left:0px;border-right:0px;color:#999999;">
+                                        <p>A payment of <b>[% DollarSymbol %][% t.curAmount %]</b> [% IF t.strGSTText %]GST&nbsp;[% t.strGSTText %][% END %] for <strong>[% t.Name %]</strong> at [% t.strName %] [% PaymentAssocType %]</p>
+                                        <table cellspacing="0" cellpadding="0" border="0" width="460">
+                                            <tbody>
+                                                <tr>
+                                                    <td valign="top" align="left" width="140"><b>Invoice Number:</b></td>
+                                                    <td valign="top" align="left">[% t.InvoiceNum %]</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" align="center"><span style="font-weight:normal;font-size:10px;">&nbsp;<br/></span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td valign="top" align="left"><b>Product:</b></td>
+                                                    <td valign="top" align="left">(Qty [% t.intQty %]) - [% t.ProductName %]</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" align="center"><span style="font-weight:normal;font-size:10px;">&nbsp;<br/></span></td>
+                                                </tr>
+                                                [% IF t.strProductNotes %]
+                                                <tr>
+                                                    <td valign="top" align="left"><b>Description:</b></td>
+                                                    <td valign="top" align="left">[% t.strProductNotes %]</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" align="center"><span style="font-weight:normal;font-size:10px;">&nbsp;<br/></span></td>
+                                                </tr>
+                                                [% END %]
+                                                <tr>
+                                                    <td valign="top" align="left"><b>Amount:</b></td>
+                                                    <td valign="top" align="left">[% DollarSymbol %][% t.curAmount %][% IF t.strGSTText %]&nbsp;GST&nbsp;[% t.strGSTText %][% END %]</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" align="center"><span style="font-weight:normal;font-size:10px;">&nbsp;<br/></span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        [% IF t.strPaymentReceiptBodyHTML %]
+                                            [% t.strPaymentReceiptBodyHTML %]
+                                        [% END %]
+                                    [% END %]
+                                    [% IF ReceiptFooter %]
+                                    <p>[% ReceiptFooter %]</p>
+                                    [% END %]
+                                    <hr style="border-top:0px;border-left:0px;border-right:0px;color:#999999;">
+                                    <table cellspacing="0" cellpadding="0" border="0" width="610">
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="2" align="center"><span style="font-weight:normal;font-size:10px;">&nbsp;<br/></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="140" align="left"><b>Total Amount:</b></td>
+                                                <td align="left">[% DollarSymbol %][% TotalAmount %]</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" align="center"><span style="font-weight:normal;font-size:10px;">&nbsp;<br/></span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table cellspacing="0" cellpadding="0" border="0" width="610">
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="4" align="center"><span style="font-weight:normal;font-size:10px;">&nbsp;<br/></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" align="center"><span style="font-weight:normal;font-size:10px;">&nbsp;<br/></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" align="center" style="border-top:5px solid #005BA7;"><span style="font-weight:normal;font-size:10px;"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="80" valign="top" align="left"><br><img src="http://www-static.spulsecdn.net/images/fsp_eml_sml.png" title="FOX SPORTS PULSE" alt="FOX SPORTS PULSE" style="display:block;"></td>
+                                                <td width="220" align="left" valign="top" style="font-size:12px;"><br><b style="color:#005BA7;font-size:13px;">Melbourne</b><br>Level 9<br>176 Wellington Pde<br>East Melbourne VIC 3002</td>
+                                                <td width="190" align="left" valign="top" style="font-size:12px;"><br><b style="color:#005BA7;font-size:13px;">Sydney</b><br>4 Broadcast Way<br>Artarmon NSW 2064</td>
+                                                <td valign="top" align="right"><img alt="Powered by Fox SportsPulse" title="Powered by Fox Sports Pulse" src="http://www-static.spulsecdn.net/images/fsplogo_footer_whitebg.png"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" align="center"><span style="font-weight:normal;">&nbsp;<br/></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" align="right"><span style="font-weight:normal;"></span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                                <td width="20" style="font-size:0px;line-height:0em">
+                                    <table width="20" cellspacing="0" cellpadding="0" border="0"><tbody><tr><td style="font-size:0px;line-height:0em">&nbsp;</td></tr></tbody></table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center"><span style="font-weight:normal;font-size:10px;">&nbsp;<br/></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table cellspacing="0" cellpadding="0" border="0" width="650">
+                        <tbody>
+                            <tr><td height="8" style="font-size:0px;line-height:0em">&nbsp;</td></tr>
+                            <tr>
+                                <td colspan="2" align="center"><span style="font-weight:normal;font-size:10px;"></span></td>
+                            </tr>
+                            <tr><td height="30" style="font-size:0px;line-height:0em">&nbsp;</td></tr>
+                            <tr>
+                                <td width="25%" align="left"></td>
+                                <td width="75%" align="right" valign="middle"></td>
+                            </tr>
+                            <tr><td height="8" style="font-size:0px;line-height:0em">&nbsp;</td></tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td width="10" style="font-size:0px;line-height:0em">
+                    <table width="10" cellspacing="0" cellpadding="0" border="0"><tbody><tr><td style="font-size:0px;line-height:0em">&nbsp;</td></tr></tbody></table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

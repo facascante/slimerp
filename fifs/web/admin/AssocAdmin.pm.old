@@ -1,0 +1,541 @@
+package AssocAdmin;
+
+require Exporter;
+@ISA =  qw(Exporter);
+@EXPORT = qw(handle_assoc);
+@EXPORT_OK = qw(handle_assoc);
+
+use lib "..","../..","../sp_publisher";
+use DBI;
+use CGI qw(param unescape escape);
+use strict;
+use Defs;
+use Utils;
+use AdminCommon;
+use DeQuote;
+
+
+sub handle_assoc	{
+  my($db, $action, $target, $escAssocName)=@_;
+  my $assocID=param('intAssocID') || 0;
+  my $body='';
+  my $menu='';
+  if($action eq 'ASSOC_update') {
+		($body,$menu)=update_assoc($db, $action, $assocID, $target, $escAssocName); 
+  }
+  elsif($action eq 'ASSOC_list') {
+		($body,$menu)=list_assoc($db, $action, $assocID, $target, $escAssocName); 
+  }
+  elsif($action eq 'ASSOC_upl') {
+		($body,$menu)=list_uploads($db, $action, $assocID, $target, $escAssocName); 
+  }
+  elsif($action eq 'ASSOC_loc') {
+		($body,$menu)=list_location($db, $action, $assocID, $target, $escAssocName); 
+  }
+  else  {
+    ($body,$menu)=assoc_details($db, $action, $assocID, $target, $escAssocName);
+  }
+
+  return ($body,$menu);
+}
+
+# *********************SUBROUTINES BELOW****************************
+
+sub assoc_details	{
+	my ($db, $action, $intAssocID, $target, $escAssocName) = @_;
+
+	$escAssocName=$escAssocName||'';
+	my $unescAssocName=unescape($escAssocName);
+	my $dref;
+	my($add, $edit,$view)=(0,0,0);
+	if(!$intAssocID)	{$action='ASSOC_add';}
+	if($action eq 'ASSOC_add')	{$add=1;}
+	elsif($action eq 'ASSOC_edit')	{$edit=1;}
+	else	{$view=1;}
+	if ($edit or $view) {
+		my $statement = "
+			SELECT tblAssoc.intAssocID, tblAssoc.strName, intDataAccess , strUsername, strPassword
+			FROM tblAssoc LEFT JOIN tblAuth ON (tblAuth.intAssocID=tblAssoc.intAssocID AND tblAuth.intLevel=$Defs::LEVEL_ASSOC)
+			WHERE tblAssoc.intAssocID = $intAssocID
+	  ";
+
+	  my $query = $db->prepare($statement) or query_error($statement);
+	  $query->execute() or query_error($statement);
+
+		$dref= $query->fetchrow_hashref();
+		$query->finish();
+		foreach my $key (keys %{$dref})	{ if(!defined $dref->{$key})	{$dref->{$key}='';} }
+
+	}
+	elsif ($add) {
+		my @fieldnames=qw( intAssocID strName );
+		for my $i (@fieldnames)	{ $dref->{$i}=''; }
+	}
+
+	my %fields=();
+	my %YesNo=(0 => 'No', 1 => 'Yes', 2 => 'Yes');
+
+	$fields{'strName'}=genTextBox('DB_strName',$dref->{strName},60,$add,$edit);
+	$fields{'strUsername'}=genTextBox('DB_strUsername',$dref->{strUsername},40,$add,$edit);
+	$fields{'strPassword'}=$dref->{strPassword}||'';
+	$fields{'strEmail'}=genTextBox('DB_strEmail',$dref->{strEmail},60,$add,$edit);
+	$fields{'intAssocID'}=$dref->{intAssocID} ||'New';
+
+	my $menu='';
+	if($view)	{
+		$menu= qq[
+			<a href="$target?action=ASSOC_edit&amp;intAssocID=$intAssocID&amp;AssocName=$escAssocName"><img src="images/edit.gif" alt="Edit" title="Edit" width="40" height="40" border="0"></a> 
+		];
+	}
+
+  my @display_fields=(
+    ['intAssocID'],
+    ['strName'],
+    ['strUsername'], 
+		['strPassword'],
+  );
+  
+  my %labels=(
+    intAssocID=>'Association ID',
+    strName=>'Association Name',
+    strEmail=>'Email Address',
+    strUsername=>'Username',
+    strPassword=>'Password',
+	);
+
+  my %span=();
+	my $body = qq[
+	<form action="$target" method=post>
+		<table width="100%">
+	];
+
+  for my $i (0 .. $#display_fields) {
+    my $found=0;
+    my $subBody='';
+    for my $j (0 .. $#{$display_fields[$i]})  {
+      if($display_fields[$i][$j]) {$found=1;}
+      my $value=$fields{$display_fields[$i][$j]} ;
+			if(!defined $value)	{$value= '&nbsp;';}
+      my $label=$labels{$display_fields[$i][$j]} || '';
+      if(!$label) { next; }
+      my $span= $span{$display_fields[$i][$j]} || 1;
+			$subBody.=qq[
+					<td class="formbg fieldlabel">$label:</td>
+					<td class="formbg" colspan="$span">$value</td>
+			];
+    }
+    if($found)  { $body.=qq[ <tr> $subBody </tr> ]; }
+  }
+
+
+  $body .= qq[
+    </table>
+    <input type="hidden" name="action" value="ASSOC_update">
+    <input type="hidden" name="oldaction" value="$action">
+		<input type="hidden" name="intAssocID" value="$intAssocID">
+		<input type="hidden" name="AssocName" value="$unescAssocName">
+	];
+
+  if(!$view)  {
+    $body .= qq[
+      <tr>
+        <td class="formbg" colspan="4" align="center"><br>
+          <input type=submit value="Update Association"><br>
+        </td>
+      </tr>
+    ];
+  }
+
+  $body .= qq[
+  </form>
+  ];
+	return ($body,$menu);
+}
+
+
+sub update_assoc {
+	my ($db, $action, $intAssocID, $target, $escAssocName) = @_;
+
+  my %CompulsoryValues=(
+      strName => "Association Name",
+  );
+
+	my $output=new CGI;
+  #Get Parameters
+  my %fields = $output->Vars;
+	#Get rid of non DB fields
+	for my $key (keys %fields)	{
+		if($key!~/^DB_/)	{delete $fields{$key};}
+	}
+	deQuote($db, \%fields);
+	{
+		my($valid,$msg)=checkusername($db,$fields{'DB_strUsername'},$intAssocID||0);
+		$CompulsoryValues{'username'}=$msg if !$valid;
+	}
+	my $AssocName=$fields{'DB_strName'} || '';
+	my($valuelist,$fieldlist)='';
+	my $error='';
+	if(!$intAssocID)	{
+		$ENV{PATH}='';
+		$fields{'DB_strPassword'}=`$Defs::fs_base/misc/passwdgen -a1q`;
+		$CompulsoryValues{'password'}='Problem Generating Password' if !$fields{'DB_strPassword'};
+	}
+	for my $key (keys %fields)	{
+		next if($key eq 'DB_strUsername' or $key eq 'DB_strPassword');
+		my $newkey=$key;
+		$newkey=~s/DB_//g;
+    if($newkey=~/^str/ and $fields{$key}!~/^'.*'$/) {$fields{$key}="'$fields{$key}'";}
+  	if($newkey=~/^dt/ and $fields{$key} ne "''")  {
+      my $newdate='';
+      if($error)  { next; }
+      else  {$fields{$key}="'$newdate'";}
+    }
+    if($newkey=~/^int/ and !$fields{$key})  {$fields{$key}=0;}
+	 if(exists $CompulsoryValues{$newkey} and (defined $fields{$key} and $fields{$key} ne "" and $fields{$key} ne "''")) {
+      delete $CompulsoryValues{$newkey};
+    }
+
+		if($intAssocID)	{
+			#Update
+			if(defined $valuelist and $valuelist ne "")	{$valuelist.=', ';}
+			$valuelist.=qq[$newkey=$fields{$key}];
+		}
+		else	{
+			#Insert
+			if(defined $valuelist and $valuelist ne "")	{$valuelist.=', ';}
+			if($fieldlist)	{$fieldlist.=', ';}
+			$valuelist.=qq[$fields{$key}];
+			$fieldlist.=qq[$newkey];
+		}
+	}
+  my $missing_fields=join("<br>\n",values %CompulsoryValues);
+  if($missing_fields) {
+    my $return_string='';
+    if($missing_fields) {
+      $return_string.=qq[
+      <p>Error: Missing Information!</p>
+      <p>The following fields need to be filled in</p>
+      <p>$missing_fields</p>
+      ];
+    }
+    $return_string.=qq[<br>
+      <p>Click your browser's 'back' button to return to the previous page</p><br>
+    ];
+    return ($return_string,'');
+  }
+
+	my $statement='';
+	my $add=0;
+	if($intAssocID)	{
+		$statement=qq[
+			UPDATE tblAssoc SET $valuelist
+			WHERE intAssocID=$intAssocID
+		];
+	}
+	else	{
+		$add=1;
+		$statement=qq[
+			INSERT INTO tblAssoc ($fieldlist)
+			VALUES ($valuelist)
+		];
+	}
+	if($add)	{
+		#Check to see if the Assoc already exists
+		my $checkstatement=qq[
+			SELECT intAssocID
+			FROM tblAssoc 
+			WHERE strName=$AssocName
+		];
+		my $query = $db->prepare($checkstatement) or query_error($checkstatement);
+		$query->execute() or query_error($checkstatement);
+		my($existingID)=$query->fetchrow();
+		if($existingID)	{
+			return (qq[
+      <p>Error: Duplicate!</p>
+			<p>This association already exists as association $existingID</p>
+			],'');
+		}
+	}
+ 
+	my $query = $db->prepare($statement) or query_error($statement);
+	$query->execute() or query_error($statement);
+	if(!$intAssocID)	{$intAssocID=$query->{mysql_insertid};}
+	if($add)	{
+		my $st=qq[
+			INSERT INTO tblAuth (strUsername, strPassword, intAssocID, intLevel, intID)
+			VALUES ($fields{'DB_strUsername'}, '$fields{'DB_strPassword'}', $intAssocID, 5, $intAssocID)
+		];
+		$db->do($st);
+	}
+	else	{
+		my $st=qq[
+      UPDATE tblAuth SET strUsername=$fields{'DB_strUsername'}
+			WHERE intAssocID=$intAssocID
+        AND intLevel=5
+		];
+		$db->do($st);
+	}
+	return assoc_details($db, 'ASSOC_view', $intAssocID, $target, $escAssocName); 
+}
+
+
+sub genTextBox	{
+	my($name, $value, $length, $add, $edit)=@_;
+	$length||='';
+	$value||='';
+	
+  my $retVal=($edit or $add) ? qq[<input type="text" name="$name" value="$value" size="$length">] : $value;
+	return $retVal;
+}
+
+
+sub displaySportSelect	{
+	my($target)=@_;
+	
+	my $body=qq[
+  <form action="$target" method="post">
+		<div style="text-align:center">
+    <input type="submit" name="submit" value="S U B M I T">
+    <input type=hidden name="action" value="ASSOC_add">
+		</div>
+  </form><br>
+	];
+	return $body;
+}
+
+
+sub list_assoc	{
+  my ($db, $action, $intAssocID, $target, $escAssocName) = @_;
+
+  my $assoc_name_IN = param('assoc_name') || '';
+  my $assoc_email_IN = param('assoc_email') || '';
+  my $realm_IN = param('realmID') || '';
+
+  my $strWhere='';
+  if ($assoc_name_IN) {
+    $strWhere .= " AND " if $strWhere;
+    $strWhere .= "tblAssoc.strName LIKE '%".$assoc_name_IN."%'";
+  }
+  if ($assoc_email_IN) {
+    $strWhere .= " AND " if $strWhere;
+    $strWhere .= "tblAssoc.strEmail LIKE '%".$assoc_email_IN."%'";
+  }
+  if ($realm_IN) {
+    $strWhere .= " AND " if $strWhere;
+    $strWhere .= "tblAssoc.intRealmID = $realm_IN ";
+  }
+	$strWhere = "WHERE $strWhere" if $strWhere;
+
+  my $statement=qq[
+		SELECT tblAssoc.strName, tblAssoc.intAssocID, strUsername, strPassword, strRealmName, intRecStatus
+		FROM tblAssoc LEFT JOIN tblAuth ON (tblAuth.intAssocID=tblAssoc.intAssocID AND tblAuth.intLevel=$Defs::LEVEL_ASSOC)
+			LEFT JOIN tblRealms ON (tblAssoc.intRealmID=tblRealms.intRealmID)
+		$strWhere
+		ORDER BY tblAssoc.strName
+  ];
+
+  my $query = $db->prepare($statement) or query_error($statement);
+  $query->execute() or query_error($statement);
+  my $count=0;
+  my $body='';
+  while(my $dref= $query->fetchrow_hashref()) {
+    foreach my $key (keys %{$dref}) { if(!defined $dref->{$key})  {$dref->{$key}='';} }
+    $dref->{strName} = $dref->{strName} || '&nbsp;';
+    $dref->{strEmail} = $dref->{strEmail} || '&nbsp;';
+    $dref->{strUsername} = $dref->{strUsername} || '&nbsp;';
+    $dref->{strPassword} = $dref->{strPassword} || '&nbsp;';
+    $dref->{strRealmName} ||= '&nbsp;';
+    my $class='';
+    my $classborder='commentborder';
+    if($count++%2==1) {
+      $class=q[ class="commentshaded" ];
+      $classborder="commentbordershaded";
+    }
+		my $extralink='';
+		if($dref->{intRecStatus}<0)	{
+			$classborder.=" greytext";
+			$extralink=qq[ class="greytext"];
+		}
+    $body.=qq[
+      <tr>
+        <td class="$classborder"><a $extralink href="$target?action=ASSOC_edit&amp;intAssocID=$dref->{intAssocID}&amp;AssocName=].escape($dref->{strName}).qq[">$dref->{strName}</a></td>
+        <td class="$classborder">$dref->{strUsername}</td>
+        <td class="$classborder">$dref->{strPassword}</td>
+        <td class="$classborder">$dref->{strRealmName}</td>
+      </tr>
+    ];
+  }
+  if(!$body)  {
+    $body.=qq[
+    <table cellpadding="1" cellspacing="0" border="0" width="90%" align="center">
+      <tr>
+				<td colspan="3" align="center"><b><br> No Search Results were found<br><br></b></td>
+      </tr>
+    </table>
+    <br>
+    ];
+  }
+  else  {
+    $body=qq[
+		 <table cellpadding="1" cellspacing="0" border="0" width="95%" align="center">
+			<tr>
+        <th style="text-align:left;">Name</th>
+        <th style="text-align:left;">Username</th>
+        <th style="text-align:left;">Password</th>
+        <th style="text-align:left;">Realm</th>
+      </tr>
+
+      $body
+    </table><br>
+    ];
+  }
+
+  return ($body,'');
+}
+
+
+sub list_uploads {
+  my ($db, $action, $intAssocID, $target, $escAssocName) = @_;
+  my $body='';
+
+  my $statement=qq[
+		SELECT DATE_FORMAT(dtSync,"%a %d/%m/%Y - %H:%i") AS dtSyncFORMAT, strAppName, strAppVer, strStage, intReturnAcknowledged, intSyncID
+		FROM tblSync
+		WHERE intAssocID=$intAssocID
+		ORDER BY dtSync DESC
+  ];
+
+  my $query = $db->prepare($statement) or query_error($statement);
+  $query->execute() or query_error($statement);
+  my $count=0;
+  while(my $dref= $query->fetchrow_hashref()) {
+    my $class='';
+    my $classborder='commentborder';
+    if($count++%2==1) {
+      $class=q[ class="commentshaded" ];
+      $classborder="commentbordershaded";
+    }
+    foreach my $key (keys %{$dref}) { if(!$dref->{$key})  {$dref->{$key}='&nbsp;';} }
+    $body.=qq[
+      <tr>
+        <td class="$classborder">$dref->{dtSyncFORMAT}</td>
+        <td class="$classborder">$dref->{strAppName}</td>
+        <td class="$classborder">$dref->{strAppVer}</td>
+        <td class="$classborder">$dref->{strStage}</td>
+        <td class="$classborder">$dref->{intReturnAcknowledged}</td>
+      </tr>
+    ];
+  }
+  if(!$body)  {
+    $body.=qq[ <div class="warningmsg"><br> No Syncs were found<br><br></b></div> <br> ];
+  }
+  else  {
+    $body=qq[
+		 <table cellpadding="1" cellspacing="0" border="0" width="95%" align="center">
+			<tr>
+        <th style="text-align:left;">Date/Time</th>
+        <th style="text-align:left;">AppName</th>
+        <th style="text-align:left;">AppVer</th>
+        <th style="text-align:left;">Stage</th>
+        <th style="text-align:left;">Ret Ack</th>
+      </tr>
+
+      $body
+    </table><br>
+    ];
+  }
+
+  return ($body,'');
+}
+
+sub checkusername	{
+	my ($db,$username,$id)=@_;
+	#Check that this password is valid and not already in use
+
+	return (0,'Username cannot begin with a number') if $username=~/^'\d/;
+	my $st=qq[ 
+		SELECT intAuthID 
+		FROM tblAuth 
+		WHERE strUsername=$username
+			AND intLevel >= $Defs::LEVEL_ASSOC
+			AND NOT (intLevel=$Defs::LEVEL_ASSOC AND intID=$id)
+	];
+	my $q=$db->prepare($st);
+	$q->execute();
+	my($found)=$q->fetchrow_array() || 0;
+	$q->finish();
+	if($found)	{
+		return (0,'Username already in use');
+	}
+	return (1,'');
+}
+
+sub list_location {
+  my ($db, $action, $intAssocID, $target, $escAssocName, $realmID) = @_;
+  my $body='';
+	my $realmID=1;
+
+  my $statement=qq[
+		SELECT DISTINCT  tblNational.strName AS NationalName, tblState.strName AS StateName, tblRegion.strName AS RegionName, tblZone.strName AS ZoneName, tblNational.intStatusID AS NationalStatus, tblState.intStatusID AS StateStatus, tblRegion.intStatusID AS RegionStatus, tblZone.intStatusID as ZoneStatus, tblZone.intNodeID as intZoneID
+		FROM  tblNode AS tblState INNER JOIN tblNodeLinks AS NL_S ON (NL_S.intChildNodeID=tblState.intNodeID AND tblState.intTypeID=$Defs::LEVEL_STATE ), 
+			tblNode AS tblRegion INNER JOIN tblNodeLinks AS NL_R ON (NL_R.intChildNodeID=tblRegion.intNodeID AND tblRegion.intTypeID=$Defs::LEVEL_REGION  ), 
+			tblNode AS tblZone INNER JOIN tblNodeLinks AS NL_Z ON (NL_Z.intChildNodeID=tblZone.intNodeID AND tblZone.intTypeID=$Defs::LEVEL_ZONE  ),
+		tblNode AS tblNational
+		WHERE   NL_S.intParentNodeID=tblNational.intNodeID  
+			AND  NL_R.intParentNodeID=tblState.intNodeID  
+			AND  NL_Z.intParentNodeID=tblRegion.intNodeID  
+		ORDER BY NationalName, StateName, RegionName, ZoneName
+  ];
+			#AND tblNational.intRealmID=$realmID
+			#AND tblState.intRealmID=$realmID
+			#AND tblRegion.intRealmID=$realmID
+			#AND tblZone.intRealmID=$realmID
+debug($statement);
+
+  my $query = $db->prepare($statement) or query_error($statement);
+  $query->execute() or query_error($statement);
+  my $count=0;
+  while(my $dref= $query->fetchrow_hashref()) {
+    my $class='';
+    my $classborder='commentborder';
+    if($count++%2==1) {
+      $class=q[ class="commentshaded" ];
+      $classborder="commentbordershaded";
+    }
+
+		my $name='';
+		for my $i (qw(National State Region Zone))	{
+			my $v = $dref->{$i."Status"} == $Defs::NODE_SHOW ? $dref->{$i."Name"} : '';
+			$name.='|' if($v and $name);
+			$name.=$v if $v;
+		}
+
+    foreach my $key (keys %{$dref}) { if(!$dref->{$key})  {$dref->{$key}='&nbsp;';} }
+    $body.=qq[
+      <tr>
+        <td class="$classborder">$name</td>
+      </tr>
+    ];
+  }
+  if(!$body)  {
+    $body.=qq[ <div class="warningmsg"><br> No Locations were found<br><br></b></div> <br> ];
+  }
+  else  {
+    $body=qq[
+		 <table cellpadding="1" cellspacing="0" border="0" width="95%" align="center">
+			<tr>
+        <th style="text-align:left;">Date/Time</th>
+        <th style="text-align:left;">AppName</th>
+        <th style="text-align:left;">AppVer</th>
+        <th style="text-align:left;">Stage</th>
+        <th style="text-align:left;">Ret Ack</th>
+      </tr>
+
+      $body
+    </table><br>
+    ];
+  }
+
+  return ($body,'');
+}
+1;

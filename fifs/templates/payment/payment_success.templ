@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.22/jquery-ui.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="js/jquery-ui/css/theme/jquery-ui-1.8.22.custom.css" />
+
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/spfont.css">
+        <link rel="stylesheet" type="text/css" href="css/regoform.css">
+        <link rel="stylesheet" type="text/css" href="css/regoform_2013.css">
+
+        <script type="text/javascript" src="js/regoform.js"></script> 
+
+        [% head %]
+
+        <title>[% title %]</title>
+        [% IF intRealmID == 2 %]
+        <script>
+            var googletag = googletag || {};
+            googletag.cmd = googletag.cmd || [];
+            (function() {
+                var gads = document.createElement('script');
+                gads.async = true;
+                gads.type = 'text/javascript';
+                var useSSL = 'https:' == document.location.protocol;
+                gads.src = (useSSL ? 'https:' : 'http:') + '//www.googletagservices.com/tag/js/gpt.js';
+                var node = document.getElementsByTagName('script')[0];
+                node.parentNode.insertBefore(gads, node);
+            })();
+            googletag.cmd.push(function() {
+                googletag.defineSlot('/8315/display-membership-spanz/australia/afl', [[728, 90]], 'div-gpt-ad-1353623042676-LeaderboardTop').addService(googletag.pubads()).setTargeting("pos", "top"); googletag.defineSlot('/8315/display-membership-spanz/australia/afl', [[728, 90]], 'div-gpt-ad-1353623042676-LeaderboardBottom').addService(googletag.pubads()).setTargeting("pos", "bottom");googletag.pubads().setTargeting("subject","payments");googletag.pubads().setTargeting("subject","payments");
+                googletag.pubads().enableSingleRequest();
+                googletag.enableServices();
+            });
+        </script>
+        [% END %]
+    </head>
+
+    <body>
+
+        <div id="pagewrapper">
+            <div id="pageheader">
+                [% page_header %]
+            </div>
+
+            <div id="pageholder">
+                <div id="content">
+                    [% IF AlreadyPaid==1 %]
+                    <div style="font-size:14px;color:green;"><b>ALREADY PAID</b></div>
+                    [% ELSE %]
+                    <div style="font-size:16px;color:green;"><b>Congratulations, you have <b>successfully paid</b> \$[% intAmount %]</b></div>
+                    <div style="font-size:12px;"><b>If you have provided an email address, you will be emailed a Tax Invoice</b></div>
+                    [% END %]
+
+                    [% IF CC_SOFT_DESC %]
+                    <div style="font-size:12px;"><i>This payment will appear on your credit card statement as [% CC_SOFT_DESC %]</i></div>
+                    [% END %]
+                    
+                    <table class="confirm-intro">
+                        <tbody>
+                            <tr>
+                                <td class = "label">Payment Reference Number:</td>
+                                <td class = "value">[% intLogID %]</td>
+                            </tr>
+                            <tr>
+                                <td class = "label">Payment To:</td>
+                                <td class = "value">[% AssocName %] [% ClubName %]</td>
+                            </tr>
+                            <tr>
+                                <td class = "label">Payment Status:</td>
+                                <td class = "value">Paid</td>
+                            </tr>
+                            <tr>
+                                <td class = "label">Bank Reference Number:</td>
+                                <td class = "value">[% strTXN %]</td>
+                            </tr>
+                            <tr>
+                                <td class = "label">Total Amount:</td>
+                                <td class = "value">\$[% intAmount %]</td>
+                            </tr>                    
+                        </tbody>
+                    </table>
+                    <table class="confirm-details permsTable" style="width:90%;">
+                        <tbody>
+                            <tr>        
+                                <th>Invoice Number</th>
+                                <th>Item</th>
+                                <th>Qty</th>
+                                <th>Amount</th>
+                                <th>Payment From</th>
+                            </tr>
+                            [% FOREACH txn = TXNs %]
+                                <tr>
+                                    <td class = "value">[% txn.InvoiceNum %]</td>
+                                    <td class = "value">[% txn.ProductName %]</td>
+                                    <td class = "value">[% txn.QtyAmount %]</td>
+                                    <td class = "value">\$[% txn.curAmount %]</td>
+                                    <td class = "value">[% txn.MemberEntityFor %]</td>
+                                </tr>
+                            [% END %]
+                        </tbody>
+                    </table>
+                    <div id="dialogform"></div>
+                    <div class="adwrap-leaderboard ad_bottom_leaderboard">
+                        <div id='div-gpt-ad-1353623042676-LeaderboardBottom'>
+                            <script type='text/javascript'>
+                                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1353623042676-LeaderboardBottom'); });
+                            </script>
+                        </div>
+                    </div>
+                </div> <!-- End Content --> 
+
+            </div> <!-- End Page Holder --> 
+            <div id="pagefooter">
+                [% page_footer %]
+                <div style="clear:both;"></div>
+            </div>
+        </div> <!-- End Page Wrapper --> 
+    
+        [% page_end %]
+
+    </body>
+</html>

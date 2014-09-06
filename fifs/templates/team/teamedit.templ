@@ -1,0 +1,89 @@
+
+<script type="text/javascript" src="js/teamedit.js"></script>
+<script type="text/javascript" src="js/jquery.tinysort.min.js"></script>
+<script>
+    jQuery(document).ready(function() {
+        setup_team_selection([% assocID %], [% compID %], [% teamID %], '[% client %]');
+    });
+</script>
+
+[% IF compID %]
+You are modifying the members in the team [% team_name %] for the competition [% comp_name %] ([% season_name %])<br>
+[% ELSE %]
+You are modifying the members in the team [% team_name %]<br>
+[% END %]
+<br>
+<form action="" name="player_select" method="POST">
+
+
+[% IF seasons.list.size %]
+<div><b>[% seasons.text %]</b>
+    <select class="search_options" name="seasonFilter" size "1" id="seasonFilter">
+    [% FOREACH  season_key IN seasons.list.sort %]
+        <option value="[% season_key %]" [% IF season_key == seasons.current %]selected[% END %]>[% seasons.list.$season_key %]</option>
+    [% END %]
+    </select>
+</div>
+[% END %]
+[% IF age_groups.list.size %]
+<div><b>[% age_groups.text %]</b>
+    <select class="search_options" name="ageGroupFilter" size "1" id="ageGroupFilter">
+    [% FOREACH age_group_key IN age_groups.list.sort %]
+        <option value="[% age_group_key %]" [% IF age_group_key == age_groups.current %]selected[% END %]>[% age_groups.list.$age_group_key %]</option>
+    [% END %]
+    </select>
+</div>
+[% END %]
+[% IF genders.list.size %]
+<div><b>[% genders.text %]</b>
+    <select class="search_options" name="genderFilter" size "1" id="genderFilter" [% IF lock_gender_if_set && genders.current.defined %] Disabled [% END %]>
+    [% FOREACH gender_key IN genders.list.keys.sort %]
+        <option value="[% gender_key %]" [% IF gender_key == genders.current %]selected[% END %]>[% genders.list.$gender_key %]</option>
+    [% END %]
+    </select>
+</div>
+[% END %]
+<b>DOB From </b><input type="text" id="dobFrom" value="[% dtMinDOB %]" size="10" class = "dateinput search_options" [% IF lock_dob_if_set && dtMinDOB.defined %] Disabled [% END %]>&nbsp;<span class="format">(dd/mm/yyyy)</span> &nbsp; <b>To</b> &nbsp; <input type="text" id="dobTo" value="[% dtMaxDOB %]" size="10" class = "dateinput search_options" [% IF lock_dob_if_set && dtMaxDOB.defined %] Disabled [% END %]>&nbsp;<span class="format">(dd/mm/yyyy)</span><br>
+<input type="checkbox" name="availp_opt" id="availp_opt" class="search_options" value="unassigned_only">Show only unassigned members<br>
+
+[% IF !compID %]
+    <div> <b> Available Competitions</b>
+    <select class="search_options" name="availablecompFilter" size "1" id="availableCompFilter">
+            <option value ="0" selected ="selected">No Competition</option>
+        [% FOREACH  comp_key IN availableComps.list.sort %]
+            <option value ="[% comp_key %]" [% IF comp_key == "0"  %] selected ="selected" [% END %]>[% availableComps.list.$comp_key %]</option>
+        [% END %]
+    </select>
+</div>
+[% END %]
+    <div id="select-players-wrap">
+        <div class="player-select-options">
+            <div class="manage-list">
+            </div>
+        </div>
+        <div class="select-titles">
+            <h3>Available Players</h3>
+            <h3>Selected Players</h3>
+        </div>
+        <div id="select-lists-wrap">
+            <div id="aplayers_total_wrap">
+                <div id = "aplayers_search"><span class="filter-title">Filter</span> <input type = "text" value = "" name = "aplayer_search" id = "aplayer_search_field"> <a href = "#" id = "aplayer_search_clear"><img src="images/delete-small.png" /></a></div> 
+                <div id = "aplayers_container" class = "aplayer_container">
+                    <ul id = "aplayers" class = "aplayer_list"></ul>
+                </div>
+            </div>
+            
+            <div class="selected-wrap">
+                <span class="select-tle-wrap">
+                    <span class="select-name-tle">Name</span>
+                    <span class="select-no-tle">No.</span>
+                </span>
+                <div id = "splayers_container" class = "splayer_container"> </div>
+                <div class="player-submit-wrap"><span class="legend">
+                </span><input type = "button" value = "SAVE" id = "save_splayer"></div>
+            </div>
+        </div>
+    </div>
+    <div id = "loading"></div>
+</form>
+

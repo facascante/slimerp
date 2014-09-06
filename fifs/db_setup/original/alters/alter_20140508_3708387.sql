@@ -1,0 +1,12 @@
+update tblPlayerCompStats_SG_2 set tTimeStamp=NOW() where intPlayerID=3708387;
+update tblCompMatchPlayerStats set tTimeStamp=NOW() where intMemberID=3708387;
+update tblMember set tTimeStamp=NOW() where intMemberID=3708387;
+update tblMember_Associations set tTimeStamp=NOW() where intMemberID=3708387;
+update tblClearance set tTimeStamp=NOW() where intMemberID=3708387;
+update tblTribunal set tTimeStamp=NOW() where intMemberID=3708387;
+update tblUmpireAllocations set tTimeStamp=NOW() where intMemberID=3708387;
+update tblResults_MatchOfficials set tTimeStamp=NOW() where intMemberID=3708387;
+update tblCompMatchSelectedPlayerRoles set tTimeStamp=NOW() where intMemberID=3708387;
+update tblPlayerRoundStats_2 set tTimeStamp=NOW() where intPlayerID=3708387;
+update tblResults_MatchActionLog_2 set tTimeStamp=NOW() where intTeam1PlayerID=3708387 OR intTeam2PlayerID=3708387;
+update tblMember_Seasons_2 set tTimeStamp=NOW() where intMemberID=3708387;

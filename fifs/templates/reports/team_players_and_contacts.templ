@@ -1,0 +1,106 @@
+
+<div class = "report-wrapper">
+<table class="report-table">
+
+[% varTeamID = '-1' %]
+[% varClass = "even" %]
+[% FOREACH m = ReportData %]
+
+[% IF varTeamID != m.intTeamID %]
+  [% IF varTeamID != -1 %]
+</table>
+<h2 style="page-break-before: always;"></h2>
+  [% END %]
+
+<h1 style="text-align:center;">[% m.strTitle %] - [% m.strName %]</h1>
+
+[% IF m.strContact or m.strContactName2 or m.strContactTitle3 %]
+<table class="report-table">
+  <caption>
+    <h1 class="RO_report_name" >
+      Team Contacts
+    </h1>
+  </caption>
+  <thead>
+    <tr>
+    <th>Title</th>
+    <th>Contact</th>
+    <th>Phone</th>
+    <th>Mobile</th>
+    <th>Email</th>
+    </tr>
+  </thead>
+[% IF m.strContact %]
+  <tr>
+    <td>[% m.strContactTitle %]</td>
+    <td>[% m.strContact %]</td>
+    <td>[% m.strPhone1 %]</td>
+    <td>[% m.strMobile %]</td>
+    <td>[% m.strContactEmail1 %]</td>
+  </tr>
+[% END %]
+[% IF m.strContactTitle2 %]
+  <tr>
+    <td>[% m.strContactTitle2 %]</td>
+    <td>[% m.strContactName2 %]</td>
+    <td>[% m.strContactPhone2 %]</td>
+    <td>[% m.strContactMobile2 %]</td>
+    <td>[% m.strContactEmail2 %]</td>
+  </tr>
+[% END %]
+[% IF m.strContactTitle3 %]
+  <tr>
+    <td>[% m.strContactTitle3 %]</td>
+    <td>[% m.strContactName3 %]</td>
+    <td>[% m.strContactPhone3 %]</td>
+    <td>[% m.strContactMobile3 %]</td>
+    <td>[% m.strContactEmail3 %]</td>
+  </tr>
+[% END %]
+</table>
+[% END %]
+
+<table class="report-table">
+  <caption>
+    <h1 class="RO_report_name" >
+      Team Members
+    </h1>
+  </caption>
+  <thead>
+    <tr>
+    <th>Team #</th>
+    <th>Firstname</th>
+    <th>Lastname</th>
+    <th>Email</th>
+    <th>Phone</th>
+    <th>Mobile</th>
+    <th>Parent/Guardian 1</th>
+    <th>Parent/Guardian 2</th>
+    </tr>
+  </thead>
+  [% varClass = "even" %]
+[% END %]
+
+[% IF varClass == "odd" %]
+  [% varClass = "even" %]
+[% ELSE %]
+  [% varClass = "odd" %]
+[% END %]
+
+<tr class="[% varClass %]">
+  <td>[% m.strJumperNum %]</td>
+  <td>[% m.strFirstname %]</td>
+  <td>[% m.strSurname %]</td>
+  <td>[% m.strEmail %]</td>
+  <td>[% m.strPhoneHome %]</td>
+  <td>[% m.strPhoneMobile %]</td>
+  <td>[% m.strP1FName %] [% m.strP1SName %]</td>
+  <td>[% m.strP2FName %] [% m.strP2SName %]</td>
+</tr>
+
+[% varTeamID = m.intTeamID %]
+
+[% END %]
+
+</table>
+</div>

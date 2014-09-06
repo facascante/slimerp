@@ -1,0 +1,29 @@
+[% IF SalesAdBlock %]
+<div>[% SalesAdBlock %]</div>
+[% END %]
+<p>Dear [% MemberName %],</p>
+
+[% IF Result == 'approved' %]
+<p>Congratulations, your request to register to [% EntityName %] has been approved.</p>
+[% ELSE %]
+<p>Your request to register to [% EntityName %] has been denied.</p>
+[% END %]
+
+<p>[% AuthEmailText %]</p>
+
+[% IF !regoEmail_HideThankYou %]
+<p>If you have any questions please contact:</p>
+<p>[% EntityName %] ([% EntityEmail %])</p>
+[% END %]
+
+[% IF Result == 'approved' %]
+<p>Thank you for registering online.<br>
+[% EntityName %]</p>
+
+</p>You have received this e-mail because you are a registered [% EntityName %] user. This message contains confidential information and is intended only for the individual named. If you are not the named addressee you should not disseminate, distribute or copy this e-mail. Please notify the sender immediately by e-mail [% EntityName %] ([% EntityEmail %]) if you have received this e-mail by mistake and delete this e-mail from your system. Please do not reply directly to this email.</p>
+[% ELSE %]
+<p>Thank you,<br>
+[% EntityName %]</p>
+
+</p>You have received this e-mail because you requested registration to [% EntityName %]. This message contains confidential information and is intended only for the individual named. If you are not the named addressee you should not disseminate, distribute or copy this e-mail. Please notify the sender immediately by e-mail [% EntityName %] ([% EntityEmail %]) if you have received this e-mail by mistake and delete this e-mail from your system. Please do not reply directly to this email.</p>
+[% END %]

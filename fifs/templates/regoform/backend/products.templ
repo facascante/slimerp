@@ -1,0 +1,126 @@
+<link rel="stylesheet" type="text/css" href="css/tablescroll.css"/>
+
+<script src="js/jquery.tablescroll.js"></script>
+<script src="js/jquery.tools.min.js"></script>
+
+<script type="text/javascript">
+    jQuery().ready(function() {
+        jQuery("#prods").tableScroll({
+            height: 420
+        });
+        jQuery('#ttmandatory').tooltip({
+            tip:'#tooltip1',
+            position:'top right',
+            offset:[-5, -15],
+            delay:0
+        });
+        jQuery('#ttsequence').tooltip({
+            tip:'#tooltip2',
+            position:'top right',
+            offset:[-5, -15],
+            delay:0
+        });
+    });
+</script>
+
+<style>
+    .tablescroll .tw1 { width:50px; }    
+    .tablescroll .tw2 { width:90px; }    
+    .tablescroll .tw2 img { vertical-align:middle; }    
+    .tablescroll th { height:25px; }
+    #tooltip1, #tooltip2 {
+        display:none;
+        background-color:#2a91ba;
+        font-size:12px;
+        padding:5px 10px 5px 10px;
+        color:#ffffff;
+    }
+</style>
+
+[% stepper_html %]
+
+[% IF productsTabOnly %]
+    <link rel="stylesheet" type="text/css" href="css/regoform_be.css">
+    <ul class="form-nav">
+        <li class="nav-currentstep steps">
+            <span class="stepDesc">Products</span>
+        </li>
+    </ul>
+[% END %]
+
+<form action="[% target %]" method="POST">
+
+    [% IF products.size %]
+        <p>Choose which products to make available for selection on the registration form by checking the corresponding 'Active' box.</p>
+        <input type="submit" value="[% continueBtn %]" class="button proceed-button">
+        <div id='tooltip1' class="tooltip">
+            Check the box to make the product mandatory on the rego form.
+        </div>
+        <div id='tooltip2' class="tooltip">
+            Sequence dictates the order that the product will display within its group, on the rego form.
+        </div>
+        <div class="prods-wrap">
+            <table class="listTable" id="prods">
+                <thead>
+                    <tr>
+                        <th class="tw1">Active</th>
+                        <th class="tw2">Mandatory <img id="ttmandatory" src="images/info_icon.png"/></th>
+                        <th class="tw2">Sequence <img id="ttsequence" src="images/info_icon.png"/></th>
+                        <th>Group</th>
+                        <th>Product Name</th>
+                        <th style="text-align:right">Price</th>
+                        <th>&nbsp;</th>
+                        <th>Created By</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    [% count = 0 %]
+                    [% FOREACH p IN products %]
+                        [% IF count % 2 == 0 %][% shade = 'class="rowshade"' %][% ELSE %][% shade = '' %][% END %]
+                        [% count = count + 1 %]
+                        <tr>
+                            <td [% shade %]>
+                                [% IF p.active == 'Compulsory' %]
+                                    <input type="hidden" name="rfprod_[% p.productID %]" value="1">[% p.active %]
+                                [% ELSIF !p.active %]
+                                    <input type="checkbox" name="rfprod_[% p.productID %]" value="1" [% p.checked %]>
+                                [% ELSE %]
+                                    [% p.active %]
+                                [% END %]
+                            </td>
+                            <td [% shade %]>
+                                [% IF p.mandatory == 'Yes' %]
+                                    <input type="hidden" name="rfprodmandatory_[% p.productID %]" value="1">[% p.mandatory %]
+                                [% ELSE %]
+                                    <input type="checkbox" name="rfprodmandatory_[% p.productID %]" value="1" [% p.mandatory %] [% p.disable %]>
+                                [% END %]
+                            </td>
+                            <td [% shade %]><input type="text" name="rfprodseq_[% p.productID %]" value="[% p.sequence %]" style="width:30px;text-align:right" [% p.disable %]></td>
+                            <td [% shade %] style="padding-left:8px">[% p.strGroup %]</td>
+                            <td [% shade %]>[% p.strName %]</td>
+                            <td [% shade %] style="text-align:right">[% p.prodPrice %]</td>
+                            <td [% shade %] style="width:40px">&nbsp;</td>
+                            <td [% shade %]>[% p.createdName %]</td>
+                        </tr>
+                    [% END %]
+                </tbody>
+            </table>
+        </div>
+        <input type="submit" value="[% continueBtn %]" class="button proceed-button">
+    [% ELSE %]
+        <div class="warningmsg" style="width:380px;margin-top:80px;margin-left:0">No products could be found for inclusion on the registration form.</div>
+        [% IF stepper_mode == 'add' %]
+            <input type="submit" value="Continue" class="button proceed-button">
+        [% END %]
+    [% END %]
+
+    [% IF clubSplits %]
+        <br><br>
+        <div class="smallprint">*This product has a payment split applied to it which is attempting to send funds to a club that isn&#039;t configured to receive payments. As a result, this product can&#039;t be added to this form because the system won&#039;t know where to send those funds.</div>
+    [% END %]
+
+    <input type="hidden" name="a" value="[% action %]">
+    <input type="hidden" name="client" value="[% client %]">
+    <input type="hidden" name="fID" value="[% formID %]">
+    [% stepper_inpt %]
+</form>

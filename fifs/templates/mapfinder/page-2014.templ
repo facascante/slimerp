@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <title>[% Title %]</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+	[% IF CSS %]<link rel="stylesheet" type="text/css" href="css/[% CSS %]">[% END %]
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+  <script src="https://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
+  <script src="../js/jquery.ui.map.full.min.js" type="text/javascript"></script>
+  <link rel="stylesheet" type="text/css" href="../js/jquery-ui/css/2014/jquery-ui-1.10.4.custom.css">
+<!--[if lt IE 9]>
+<style>
+#accordion #HFsubbut {background-color: #ff8a00;}
+#accordion #HFsubbut:hover {background-color: #ffa600;}
+.cancel-button a, input.cancel-button {background-color: #dc1212;}
+.cancel-button a:hover, input.cancel-button:hover {background-color: #e31616;}
+.generic-button a, input.generic-button {background-color: #357db0;}
+.generic-button a:hover, input.generic-button:hover {background-color: #4096c0;}
+input[type="submit"], input[type="button"], .special-button a {
+	background-color: #357db0;
+}
+.special-button a {float:left;}
+input[type="submit"]:hover, input[type="button"]:hover, .special-button a:hover {background-color: #4096c0;}
+</style>
+	<![endif]-->
+</head>
+<body>
+
+  <script type="text/javascript">
+    var json_data = [% json_file %];
+    jQuery(function() {
+			[% IF json_file != '[]' %]
+                jQuery('#accordion').accordion({autoHeight: false});
+			[% END %]
+      var StartLatLng = new google.maps.LatLng(-25.901820984476252, 134.00135040279997);
+      jQuery('#map_canvas').gmap({
+        'center': StartLatLng,
+        'streetViewControl': false,
+        'panControl': false,
+        'maxZoom':17,
+    	'zoom' : 4,
+        'zoomControlOptions': {style: google.maps.ZoomControlStyle.SMALL}
+      });
+      jQuery.each( json_data, function(i, m) {
+          var iconImageURL = 'https://www.google.com/intl/en_ALL/mapfiles/marker_yellow' + m.letter + '.png';
+          if(m.letter == 'A')  {
+            iconImageURL = 'https://www.google.com/intl/en_ALL/mapfiles/marker' + m.letter + '.png';
+          }
+          jQuery('#map_canvas').gmap('addMarker', {
+            'position': new google.maps.LatLng(m.lat, m.lng),
+            'bounds': true,
+            'title': m.name,
+            'icon' : iconImageURL,
+            'letter' : m.letter,
+            'id' : 'mk_' + m.rank
+          }).click(function() {
+            jQuery("#accordion").accordion("activate", m.rank);
+            cm_markerClicked(m.rank);
+          });
+      });
+			jQuery('#dialogform').dialog({
+				modal: true,
+				autoOpen: false,
+				width: '80%',
+				buttons: {
+				Close: function() {
+				jQuery( this ).dialog( "close" );
+					}
+				}
+			});
+			jQuery('.finder_more_info_btn').click(function ()	{
+				var id = jQuery(this).attr('id');	
+				jQuery('#dialogform').html(jQuery('#' + id + '_data').html());
+				var t = jQuery('#' + id + '_title').html();
+				jQuery('#dialogform').dialog('option','title',jQuery('#' + id + '_title').html());
+				jQuery('#dialogform').dialog('open');
+			});
+/*
+        jQuery( ".ui-button h3 a" ).on( "click", function() {
+            var id = jQuery(this).attr('id');
+            id = id.replace(/headerlink-/,'');
+            jQuery( "#row_" + id  ).show();
+        });
+*/
+    });
+
+    function cm_markerClicked(markerNum) {
+      var markerID = "mk_" + markerNum;
+      var marker = jQuery('#map_canvas').gmap('get', 'markers > ' + markerID);
+      jQuery('#map_canvas').gmap('option','center', marker.getPosition());
+      var markers = jQuery('#map_canvas').gmap('get', 'markers');
+      var bounds = new google.maps.LatLngBounds();
+      for (var i in markers) {
+        bounds.extend(markers[i].position);
+        markers[i].setIcon( 'https://www.google.com/intl/en_ALL/mapfiles/marker_yellow' + markers[i].letter + '.png');
+        markers[i].map.fitBounds(bounds);
+      }
+      marker.setIcon( 'https://www.google.com/intl/en_ALL/mapfiles/marker' + marker.letter + '.png');
+            jQuery(".row-details").hide();
+            jQuery( "#row_" + markerNum  ).show();
+    }
+
+    [% IF realmID == 2 && subRealmID == 7 %]
+    jQuery(document).ready(function() {
+        var request = {};
+        var pairs = location.search.substring(1).split('&');
+        for (var i = 0; i < pairs.length; i++) {
+            var pair = pairs[i].split('=');
+            request[pair[0]] = pair[1];
+        }
+
+        var showmore = request['showmore'];
+        if (showmore == 1) {
+            jQuery("body").addClass("showmore");
+        }
+
+        else {
+            jQuery("body").removeClass("showmore");
+        }
+
+    });
+    [% END %]
+  </script>
+<div id="wrapper" class = "[% ExtraWrapperClass %]">
+[% GlobalNav %]
+    <div id="content">
+        <div id="map_canvas"></div>
+        <div class="map-control">
+					<div class="map-title">
+					
+					</div>
+					<div id="accordion_container">
+          <div class="map-intro">
+						<h3>Enter your postcode or suburb below to search for your nearest program</h3>
+						<p></p>
+					<div id="search-box">
+        	      <form>
+                  <input type="hidden" name="r" value="[% realmID %]">
+                  <input type="hidden" name="sr" value="[% subRealmID %]">
+                  <input type="hidden" name="type" value="[% type %]">
+                  <div class="search-box-wrap">
+									<input type="text" name="search_value" value="[% search_value %]">
+									<input type="submit" value="Search">
+									</div>
+                  <span id="locator-type">
+                    <input type="radio" name="stt" value="pc" checked="checked"><span>Postcode/Suburb</span>
+                    <input type="radio" name="stt" value="name"><span>[% SearchOrgType %] name</span>
+                  </span>
+                  [% IF AdvancedSearchBox %]
+                    <a href = "#" onclick = "jQuery('#advanced_search_box').toggle();return false;" style="margin: 0px 0px 0px 10px;">See Advanced Search</a>
+	                  [% AdvancedSearchBox %]
+                  [% END %]
+                </form>
+	            </div>
+						</div>
+  	          [% content %]
+    		    </div>
+					</div>
+    	</div>
+[% Footer %]
+<div class="copyright">[% Copyright %]</div>
+	<div id="dialogform"></div>
+</div>
+<style>
+#wrapper {
+    margin: 0 auto;
+    position: relative;
+    width: 100%;
+}
+
+#content {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background: none repeat scroll 0 0 #FFFFFF;
+    float: left;
+    padding: 0;
+    width: 100%;
+}
+
+#map_canvas {
+    float:right;
+    height: 565px;
+    width: -webkit-calc(100% - 320px);
+    width: -moz-calc(100% - 320px);
+    width: calc(100% - 320px);
+}
+
+</style>
+[% TagManagement %]
+</body>
+</html>

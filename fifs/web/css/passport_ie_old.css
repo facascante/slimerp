@@ -1,0 +1,24 @@
+/* IE 7-8 Styles */
+
+#login-form INPUT.fields {
+	line-height: 40px;
+}
+
+.edit-account INPUT.fields {
+	line-height: 30px;
+}
+
+#login-page a.haeck, #signup-page-wrap a.haeck {
+	float: left;
+	padding: 0px 30px;
+	font-family: 'DINBold',sans-serif;
+	font-size: 14px;
+}
+
+.navoptions a:hover {
+	background-color: #0179b6;
+}
+
+a {
+	text-decoration: none;
+}

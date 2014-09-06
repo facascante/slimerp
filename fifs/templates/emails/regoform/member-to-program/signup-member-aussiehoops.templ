@@ -1,0 +1,71 @@
+[% contact = program_obj.get_contacts.first %]
+[% location_obj = program_obj.get_location_obj %]
+[% IF SalesAdBlock %]
+<div>[% SalesAdBlock %]</div>
+[% END %]
+<p>Welcome [% parent_1_name %][% IF parent_2_name %] and [% parent_2_name %][% END %], your child [% MemberName %] has been enrolled into Basketball Australia's official junior game development program - Aussie Hoops. </p>
+
+[% IF new_to_program %]
+<p>Aussie Hoops is being launched right across Australia providing young boys and girls with the opportunity to participate in a variety of activities to develop their basketball skills.  This will enable participants to develop their physical fitness, social skills and an understanding of the sport while making new friends too!  Your child will receive:
+<ul>
+<li>an Aussie Hoops Participant Pack including an Aussie Hoops basketball, Reversible Singlet and backpack (new participants only).</li>
+<li>a structured 8 - 10 week program providing children with a fun, safe and enjoyable introduction to the skills, and game principles of basketball.</li>
+<li>an appropriate learning environment for a range of ages and abilities, to help maximise enjoyment and encourage a child's lifelong participation in the sport.</li>
+<li>a program that promotes a healthy and active lifestyle.</li>
+</p>
+[% END %]
+<p>[% MemberName %] has successfully enrolled into the following Aussie Hoops Program<br>
+<table cellspacing="0" cellpadding="0" border="0">
+    <tbody>
+        <tr>
+            <td width="150">Centre Name:</td>
+            <td>[% AssocName %]</td>
+        </tr>
+        <tr>
+            <td>Program Name:</td>
+            <td>[% program_obj.name %]</td>
+        </tr>
+        <tr>
+            <td>Program Start Date:</td>
+            <td>[% program_obj.display_start_date %]</td>
+        </tr>
+        <tr>
+            <td>Facility Name:</td>
+            <td>[% location_obj.name %]</td>
+        </tr>
+        <tr>
+            <td>Facility Address:</td>
+            <td>[% location_obj.get_address %]</td>
+        </tr>
+    </tbody>
+</table>
+
+[% IF !UsePassport %]
+<p>We have issued you with a username and password, you might need this in the future so please retain this email.</p>
+
+<table>
+  <tr>
+    <td><b>Username:</b></td>
+    <td><b>[% Username %]</b></td>
+  </tr>
+  <tr>
+    <td><b>Password:</b></td>
+    <td><b>[% Password %]</b></td>
+  </tr>
+</table>
+
+[% END %]
+
+<p>If you require any more information regarding the program contact [% contact.strContactFirstname %] [% contact.strContactSurname %]
+[% IF contact.strContactEmail %]
+ at [% contact.strContactEmail %]
+[% END %]
+[% IF contact.strContactMobile %]
+   [% IF contact.strContactEmail %] or[% END %] on [% contact.strContactMobile %]
+[% END %].</p>
+
+<p>Yours sincerely,</p>
+    
+<p>[% contact.strContactFirstname %] [% contact.strContactSurname %]<br>
+Aussie Hoops Local Coordinator<br>
+[% AssocName %]</p>

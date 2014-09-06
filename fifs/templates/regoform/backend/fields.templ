@@ -1,0 +1,54 @@
+<link rel="stylesheet" type="text/css" href="css/tablescroll.css"/>
+<script src="js/jquery.tablescroll.js"></script>
+<script type="text/javascript">
+    jQuery().ready(function() {
+        jQuery("#perms").tableScroll({
+            width: 1200,
+            height: 400
+        });
+    });
+</script>
+<style>
+    .tablescroll .thdr { text-align:center; }
+</style>
+[% stepper_html %]
+<p>[% intro %]</p>
+<form action="[% target %]" method="POST">
+    <input type="submit" value="[% continue_btn %]" class="button proceed-button">
+    <div class="perms-wrap">
+        <table class="permsTable" id="perms">
+            <thead>
+                <tr>
+                    <th>Field Name</th>
+                    <th class="thdr">[% texts.hid %]</th>
+                    <th class="thdr">[% texts.rdo %]</th>
+                    <th class="thdr">[% texts.edi %]</th>
+                    <th class="thdr">[% texts.cmp %]</th>
+                    <th class="thdr">[% texts.aoc %]</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                [% count = 0 %]
+                [% FOREACH item IN fieldPermissions %]
+                    [% count = count + 1 %]
+                    [% IF count % 2 == 0 %][% shade = 'class="rowshade"' %][% ELSE %][% shade = '' %][% END %]
+                    <tr>
+                        <td [% shade %]>[% item.label %]</td>
+                        <td [% shade %] style="text-align:center;vertical-align:middle">[% item.hidstr %]</td>
+                        <td [% shade %] style="text-align:center;vertical-align:middle">[% item.rostr %]</td>
+                        <td [% shade %] style="text-align:center;vertical-align:middle">[% item.editablestr %]</td>
+                        <td [% shade %] style="text-align:center;vertical-align:middle">[% item.compulsstr %]</td>
+                        <td [% shade %] style="text-align:center;vertical-align:middle">[% item.aostr %]</td>
+                        <td></td>
+                    </tr>
+                [% END %]
+            </tbody>
+        </table>
+    </div>
+    <input type="submit" value="[% continue_btn %]" class="button proceed-button">
+    <input type="hidden" name="a" value="[% action %]">
+    <input type="hidden" name="client" value="[% client %]">
+    <input type="hidden" name="fID" value="[% formID %]">
+    [% stepper_inpt %]
+</form>

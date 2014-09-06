@@ -1,0 +1,1 @@
+insert into tblCustomReports ( strName, intTypeID, strTemplateFile, strDataRoutine ) values ( 'VCFL Final Scores (Seniors) CSV', 3, 'football_media_scores_csv.rpt', 'MediaReportData::football_media_scores_vcfl' );

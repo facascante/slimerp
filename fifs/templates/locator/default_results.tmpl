@@ -1,0 +1,127 @@
+<html>
+<head>
+  <title>Where Can I Play ?</title>  
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+<img src="http://reg.sportingpulse.com/v5/locator/images/prlsearch_hdr.jpg" border="0" alt="">
+<div id="container">
+[% varClassCount = 0 %]
+[% varClass = '' %]
+[% FOREACH r = Result %]
+[% varSubRealm = '' %]
+[% IF r.strSubTypeName %]
+  [% varSubRealm = ' - ' + r.strSubTypeName %]
+[% END %]
+[% IF varCount == 1 %]
+  [% varClass = 'altrow' %]
+  [% varClassCount = 0 %]
+[% ELSE %]
+  [% varClass = '' %]
+  [% varClassCount = 1 %]
+[% END %]
+<div class="[% varClass %]">
+  <div class="displaytext" style="color:#3399FF;">[% r.strName %][% varSubRealm %]</div>
+  <div style="clear:both;"></div>
+  <table class="list_results " width="99%">
+    <tr>
+      <td style="padding-left:16px;vertical-align:top;">
+        [% IF r.strContact1Title %]
+          <span class="formlabel">[% r.strContact1Title %]:</span><br>
+        [% END %]
+        [% IF r.strContact1Name and r.strContact1Title %]
+          [% r.strContact1Name %] <br>
+        [% END %]
+        [% IF r.strContact1Phone and r.strContact1Title %]
+          Phone: [% r.strContact1Phone %] <br>
+        [% END %]
+        [% IF r.strContact2Title %]
+          <span class="formlabel">[% r.strContact2Title %]:</span><br>
+        [% END %]
+        [% IF r.strContact2Name and r.strContact2Title %]
+          [% r.strContact2Name %] <br>
+        [% END %]
+        [% IF r.strContact2Phone and r.strContact2Title %]
+          Phone: [% r.strContact2Phone %] <br>
+        [% END %]
+        [% IF r.intShowPresident and r.strPresidentName %]
+          <span class="formlabel">President Name:</span> [% r.strPresidentName %]<br>
+          <span class="formlabel">President Email:</span> [% r.strPresidentEmail %]<br>
+          <span class="formlabel">President Phone:</span> [% r.strPresidentPhone %]<br>
+        [% END %]
+        [% IF r.intShowSecretary and r.strSecretaryName %]
+          <span class="formlabel">Secretary Name:</span> [% r.strSecretaryName %]<br>
+          <span class="formlabel">Secretary Emaill:</span> [% r.strSecretaryEmail %]<br>
+          <span class="formlabel">Secretary Phone:</span> [% r.strSecretaryPhone %]<br>
+        [% END %]
+        [% IF r.intShowTrasurer and r.strTreasurerName %]
+          <span class="formlabel">Treasurer Name:</span> [% r.strTreasurerName %]<br>
+          <span class="formlabel">Treasurer Email:</span> [% r.strTreasurerEmail %]<br>
+          <span class="formlabel">Treasurer Phone:</span> [% r.strTreasurerPhone %]<br>
+        [% END %]
+        [% IF r.intShowRegistrar and r.strRegistraName %]
+          <span class="formlabel">Registrar Name:</span> [% r.strRegistarName %]<br>
+          <span class="formlabel">Registrar Email:</span> [% r.strRegistrarEmail %]<br>
+          <span class="formlabel">Registrar Phone:</span> [% r.strRegistrarPhone %]<br>
+        [% END %]
+      </td>
+      <td style="vertical-align:top;">
+        [% IF r.strVenueName or r.strVenueAddress or r.strVenueSuburb or r.strVenueState or r.strVenuePostalCode %]
+          <span class="formlabel">Location</span> <br>
+        [% END %]    
+        [% IF r.strVenueName %]
+          <b>Venue:</b> [% r.strVenueName %] <br>
+        [% END %]    
+        [% IF r.strVenueAddress %]
+          <b>Address:</b> [% r.strVenueAddress %] <br>
+        [% END %]    
+        [% IF r.strVenueAddress %]
+          <b>Suburb:</b> [% r.strVenueSuburb %] <br>
+        [% END %]    
+        [% IF r.strVenueState %]
+          <b>State:</b> [% r.strVenueState %] <br>
+        [% END %]    
+        [% IF r.strVenuePostalCode %]
+          <b>Postal Code:</b> [% r.strVenuePostalCode %] <br>
+        [% END %]    
+      </td>
+      <td style="vertical-align:top;">
+        [% IF r.strDays or r.strTimes or r.strSessionDuraions or r.niceStartDate or r.niceFinishDate %]
+          <span class="formlabel">Details</span> <br>
+        [% END %]    
+        [% IF r.strDays %]
+          <b>Days of operation:</b> [% r.strDays %] <br>
+        [% END %]    
+        [% IF r.strTimes %]
+          <b>Time:</b> [% r.strTimes %] <br>
+        [% END %]    
+        [% IF r.strSessionDuration %]
+          <b>Duration:</b> [% r.strSessopmDurations %] <br>
+        [% END %]    
+        [% IF r.niceStartDate %]
+          <b>Start Date:</b> [% r.niceStartDate %] <br>
+        [% END %]    
+        [% IF r.niceFinishDate %]
+          <b>Finish Date:</b> [% r.niceFinishDate %] <br>
+        [% END %]    
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-left:16px" colspan="3">
+          [% r.strCentreURL %]
+          [% r.strNotes %]
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-left:16px" colspan="3">
+        <a href="clubfinder.cgi?a=EOI_DTA&amp;assocID=[% r.intAssocID %]&amp;clubID=[% r.intClubID %]&amp;postcode=[% r.postcode_IN %]&amp;yob=[% r.yob_IN %]&amp;r=[% r.realmID_IN %]"><img src="images/register_now.gif" border="0" alt="Register Now" /></a>
+      </td>
+    </tr>
+
+  </table>
+</div>
+<br>
+[% END %]
+</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        
+        jQuery('.col2').click(function(e){
+            e.preventDefault();
+            var deferred = jQuery.Deferred();
+            var request = jQuery.ajax({
+                url: "ajax/aj_regoform_pbfid_update.cgi", 
+                type: "POST",
+                data: "client=[% client %]&amp;fid=[% formID %]&amp;pbfid=" + jQuery(this).attr("id"),
+                dataType: 'json'
+            });
+            request.done(function(){
+                parent.window.submitDummy();
+                // either/both of the following 2 lines work, but handled it instead in RegoFormOptions with a destroy of the frame.
+//              jQuery('.-dialog-buttonpane').hide();
+//              jQuery('.ui-widget-overlay, .ui-dialog', window.parent.document).remove();
+                deferred.resolve();
+            });
+            request.fail(function(){
+                deferred.reject();
+            });
+        });
+
+    });
+</script>
+
+<style>
+    table { width:98%; border-collapse:collapse; margin-top:20px; }
+    table caption { text-align:left; font-style:italic; color:#000000; }
+    table th { background-color:#DDDDDD; padding-bottom:5px; }
+    table td { padding:3px; }
+    .col1 { width:90%; }
+    .col2 { width:10%; }
+</style>
+
+<div id="reorder">
+
+    [% IF pbForms.size %]
+        <table>
+        [% FOREACH pbForm IN pbForms %]
+            <tr>
+                <td class="col1">[% pbForm.formName %]  (#[% pbForm.formID %])</td>
+                <td class="col2" id="[% pbForm.formID %]"><a href="#">Select</a></td>
+            </tr>
+        [% END %]
+        </table>
+    [% ELSE %]
+		<div class="warningmsg">No Records could be found</div>
+    [% END %]
+</div>

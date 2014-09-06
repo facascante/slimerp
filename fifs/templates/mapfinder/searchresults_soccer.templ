@@ -1,0 +1,173 @@
+  [% FOREACH r = results %]
+    <h3 style="font-size:12px;width:319px;text-align:left;"><a href="#" onClick="javascript:cm_markerClicked('[% r.Details.rank %]')">[% r.Details.letter %]) [% r.Details.NameCol%] [% IF r.Details.intGoodSport %]<div style='float:right;'><img src="../images/good-sports-logo.png" /></div> [% END %]</a></h3>
+
+    <div id="row_[% r.Details.IDCol %]">
+
+    [% BLOCK BLOCK_title_club %]
+      [% IF r.Details.ClubName %]
+        [% r.Details.ClubName %] 
+      [% END %]
+      [% IF r.Details.strName %]
+        ([% r.Details.strName %]) 
+      [% END %]
+      [% IF r.Details.SubRealmName %]
+        - [% r.Details.SubRealmName %] 
+      [% END %]
+    [% END %] 
+
+    [% BLOCK BLOCK_title_assoc %]
+      [% r.Details.strName %]
+      [% IF r.Details.SubRealmName %]
+        - [% r.Details.SubRealmName %] 
+      [% END %]
+    [% END %]
+    [% BLOCK BLOCK_location %]
+      [% IF r.Details.strVenueName or r.Details.strAddress or r.Details.strVenueSuburb or r.Details.strVenuePostalCode or r.Details.strVenueCountry %]
+        [% IF r.Details.ClubLevelImageName %]
+          <span class="star-img" style="float: right;"><img src="../images/[% r.Details.ClubLevelImageName %]" border=0></span> <br>
+        [% END %]
+        <span class="section_heading">Location</span> <br>
+        [% IF r.Details.strVenueAddress %]
+          <span><b>Address:</b> [% r.Details.strVenueAddress %]</span> <br>
+        [% END %]
+        [% IF r.Details.strVenueSuburb %]
+          <span><b>Suburb:</b> [% r.Details.strVenueSuburb %]</span> <br>
+        [% END %]
+        [% IF r.Details.strVenuePostalCode %]
+          <span><b>Postal Code:</b> [% r.Details.strVenuePostalCode %]</span> <br>
+        [% END %]
+        [% IF r.Details.strVenueCountry %]
+          <!--<span><b>Country:</b> [% r.Details.strVenueCountry %]</span> <br>  -->
+        [% END %]
+        <br>
+      [% END %]
+    [% END %]
+
+    [% BLOCK BLOCK_details %]
+      [% IF 
+        r.Details.days 
+        or (r.Details.niceStartDate and r.Details.niceStartDate != '00/00/00') 
+        or (r.Details.niceFinishDate and r.Details.niceFinishDate != '00/00/00')
+        or r.Details.strTimes 
+        or r.Details.strSessionDuration 
+      %]
+        <span class="section_heading">Details</span> <br>
+        [% IF r.Details.days %]
+          <span><b>Days of operation:</b> [% r.Details.days %]</span> <br>
+        [% END %]
+        [% IF r.Details.niceStartDate and r.Details.niceStartDate != '00/00/00' %]
+          <span><b>Start Date:</b> [% r.Details.niceStartDate %]</span> <br>
+        [% END %]
+        [% IF r.Details.niceFinishDate and r.Details.niceFinishDate != '00/00/00' %]
+          <span><b>Finish Date:</b> [% r.Details.niceFinishDate %]</span> <br>
+        [% END %]
+        [% IF r.Details.strTimes %]
+          <span><b>Time:</b> [% r.Details.strTimes %]</span> <br>
+        [% END %]
+        [% IF r.Details.strSessionDurations %]
+          <span><b>Duration:</b> [% r.Details.strSessionDurations %]</span> <br>
+        [% END %]
+        <br>
+      [% END %]
+    [% END %]
+
+    [% BLOCK BLOCK_compdetails %]
+      [% IF r.Details.strCompetitions %]
+        <span class="section_heading">Competitions</span> <br>
+        <span>[% r.Details.strCompetitions %]</span> <br><br>
+        <span class="section_heading">Competition Organizer</span> <br>
+        <span>[% r.Details.strCompOrganizer %]</span> <br><br>
+        <span class="section_heading">Cost</span> <br>
+        <span>[% r.Details.strCompCosts %]</span> <br>
+        <br>
+      [% END %]
+    [% END %]
+
+    [% BLOCK BLOCK_other %]
+      [% IF r.Details.strURL or r.Details.strNotes or r.Details.strEmail %]
+      <span class="section_heading">Other</span> <br>
+        [% IF r.Details.strURL %]
+          <span><b>Website:</b> <a href = "[% IF r.Details.strURL.match('^http://') %][% ELSE %]http://[% END %][% r.Details.strURL %]" target = "_blank">[% r.Details.strURL %]</a></span> <br>
+        [% END %]
+        [% IF r.Details.strEmail %]
+          <span><b>Email:</b> <a href = "mailto:[% r.Details.strEmail %]">[% r.Details.strEmail %]</a></span> <br>
+        [% END %]
+        [% IF r.Details.strNotes %]
+          <span><b>Notes:</b> [% r.Details.strNotes %]</span> <br>
+        [% END %]
+      <br>
+      [% END %]
+    [% END %]
+
+  [% BLOCK BLOCK_characteristics%]
+		[% IF ClubCharacteristics and ClubCharacteristics.item(r.Details.intClubID) %]
+			[% ClubCharacteristics.item(r.Details.intClubID) %]<br>
+		[% END %]
+	[% END %]
+  [% BLOCK BLOCK_contacts %]
+    <div class="contacts_container">
+    [% IF r.Contacts.size > 0 %]
+      <span class="section_heading">Contacts</span> <br>
+    [% END %]
+      [% FOREACH c = r.Contacts %]
+        <div class="contact">
+          <span><b>Position:</b> [% c.Role %]</span> <br>
+          <span><b>Name:</b> [% c.Firstname %] [% c.Surname %]</span><br>
+          <span><b>Email:</b> [% c.Email %]</span> <br>
+          <span><b>Phone:</b> [% c.Mobile %]</span> <br><br>
+        </div>
+      [% END %]
+    </div>
+  [% END %]
+
+    <div style="clear:both;"></div>
+
+    [% PROCESS BLOCK_location %]
+		<input type = "button" class = "finder_more_info_btn" value = "[% Lang.txt('More Information') %]" id = "[% r.Details.IDCol %]_more_info">
+    [% PROCESS BLOCK_goodsports %] 
+
+		<div id = "[% r.Details.IDCol %]_more_info_data" class = "more_info_data">
+			<div class="result_heading" id = "[% r.Details.IDCol %]_more_info_title">
+				[% IF r.Details.ClubName %]
+					[% PROCESS BLOCK_title_club %]
+				[% ELSE %]
+					[% PROCESS BLOCK_title_assoc %]
+				[% END %]
+			</div>
+
+			[% PROCESS BLOCK_location %]
+			[% PROCESS BLOCK_details %]
+			[% PROCESS BLOCK_compdetails %]
+			[% PROCESS BLOCK_characteristics %]
+			[% PROCESS BLOCK_contacts %]
+
+			<div style="clear:both;"></div>
+
+			[% PROCESS BLOCK_other %]
+
+			[% IF AllowEOI and r.Details.intClubID  %]
+			<div class="button">
+				<form name="EOI_form" action="mapfinder.cgi" method="post">
+					<input type="submit" name="" value="Register Interest">
+					<input type="hidden" name="a" value="EOI_DTA">
+					<input type="hidden" name="assocID" value="[% r.Details.intAssocID %]">
+					<input type="hidden" name="clubID" value="[% r.Details.intClubID %]">
+					<input type="hidden" name="postcode" value="[% r.Details.postcode %]">
+					<input type="hidden" name="club_search_all" value="[% r.Details.club_search_all %]">
+					<input type="hidden" name="yob" value="[% r.Details.yob %]">
+					<input type="hidden" name="r" value="[% r.Details.realmID %]">
+      					<input type="hidden" name="type" value="[% type %]">
+				</form>
+			</div>
+			[% END %]
+		</div>
+
+	[% BLOCK BLOCK_goodsports %]
+	  [% IF r.Details.intGoodSport %]
+		<div style="padding-top:8.5px"><a href="http://www.sportingpulse.com/clickthru/?328" target="_blank"><img src="../images/wearegoodsports-btn.png" border=0></a></div>
+	  [% END %]
+	[% END %]
+ 
+    </div>
+
+  [% END %]

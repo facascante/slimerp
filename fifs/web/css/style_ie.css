@@ -1,0 +1,30 @@
+#menu_wrap {
+	height: 54px;
+}
+
+div#menu_wrap a.system-icon {
+	height: 54px;
+}
+
+.search-box-wrap {
+	height: 54px;
+}
+
+div#menu_wrap input#search {
+	margin-top: 10px;
+}
+
+.button a, input.button {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+#form-int .inactivebar {
+	background-image: none;
+}
+
+.col-1 input {
+	border: 0px;
+}

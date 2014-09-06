@@ -1,0 +1,90 @@
+<div class = "report-wrapper">
+<table class="report-table">
+<caption>
+	<div class="report-numrows">Returned [% RecordCount %] records </div>
+	<h1 class="RO_report_name" [% IF Options.Logo %]style =" line-height:100px;"[% END %]>
+		[% IF Options.Logo %]
+			[% Options.Logo %]
+		[% END %]
+		[% Name %]
+	</h1>
+</caption>
+	<thead>
+		<tr>
+[% FOREACH i = Labels %]
+		<th>[% i.1 %]</th>
+[% END %]
+[% IF Summarise %]
+		<th>Count</th>
+[% END %]
+		</tr>
+	</thead>
+
+	<tbody>
+[% LastGroup = '--Blank--' %]
+[% FOREACH r = ReportData %]
+	[% IF GroupField and LastGroupText != r.item(GroupField) %]
+		[% IF LastGroup != '--Blank--' %]
+			<tr class="ROgroupfooter">
+				<td>[% SummaryCount.NumRows.item(LastGroup) || 0 %] rows</td>
+				[% FOREACH f = RunOrder %]
+					[% NEXT IF f == GroupField %]
+					<td>[% Totals.grp.item(LastGroup).item(f) || '' %]</td>
+				[% END %]
+				[% IF Summarise %]
+					<td>[% SummaryCount.GroupTotal.item(LastGroup) %]</td>
+				[% END %]
+			</tr>
+		[% END %]
+		[% LastGroup = r.item(GroupField _ '_RAW') %]
+		[% LastGroupText  = r.item(GroupField) %]
+		<tr class="ROgroupheader">
+			<td colspan = "[% RunOrder.size + Summarise || 0 %]">[% LastGroupText || '(Blank)' %]</td>
+		</tr>
+	[% END %]
+  [% class = loop.index % 2 ? 'even' : 'odd' %]
+		<tr class="[% class %]">
+[% FOREACH f = RunOrder %]
+			<td>[% IF f == GroupField%]&nbsp;[% ELSE %][% r.item(f) %][% END %]</td>
+[% END %]
+[% IF Summarise %]
+			<td>[% SummaryCount.Rows.item(r.RowHash) %]</td>
+[% END %]
+		</tr>
+[% END %]
+	[% IF LastGroup != '--Blank--' %]
+		<tr class="ROgroupfooter">
+			<td>[% SummaryCount.NumRows.item(LastGroup) || 0 %] rows</td>
+			[% FOREACH f = RunOrder %]
+				[% NEXT IF f == GroupField %]
+				<td>[% Totals.grp.item(LastGroup).item(f) || '' %]</td>
+			[% END %]
+			[% IF Summarise %]
+				<td>[% SummaryCount.GroupTotal.item(LastGroup) %]</td>
+			[% END %]
+		</tr>
+	[% END %]
+		<tr class="ROtotalfooter">
+		[% FOREACH f = RunOrder %]
+			[% IF loop.first and !Totals.all.item(f) %]
+				<td>[% RecordCount %] rows [% IF SummaryCount.All != RecordCount %](Examined [% SummaryCount.All || 0 %] rows)[% END %]</td>
+			[% ELSE %]
+				<td>[% Totals.all.item(f) %]</td>
+			[% END %]
+		[% END %]
+		[% IF Summarise %]
+			<td>[% SummaryCount.All %]</td>
+		[% END %]
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+			<th colspan="[% Labels.size %]"><span class="report-daterun">Report Run [% DateRun %]</span></th>
+[% IF Summarise %]
+			<th>&nbsp;</th>
+[% END %]
+		</tr>
+
+	</tfoot>
+</table>
+</div>

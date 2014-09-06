@@ -1,0 +1,15 @@
+<div class="member-status-wrap">
+	<div class="sectionheader">Registration</div>
+		<div class="members-seasonstatus-content">
+			[% FOREACH entity IN RegistrationInfo %]
+				<div class="member-data"> [% entity.strLocalName %] </div>
+				<div class="member-data"> [% entity.strSport %] </div>
+				<div class="member-data"> [% entity.strPersonType %] </div>
+				<div class="member-data"> [% entity.strPersonLevel %] </div>
+				<div class="member-data"> [% entity.dtFrom %] </div>
+				<div class="member-data"> [% entity.dtTo %] </div>
+			[% END %]
+		</div>
+	</div>
+    <a href = "[% AddRegistrationURL %]">[% Lang.txt('Add Registration') %]</a>
+</div>

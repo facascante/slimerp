@@ -1,0 +1,70 @@
+{
+  SQL => "
+    SELECT
+      DISTINCT
+      MT.intTeamID,
+      MT.intCompID,
+      MT.intMemberID,
+      AC.strTitle,
+      tblMember.strFirstname,
+      tblMember.strSurname,
+      tblMember.strEmail,
+      tblMember.strPhoneMobile,
+      tblMember.strPhoneHome,
+      tblMember.strP1FName,
+      tblMember.strP1SName,
+      tblMember.strP2FName,
+      tblMember.strP2SName,
+      T.strName,
+      T.strContactTitle,
+      T.strContact,
+      T.strPhone1,
+      T.strPhone2,
+      T.strMobile,
+      T.strEmail AS strContactEmail1,
+      T.strContactTitle2,
+      T.strContactName2,
+      T.strContactPhone2,
+      T.strContactMobile2,
+      T.strContactEmail2,
+      T.strContactTitle3,
+      T.strContactName3,
+      T.strContactPhone3,
+      T.strContactMobile3,
+      T.strContactEmail3
+    FROM
+      ###FROM_LEVELS### 
+      ###CURRENT_FROM###
+      INNER JOIN tblMember_Teams AS MT ON tblMember.intMemberID = MT.intMemberID
+      INNER JOIN tblAssoc_Comp AS AC ON (AC.intCompID = MT.intCompID)
+      INNER JOIN tblTeam AS T ON (T.intTeamID = MT.intTeamID)
+      INNER JOIN tblComp_Teams CT ON (CT.intTeamID = T.intTeamID AND AC.intCompID = CT.intCompID)
+    WHERE
+      ###WHERE_LEVELS### 
+      ###CURRENT_WHERE###
+      AND AC.intNewSeasonID = tblAssoc.intCurrentSeasonID
+      AND MT.intStatus <> -1
+      AND tblMember.intStatus <> -1
+      AND AC.intRecStatus <> -1
+      AND T.intRecStatus <> -1
+      AND CT.intRecStatus <> -1
+      AND AC.intAssocID = ###ASSOCID###
+      AND IF (###CLUBID### > 0,T.intClubID = ###CLUBID###,1=1)
+      AND IF (###TEAMID### > 0,MT.intTeamID = ###TEAMID###,1=1)
+  ",
+  StatsReport => 0,
+  MemberTeam => 0,
+  ReportEntity => 0,
+  ReportLevel => 0,
+  Template => 'team_players_and_contacts',
+  DistinctValues => 1,
+  Labels => [
+  ],
+  Sort => [
+    ['intCompID','ASC','int'],
+    ['intTeamID','ASC','int'],
+    ['strSurname','ASC','string'],
+    ['strFirstname','ASC','string'],
+  ],
+}
+
